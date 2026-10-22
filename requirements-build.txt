@@ -1,0 +1,14 @@
+# Herramientas necesarias unicamente para construir el ejecutable de Windows,
+# con las versiones exactas del entorno que produjo SAVIP 1.1.1.
+# Las dependencias de ejecucion estan en requirements-lock.txt.
+#
+# Instalacion (la hace scripts/build_exe.ps1 en un venv propio):
+#   python -m pip install --no-deps -r requirements-lock.txt -r requirements-build.txt
+# Ver COMPILACION_WINDOWS.md para el procedimiento completo.
+
+pyinstaller==6.22.3
+pyinstaller-hooks-contrib==2026.8
+altgraph==0.17.5
+pefile==2024.8.26
+pywin32-ctypes==0.2.3
+setuptools==84.0.0

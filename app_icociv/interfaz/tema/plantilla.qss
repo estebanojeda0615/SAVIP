@@ -1,0 +1,1337 @@
+/* Hoja de estilos de SAVIP.
+ *
+ * No contiene ni un solo color ni medida literal: todo se expresa con
+ * marcadores de token que resuelve tema/estilos.py contra la paleta activa.
+ * Anadir un color nuevo aqui sin registrarlo como token hace fallar la prueba
+ * tests/test_interfaz_tema.py, que es justamente lo que se busca.
+ * Las llaves de las reglas van duplicadas porque la plantilla se resuelve con
+ * str.format: una llave simple delimita un token.
+ */
+
+/* ============ BASE ============ */
+
+QMainWindow, QDialog {{
+    background: {fondo};
+}}
+
+QWidget {{
+    color: {texto};
+    font-family: {familia_interfaz};
+    font-size: {tamano_cuerpo}pt;
+}}
+
+QToolTip {{
+    background: {tooltip_fondo};
+    color: {tooltip_texto};
+    border: {grosor_borde}px solid {tooltip_borde};
+    border-radius: {radio_pequeno}px;
+    padding: {espacio_1}px {espacio_2}px;
+}}
+
+/* ============ CABECERA ============ */
+
+QFrame#cabecera_app {{
+    background: {cabecera_fondo};
+    border: none;
+    border-bottom: {grosor_borde}px solid {separador};
+}}
+
+QLabel#cabecera_titulo {{
+    color: {texto};
+    font-family: {familia_titulo};
+    font-size: {tamano_subtitulo}pt;
+    font-weight: {peso_fuerte};
+}}
+
+QLabel#cabecera_vista {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+QLabel#cabecera_estado {{
+    color: {texto_secundario};
+    background: {superficie_3};
+    border-radius: {radio_pildora}px;
+    padding: {espacio_1}px {espacio_3}px;
+    font-size: {tamano_secundario}pt;
+}}
+
+QLabel#cabecera_estado[estado="cargado"] {{
+    color: {principal};
+    background: {principal_suave};
+    font-weight: {peso_medio};
+}}
+
+QLabel#cabecera_estado[estado="advertencia"] {{
+    color: {advertencia};
+    background: {advertencia_suave};
+}}
+
+/* ============ NAVEGACIÓN LATERAL ============ */
+
+QFrame#navegacion_lateral {{
+    background: {barra_lateral};
+    border: none;
+    border-right: {grosor_borde}px solid {navegacion_borde};
+}}
+
+/* El area desplazable y su contenido necesitan fondo propio: sin estas reglas
+ * heredan la paleta del sistema y el panel sale negro en tema claro. */
+QScrollArea#navegacion_scroll {{
+    background: {barra_lateral};
+    border: none;
+}}
+
+QScrollArea#navegacion_scroll > QWidget > QWidget {{
+    background: {barra_lateral};
+}}
+
+/* Fase 4F: todas las entradas reservan el borde izquierdo (transparente) para
+ * que el indicador del elemento activo no desplace el texto. */
+QPushButton#boton_navegacion {{
+    background: transparent;
+    color: {navegacion_secundario};
+    border: none;
+    border-left: {grosor_indicador_seleccion}px solid transparent;
+    border-radius: {radio_pequeno}px;
+    padding: {espacio_2}px {espacio_3}px;
+    min-height: {altura_fila_navegacion}px;
+    text-align: left;
+    font-size: {tamano_cuerpo}pt;
+}}
+
+QPushButton#boton_navegacion:hover {{
+    background: {navegacion_hover};
+    color: {navegacion_texto};
+}}
+
+QPushButton#boton_navegacion:checked {{
+    background: {navegacion_seleccionada};
+    color: {navegacion_texto};
+    font-weight: {peso_medio};
+    border-left: {grosor_indicador_seleccion}px solid {navegacion_acento};
+}}
+
+QPushButton#boton_navegacion:focus {{
+    border: {grosor_borde_foco}px solid {navegacion_acento};
+    border-left: {grosor_indicador_seleccion}px solid {navegacion_acento};
+}}
+
+/* post-r1-metodologia-12-24, 19-08-2026 (Prompt UI 01). "destacado" señala
+ * que la entrada tiene contenido disponible (p. ej. Resultados con una
+ * proyección ya calculada); es independiente de ":checked" (seleccionada),
+ * por lo que ambos estados se combinan sin pisarse. */
+QPushButton#boton_navegacion[destacado="true"] {{
+    color: {navegacion_acento};
+    font-weight: {peso_medio};
+}}
+
+QPushButton#boton_navegacion:checked[destacado="true"] {{
+    background: {navegacion_seleccionada};
+    color: {navegacion_texto};
+    font-weight: {peso_fuerte};
+    border-left: {grosor_indicador_seleccion}px solid {navegacion_acento};
+}}
+
+QLabel#nav_grupo {{
+    color: {navegacion_secundario};
+    font-size: {tamano_micro}pt;
+    font-weight: {peso_fuerte};
+    letter-spacing: 1px;
+    padding: {espacio_1}px {espacio_3}px;
+}}
+
+QLabel#nav_archivo {{
+    color: {navegacion_secundario};
+    background: {navegacion_campo};
+    border: {grosor_borde}px solid {navegacion_borde};
+    border-radius: {radio_pequeno}px;
+    padding: {espacio_2}px {espacio_3}px;
+    font-size: {tamano_secundario}pt;
+}}
+
+QPushButton#boton_contraer_navegacion {{
+    background: transparent;
+    color: {navegacion_secundario};
+    border: none;
+    border-radius: {radio_pequeno}px;
+    padding: {espacio_1}px;
+}}
+
+QPushButton#boton_contraer_navegacion:hover {{
+    background: {navegacion_hover};
+    color: {navegacion_texto};
+}}
+
+QFrame#navegacion_lateral QLabel {{
+    color: {navegacion_secundario};
+}}
+
+QFrame#navegacion_lateral QPushButton {{
+    border-radius: {radio_pequeno}px;
+}}
+
+QFrame#navegacion_lateral QPushButton#boton_secundario {{
+    color: {navegacion_texto};
+    background: {navegacion_campo};
+    border-color: {navegacion_borde};
+}}
+
+QFrame#navegacion_lateral QPushButton#boton_secundario:hover {{
+    background: {navegacion_seleccionada};
+}}
+
+QFrame#navegacion_lateral QPushButton#boton_secundario:disabled {{
+    color: {navegacion_secundario};
+    background: {barra_lateral};
+}}
+
+QFrame#navegacion_lateral[contraida="true"] QPushButton {{
+    min-width: 0px;
+    padding: {espacio_1}px;
+    text-align: center;
+}}
+
+/* ============ AREAS DE DESPLAZAMIENTO ============ */
+
+/* Regla general y deliberadamente amplia: un QScrollArea sin fondo declarado
+ * hereda la paleta del sistema, que en Windows con tema oscuro es negra, y el
+ * modulo entero sale en negro sobre el tema claro. Cubre tambien los scroll que
+ * crean los widgets de Proyecciones y Empalme, que no tienen nombre propio. */
+QScrollArea {{
+    background: {fondo};
+    border: none;
+}}
+
+QScrollArea > QWidget > QWidget {{
+    background: {fondo};
+}}
+
+/* ============ PANELES Y SUPERFICIES ============ */
+
+QFrame#panel_controles, QScrollArea#panel_scroll {{
+    background: {superficie};
+    border: none;
+    border-right: {grosor_borde}px solid {borde};
+}}
+
+QScrollArea#panel_scroll > QWidget > QWidget {{
+    background: {superficie};
+}}
+
+QFrame#dashboard_principal {{
+    background: {fondo};
+}}
+
+QFrame#dashboard_cabecera {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+QFrame#tarjeta, TarjetaInteractiva#tarjeta_kpi {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+/* Ajuste visual: sin barra vertical de color; la tarjeta se separa con borde sutil y espaciado. */
+TarjetaInteractiva#tarjeta_kpi {{
+    min-height: {tarjeta_kpi_min_altura}px;
+}}
+
+TarjetaInteractiva#tarjeta_kpi:hover {{
+    background: {superficie_2};
+    border-color: {borde_fuerte};
+}}
+
+TarjetaInteractiva#tarjeta_kpi:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+QLabel#titulo_dashboard {{
+    color: {texto};
+    font-family: {familia_titulo};
+    font-size: {tamano_titulo}pt;
+    font-weight: {peso_fuerte};
+}}
+
+QLabel#ruta_dashboard {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+QLabel#estado_dashboard {{
+    color: {principal};
+    font-weight: {peso_medio};
+}}
+
+QLabel#etiqueta_kpi {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+    font-weight: {peso_medio};
+}}
+
+QLabel#valor_kpi {{
+    color: {texto};
+    font-family: {familia_numerica};
+    font-size: {tamano_metrica}pt;
+    font-weight: {peso_fuerte};
+}}
+
+QLabel#accion_kpi {{
+    color: {principal};
+    font-size: {tamano_micro}pt;
+    font-weight: {peso_medio};
+}}
+
+QLabel#titulo_seccion {{
+    color: {texto};
+    font-family: {familia_titulo};
+    font-size: {tamano_subtitulo}pt;
+    font-weight: {peso_fuerte};
+}}
+
+QLabel#descripcion_seccion {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+/* ============ IDENTIDAD ============ */
+
+QLabel#titulo_app {{
+    font-family: {familia_titulo};
+    font-size: {tamano_display}pt;
+    font-weight: {peso_fuerte};
+    color: {texto};
+}}
+
+QLabel#subtitulo_app {{
+    font-size: {tamano_secundario}pt;
+    color: {texto_secundario};
+    line-height: {interlineado_comodo};
+}}
+
+QLabel#estado {{
+    color: {texto_secundario};
+}}
+
+QLabel#tabla_activa {{
+    background: {principal_suave};
+    color: {principal};
+    border: none;
+    border-radius: {radio_pequeno}px;
+    padding: {espacio_2}px {espacio_3}px;
+    font-weight: {peso_medio};
+}}
+
+QScrollArea#ruta_scroll {{
+    background: {campo};
+    color: {texto_secundario};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+QScrollArea#ruta_scroll > QWidget > QWidget {{
+    background: {campo};
+}}
+
+QLabel#ruta_jerarquica {{
+    background: {campo};
+    color: {texto_secundario};
+    border: none;
+    padding: {espacio_2}px {espacio_3}px;
+    line-height: {interlineado_comodo};
+}}
+
+QLabel#horizonte_recomendado {{
+    background: {campo};
+    color: {texto_secundario};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    padding: {espacio_2}px {espacio_3}px;
+}}
+
+/* ============ BOTONES ============ */
+
+QPushButton {{
+    background: {principal};
+    color: {texto_sobre_principal};
+    border: none;
+    border-radius: {radio_pequeno}px;
+    min-height: {altura_boton_contenido}px;
+    min-width: {ancho_minimo_boton}px;
+    padding: {espacio_2}px {espacio_4}px;
+    font-weight: {peso_medio};
+}}
+
+QPushButton:hover {{
+    background: {acento_hover};
+}}
+
+QPushButton:pressed {{
+    background: {acento_presionado};
+    padding-top: {espacio_2}px;
+}}
+
+QPushButton:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+QPushButton:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+}}
+
+QPushButton#boton_secundario {{
+    background: {superficie};
+    color: {texto};
+    border: {grosor_borde}px solid {borde_control};
+}}
+
+QPushButton#boton_secundario:hover {{
+    background: {principal_suave};
+    color: {principal};
+    border-color: {principal};
+}}
+
+QPushButton#boton_secundario:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+/* Acciones destructivas (eliminar seleccionado / eliminar todo). */
+QPushButton#boton_peligro {{
+    background: {superficie};
+    color: {error};
+    border: {grosor_borde}px solid {borde_control};
+}}
+
+QPushButton#boton_peligro:hover {{
+    background: {error_suave};
+    border-color: {error};
+}}
+
+QPushButton#boton_peligro:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+QPushButton#boton_peligro:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QPushButton#boton_secundario:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QPushButton#boton_terciario {{
+    background: transparent;
+    color: {principal};
+    border: none;
+    min-width: 0px;
+}}
+
+QPushButton#boton_terciario:hover {{
+    background: {hover_superficie};
+}}
+
+QToolButton#boton_exportar_informe {{
+    background: {principal};
+    color: {texto_sobre_principal};
+    border: none;
+    border-radius: {radio_pequeno}px;
+    min-height: {altura_boton_contenido}px;
+    padding: {espacio_2}px {espacio_4}px;
+    font-weight: {peso_medio};
+}}
+
+QToolButton#boton_exportar_informe:hover {{
+    background: {principal_intenso};
+}}
+
+QToolButton#boton_exportar_informe:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+}}
+
+QToolButton#boton_exportar_informe::menu-indicator {{
+    image: none;
+    width: 0;
+}}
+
+QPushButton#boton_zoom {{
+    background: {superficie};
+    color: {principal};
+    border: {grosor_borde}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    font-size: {tamano_subtitulo}pt;
+    font-weight: {peso_fuerte};
+    min-width: {altura_control_compacto}px;
+    max-width: {altura_control_compacto}px;
+    min-height: {altura_control_compacto}px;
+    padding: 0;
+}}
+
+QPushButton#boton_zoom:hover {{
+    background: {principal_suave};
+    border-color: {principal};
+}}
+
+QPushButton#boton_incremento {{
+    background: {superficie};
+    color: {principal};
+    border: {grosor_borde}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    font-weight: {peso_fuerte};
+    min-width: 0px;
+    min-height: {altura_boton}px; /* sin padding: conserva su altura previa junto al campo */
+    padding: 0;
+}}
+
+QPushButton#boton_incremento:hover {{
+    background: {principal_suave};
+    border-color: {principal};
+}}
+
+QPushButton#boton_incremento:disabled {{
+    background: {deshabilitado};
+    border-color: {borde};
+    color: {texto_deshabilitado};
+}}
+
+QPushButton#boton_incremento[fecha_empalme="true"] {{
+    min-width: {altura_control}px;
+    max-width: {altura_control}px;
+}}
+
+QPushButton#boton_cerrar_dialogo {{
+    min-width: {ancho_minimo_boton}px;
+}}
+
+/* ============ CONTROLES DE ENTRADA ============ */
+
+QComboBox, QSpinBox, QLineEdit, QDateEdit, QTextEdit#campo_texto {{
+    background: {campo};
+    color: {texto};
+    border: {grosor_borde}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    min-height: {altura_control}px;
+    padding: {espacio_1}px {espacio_3}px;
+    selection-background-color: {seleccion};
+    selection-color: {texto};
+}}
+
+QComboBox:hover, QSpinBox:hover, QLineEdit:hover, QDateEdit:hover {{
+    background: {campo_hover};
+    border-color: {principal};
+}}
+
+QComboBox:focus, QSpinBox:focus, QLineEdit:focus, QDateEdit:focus {{
+    border: {grosor_borde_foco}px solid {principal};
+}}
+
+QComboBox:disabled, QSpinBox:disabled, QLineEdit:disabled, QDateEdit:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QComboBox::drop-down {{
+    border: none;
+    width: {espacio_6}px;
+}}
+
+/* Sin esta regla el combo con QSS no dibuja flecha y no parece desplegable. */
+QComboBox::down-arrow {{
+    image: url("{flecha_combo}");
+    width: {espacio_3}px;
+    height: {espacio_2}px;
+}}
+
+QComboBox::down-arrow:disabled {{
+    image: url("{flecha_combo_deshabilitada}");
+}}
+
+/* Estado inválido: lo activa cualquier widget con la propiedad invalido=true. */
+QComboBox[invalido="true"], QSpinBox[invalido="true"], QDoubleSpinBox[invalido="true"],
+QLineEdit[invalido="true"], QDateEdit[invalido="true"] {{
+    border: {grosor_borde_foco}px solid {error};
+    background: {error_suave};
+}}
+
+QComboBox QAbstractItemView {{
+    background: {campo};
+    color: {texto};
+    selection-background-color: {principal_suave};
+    selection-color: {principal};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    padding: {espacio_1}px;
+}}
+
+/* Entrega 1.1: la vista emergente y su contenedor siempre con colores del tema. */
+QComboBox QListView, QComboBox QAbstractItemView QWidget, QListView, QTreeView {{
+    background: {campo};
+    color: {texto};
+}}
+
+QComboBox QAbstractItemView::item {{
+    min-height: {altura_control_compacto}px;
+    padding: {espacio_1}px {espacio_2}px;
+    border-radius: {radio_pequeno}px;
+}}
+
+QComboBox QAbstractItemView::item:hover,
+QComboBox QAbstractItemView::item:selected {{
+    background: {principal_suave};
+    color: {principal};
+}}
+
+QCheckBox {{
+    color: {texto};
+    spacing: {espacio_2}px;
+    padding: {espacio_1}px 0;
+    min-height: {altura_control_compacto}px;
+}}
+
+QCheckBox::indicator {{
+    width: 18px;
+    height: 18px;
+    border: {grosor_borde_foco}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    background: {campo};
+}}
+
+QCheckBox::indicator:hover {{
+    border-color: {principal};
+    background: {principal_suave};
+}}
+
+QCheckBox::indicator:focus {{
+    border-color: {foco};
+}}
+
+QCheckBox::indicator:checked {{
+    border-color: {principal};
+    background: {principal};
+    image: url("{marca_casilla}");
+}}
+
+QCheckBox::indicator:checked:hover {{
+    border-color: {principal_intenso};
+    background: {principal_intenso};
+}}
+
+QCheckBox::indicator:disabled {{
+    border-color: {borde};
+    background: {deshabilitado};
+}}
+
+QGroupBox {{
+    background: {superficie_formulario};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    margin-top: {espacio_4}px;
+    padding: {espacio_4}px {espacio_3}px {espacio_3}px {espacio_3}px;
+    font-weight: {peso_medio};
+}}
+
+QGroupBox::title {{
+    color: {texto};
+    subcontrol-origin: margin;
+    left: {espacio_3}px;
+    padding: 0 {espacio_1}px;
+    font-size: {tamano_secundario}pt;
+    font-weight: {peso_medio};
+}}
+
+/* ============ PESTAÑAS ============ */
+
+QTabWidget::pane {{
+    border: none;
+    background: {fondo};
+    top: -1px;
+}}
+
+QTabWidget > QWidget {{
+    background: {fondo};
+}}
+
+/* Fase 4F: pestañas dentro de un bloque (vistas de tablas de Empalme): el
+ * panel toma el color del bloque en vez del fondo gris de la ventana. */
+QGroupBox QTabWidget::pane {{
+    background: {superficie_formulario};
+    border-top: {grosor_borde}px solid {borde};
+}}
+
+QGroupBox QTabWidget > QWidget {{
+    background: {superficie_formulario};
+}}
+
+QTabBar {{
+    background: transparent;
+}}
+
+QTabBar::tab {{
+    background: transparent;
+    color: {texto_secundario};
+    border: none;
+    border-bottom: {grosor_borde_foco}px solid transparent;
+    border-radius: 0;
+    min-width: {ancho_minimo_boton}px;
+    padding: {espacio_2}px {espacio_4}px;
+    margin-right: {espacio_1}px;
+}}
+
+QTabBar::tab:hover {{
+    background: {hover_superficie};
+    color: {texto};
+}}
+
+QTabBar::tab:selected {{
+    background: transparent;
+    color: {principal};
+    font-weight: {peso_medio};
+    border-bottom: {grosor_borde_foco}px solid {principal};
+}}
+
+QTabBar::tab:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+/* ============ TABLAS ============ */
+
+QTableView {{
+    background: {superficie};
+    alternate-background-color: {superficie_2};
+    color: {texto};
+    gridline-color: {borde};
+    selection-background-color: {seleccion};
+    selection-color: {texto};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_pequeno}px;
+    font-family: {familia_numerica};
+}}
+
+QTableView::item {{
+    padding: {espacio_1}px {espacio_2}px;
+    border: none;
+}}
+
+QTableView::item:hover {{
+    background: {hover_superficie};
+}}
+
+QTableView::item:selected {{
+    background: {seleccion};
+    color: {texto};
+}}
+
+/* Con la ventana o la tabla sin foco la selección sigue siendo legible. */
+QTableView::item:selected:!active {{
+    background: {seleccion_inactiva};
+    color: {texto};
+}}
+
+QHeaderView {{
+    background: transparent;
+}}
+
+QHeaderView::section {{
+    background: {superficie_3};
+    color: {texto};
+    border: none;
+    border-bottom: {grosor_borde}px solid {borde_fuerte};
+    border-right: {grosor_borde}px solid {borde};
+    padding: {espacio_1}px {espacio_2}px;
+    font-family: {familia_interfaz};
+    font-weight: {peso_fuerte};
+}}
+
+QHeaderView::section:vertical {{
+    color: {texto_secundario};
+    font-weight: {peso_normal};
+    border-bottom: {grosor_borde}px solid {borde};
+}}
+
+QHeaderView::section:hover {{
+    background: {principal_suave};
+    color: {principal};
+}}
+
+QTableCornerButton::section {{
+    background: {superficie_3};
+    border: none;
+}}
+
+/* ============ TEXTO ENRIQUECIDO ============ */
+
+QTextEdit, QTextBrowser, QPlainTextEdit {{
+    background: {campo};
+    color: {texto};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    padding: {espacio_3}px;
+    selection-background-color: {seleccion};
+    selection-color: {texto};
+}}
+
+QTextEdit#visor_resultados, QTextBrowser#visor_resultados {{
+    padding: 0;
+    border: none;
+    background: {fondo};
+    font-family: {familia_interfaz};
+}}
+
+QTextEdit:disabled, QTextBrowser:disabled, QPlainTextEdit:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+}}
+
+QTextEdit[readOnly="false"] {{
+    border-color: {borde_control};
+}}
+
+QTextEdit[readOnly="false"]:hover {{
+    border-color: {principal};
+}}
+
+QTextEdit[readOnly="false"]:focus {{
+    border: {grosor_borde_foco}px solid {principal};
+}}
+
+QTextEdit[readOnly="false"]:disabled {{
+    border-color: {borde};
+}}
+
+QTextBrowser#visor_explicacion {{
+    background: {superficie};
+    color: {texto};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    padding: {espacio_2}px;
+}}
+
+QDialog#dialogo_explicacion {{
+    background: {fondo};
+}}
+
+/* ============ MENÚS ============ */
+
+/* Fase 4F: la barra de menú vive dentro de la cabecera, a la derecha de la
+ * navegación lateral, para que la barra oscura recorra la ventana completa. */
+QMenuBar {{
+    background: transparent;
+    color: {texto_secundario};
+    border: none;
+    padding: 0;
+}}
+
+QMenuBar::item {{
+    background: transparent;
+    color: {texto_secundario};
+    padding: {espacio_1}px {espacio_3}px;
+    border-radius: {radio_pequeno}px;
+}}
+
+QMenuBar::item:selected, QMenuBar::item:pressed {{
+    background: {principal_suave};
+    color: {principal};
+}}
+
+QMenu {{
+    background: {superficie};
+    color: {texto};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+    padding: {espacio_1}px;
+}}
+
+QMenu::item {{
+    background: transparent;
+    color: {texto};
+    padding: {espacio_2}px {espacio_6}px;
+    border-radius: {radio_pequeno}px;
+}}
+
+QMenu::item:selected {{
+    background: {principal_suave};
+    color: {principal};
+}}
+
+QMenu::separator {{
+    height: {grosor_borde}px;
+    background: {borde};
+    margin: {espacio_1}px {espacio_2}px;
+}}
+
+/* ============ BARRAS DE DESPLAZAMIENTO ============ */
+
+QScrollBar:vertical {{
+    background: transparent;
+    width: {espacio_3}px;
+    margin: 0;
+}}
+
+QScrollBar::handle:vertical {{
+    background: {borde_control};
+    min-height: {espacio_7}px;
+    border-radius: {radio_pequeno}px;
+    margin: {espacio_1}px;
+}}
+
+QScrollBar::handle:vertical:hover {{
+    background: {borde_fuerte};
+}}
+
+QScrollBar:horizontal {{
+    background: transparent;
+    height: {espacio_3}px;
+    margin: 0;
+}}
+
+QScrollBar::handle:horizontal {{
+    background: {borde_control};
+    min-width: {espacio_7}px;
+    border-radius: {radio_pequeno}px;
+    margin: {espacio_1}px;
+}}
+
+QScrollBar::handle:horizontal:hover {{
+    background: {borde_fuerte};
+}}
+
+QScrollBar::add-line, QScrollBar::sub-line {{
+    height: 0;
+    width: 0;
+}}
+
+QScrollBar::add-page, QScrollBar::sub-page {{
+    background: transparent;
+}}
+
+/* ============ PROGRESO Y CARGA ============ */
+
+QProgressBar {{
+    background: {superficie_3};
+    color: {texto_secundario};
+    border: none;
+    border-radius: {radio_pequeno}px;
+    height: {espacio_2}px;
+    text-align: center;
+}}
+
+QProgressBar::chunk {{
+    background: {principal};
+    border-radius: {radio_pequeno}px;
+}}
+
+QFrame#velo_carga {{
+    background: {velo_fondo};
+    border: none;
+}}
+
+QFrame#panel_carga {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+QLabel#texto_carga {{
+    color: {texto};
+    font-weight: {peso_medio};
+}}
+
+QLabel#detalle_carga {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+/* ============ NOTIFICACIONES ============ */
+
+QFrame#notificacion {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+QFrame#notificacion[nivel="exito"] {{
+    background: {exito_suave};
+    border-color: {exito};
+}}
+
+QFrame#notificacion[nivel="advertencia"] {{
+    background: {advertencia_suave};
+    border-color: {advertencia};
+}}
+
+QFrame#notificacion[nivel="error"] {{
+    background: {error_suave};
+    border-color: {error};
+}}
+
+QFrame#notificacion[nivel="informacion"] {{
+    background: {informacion_suave};
+    border-color: {informacion};
+}}
+
+QLabel#notificacion_titulo {{
+    color: {texto};
+    font-weight: {peso_medio};
+}}
+
+QLabel#notificacion_detalle {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+QPushButton#notificacion_cerrar {{
+    background: transparent;
+    color: {texto_terciario};
+    border: none;
+    min-width: 0px;
+    min-height: 0px;
+    padding: {espacio_1}px;
+}}
+
+QPushButton#notificacion_cerrar:hover {{
+    color: {texto};
+    background: {hover_superficie};
+}}
+
+/* ============ INICIO ============ */
+
+QFrame#inicio_portada {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_medio}px;
+}}
+
+QLabel#inicio_bienvenida {{
+    color: {texto};
+    font-family: {familia_titulo};
+    font-size: {tamano_display}pt;
+    font-weight: {peso_fuerte};
+}}
+
+QLabel#inicio_descripcion {{
+    color: {texto_secundario};
+    font-size: {tamano_subtitulo}pt;
+    line-height: {interlineado_comodo};
+}}
+
+QFrame#inicio_tarjeta_dato {{
+    background: {superficie_2};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_pequeno}px;
+}}
+
+QLabel#inicio_dato_etiqueta {{
+    color: {texto_terciario};
+    font-size: {tamano_micro}pt;
+}}
+
+QLabel#inicio_dato_valor {{
+    color: {texto};
+    font-family: {familia_numerica};
+    font-size: {tamano_subtitulo}pt;
+    font-weight: {peso_medio};
+}}
+
+QLabel#inicio_version {{
+    color: {texto_terciario};
+    font-size: {tamano_micro}pt;
+}}
+
+/* ============ SEPARADORES ============ */
+
+QFrame#separador_horizontal {{
+    background: {borde};
+    border: none;
+    max-height: {grosor_borde}px;
+}}
+
+QSplitter::handle {{
+    background: transparent;
+}}
+
+QSplitter::handle:horizontal {{
+    width: {espacio_1}px;
+}}
+
+/* Presentación local de Proyecciones ICOCIV; no afecta otros módulos. */
+QWidget#proyecciones_icociv QGroupBox {{
+    border-radius: {radio_pequeno}px;
+}}
+
+QWidget#proyecciones_icociv QPushButton {{
+    border-radius: {radio_pequeno}px;
+}}
+
+QWidget#proyecciones_icociv QComboBox,
+QWidget#proyecciones_icociv QLineEdit,
+QWidget#proyecciones_icociv QTextEdit,
+QWidget#proyecciones_icociv QTextBrowser {{
+    border-radius: {radio_pequeno}px;
+}}
+
+QWidget#proyecciones_icociv QDoubleSpinBox {{
+    background: {campo};
+    color: {texto};
+    border: {grosor_borde}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    min-height: {altura_control}px;
+    padding: {espacio_1}px {espacio_3}px;
+    selection-background-color: {seleccion};
+    selection-color: {texto};
+}}
+
+QWidget#proyecciones_icociv QDoubleSpinBox:hover {{
+    background: {campo_hover};
+    border-color: {principal};
+}}
+
+QWidget#proyecciones_icociv QDoubleSpinBox:focus {{
+    border: {grosor_borde_foco}px solid {principal};
+}}
+
+QWidget#proyecciones_icociv QDoubleSpinBox:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox {{
+    background: {campo};
+    color: {texto};
+    border: {grosor_borde}px solid {borde_control};
+    border-radius: {radio_pequeno}px;
+    min-height: {altura_control}px;
+    padding: {espacio_1}px {espacio_3}px;
+    selection-background-color: {seleccion};
+    selection-color: {texto};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox:hover {{
+    background: {campo_hover};
+    border-color: {principal};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox:focus {{
+    border: {grosor_borde_foco}px solid {principal};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-button,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-button {{
+    background: transparent;
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-button:hover,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-button:hover {{
+    background: {principal_suave};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-button:pressed,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-button:pressed {{
+    background: {seleccion};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-button:disabled,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-button:disabled,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-button:off,
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-button:off {{
+    background: {deshabilitado};
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::up-arrow {{
+    image: url("{flecha_spin_arriba}");
+    width: {espacio_2}px;
+    height: {espacio_2}px;
+}}
+
+QWidget#empalme_iccp_icociv QDoubleSpinBox::down-arrow {{
+    image: url("{flecha_spin_abajo}");
+    width: {espacio_2}px;
+    height: {espacio_2}px;
+}}
+
+/* Meses personalizados: mismas flechas, hover y estado deshabilitado que los controles de Empalme. */
+QSpinBox#spin_meses::up-button,
+QSpinBox#spin_meses::down-button {{
+    background: transparent;
+    border: none;
+    width: {espacio_5}px;
+}}
+
+QSpinBox#spin_meses::up-button:hover,
+QSpinBox#spin_meses::down-button:hover {{
+    background: {principal_suave};
+}}
+
+QSpinBox#spin_meses::up-button:pressed,
+QSpinBox#spin_meses::down-button:pressed {{
+    background: {seleccion};
+}}
+
+QSpinBox#spin_meses::up-button:disabled,
+QSpinBox#spin_meses::down-button:disabled,
+QSpinBox#spin_meses::up-button:off,
+QSpinBox#spin_meses::down-button:off {{
+    background: transparent;
+}}
+
+QSpinBox#spin_meses::up-arrow {{
+    image: url("{flecha_spin_arriba}");
+    width: {espacio_2}px;
+    height: {espacio_2}px;
+}}
+
+QSpinBox#spin_meses::down-arrow {{
+    image: url("{flecha_spin_abajo}");
+    width: {espacio_2}px;
+    height: {espacio_2}px;
+}}
+
+QSpinBox#spin_meses::up-arrow:disabled,
+QSpinBox#spin_meses::down-arrow:disabled {{
+    image: none;
+}}
+
+QWidget#proyecciones_icociv QLabel#icociv_titulo_seccion {{
+    color: {texto};
+    font-size: {tamano_subtitulo}pt;
+    font-weight: {peso_medio};
+}}
+
+QWidget#proyecciones_icociv QFrame#icociv_contexto {{
+    background: {superficie};
+    border: {grosor_borde}px solid {borde};
+    border-radius: {radio_pequeno}px;
+}}
+
+/* Fase 4I-D: aviso de actividades con el factor anterior (visible arriba del módulo y junto a la tabla). */
+QFrame#aviso_legados {{
+    background: {advertencia_suave};
+    border: {grosor_borde}px solid {advertencia};
+    border-radius: {radio_pequeno}px;
+}}
+
+QFrame#aviso_legados QLabel {{
+    color: {texto};
+    background: transparent;
+}}
+
+/* Fase 4I-A V4: acciones secundarias compactas (Deshacer/Rehacer, Ver gráfica). */
+QPushButton#boton_compacto {{
+    background: {superficie};
+    color: {texto};
+    border: {grosor_borde}px solid {borde_control};
+    min-height: {altura_compacto_contenido}px;
+    min-width: 0px;
+    padding: {espacio_1}px {espacio_3}px;
+    font-weight: normal;
+}}
+
+QPushButton#boton_compacto:hover {{
+    background: {principal_suave};
+    color: {principal};
+    border-color: {principal};
+}}
+
+QPushButton#boton_compacto:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+QPushButton#boton_compacto:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QWidget#proyecciones_icociv QPushButton#icociv_eliminar {{
+    background: {superficie};
+    color: {error};
+    border: {grosor_borde}px solid {borde_control};
+}}
+
+QWidget#proyecciones_icociv QPushButton#icociv_eliminar:hover {{
+    background: {error_suave};
+    border-color: {error};
+}}
+
+QWidget#proyecciones_icociv QPushButton#icociv_eliminar:focus {{
+    border: {grosor_borde_foco}px solid {foco};
+}}
+
+QWidget#proyecciones_icociv QPushButton#icociv_eliminar:disabled {{
+    background: {deshabilitado};
+    color: {texto_deshabilitado};
+    border-color: {borde};
+}}
+
+QWidget#proyecciones_icociv QPushButton#boton_incremento {{
+    min-width: {altura_control}px;
+    max-width: {altura_control}px;
+    padding: 0;
+}}
+
+/* ============ FASE 4F: BARRA DE ACCIONES DE TABLAS ============ */
+
+QWidget#barra_acciones_tablas QLabel {{
+    color: {texto_secundario};
+    font-size: {tamano_secundario}pt;
+}}
+
+/* ============ FASE 4F: DESLIZADOR DE REFERENCIA ============ */
+/* Solo apariencia: el control conserva su política de rueda y foco. */
+
+QSlider:horizontal {{
+    min-height: {espacio_6}px;
+}}
+
+QSlider::groove:horizontal {{
+    background: {superficie_3};
+    height: {espacio_2}px;
+    border-radius: {espacio_1}px;
+}}
+
+QSlider::sub-page:horizontal {{
+    background: {principal};
+    border-radius: {espacio_1}px;
+}}
+
+/* Asa circular: 12 px + borde de 2 px por lado = 16 px de lado y radio 8,
+ * igual que el alto (ranura de 8 px + 4 px de margen arriba y abajo). */
+QSlider::handle:horizontal {{
+    background: {superficie};
+    border: {grosor_borde_foco}px solid {principal};
+    width: {espacio_3}px;
+    margin: -{espacio_1}px 0;
+    border-radius: {espacio_2}px;
+}}
+
+QSlider::handle:horizontal:hover {{
+    background: {principal_suave};
+}}
+
+QSlider::handle:horizontal:focus {{
+    border-color: {foco};
+    background: {principal_suave};
+}}
+
+QSlider::groove:horizontal:disabled, QSlider::sub-page:horizontal:disabled {{
+    background: {deshabilitado};
+}}
+
+QSlider::handle:horizontal:disabled {{
+    border-color: {borde};
+}}

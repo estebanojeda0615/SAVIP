@@ -1,0 +1,63 @@
+SAVIP 1.1.1 - Version portatil para Windows x64
+Sistema de Analisis de Variaciones de Precios (indices ICOCIV del DANE)
+=======================================================================
+
+1. ANTES DE EMPEZAR
+   - Extraiga COMPLETAMENTE el archivo ZIP (clic derecho > "Extraer todo...")
+     en una carpeta de su eleccion. No ejecute SAVIP desde dentro del ZIP.
+   - No necesita instalar Python ni ningun otro programa: todo lo necesario
+     esta en esta carpeta (SAVIP.exe y la carpeta _internal).
+   - No borre ni mueva por separado la carpeta _internal: debe quedar siempre
+     junto a SAVIP.exe. Puede mover la carpeta SAVIP_1.1.1_Portatil completa.
+   - El paquete NO incluye el Excel oficial del DANE: descarguelo de la pagina
+     del DANE (anexo ICOCIV, formato .xlsx o .xlsb).
+
+2. ABRIR SAVIP
+   - Haga doble clic en SAVIP.exe. La primera apertura puede tardar unos
+     segundos.
+   - SAVIP.exe no tiene firma digital de editor. Windows SmartScreen puede
+     mostrar "Windows protegio su equipo" o "editor desconocido". Si obtuvo
+     el ZIP de una fuente de confianza, puede elegir "Mas informacion" >
+     "Ejecutar de todas formas". No desactive el antivirus ni las
+     protecciones de Windows.
+
+3. CARGAR EL ARCHIVO DEL DANE (paso 1 siempre)
+   - Boton "Cargar archivo Excel" (barra lateral) o menu Archivo > Cargar Excel.
+   - Formatos admitidos: .xlsx y .xlsb (anexo ICOCIV del DANE).
+
+4. PROYECCIONES Y FECHA OBJETIVO
+   - En Proyecciones elija la serie y en "Parametros de proyeccion" el
+     horizonte (o Ano/Mes) y pulse "Ejecutar proyeccion". SAVIP calcula una
+     trayectoria de 24 meses desde el ultimo dato observado del DANE.
+   - Repetir "Ejecutar proyeccion" con otro horizonte sobre la misma serie y
+     el mismo DANE reutiliza esa trayectoria (no recalcula).
+   - "Aplicar fecha objetivo a analisis guardados" cambia la fecha del
+     presupuesto; muestra antes una ventana para "Aceptar y actualizar" o
+     "Cancelar". Se puede deshacer con Ctrl+Z.
+
+5. SESIONES (archivos .json)
+   - Para abrir una sesion: primero cargue el Excel del DANE (igual o mas
+     reciente que el de la sesion) y luego "Abrir sesion".
+   - Guardar: Ctrl+S (en el mismo archivo) / Guardar como: Ctrl+Shift+S.
+   - "Cerrar sesion" pregunta: Guardar y cerrar / Cerrar sin guardar /
+     Cancelar. El DANE sigue cargado para empezar otro presupuesto.
+   - Las sesiones, informes y exportaciones se guardan donde usted elija
+     (por defecto en Documentos\SAVIP), nunca dentro de esta carpeta.
+
+6. DANE MAS RECIENTE
+   - Cargar un DANE nuevo NO recalcula nada. Para actualizar los analisis con
+     los datos nuevos use "Actualizar analisis con DANE mas reciente" y
+     confirme. Se crean revisiones nuevas; las anteriores y los valores
+     guardados se conservan.
+
+7. EXPORTAR
+   - En las tablas: "Exportar / informes" > Excel (.xlsx), PDF o Word (.docx).
+   - En Resultados: "Generar informe" (PDF o Word).
+   - Si el presupuesto mezcla fechas objetivo, SAVIP avisa antes de exportar.
+
+8. REGISTROS Y PREFERENCIAS
+   - Registros de ejecucion: %LOCALAPPDATA%\SAVIP\logs
+   - El tema claro/oscuro se recuerda en las preferencias de Windows del
+     usuario.
+
+SAVIP 1.1.1 - Secretaria de Infraestructura del Cauca

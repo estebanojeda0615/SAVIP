@@ -1,0 +1,38 @@
+# Reconstruye el paquete portatil de SAVIP en Windows x64, solo a peticion
+# (Actions > build-windows > Run workflow). No hace commits, push ni releases y
+# no usa secretos: el resultado es un artefacto descargable con el ZIP.
+name: build-windows
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.10"
+          architecture: x64
+
+      - name: Construir SAVIP y el ZIP portatil
+        shell: powershell
+        run: .\scripts\build_portatil.ps1
+
+      - name: Publicar el ZIP como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: SAVIP-portatil-windows-x64
+          path: |
+            release/SAVIP_*_Portatil_Windows_x64.zip
+            release/SAVIP_*_Portatil_Windows_x64.zip.sha256
+            release/verificacion_lock.json
+            release/autocomprobacion.txt
+          if-no-files-found: error
+          retention-days: 30
