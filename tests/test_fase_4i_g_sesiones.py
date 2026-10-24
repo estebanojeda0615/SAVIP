@@ -16,7 +16,6 @@ from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QLabel, QMessa
 
 from tests.test_slider_comparacion_historica_fase_4d import APP, reales
 from tests.test_switch_tema_sesion_dane import MOTOR, _ventana_con_dane
-from app_icociv.interfaz.componentes.carga import ESCALA
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.persistencia import gestor_sesiones
 
@@ -80,7 +79,7 @@ def test_1_2_apertura_con_velo_errores_y_sesion_previa_intacta(tmp_path):
     try:
         real = gestor_sesiones.cargar_sesion
         lenta = lambda r: (time.sleep(0.9), real(r))[1]  # sesión «pesada»: el velo debe verse mientras se lee
-        visto, maximo = False, 0
+        visto, porcentajes, modos = False, set(), set()
         with patch("app_icociv.interfaz.ventana_principal.cargar_sesion", side_effect=lenta), \
              patch.object(QFileDialog, "getOpenFileName", return_value=(str(ruta), "")) as dialogo, \
              patch(MOTOR, side_effect=AssertionError("motor")):
@@ -90,16 +89,19 @@ def test_1_2_apertura_con_velo_errores_y_sesion_previa_intacta(tmp_path):
             while v._operacion_sesion:
                 APP.processEvents()
                 efecto = v.velo_carga.graphicsEffect()
-                if v.velo_carga.isVisible() and efecto is not None and efecto.opacity() > 0.5:
+                if v.velo_carga.isVisible() and v.velo_carga.property("modo") == "esqueleto" and (efecto is None or efecto.opacity() > 0.5):
                     if not visto:
                         v.grab().save(str(CAPTURAS / f"apertura_velo_{v.tema_actual}.png"))
                     visto = True
                 if v._operacion_sesion:  # aún trabajando
-                    maximo = max(maximo, v.velo_carga.barra.value())
+                    porcentajes.add(v.velo_carga.franja.porcentaje()); modos.add(v.velo_carga.property("modo"))
             assert time.time() - inicio >= 0.8
-        assert v.velo_carga.barra.value() == ESCALA  # 100 % solo al terminar con éxito
-        assert dialogo.call_count == 1 and visto and v.velo_carga.etiqueta.text() == "Abriendo sesión…"
-        assert 0 < maximo < ESCALA  # nunca 100 % mientras trabaja
+        # Fase V1.1.2-01: esqueleto de la sesión y avance indeterminado (la lectura no se puede medir):
+        # ningún porcentaje inventado mientras trabaja ni un 100 % simulado al terminar.
+        # Fase V1.1.2-01B: primero la franja inmediata y, pasados 0,4 s, el esqueleto; etapas reales.
+        assert v.velo_carga.franja.porcentaje() is None and porcentajes == {None} and modos == {"franja", "esqueleto"}
+        assert dialogo.call_count == 1 and visto
+        assert v.velo_carga.etiqueta.text() == "Abriendo sesión: restaurando análisis, actividades y Empalme…"
         QTest.qWait(400); assert not v.velo_carga.isVisible() and v.navegacion.isEnabled()
         assert [a["id"] for a in v.widget_proyecciones.historial] == [a["id"] for a in datos["proyecciones_icociv"]["historial_analisis"]]
         assert v.ruta_sesion_actual == ruta and not v._operacion_sesion

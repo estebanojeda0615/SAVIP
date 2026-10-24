@@ -206,13 +206,13 @@ def test_velo_de_carga_cubre_y_libera_el_area() -> None:
     velo.mostrar("Analizando", "Serie total")
     assert velo.isVisible()
     assert velo.etiqueta.text() == "Analizando"
-    # Fase 4I-B: sin progreso medido la barra muestra progreso VISUAL estimado, rotulado como tal.
-    # Fase 4I-C: solo título y barra (progreso visual estimado declarado en el nombre accesible).
+    # Fase V1.1.2-01: sin progreso medido la franja es indeterminada (no se estima un porcentaje).
+    # Fase 4I-C: solo título y barra.
     from PySide6.QtWidgets import QLabel
-    assert velo.barra.value() < velo.barra.maximum() and velo.barra.accessibleName() == "Progreso visual estimado"
+    assert velo.franja.porcentaje() is None and "avance no medible" in velo.franja.accessibleName()
     assert [l.text() for l in velo.findChildren(QLabel) if l.isVisible()] == [velo.etiqueta.text()]
     velo.establecer_progreso(40, 100)
-    assert velo.barra.value() == 40
+    assert velo.franja.porcentaje() == 40
     velo.ocultar()
     assert not velo.isVisible(), "Sin animación el velo debe ocultarse de inmediato"
     establecer_movimiento_reducido(False)

@@ -2,6 +2,8 @@
 
 **Versión 1.1.1** · Aplicación de escritorio para Windows x64 · Autor: **Esteban Ojeda**
 
+> **Rama `develop/v1.1.2`: en desarrollo, no es una versión publicada.** Contiene la 1.1.1 más los indicadores de carga con esqueleto (Skeleton Loaders), diálogos que se ajustan a la ventana e indicadores al abrir, guardar y cerrar sesiones. Tiene pruebas automáticas, pero aún faltan la revisión manual y la aprobación del autor. `VERSION` sigue en 1.1.1 y no hay ZIP de 1.1.2. La versión estable es la de `main`.
+
 SAVIP ayuda a actualizar precios de presupuestos de obra civil con los índices **ICOCIV** (Índice de Costos de la Construcción de Obras Civiles) que publica el DANE en Colombia. Carga el anexo oficial del DANE, proyecta la serie elegida hasta la fecha objetivo del presupuesto y calcula el valor actualizado de cada actividad. Guarda el trabajo en sesiones y exporta el resultado a Excel, PDF o Word.
 
 ## Qué hace

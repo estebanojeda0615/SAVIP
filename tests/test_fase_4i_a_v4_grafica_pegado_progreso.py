@@ -196,12 +196,12 @@ def test_F_velo_veraz_sin_destello_y_con_tiempo_transcurrido():
     base = QWidget(); base.resize(400, 300); base.show()
     velo = VeloCarga(base)
     velo.mostrar("Leyendo datos…", "La aplicación sigue respondiendo.")
-    assert velo.isVisible() and velo.barra.accessibleName() == "Progreso visual estimado"  # bloquea clics
+    assert velo.isVisible() and "avance no medible" in velo.franja.accessibleName()  # bloquea clics; Fase V1.1.2-01: honesto
     efecto = velo.graphicsEffect(); assert efecto is not None and efecto.opacity() == 0.0  # aún imperceptible
     # Fase 4I-B: barra determinada de progreso VISUAL estimado (rotulada), no indeterminada.
     velo.ocultar(); QTest.qWait(250); assert not velo.isVisible()  # tarea breve: no hubo destello
     velo.mostrar("Evaluando modelos…"); QTest.qWait(3300)
-    assert "Completado" not in velo.etiqueta.text() and velo.barra.value() < velo.barra.maximum()  # Fase 4I-C: sin textos accesorios
+    assert "Completado" not in velo.etiqueta.text() and velo.franja.porcentaje() is None  # Fase 4I-C: sin textos accesorios
     velo.ocultar(); QTest.qWait(250); assert not velo.isVisible() and not velo._animacion.isActive()
     base.close()
 

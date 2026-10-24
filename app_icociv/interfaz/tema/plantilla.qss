@@ -950,6 +950,29 @@ QLabel#detalle_carga {{
     font-size: {tamano_secundario}pt;
 }}
 
+/* Fase V1.1.2-01: esqueleto del contenido esperado (fondo opaco: oculta lo desactualizado). */
+QFrame#velo_carga[modo="esqueleto"] {{
+    background: {fondo};
+    border: none;
+}}
+
+/* Fase V1.1.2-01B: franja inmediata sobre el contenido vigente (guardar, primeros 0,4 s al abrir). */
+QFrame#velo_carga[modo="franja"] {{
+    background: transparent;
+    border: none;
+}}
+
+QFrame#franja_progreso {{
+    background: {superficie};
+    border: none;
+    border-bottom: {grosor_borde}px solid {borde};
+}}
+
+QFrame#panel_carga QFrame#franja_progreso {{
+    background: transparent;
+    border: none;
+}}
+
 /* ============ NOTIFICACIONES ============ */
 
 QFrame#notificacion {{

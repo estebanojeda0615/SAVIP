@@ -219,9 +219,10 @@ def test_B_cuadro_de_carga_solo_titulo_y_barra():
     try:
         velo.mostrar("Ejecutando proyección…", "La aplicación sigue respondiendo."); QTest.qWait(3500)
         visibles = [l.text() for l in velo.findChildren(QLabel) if l.isVisible()]
-        assert visibles == ["Ejecutando proyección…"] and velo.barra.isVisible() and not velo.barra.isTextVisible()
-        assert 0 < velo.barra.value() < velo.barra.maximum() and velo.panel.sizeHint().height() < 140
-        velo.ocultar(exito=False); assert velo.barra.value() < velo.barra.maximum()  # error: sin 100 %
+        # Fase V1.1.2-01: la barra es la franja indeterminada (sin porcentaje inventado).
+        assert visibles == ["Ejecutando proyección…"] and velo.franja.isVisible()
+        assert velo.franja.porcentaje() is None and velo.panel.sizeHint().height() < 140
+        velo.ocultar(exito=False); assert velo.franja.porcentaje() is None  # error: sin 100 %
         velo.mostrar("Cargando archivo…"); QTest.qWait(100); velo.ocultar(); QTest.qWait(200)
         assert not velo.isVisible()  # tarea breve: nunca apareció
     finally:

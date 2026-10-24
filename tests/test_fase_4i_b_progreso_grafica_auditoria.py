@@ -14,7 +14,7 @@ from PySide6.QtWidgets import QScrollArea, QWidget
 from tests.test_slider_comparacion_historica_fase_4d import APP, cargar
 from tests.test_proyecciones_redisenio_visual import ventana_de_prueba
 from app_icociv.interfaz.componentes import VeloCarga
-from app_icociv.interfaz.componentes.carga import ESCALA, progreso_estimado
+from app_icociv.interfaz.componentes import carga as modulo_carga
 from app_icociv.interfaz.animaciones.transiciones import establecer_movimiento_reducido
 from app_icociv.interfaz.widgets.visor_grafica import VisorGraficaDialog
 from app_icociv.persistencia.historial_icociv import recuperar_resultado
@@ -32,14 +32,9 @@ class _Visor(VisorGraficaDialog):
 
 
 # ---------------------------------------------------------------- progreso
-def test_P_curva_estimada_por_fases():
-    assert progreso_estimado(0) == 0
-    serie = [progreso_estimado(t / 10) for t in range(0, 600)]
-    assert all(b >= a for a, b in zip(serie, serie[1:]))  # monótona
-    assert 40 < progreso_estimado(1.5) < 85 and abs(progreso_estimado(4.0) - 85) < 1e-9
-    assert progreso_estimado(4.2) == 85 == progreso_estimado(4.44)  # pausa visible en ~85 %
-    assert 85 < progreso_estimado(10) < progreso_estimado(60) < 94  # lenta, sin llegar a 100
-    assert progreso_estimado(3600) < 94.0001
+def test_P_sin_curva_estimada():
+    # Fase V1.1.2-01: se retiró el «progreso visual estimado» (simulaba un porcentaje sin medirlo).
+    assert not hasattr(modulo_carga, "progreso_estimado") and not hasattr(modulo_carga, "ESCALA")
 
 
 def _velo():
@@ -52,15 +47,13 @@ def test_P1_P4_avanza_pausa_y_solo_completa_con_exito_real():
     base, velo = _velo()
     try:
         velo.mostrar("Ejecutando proyección…")
-        QTest.qWait(1200); temprano = velo.barra.value()
-        assert 0 < temprano < 0.85 * ESCALA and velo.barra.maximum() == ESCALA
-        QTest.qWait(3150); assert abs(velo.barra.value() - 0.85 * ESCALA) <= 5  # ~85 % y en pausa
-        QTest.qWait(2500); tardio = velo.barra.value()
-        assert 0.85 * ESCALA < tardio < 0.95 * ESCALA and velo.barra.value() < ESCALA  # sigue sin 100 %
+        # Fase V1.1.2-01: sin medición la barra es indeterminada; el tiempo no fabrica porcentaje.
+        QTest.qWait(1200); assert velo.franja.porcentaje() is None and velo.franja.isVisible()
+        QTest.qWait(2500); assert velo.franja.porcentaje() is None
         from PySide6.QtWidgets import QLabel
         assert [l.text() for l in velo.findChildren(QLabel) if l.isVisible()] == [velo.etiqueta.text()]  # Fase 4I-C: solo título y barra
         velo.ocultar(exito=True)
-        assert velo.barra.value() == ESCALA  # 100 % solo al terminar de verdad
+        assert velo.franja.porcentaje() is None  # éxito sin medición: no se simula un 100 %
         QTest.qWait(300); assert not velo.isVisible() and not velo._animacion.isActive()
         velo.ocultar(exito=True)  # idempotente (p. ej. error + finished)
     finally:
@@ -74,12 +67,12 @@ def test_P2_P3_tarea_breve_sin_destello_y_error_sin_exito_falso():
         velo.mostrar("Cargando…"); QTest.qWait(150)
         assert velo.graphicsEffect().opacity() == 0.0  # < 400 ms: aún imperceptible
         velo.ocultar(); QTest.qWait(300); assert not velo.isVisible()
-        velo.mostrar("Ejecutando…"); QTest.qWait(900); valor = velo.barra.value()
+        velo.mostrar("Ejecutando…"); QTest.qWait(900)
         velo.ocultar(exito=False)
-        assert velo.barra.value() == valor < ESCALA  # error: no salta a 100 %
+        assert velo.franja.porcentaje() is None  # error: no salta a 100 %
         QTest.qWait(300); assert not velo.isVisible() and not velo._animacion.isActive()
         velo.mostrar("Exportando…"); velo.establecer_progreso(40, 100)  # progreso MEDIDO: sin rótulo de estimado
-        QTest.qWait(200); assert velo.barra.value() == 40
+        QTest.qWait(200); assert velo.franja.porcentaje() == 40
         velo.ocultar()
     finally:
         base.close()
@@ -91,7 +84,7 @@ def test_P3_ventana_error_real_retira_velo_sin_completar():
         v._establecer_ocupado(True, "Ejecutando proyección…"); QTest.qWait(700)
         with patch.object(v, "notificaciones", None), patch("app_icociv.interfaz.ventana_principal.QMessageBox.critical"):
             v._mostrar_error("fallo simulado")
-        assert v.velo_carga.barra.value() < ESCALA
+        assert v.velo_carga.franja.porcentaje() is None  # Fase V1.1.2-01: sin 100 % simulado
         v._establecer_ocupado(False)  # «finished» posterior: no cambia nada
         QTest.qWait(300); assert not v.velo_carga.isVisible() and v.boton_cargar.isEnabled()
     finally:

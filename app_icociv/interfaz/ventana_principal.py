@@ -16,7 +16,7 @@ from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
 from matplotlib.ticker import FuncFormatter
 from app_icociv.interfaz.formato_numerico import numero_ui, detalle_ui
-from PySide6.QtCore import QEvent, QSettings, Qt, QTimer, QUrl, Signal
+from PySide6.QtCore import QEvent, QEventLoop, QSettings, Qt, QTimer, QUrl, Signal
 from PySide6.QtGui import QDesktopServices, QIcon, QKeySequence, QPixmap
 from PySide6.QtWidgets import (
     QApplication,
@@ -336,7 +336,7 @@ class VentanaPrincipal(QMainWindow):
         accion_cargar = menu_archivo.addAction("Cargar Excel")
         accion_cargar.triggered.connect(self.seleccionar_archivo)
         menu_archivo.addSeparator()
-        menu_archivo.addAction("Salir", self.close)
+        menu_archivo.addAction("Salir", self.salir)
 
         menu_sesion = self.menuBar().addMenu("Sesiones")
         menu_sesion.addAction("Abrir sesión", self.abrir_sesion)
@@ -929,6 +929,9 @@ class VentanaPrincipal(QMainWindow):
         from PySide6.QtWidgets import QApplication
         self._ajuste_tooltips = AjusteTooltips(self)
         QApplication.instance().installEventFilter(self._ajuste_tooltips)
+        # Fase V1.1.2-01: los diálogos se dimensionan y colocan dentro de la ventana de SAVIP.
+        from app_icociv.interfaz.componentes.dialogos import instalar_ajuste_dialogos
+        instalar_ajuste_dialogos(QApplication.instance())
         self._contenedor_superposiciones = cuerpo
 
         self._elevar_superficies()
@@ -1432,7 +1435,7 @@ class VentanaPrincipal(QMainWindow):
             self._cargar_archivo(ruta_archivo)
 
     def _cargar_archivo(self, ruta_archivo: str) -> None:
-        self._establecer_ocupado(True, "Cargando archivo Excel...")
+        self._establecer_ocupado(True, "Leyendo y validando el anexo DANE…", esqueleto="anexo")
         self.trabajador = TrabajadorFuncion(self.controlador.cargar_archivo, ruta_archivo)
         self.trabajador.resultado.connect(self._archivo_cargado)
         self.trabajador.error.connect(self._mostrar_error)
@@ -1459,6 +1462,9 @@ class VentanaPrincipal(QMainWindow):
         self.widget_empalme.actualizar_icociv(self.controlador.tablas, self.controlador.periodos, self.controlador.ruta_archivo)
         self._actualizar_jerarquia()
         self.etiqueta_estado.setText("Archivo cargado correctamente.")
+        # Fase V1.1.2-01: la portada refleja el anexo recién cargado aunque el usuario siga en Inicio
+        # (antes conservaba «Sin archivo cargado» hasta cambiar de sección). Solo presentación.
+        self._actualizar_pantalla_inicio()
         if vacio:
             self._firma_vacia = self._firma_guardada = self._firma_trabajo()
 
@@ -1512,7 +1518,7 @@ class VentanaPrincipal(QMainWindow):
                 self.etiqueta_estado.setText("Proyección no ejecutada: la serie ya está en el presupuesto con otros datos DANE.")
                 return
 
-        self._establecer_ocupado(True, "Ejecutando proyección...")
+        self._establecer_ocupado(True, "Evaluando los modelos de proyección…", esqueleto="resultados")
         self.trabajador = TrabajadorFuncion(
             self.controlador.ejecutar_analisis,
             seleccion,
@@ -1614,7 +1620,7 @@ class VentanaPrincipal(QMainWindow):
         en exito, `al_terminar(None, mensaje)` en error; en ambos casos el
         velo se cierra antes de invocar el callback.
         """
-        self._establecer_ocupado(True, "Calculando proyección ICOCIV...")
+        self._establecer_ocupado(True, "Evaluando los modelos de proyección ICOCIV…")
         controlador_empalme = ControladorPrincipal()
         controlador_empalme.ruta_archivo = self.controlador.ruta_archivo
         controlador_empalme.tablas = self.controlador.tablas
@@ -1642,10 +1648,16 @@ class VentanaPrincipal(QMainWindow):
             foco.clearFocus()  # el delegado de la tabla confirma su editor al perder el foco
         return self.guardar_sesion_actual(como=True) if como else self.guardar_sesion_actual()
 
-    def guardar_sesion_actual(self, como: bool = False) -> bool:
+    def guardar_sesion_actual(self, como: bool = False, mensaje: str = "Guardando sesión…") -> bool:
         """Guarda la sesión. Con ruta asociada (abierta o ya guardada) escribe allí sin diálogos;
-        sin ruta, o con «Guardar como…», pide el destino. Devuelve True solo si el archivo quedó escrito."""
+        sin ruta, o con «Guardar como…», pide el destino. Devuelve True solo si el archivo quedó escrito.
+
+        Fase 01B: elegida la ruta, la franja `mensaje` se pinta antes de reunir los datos y la escritura
+        corre en un hilo; «Sesión guardada» solo se anuncia tras el reemplazo atómico del archivo."""
         if self._operacion_sesion is not None:
+            return False
+        if self.velo_carga.activo:  # Ctrl+S durante otra carga: un solo indicador y nada guardado a medias
+            self._aviso("Espere a que termine la operación en curso para guardar la sesión", nivel="advertencia")
             return False
         # Fase 4I-I: un cálculo de Empalme sin registrar también es trabajo que se guarda (como borrador).
         hay_empalme = bool(self.widget_empalme.calculos or self.widget_empalme.historial_empalme or self.widget_empalme.tiene_borrador())
@@ -1683,6 +1695,30 @@ class VentanaPrincipal(QMainWindow):
                 return False
             destino = Path(ruta_salida)
 
+        self._operacion_sesion = "guardar"
+        self.etiqueta_estado.setText(mensaje)
+        self.velo_carga.mostrar(mensaje, inmediato=True)
+        self.velo_carga.pintar_ahora()
+        try:
+            ruta, firma, error = self._escribir_sesion(destino, usuario, hay_empalme, seleccion, parametros, ruta_jerarquica)
+        finally:
+            self._operacion_sesion = None
+            self.velo_carga.ocultar(exito=False)
+            self.notificaciones.reposicionar()
+        if error is not None:
+            self.etiqueta_estado.setText("No se guardó la sesión.")
+            QMessageBox.warning(self, "Guardar sesión", f"No se pudo guardar la sesión en «{destino}».\n\n{error}\n\n"
+                                "Los datos siguen en memoria y quedan pendientes de guardar.")
+            return False
+        self.ruta_sesion_actual = ruta
+        self.nombre_sesion_actual = ruta.name
+        self._firma_guardada = firma
+        self.etiqueta_estado.setText(f"Sesión guardada: {ruta.name}")
+        self.notificaciones.exito("Sesión guardada", ruta.name)
+        return True
+
+    def _escribir_sesion(self, destino, usuario, hay_empalme, seleccion, parametros, ruta_jerarquica):
+        """Reúne lo persistible (hilo de la interfaz) y lo escribe en un hilo: (ruta, huella, error)."""
         datos = self.controlador.crear_datos_sesion(usuario, seleccion, parametros, ruta_jerarquica) if self.controlador.proyeccion_actual is not None else {'usuario': usuario, 'archivo_excel': str(self.controlador.ruta_archivo or '')}
         activo = self.widget_proyecciones.analisis_activo()
         if activo:
@@ -1695,22 +1731,23 @@ class VentanaPrincipal(QMainWindow):
         if hay_empalme:datos['tipo_resultado_visible'] = 'empalme' if self.selector_tipo_resultado.currentIndex() == 1 else 'icociv'
         if self.widget_proyecciones.historial and self.resultado_ui_actual is not None:
             datos["proyecciones_icociv"]["resultado_visible"] = serializar_resultado(self.resultado_ui_actual)
-        self._operacion_sesion = "guardar"
-        try:
-            ruta = guardar_sesion(destino, datos)  # escritura atómica: el archivo anterior queda intacto si falla
-        except (OSError, ValueError, TypeError) as error:
-            QMessageBox.warning(self, "Guardar sesión", f"No se pudo guardar la sesión en «{destino}».\n\n{error}\n\n"
-                                "Los datos siguen en memoria y quedan pendientes de guardar.")
-            return False
-        finally:
-            self._operacion_sesion = None
-        self.ruta_sesion_actual = ruta
-        self.nombre_sesion_actual = ruta.name
-        self._firma_guardada = self._firma_trabajo()
-        self.etiqueta_estado.setText(f"Sesión guardada: {ruta.name}")
-        if hasattr(self, "notificaciones"):
-            self.notificaciones.exito("Sesión guardada", ruta.name)
-        return True
+        firma = self._firma_trabajo()  # huella de lo que se escribe, no de lo que haya después
+        ruta, error = self._esperar_en_hilo(guardar_sesion, destino, datos)  # atómica: si falla, el anterior queda intacto
+        return ruta, firma, error
+
+    def _esperar_en_hilo(self, funcion, *args) -> tuple[Any, str | None]:
+        """Ejecuta `funcion` en un hilo y espera su fin en un bucle local que repinta y anima el indicador
+        pero deja en cola la entrada del usuario (sin clics ni atajos reentrantes). Devuelve (resultado, error)."""
+        salida: dict[str, Any] = {}
+        trabajador = TrabajadorFuncion(funcion, *args)
+        trabajador.resultado.connect(lambda valor: salida.update(resultado=valor))
+        trabajador.error.connect(lambda error: salida.update(error=error or "Error desconocido."))
+        bucle = QEventLoop()
+        trabajador.finished.connect(bucle.quit)
+        trabajador.start()
+        bucle.exec(QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents)
+        trabajador.wait()
+        return salida.get("resultado"), salida.get("error")
 
     def _corte_dane_cargado(self) -> str:
         """Último periodo (AAAA-MM) del Excel DANE cargado; vacío si no hay ninguno."""
@@ -1741,16 +1778,27 @@ class VentanaPrincipal(QMainWindow):
             return
         if self._hay_trabajo():
             decision = self._decidir_cierre("Abrir otra sesión", f"Para abrir «{Path(ruta_sesion).name}» se cerrará la sesión actual.")
-            if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual()):
+            if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual(
+                    mensaje="Guardando la sesión actual antes de abrir otra…")):
                 return
         self._operacion_sesion = "abrir"
-        self._establecer_ocupado(True, "Abriendo sesión…")
+        # Fase 01B: franja inmediata; el esqueleto sustituye al contenido anterior si pasa de 0,4 s.
+        self._establecer_ocupado(True, "Abriendo sesión: leyendo el archivo…", esqueleto="sesion", inmediato=True)
         self._trabajador_sesion = TrabajadorFuncion(leer_sesion_json, ruta_sesion)
         self._trabajador_sesion.resultado.connect(lambda datos: self._sesion_leida(ruta_sesion, datos, corte_cargado))
         self._trabajador_sesion.error.connect(self._terminar_apertura)
         self._trabajador_sesion.start()
 
     def _sesion_leida(self, ruta_sesion: str, datos: dict[str, Any], corte_cargado: str) -> None:
+        # Validar y reconstruir ocurre en el hilo de la interfaz (segundos en sesiones grandes): cada etapa
+        # se pinta antes de empezar, porque mientras dura no se repinta nada.
+        # ponytail: ~0,4 s de hilo de interfaz por MB medidos (sesión de 6,8 MB: 2,6 s); con más de 1 MB el
+        # esqueleto entra ya, sin esperar a un temporizador que no podrá dispararse. Ajustar si cambia el coste.
+        try:
+            largo = Path(ruta_sesion).stat().st_size > 1_000_000
+        except OSError:
+            largo = False
+        self._etapa_apertura("Abriendo sesión: validando el contenido…", largo)
         try:
             self.widget_proyecciones.validar_datos_sesion(datos.get("proyecciones_icociv"))
             self.widget_empalme.validar_datos_sesion(datos.get('empalme_iccp_icociv'))
@@ -1765,6 +1813,7 @@ class VentanaPrincipal(QMainWindow):
             return
         anterior = (self.widget_proyecciones.datos_sesion(), self.widget_empalme.datos_sesion(),
                     self.ruta_sesion_actual, self.nombre_sesion_actual, self._firma_guardada)
+        self._etapa_apertura("Abriendo sesión: restaurando análisis, actividades y Empalme…")
         try:
             self._reiniciar_espacio_trabajo()
             self.sesion_pendiente = datos
@@ -1785,6 +1834,16 @@ class VentanaPrincipal(QMainWindow):
         self._firma_guardada = self._firma_trabajo()
         self._terminar_apertura()
         self.boton_guardar_sesion.setEnabled(True)
+        self.notificaciones.exito("Sesión abierta", self.nombre_sesion_actual or "")
+
+    def _etapa_apertura(self, mensaje: str, largo: bool = False) -> None:
+        self.etiqueta_estado.setText(mensaje)
+        pie = self.etiqueta_estado.parentWidget()  # el texto puede pasar a dos líneas: recolocar antes de pintar
+        if pie.layout() is not None:
+            pie.layout().activate()
+        pie.repaint()
+        self.velo_carga.actualizar_mensaje(mensaje)
+        self.velo_carga.pintar_ahora(largo)
 
     def _terminar_apertura(self, error: str = "") -> None:
         """Retira el velo (100 % solo con éxito) y, si hubo error, lo explica sin tocar la sesión vigente."""
@@ -1824,6 +1883,9 @@ class VentanaPrincipal(QMainWindow):
             boton.clicked.connect(lambda _=False, valor=valor: (eleccion.update(valor=valor), dialogo.accept()))
             if valor == "guardar":
                 boton.setDefault(True)
+            # Fase 01B: el borde de foco (QSS) no entra en el tamaño sugerido del botón principal, que no
+            # tiene borde en reposo; sin este margen «Guardar y cerrar» se recortaba al tener el foco.
+            boton.ensurePolished(); boton.setMinimumWidth(boton.sizeHint().width() + 2 * tokens.GROSOR_BORDE_FOCO)
         dialogo.exec()  # Esc / cerrar la ventana = «Cancelar»
         return eleccion["valor"]
 
@@ -1836,10 +1898,11 @@ class VentanaPrincipal(QMainWindow):
             self.etiqueta_estado.setText("No hay una sesión abierta que cerrar.")
             return False
         decision = self._decidir_cierre("Cerrar sesión", "Se cerrará el presupuesto actual; el archivo Excel del DANE seguirá cargado.")
-        if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual()):
+        if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual(mensaje="Guardando sesión antes de cerrarla…")):
             return False
-        self._reiniciar_espacio_trabajo()
+        self._reiniciar_espacio_trabajo()  # ~0,03 s: sin indicador propio, que solo destellaría
         self.etiqueta_estado.setText("Sesión cerrada. El archivo Excel del DANE sigue cargado.")
+        self.notificaciones.informacion("Sesión cerrada", "El archivo Excel del DANE sigue cargado.")
         return True
 
     def _reiniciar_espacio_trabajo(self) -> None:
@@ -1965,17 +2028,28 @@ class VentanaPrincipal(QMainWindow):
             return
         controlador = self.controlador
 
-        def reanalizar():  # hilo secundario: solo el motor, una ejecución por revisión vigente (no por actividad)
-            return [(id_, controlador.ejecutar_analisis(sel, anio, mes, "predeterminado"), objetivo)
-                    for id_, sel, anio, mes, objetivo in planes]
+        def reanalizar(informar):  # hilo secundario: solo el motor, una ejecución por revisión vigente (no por actividad)
+            salida = []
+            for hechos, (id_, sel, anio, mes, objetivo) in enumerate(planes):
+                informar(hechos, len(planes))  # avance REAL: revisiones terminadas / total
+                salida.append((id_, controlador.ejecutar_analisis(sel, anio, mes, "predeterminado"), objetivo))
+            return salida
 
         self._establecer_ocupado(True, "Actualizando análisis con el DANE más reciente…")
-        self.trabajador = TrabajadorFuncion(reanalizar)
+        self.trabajador = TrabajadorFuncion(reanalizar, informar_progreso=True)
+        self.trabajador.progreso.connect(self._progreso_reanalisis)
         self.trabajador.resultado.connect(lambda resultados: self._registrar_revisiones(resultados, excluidos))
         self.trabajador.error.connect(lambda error: (self._establecer_ocupado(False, exito=False),
                                                      QMessageBox.warning(self, "Actualizar análisis",
                                                                          f"No se creó ninguna revisión: {error}")))
         self.trabajador.start()
+
+    def _progreso_reanalisis(self, hechos: int, total: int) -> None:
+        """Hilo de interfaz: avance medido del reanálisis (una revisión por paso)."""
+        velo = getattr(self, "velo_carga", None)
+        if velo is not None and velo.activo:
+            velo.establecer_progreso(hechos, total)
+            velo.actualizar_mensaje(f"Actualizando análisis con el DANE más reciente: {hechos + 1} de {total}…")
 
     def _registrar_revisiones(self, resultados, excluidos) -> None:
         """Hilo de interfaz: valida todo y registra las revisiones como un conjunto; ante fallo, nada cambia."""
@@ -2061,7 +2135,7 @@ class VentanaPrincipal(QMainWindow):
             "horizonte": self._horizonte_actual_meses(),
         }
         funcion = generar_reporte_pdf if formato == "pdf" else generar_reporte_proyeccion
-        self._establecer_ocupado(True, f"Generando informe {formato.upper()}...")
+        self._establecer_ocupado(True, f"Generando el informe {formato.upper()}…")
         self.trabajador = TrabajadorFuncion(
             funcion,
             ruta_salida,
@@ -2106,7 +2180,7 @@ class VentanaPrincipal(QMainWindow):
         )
         if not ruta_salida:
             return
-        self._establecer_ocupado(True, "Exportando CSV reproducible...")
+        self._establecer_ocupado(True, "Generando el CSV reproducible…")
         self.trabajador = TrabajadorFuncion(
             generar_csv_reproducibilidad,
             ruta_salida,
@@ -2791,7 +2865,10 @@ class VentanaPrincipal(QMainWindow):
             and not (self.trabajador is not None and self.trabajador.isRunning())
         )
 
-    def _establecer_ocupado(self, ocupado: bool, mensaje: str | None = None, exito: bool = True) -> None:
+    def _establecer_ocupado(self, ocupado: bool, mensaje: str | None = None, exito: bool = True,
+                            esqueleto: str | None = None, inmediato: bool = False) -> None:
+        """Bloquea/desbloquea las acciones y muestra el velo. `esqueleto` («anexo», «resultados»,
+        «sesion») pinta la silueta del contenido que se prepara; sin él, un panel compacto."""
         self.boton_cargar.setEnabled(not ocupado)
         self.boton_ejecutar.setEnabled(not ocupado and self.controlador.archivo_cargado)
         self.boton_guardar_sesion.setEnabled(not ocupado and (self.controlador.archivo_cargado or bool(self.widget_proyecciones.historial) or bool(self.widget_empalme.calculos or self.widget_empalme.historial_empalme)))
@@ -2812,9 +2889,9 @@ class VentanaPrincipal(QMainWindow):
         velo = getattr(self, "velo_carga", None)
         if velo is not None:
             if ocupado:
-                velo.mostrar(mensaje or "Procesando…", "La aplicación sigue respondiendo.")
+                velo.mostrar(mensaje or "Procesando…", "La aplicación sigue respondiendo.", esqueleto=esqueleto, inmediato=inmediato)
             else:
-                # Fase 4I-B: 100 % visual solo con éxito real; ante error se retira sin completar.
+                # Éxito, error o cancelación: el velo se retira siempre; sin avance simulado.
                 velo.ocultar(exito=exito)
         # El velo cubre todo `cuerpo` -incluida la esquina de las alertas- y se
         # eleva sobre sus hermanos al mostrarse (VeloCarga.mostrar hace
@@ -2855,7 +2932,8 @@ class VentanaPrincipal(QMainWindow):
         self.etiqueta_estado.setText("Ocurrió un error.")
         gestor = getattr(self, "notificaciones", None)
         if gestor is None:
-            QMessageBox.critical(self, "Error", mensaje)
+            QMessageBox.critical(self, "La operación no pudo completarse",
+                                 f"{self._mensaje_comprensible(mensaje)}\n\nDetalle técnico: {mensaje}")
             return
         # Texto comprensible a la vista, detalle técnico disponible en el aviso.
         gestor.error(self._mensaje_comprensible(mensaje), str(mensaje))
@@ -2962,15 +3040,28 @@ class VentanaPrincipal(QMainWindow):
         decisión que «Cerrar sesión»; un close() programático no pregunta. Durante una apertura o un
         guardado en curso no se cierra.
         """
-        if event.spontaneous():
+        if event.spontaneous() or self._salir_solicitado:
             if self._operacion_sesion is not None:
+                self._aviso("Espere a que termine la operación de sesión en curso", nivel="advertencia")
                 event.ignore();return
             if self._hay_trabajo() and self._firma_trabajo() != self._firma_guardada:
                 decision = self._decidir_cierre("Cerrar SAVIP", "Hay cambios sin guardar en la sesión actual.")
-                if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual()):
+                # Fase 01B: SAVIP solo se cierra si el guardado terminó (archivo ya reemplazado).
+                if decision == "cancelar" or (decision == "guardar" and not self.guardar_sesion_actual(
+                        mensaje="Guardando sesión antes de cerrar SAVIP…")):
                     event.ignore();return
         detener_todas()
         super().closeEvent(event)
+
+    _salir_solicitado = False
+
+    def salir(self) -> None:
+        """Archivo › Salir: el mismo cierre que la X de Windows (pregunta si hay cambios sin guardar)."""
+        self._salir_solicitado = True
+        try:
+            self.close()
+        finally:
+            self._salir_solicitado = False
 
     def _aviso(self, titulo: str, detalle: str = "", nivel: str = "informacion") -> None:
         """Aviso no modal; recurre al diálogo solo si aún no hay gestor."""
