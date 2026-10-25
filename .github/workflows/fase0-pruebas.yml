@@ -1,0 +1,52 @@
+# Fase 0 (SAVIP 1.1.2): perfil de pruebas autocontenidas desde un clon limpio, con las versiones exactas
+# del lock. Solo se ejecuta en la rama de la Fase 0 o a petición. No compila, no publica y no usa secretos.
+name: fase0-pruebas
+
+on:
+  push:
+    branches:
+      - maintenance/v1.1.2-fase0-reproducibilidad
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  esenciales:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        shell: bash  # bash -e: cualquier comando que falle detiene el paso
+    env:
+      QT_QPA_PLATFORM: offscreen
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.10"
+          architecture: x64
+
+      - name: Instalar las versiones exactas (lock de la aplicación + dependencias de prueba)
+        run: |
+          python -m pip install --no-deps -r requirements-lock.txt
+          python -m pip install --no-deps -r requirements-test.txt
+          python -m pip check
+
+      - name: Perfiles y recuentos
+        run: python scripts/pruebas_fase0.py --listar
+
+      - name: Tests autocontenidos esenciales (incluye los Golden Masters)
+        run: python scripts/pruebas_fase0.py esenciales --junitxml=resultados/esenciales.xml -o junit_family=xunit2
+
+      - name: Publicar el resultado JUnit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fase0-esenciales-junit
+          path: resultados/*.xml
+          if-no-files-found: warn
+          retention-days: 30

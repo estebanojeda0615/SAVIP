@@ -106,7 +106,9 @@ logs/
 # Publicacion GitHub (1.1.1): material de trabajo que no forma parte del codigo
 # fuente publico. Las pruebas historicas escriben evidencia en docs/fase_*;
 # esa evidencia, las entregas y las presentaciones no se versionan.
-/docs/
+/docs/*
+# Fase 0 (1.1.2): unica excepcion publicada, los informes de reproducibilidad y Golden Master.
+!/docs/fase_v112_antislop_00/
 /ENTREGA_SAVIP_1_1/
 /entregables/
 CONTEXTO_CHAT_*.md

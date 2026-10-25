@@ -13,9 +13,23 @@ APP=QApplication.instance() or QApplication([])
 ICCP={'Total ICCP':{'2021_1':100.,'2021_6':105.,'2021_12':110.}}
 from app_icociv.persistencia.historial_icociv import recuperar_resultado
 from app_icociv.interfaz.widgets.proyecciones_icociv import _extraer_contexto
-PREVIO=json.loads((ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
-FUTURO=_extraer_contexto(recuperar_resultado(PREVIO['proyecciones']['historial_analisis'][-1]['resultado']))
-INDICES={'2021_12':100.,'2022_1':120.,'2022_6':150.,'2027_3':FUTURO['indice_proyectado']}
+_RUTA_PREVIO=ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json'
+
+
+class _FixtureNoPublicado(dict):
+    """Fase 0: este fixture de desarrollo no está publicado. Importar el módulo ya no falla; los casos
+    que lo usan fallan al usarlo, con este motivo (perfil histórico, ver docs/fase_v112_antislop_00)."""
+    def _falta(self,*_):
+        raise FileNotFoundError(f'Fixture de desarrollo no publicado: {_RUTA_PREVIO.relative_to(ROOT).as_posix()}')
+    __getitem__=get=keys=items=values=__iter__=__len__=__contains__=_falta
+
+
+if _RUTA_PREVIO.exists():
+    PREVIO=json.loads(_RUTA_PREVIO.read_text(encoding='utf-8'))
+    FUTURO=_extraer_contexto(recuperar_resultado(PREVIO['proyecciones']['historial_analisis'][-1]['resultado']))
+    INDICES={'2021_12':100.,'2022_1':120.,'2022_6':150.,'2027_3':FUTURO['indice_proyectado']}
+else:
+    PREVIO=FUTURO=INDICES=_FixtureNoPublicado()
 
 def registrar_casos(w):
     entradas=[]
