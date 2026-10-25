@@ -40,6 +40,7 @@ from PySide6.QtWidgets import (
 
 MARGEN = 12  # separación mínima entre el diálogo y el borde del área permitida
 ANCHO_MINIMO_MENSAJE = 260
+LINEAS_LEGIBLES = 6  # líneas de texto que el área desplazable deja siempre a la vista
 _EXCLUIDOS = (QFileDialog, QColorDialog, QFontDialog)
 
 
@@ -104,6 +105,27 @@ def _minimo_caja(caja: QMessageBox) -> QSize:
     return QSize(max(ANCHO_MINIMO_MENSAJE, ancho_botones), 120)
 
 
+def _ajuste_de_linea(caja: QMessageBox) -> None:
+    for nombre in ("qt_msgbox_label", "qt_msgbox_informativelabel"):
+        etiqueta = caja.findChild(QLabel, nombre)
+        if etiqueta is not None:
+            etiqueta.setWordWrap(True)
+
+
+def _minimo_lectura(caja: QMessageBox, minimo: QSize) -> QSize:
+    """Mínimo con el texto desplazable: botones y márgenes más `LINEAS_LEGIBLES` líneas de texto a la vista."""
+    etiqueta = caja.findChild(QLabel, "qt_msgbox_label")
+    botones = caja.findChild(QDialogButtonBox)
+    rejilla = caja.layout()
+    if etiqueta is None or rejilla is None:
+        return minimo
+    m = rejilla.contentsMargins()
+    alto = (m.top() + m.bottom() + max(rejilla.verticalSpacing(), 0)
+            + (botones.sizeHint().height() if botones is not None else 0)
+            + LINEAS_LEGIBLES * etiqueta.fontMetrics().lineSpacing() + 2 * etiqueta.margin())
+    return QSize(minimo.width(), max(minimo.height(), alto))
+
+
 def _texto_desplazable(caja: QMessageBox) -> None:
     """Pone el texto principal en un área desplazable (los botones siguen fuera de ella)."""
     etiqueta = caja.findChild(QLabel, "qt_msgbox_label")
@@ -132,20 +154,28 @@ def ajustar_dialogo(dialogo: QDialog) -> str:
     marco = ventana.frameGeometry() if ventana is not None else None
     if isinstance(dialogo, QMessageBox):
         minimo = _minimo_caja(dialogo)
-        destino, ambito = geometria_dialogo(dialogo.size(), minimo, marco, util, bordes)
-        if destino.width() < dialogo.width() or destino.height() < dialogo.height():
-            for nombre in ("qt_msgbox_label", "qt_msgbox_informativelabel"):
-                etiqueta = dialogo.findChild(QLabel, nombre)
-                if etiqueta is not None:
-                    etiqueta.setWordWrap(True)
-            rejilla = dialogo.layout()
-            rejilla.activate()
-            alto = rejilla.totalHeightForWidth(destino.width()) if rejilla.hasHeightForWidth() else dialogo.height()
-            if alto > destino.height():
-                _texto_desplazable(dialogo)
-                alto = destino.height()
-            destino, ambito = geometria_dialogo(QSize(destino.width(), max(alto, minimo.height())), minimo, marco, util, bordes)
+        lectura = dialogo.property("savip_tamano_lectura")
+        if lectura is not None:
+            # Con el texto ya desplazable, QMessageBox se recalcula al mínimo del área (una sola línea a la
+            # vista, sin ajuste de línea): se reaplican el ajuste y el tamaño de lectura decididos al activarlo.
+            _ajuste_de_linea(dialogo)
+            destino, ambito = geometria_dialogo(lectura, _minimo_lectura(dialogo, minimo), marco, util, bordes)
             dialogo.setFixedSize(destino.size())
+        else:
+            destino, ambito = geometria_dialogo(dialogo.size(), minimo, marco, util, bordes)
+            if destino.width() < dialogo.width() or destino.height() < dialogo.height():
+                _ajuste_de_linea(dialogo)
+                rejilla = dialogo.layout()
+                rejilla.activate()
+                alto = rejilla.totalHeightForWidth(destino.width()) if rejilla.hasHeightForWidth() else dialogo.height()
+                if alto > destino.height():
+                    _texto_desplazable(dialogo)
+                    alto = destino.height()
+                    minimo = _minimo_lectura(dialogo, minimo)
+                destino, ambito = geometria_dialogo(QSize(destino.width(), max(alto, minimo.height())), minimo, marco, util, bordes)
+                if dialogo.findChild(QScrollArea, "savip_desplazamiento_mensaje") is not None:
+                    dialogo.setProperty("savip_tamano_lectura", destino.size())
+                dialogo.setFixedSize(destino.size())
     else:
         disposicion = dialogo.layout()
         minimo = disposicion.minimumSize() if disposicion is not None else dialogo.minimumSizeHint()
