@@ -56,9 +56,10 @@ DANE = [
     "tests/test_slider_comparacion_historica_fase_4d.py", "tests/test_switch_tema_sesion_dane.py", "tests/test_v112_01b_indicadores_sesiones.py",
 ]
 GUI = ["tests/test_v112_01c_dialogos_legibles.py"]
-#: Se ejecutan en su propio proceso: al importarse apagan interruptores globales (sombras, movimiento) y,
-#: recolectados junto a los demás, hacen fallar test_interfaz_componentes::test_sombras_… (contaminación heredada).
-AISLADOS = {"tests/test_proyecciones_redisenio_visual.py"}
+#: Se ejecutan en su propio proceso. test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE,
+#: y lo importan (directa o transitivamente) test_numericos_icociv, test_horizonte_editable, test_proyecciones_fase_2b
+#: y _3, entre otros: recolectado junto a ellos, test_interfaz_componentes::test_sombras_… falla (contaminación heredada).
+AISLADOS = {"tests/test_interfaz_componentes.py"}
 #: Verificación física en Windows que ninguna prueba automática cubre (se marca a mano).
 GUI_MANUAL = [
     "Equipo sin Python instalado: extraer el ZIP del Release y abrir SAVIP.exe",

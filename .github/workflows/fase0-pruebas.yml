@@ -30,17 +30,19 @@ jobs:
           python-version: "3.12.10"
           architecture: x64
 
+      # Entorno virtual propio: el Python del runner trae paquetes ajenos (p. ej. pipx) que romperían pip check.
       - name: Instalar las versiones exactas (lock de la aplicación + dependencias de prueba)
         run: |
-          python -m pip install --no-deps -r requirements-lock.txt
-          python -m pip install --no-deps -r requirements-test.txt
-          python -m pip check
+          python -m venv .venv-test
+          .venv-test/Scripts/python -m pip install --no-deps -r requirements-lock.txt
+          .venv-test/Scripts/python -m pip install --no-deps -r requirements-test.txt
+          .venv-test/Scripts/python -m pip check
 
       - name: Perfiles y recuentos
-        run: python scripts/pruebas_fase0.py --listar
+        run: .venv-test/Scripts/python scripts/pruebas_fase0.py --listar
 
       - name: Tests autocontenidos esenciales (incluye los Golden Masters)
-        run: python scripts/pruebas_fase0.py esenciales --junitxml=resultados/esenciales.xml -o junit_family=xunit2
+        run: .venv-test/Scripts/python scripts/pruebas_fase0.py esenciales --junitxml=resultados/esenciales.xml -o junit_family=xunit2
 
       - name: Publicar el resultado JUnit
         if: always()

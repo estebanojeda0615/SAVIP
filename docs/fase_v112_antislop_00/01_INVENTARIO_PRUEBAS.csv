@@ -1,0 +1,1053 @@
+archivo;prueba;estado_clon_limpio;categoria;perfil;motivo
+tests/test_ajuste_salto_anual.py;test_detecta_salto_recurrente;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_serie_sin_patron_no_activa_ajuste;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_serie_corta_no_activa_ajuste;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_factor_es_neutral_a_doce_meses;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_eneros_en_horizonte;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_ajuste_eleva_enero_y_modera_el_resto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_backtesting_rechaza_ajuste_que_deteriora;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_la_activacion_no_depende_de_si_el_horizonte_cruza_enero;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_no_se_aplica_sin_validacion_de_backtesting;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ajuste_salto_anual.py;test_bloque_de_interfaz_aparece_solo_con_patron;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert ('21,60 %' in ""\n<style>\nbody{background:#F7F9FB;color:#26323D;}\n.resultado-icociv{font-family:'Segoe"
+tests/test_ajuste_tooltips_pantalla_dividida.py;test_tooltips_claros_en_tema_claro_suaves_en_oscuro_y_breves;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_ajuste_tooltips_pantalla_dividida.py;test_tooltip_de_importe_breve_con_modalidad_declarada;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_ajuste_tooltips_pantalla_dividida.py;test_pantalla_dividida_ancho_estrecho_ancho_sin_perder_estado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_alertas_boton_cerrar.py;test_una_alerta_se_cierra_con_su_boton;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_alertas_boton_cerrar.py;test_varias_alertas_el_cierre_es_individual;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_alertas_boton_cerrar.py;test_cierre_manual_no_lanza_excepcion_si_se_repite;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_alertas_boton_cerrar.py;test_autocierre_programado_sigue_funcionando;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_alertas_boton_cerrar.py;test_error_no_se_autocierra_y_su_boton_si_cierra;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_alertas_boton_cerrar.py;test_alerta_ya_visible_sigue_clicable_tras_ciclo_de_velo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_enero_confirmado_es_patron_calendario;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_conteos_excluyen_patron_calendario;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_alertas_deduplicadas_por_periodo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_enero_sin_patron_puede_ser_atipico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_serie_no_se_modifica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_umbrales_salto_anual_sin_cambios;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_cuatro_clasificaciones_distinguibles;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_atipicos_calendario.py;test_serie_real_total_icociv;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_mae_rmse_sesgo_a_mano;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_mape_a_mano_y_manejo_de_ceros;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_smape_a_mano_y_cota_teorica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_mase_usa_escala_del_entrenamiento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_durbin_watson_casos_limite;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_naive_y_drift_predicen_lo_esperado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_walk_forward_reentrena_y_no_filtra_futuro;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_intervalos_ic80_dentro_de_ic95_y_ancho_crece;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_matriz_criterios_cubre_constantes_clave;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_ets_retirado_del_catalogo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_ets_ya_no_es_ajustable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_holt_sigue_operativo_sin_ets;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_auditoria_formulas_estadisticas.py;test_fuentes_sin_clave_ets_funcional;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_intervalo_normal_es_valido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_limites_iguales_no_son_invalidos_pero_se_declaran;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_limites_invertidos_se_detectan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_los_limites_invertidos_no_se_intercambian_en_silencio;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_nan_e_infinito_se_detectan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_pronostico_no_finito_se_nombra_aparte_de_la_banda;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_piso_cero_no_invalida_una_banda_bien_ordenada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_piso_cero_con_pronostico_negativo_produce_banda_invertida;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_sin_errores_la_banda_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_un_solo_error_tampoco_permite_construirla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_no_se_mezclan_errores_de_otro_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_vacio_no_se_interpreta_como_cero;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_la_evaluacion_marca_critico_el_intervalo_invertido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_la_evaluacion_no_confunde_no_calculable_con_ancho_infinito;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_banda_prediccion_valida.py;test_la_evaluacion_acepta_una_banda_bien_construida;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_01_principales_900_990_tres_modos_cantidades_y_extremos;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_02_tablas_17_18_roles_fuente_declarada_y_acero;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_03_edicion_real_actualiza_pares_y_cancelar_conserva_principal;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_04_slider_tres_analisis_fechas_y_retorno_exactos;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_05_excel_mixto_formulas_nulas_entradas_invalidas_y_sin_inyeccion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_06_pdf_word_modelos_principales_y_cuatro_importes_sin_expandir_tecnica;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_07_sesion_sin_dane_pares_identicos_y_ausencia_metadata_legada;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_base_valor_presupuestal_fase_4e_a.py;test_08_geometria_copia_foco_y_seleccion_por_id;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_calendario_y_clasificacion_intervalo.py;test_patron_se_detecta_y_se_declara_sin_tratamiento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_horizonte_que_alcanza_enero_lo_cuenta_pero_no_produce_efecto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_los_meses_comunes_no_cambian_al_ampliar_el_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_serie_sin_patron_lo_declara_como_no_detectado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_el_estado_visible_llega_al_csv_reproducible;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_en_produccion_el_calendario_no_toca_el_pronostico_puntual;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_cobertura_alta_es_intervalo_nominal_sin_degradacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_el_umbral_de_aceptacion_es_inclusivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_cobertura_intermedia_es_admisible_con_advertencia_y_no_degrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_el_umbral_de_advertencia_es_inclusivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_cobertura_baja_se_advierte_con_su_valor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_cobertura_no_calculable_no_afirma_ninguna_cobertura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_ninguna_clasificacion_promete_garantia_exacta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_la_clasificacion_no_toca_ningun_numero_del_intervalo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_calendario_y_clasificacion_intervalo.py;test_los_umbrales_estan_declarados_como_criterios_operativos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_la_serie_iccp_de_acero_existe_con_ese_nombre_exacto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_el_caso_de_acero_se_calcula_sin_error;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_formulas_del_acero_contra_sustitucion_numerica_independiente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_el_encadenamiento_no_es_sobre_la_misma_base;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_z_no_calculable_sin_ix_ni_q;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_la_trazabilidad_deja_la_sustitucion_numerica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_caso_acero_reproducible.py;test_el_informe_de_empalme_incluye_la_formula_de_z;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_el_corte_125_no_queda_en_ninguna_via_decisoria;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_comparacion_con_el_benchmark_es_frente_a_uno;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_un_rrmse_alto_ya_no_bloquea_pero_se_dice;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_clave_de_factibilidad_es_descriptiva;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_v12_ya_no_degrada_y_sigue_avisando;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_amplitud_del_intervalo_ya_no_bloquea_ni_degrada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_estabilidad_ya_no_degrada_y_sigue_avisando;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_evidencia_reducida_ya_no_degrada_y_sigue_avisando;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_mase_sigue_siendo_descriptivo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_ningun_corte_de_cobertura_degrada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_n_menor_16_se_publica_con_su_limitacion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_cobertura_se_declara_observada_y_no_garantizada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_banda_no_valida_se_declara_sin_bloquear_el_punto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_pocas_ventanas_limitan_el_intervalo_pero_no_el_punto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_metricas_porcentuales_no_finitas_ya_no_bloquean;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_cobertura_no_calculable_se_declara_y_ya_no_degrada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_lo_unico_que_bloquea_es_una_imposibilidad_del_propio_calculo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_salvaguarda_no_sustituye_el_modelo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_seleccion_no_consulta_ningun_umbral;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_ponderacion_1_h_ya_no_decide;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_la_seleccion_elige_el_de_menor_error_oos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_las_constantes_conservan_su_valor;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_metodologico.py;test_no_hay_modelo_por_horizonte;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert 'modelo = seleccion_horizonte[""modelo""]' in 'def _ejecutar_proyeccion_base(\n    serie_df: pd.DataFrame"
+tests/test_cierre_semantico_ps01_ps05.py;test_ps01_la_salvaguarda_no_sustituye_el_modelo_entregado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps01_arena_entrega_drift_por_merito_y_sin_intentar_salvaguarda;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps02_las_metricas_por_horizonte_de_la_tabla_son_reproducibles;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps02_ninguna_metrica_niega_un_horizonte_con_evidencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps03_w_es_cero_exactamente_cuando_el_dato_no_existe;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps04_la_cota_de_iteraciones_no_es_la_restriccion_activa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps04_alpha_no_gobierna_el_ajuste_de_huber;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps04_huber_estima_la_escala_lo_que_sustenta_su_nmin;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps05_nmin_no_sigue_una_regla_unica_para_todas_las_familias;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps05_holt_estima_sus_parametros_y_no_los_lleva_fijos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cierre_semantico_ps01_ps05.py;test_ps05_el_primer_origen_es_el_maximo_de_los_minimos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cobertura_cero_es_valida_y_no_es_no_verificable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cobertura_cero_no_declara_falta_de_errores;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cobertura_cero_se_publica_como_valor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cobertura_cero_se_advierte_por_su_valor_y_ya_no_degrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_none_si_es_ausencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_nan_no_es_cobertura_valida;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_infinito_no_es_cobertura_valida;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_minimo_incluye_cero;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_minimo_respaldo_cero;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_minimo_excluye_none_nan_e_infinito;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cero_global_genera_advertencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_g2_se_mantiene_con_cero_remoto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_cero_local_si_degrada_su_propio_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_diferencia_pp_de_cobertura_cero;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_diferencia_pp_valores_de_referencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_diferencia_pp_es_descriptiva_y_no_decide;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_sin_cobertura_no_hay_diferencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_nivel_nominal_se_publica_aparte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_cero_valida.py;test_los_cortes_siguen_vigentes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_la_cobertura_del_paso_solicitado_decide_el_estado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_otro_paso_con_cobertura_baja_no_degrada_el_solicitado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_la_cobertura_local_baja_se_advierte_con_su_valor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_el_criterio_declara_que_magnitud_uso;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_la_advertencia_global_se_publica_con_horizonte_y_conteo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_la_advertencia_dice_que_no_invalida_el_horizonte_solicitado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_no_se_advierte_cuando_el_minimo_cae_en_el_paso_solicitado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_no_se_advierte_cuando_todos_los_horizontes_cubren_bien;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_todos_los_horizontes_iguales_no_producen_advertencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_cobertura_global_no_calculable_no_rompe_ni_advierte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_el_minimo_global_se_publica_siempre_aunque_no_advierta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_los_tres_casos_dejan_de_degradarse;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_c11_h6_conserva_su_cobertura_de_1000_sin_degradarse;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_los_tres_cortes_siguen_activos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_el_corte_de_16_ya_no_degrada_con_cobertura_local_perfecta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_los_cortes_siguen_siendo_inclusivos_sobre_la_cobertura_local;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_no_hay_regla_basada_en_n_mayor_o_igual_a_19;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_vc_permanece_estable_bajo_g2;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_local_g2.py;test_el_llamador_sin_paso_exacto_conserva_la_regla_anterior;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_no_hay_fuga_el_error_no_entra_en_su_propio_rango;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_los_errores_futuros_no_se_consultan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_el_orden_temporal_se_respeta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_cada_horizonte_usa_solo_sus_errores;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_no_se_mezclan_pasos_en_el_rango;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_ningun_error_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_un_solo_error_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_dos_errores_dejan_el_segundo_sin_evaluar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_valores_no_finitos_se_declaran;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_observacion_sin_real_se_declara_aparte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_observacion_sin_fecha_objetivo_se_excluye;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_cambio_estructural_se_amortigua_y_se_puede_observar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_cobertura_perfecta_con_errores_homogeneos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_cobertura_deficiente_con_dispersion_creciente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_todos_los_horizontes_operativos_se_evaluan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_faltantes_al_final_no_rompen_la_evaluacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_reproducibilidad;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_el_metodo_visible_es_origen_movil;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_los_cortes_productivos_siguen_activos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_el_minimo_de_16_sigue_gobernando_la_verificabilidad;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_las_etiquetas_de_cobertura_no_cambiaron;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_el_intervalo_entregado_no_depende_de_la_evaluacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_la_evaluacion_no_escribe_en_los_errores_recibidos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_origen_movil.py;test_la_trazabilidad_conserva_origen_y_fecha_objetivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n15_con_cobertura_10_de_15_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n15_con_cobertura_cero_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n15_con_cobertura_uno_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n13_del_encargo_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n16_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n0_no_inventa_cobertura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_none_no_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_nan_no_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_infinito_no_se_publica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n_menor_16_ya_no_degrada_el_estado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_n_menor_16_conserva_la_banda_calculada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_con_n_menor_16_la_medida_ya_es_la_magnitud_publicada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_la_aptitud_para_la_regla_se_declara_aparte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_la_limitacion_explica_el_criterio_sin_llamarlo_garantia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_sin_limitacion_cuando_la_muestra_es_apta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_los_tres_cortes_siguen_activos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_cobertura_publicada_n_menor_16.py;test_el_corte_sigue_gobernando_la_aptitud;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_componente_empalme_fase_4b_a.py;test_ui_rotulos_compatibles_tab_unicode_y_sin_inferencia;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_componente_empalme_fase_4b_a.py;test_cinco_ejecuciones_paridad_y_dos_selectores_cero_servicios;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_componente_empalme_fase_4b_a.py;test_editar_borrar_y_cancelar_clasificacion_original;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_componente_empalme_fase_4b_a.py;test_sesion_mixta_y_metadata_corrupta_no_destructiva;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_componente_empalme_fase_4b_a.py;test_sesion_anterior_neutra_edicion_y_exportacion;falla;c;historicas;Necesita docs/fase_4b/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_componente_empalme_fase_4b_a.py;test_entrada_real_y_captura_metadata_antes_de_callback;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_factor_es_funcion_solo_del_paso;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_serie_con_patron_calendario_es_consistente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_serie_sin_patron_es_consistente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_arena_es_consistente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_series_reales_de_distinto_nivel_son_consistentes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_consistencia_trayectoria.py;test_intervalos_usan_la_trayectoria_ajustada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_statsmodels_instalado_en_la_version_exigida;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_requirements_fija_version_exacta_sin_rangos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_statsmodels_declarado_como_obligatorio;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_importacion_directa_sin_ruta_alternativa;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_ningun_modulo_productivo_hace_statsmodels_opcional;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_verificacion_de_dependencias_pasa_y_es_explicita;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_ljung_box_coincide_con_calculo_independiente;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_ljung_box_declara_rezagos_y_model_df;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_residuos_constantes_no_son_calculables;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_muestra_insuficiente_produce_no_calculable;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_los_rezagos_usan_la_regla_del_tamano_muestral;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_el_diagnostico_conserva_estadistico_valor_p_residuos_y_rezagos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_una_muestra_pequena_no_habilita_conclusiones_fuertes;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_el_diagnostico_ljung_box_llega_al_resultado_y_al_informe;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_holt_estima_sus_parametros_dentro_de_las_cotas_con_fuente;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_la_estimacion_de_holt_es_determinista;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_la_estimacion_de_holt_solo_usa_la_ventana_recibida;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_holt_no_consulta_statsmodels_aunque_este_instalado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_la_proyeccion_es_identica_con_statsmodels_importado;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: KeyError: 'horizonte_maximo_recomendado' def test_la_proyeccion_es_identica_con_statsmodels_importado() -> Non"
+tests/test_dependencia_statsmodels.py;test_la_aplicacion_se_detiene_si_falta_una_dependencia;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_version_incorrecta_tambien_detiene_la_aplicacion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_dependencia_statsmodels.py;test_el_spec_declara_statsmodels_sin_condicional;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_media_residual_publica_todos_los_campos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_media_residual_centrada_no_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_media_residual_desplazada_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_media_residual_no_calculable_con_un_residuo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_media_residual_no_calculable_sin_dispersion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_heterocedasticidad_publica_todos_los_campos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_heterocedasticidad_constante_no_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_heterocedasticidad_creciente_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_heterocedasticidad_no_calculable_con_pocos_residuos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_heterocedasticidad_no_calculable_con_residuos_constantes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_limitacion_por_muestra_pequena;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_evaluar_residuos_integra_los_contrastes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_ljung_box_sigue_siendo_la_prueba_formal_de_autocorrelacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_jarque_bera_publica_sus_campos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_ninguna_redaccion_afirma_la_hipotesis_nula;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_solo_tres_redacciones_de_resultado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_no_quedan_constantes_sin_fuente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_el_catalogo_declara_los_contrastes_como_estandar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_diagnostico_residual_formal.py;test_el_diagnostico_no_bloquea_ni_degrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_fase_4a.py;test_formato_edicion_copiar_pegar_deshacer_y_limites;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_fase_4a.py;test_contrato_original_flechas_geometria_y_float;falla;c;historicas;Necesita docs/fase_4a/respaldo_inicio/app_icociv__interfaz__widgets__empalme_iccp_icociv.py.bak (no publicado: AS-007)
+tests/test_empalme_fase_4a.py;test_tooltips_completos_escapados_y_recursos_empaquetados;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_fase_4c.py;test_seis_calculos_reales_columnas_valores_y_proyecto_original;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_seleccion_por_id_celda_copiable_cambio_vista_y_reordenacion;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_edicion_borrado_snapshot_y_borrar_todo_confirmado;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_sesion_mixta_sin_fuente_no_recalcula_y_compatibilidad;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_excel_resumen_vinculos_congelados_y_heredados;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_rendimiento_1_10_100_1000_scroll_y_temas;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_fase_4c.py;test_periodo_historico_largo_y_fuente_sintetica_disponible;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_empalme_horizonte_futuro.py;test_h0_fecha_dentro_de_lo_observado_no_llama_proyeccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_h1_permite_y_llama_a_la_proyeccion_una_vez;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_h24_permitido_y_llama_a_la_proyeccion_una_vez;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_h25_rechazado_sin_llamar_a_la_proyeccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_fecha_muy_futura_2036_rechazada_dinamicamente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_boton_se_reactiva_si_la_proyeccion_falla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_horizonte_futuro.py;test_boton_se_deshabilita_mientras_la_proyeccion_esta_en_curso;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_empalme_completo_general;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_solo_iccp_general;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_iccp_canasta_general_activa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_iccp_separa_total_canasta_y_grupo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_iccp_rechaza_serie_fuera_de_tipo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_iccp_rechaza_canasta_y_grupo_simultaneos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_acero_calcula_z;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_acero_calcula_r_sin_ix_q_y_deja_z_pendiente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_empalme_iccp_icociv.py;test_exportacion_excel_empalme_hoja_unica_y_formulas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_equivalencia_presupuestal_fase_4e_b.py;tests.test_equivalencia_presupuestal_fase_4e_b;error;c;historicas;Importa el paquete docs.fase_4e_b_unificada (no publicado)
+tests/test_errores_extremos_descriptivos.py;test_serie_sin_errores_inusuales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_un_error_inusual_se_marca;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_varios_errores_inusuales_se_marcan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_umbral_es_el_bibliografico_y_no_uno_interno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_mad_igual_a_cero_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_sin_errores_finitos_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_lista_vacia_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_los_periodos_se_conservan_por_observacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_no_quedan_constantes_de_proporcion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_ningun_modulo_vivo_decide_por_proporcion_de_extremos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_el_criterio_del_catalogo_es_bibliografico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_errores_extremos_descriptivos.py;test_la_proporcion_no_aparece_en_ninguna_razon_de_bloqueo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_excel_formulas_principales.py;test_icociv_principal_formulas_fuentes_auditoria_y_sesion;falla;c;historicas;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_excel_formulas_principales.py;test_empalme_principal_escenarios_acero_y_heredados;falla;c;historicas;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_excel_formulas_principales.py;test_excel_cancelacion_permiso_y_escritura_atomica_principales;falla;c;historicas;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_excel_formulas_principales.py;test_registros_incompletos_no_inventan_formulas_ni_notas_numericas;falla;c;historicas;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_fase_4a_c.py;test_a_valor_original_display_y_copia_numericos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4a_c.py;test_b_barra_unica_destinos_filtro_borrado_y_edicion;falla;c;historicas;Necesita docs/auditoria_better_ui_v11/temporal/sesion_auditoria.json (no publicado: AS-007)
+tests/test_fase_4a_c.py;test_c_guardado_cancelacion_fallo_y_archivo_previo;falla;c;historicas;Necesita docs/auditoria_better_ui_v11/temporal/sesion_auditoria.json (no publicado: AS-007)
+tests/test_fase_4a_c.py;test_d_tres_formatos_por_modulo_cancelacion_empalme_y_snapshot;falla;c;historicas;Necesita docs/auditoria_better_ui_v11/temporal/sesion_auditoria.json (no publicado: AS-007)
+tests/test_fase_4a_d.py;test_a_fechas_layout_controles_y_senales;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4a_d.py;test_b_intentos_reales_h24_y_asignaciones_silenciosas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4a_d.py;test_d_resultados_texto_tarjetas_y_historial_sin_motor;falla;c;historicas;Necesita docs/fase_4a_c/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_fase_4a_d.py;test_c_excel_formulas_estaticos_inyeccion_y_escenario;falla;c;historicas;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_fase_4g_b_consulta_exportacion.py;test_01_homonimos_y_tipologia_con_dos_series;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_02_checkbox_desmarcado_y_filtros_por_ambito_y_proyeccion;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_03_navegar_no_toca_calculadora_ni_analisis_activo;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_04_editar_explicito_cancelar_y_guardar_cambios;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_05_sin_analisis_activo_y_ambito_distinto_del_activo;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_06_alcances_independientes_del_filtro_y_del_activo_en_tres_formatos;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_07_flujo_de_exportacion_cancelar_y_no_mutar_estado;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_08_legado_sin_vinculo_y_duplicados_aviso;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_b_consulta_exportacion.py;test_09_sesion_reabierta_sin_dane_conserva_consulta_y_formulario;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_fase_4g_historial_dane_fechas.py;test_A_serie_analisis_actividades_reutilizar_revision_y_rotulos;falla;c;dane;Necesita docs/fase_4g/MATRIZ_TRAZABILIDAD.json (no publicado: AS-007)
+tests/test_fase_4g_historial_dane_fechas.py;test_A_sin_analisis_activo_real_en_los_tres_selectores_y_sesion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4g_historial_dane_fechas.py;test_B_sesion_agosto_con_dane_octubre_invariante_actualizacion_y_restauracion;falla;b;dane;"Espera el factor I/I0 sin redondear; la regla vigente (4I-C) es 1 + ROUND(p; 2)/100"
+tests/test_fase_4g_historial_dane_fechas.py;test_F_rechazos_no_destructivos_y_global_atomico;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4g_historial_dane_fechas.py;test_G_sesiones_legado_v1_v2_v3_y_corrupcion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4g_historial_dane_fechas.py;test_C_cuatro_combinaciones_en_qt_y_excel;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4g_historial_dane_fechas.py;test_C_filtro_cambia_solo_columnas_y_conserva_seleccion_y_cero_filas;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4g_historial_dane_fechas.py;test_D_100_m3_ambas_modalidades_con_0_1_2_auxiliares;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4g_historial_dane_fechas.py;test_E_nueva_proyeccion_desde_octubre_es_revision_y_conserva_agosto;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_a_deshacer_historial_pegado.py;test_B_ctrl_v_real_en_calculadora_P_A_y_cantidad;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_deshacer_historial_pegado.py;test_C_ctrl_v_real_en_editor_de_celda_y_deshacer_local;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_deshacer_historial_pegado.py;test_D_deshacer_rehacer_botones_atajos_y_resaltado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_deshacer_historial_pegado.py;test_E_dos_historiales_sincronizados_sin_tocar_calculadora;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_A_matriz_de_pegado_del_convenio_v4;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_B_ctrl_v_real_en_P_A_cantidad_y_celda;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_C_deshacer_rehacer_compactos_y_resaltado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_D_ver_grafica_abre_el_analisis_exacto_sin_recalcular;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_E_homonimos_legado_sin_grafica_y_sesion_vacia;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_F_velo_veraz_sin_destello_y_con_tiempo_transcurrido;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_a_v4_grafica_pegado_progreso.py;test_G_exportacion_muestra_estado_y_lo_retira_tambien_si_falla;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_P_sin_curva_estimada;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_P1_P4_avanza_pausa_y_solo_completa_con_exito_real;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_P2_P3_tarea_breve_sin_destello_y_error_sin_exito_falso;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_P3_ventana_error_real_retira_velo_sin_completar;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_G1_G5_ver_grafica_sobre_proyecciones_por_analisis_id;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_b_progreso_grafica_auditoria.py;test_U1_U2_acciones_en_una_fila_y_botones_compactos;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_C1_matriz_y_falla_si_se_usa_el_cociente_crudo;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_c_factor_grafica_carga.py;test_C2_calculadora_tabla_modalidades_y_edicion_con_el_mismo_factor;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_C3_slider_expreso_usa_el_porcentaje_redondeado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_C4_excel_pdf_word_y_sesion_con_el_factor_aplicado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_C5_legados_se_conservan_y_solo_se_actualizan_expresamente;falla;c;dane;Necesita docs/fase_4a_d/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_A_clic_muestra_mes_indice_y_tipo_y_reutiliza_una_etiqueta;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_c_factor_grafica_carga.py;test_B_cuadro_de_carga_solo_titulo_y_barra;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_d_legados_factor.py;test_1_antes_legados_intactos_celdas_numericas_y_aviso;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_d_legados_factor.py;test_2_cancelar_y_fallo_no_cambian_nada;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_d_legados_factor.py;test_3_conversion_por_lote_coherente_deshacible_y_persistente;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_d_legados_factor.py;test_4_exportar_con_reglas_mixtas_avisa_y_permite_cancelar;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_d_legados_factor.py;test_5_edicion_posterior_y_descriptiva;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_d_verificacion_ventana.py;test_ventana_abrir_convertir_guardar_reabrir_y_excel;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_e_tema_rendimiento.py;test_boton_de_tema_nunca_queda_vacio_en_pantalla_dividida;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_e_tema_rendimiento.py;test_snapshots_identicos_al_deserializador_original;falla;c;dane;Necesita docs/fase_4i_e/respaldo_inicio/fuentes_tests_inicio.tar (no publicado: AS-007)
+tests/test_fase_4i_g_sesiones.py;test_1_2_apertura_con_velo_errores_y_sesion_previa_intacta;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_g_sesiones.py;test_3_4_5_guardar_primera_vez_rapido_y_guardar_como;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_fase_4i_g_sesiones.py;test_6_7_8_9_cerrar_sesion_tres_salidas_y_nuevo_presupuesto;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_g_sesiones.py;test_10_cambiar_de_sesion_y_x_de_windows;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_g_sesiones.py;test_11_12_controles_temas_pantalla_dividida_y_referencias;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_h_encabezado.py;test_sin_dane_leyenda_completa_o_corta_nunca_recortada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_h_encabezado.py;test_ultimo_recurso_icono_con_tooltip;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_h_encabezado.py;test_dane_cargado_nombre_legible_que_se_reexpande;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_h_encabezado.py;test_indicador_sigue_al_dane_activo_al_cerrar_y_cambiar;falla;c;historicas;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_fase_4i_i_responsive_borrador.py;test_calculadora_icociv_una_columna_sin_perder_nada_y_mismo_calculo;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_i_responsive_borrador.py;test_empalme_media_pantalla_sin_barra_horizontal_y_estado_invariable;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_i_responsive_borrador.py;test_borrador_empalme_se_guarda_cierra_y_reabre_literal;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_fase_4i_i_responsive_borrador.py;test_aviso_sesion_guardada_no_falla_al_destruir_la_ventana;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_i_responsive_borrador.py;test_edicion_de_fila_empalme_en_curso_se_reabre_en_edicion;falla;c;dane;Necesita docs/fase_4b/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_fase_4i_j_fecha_comun.py;test_presupuesto_fecha_comun_excepcion_exportacion_y_reanalisis_dane;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_j_fecha_comun.py;test_sesion_antigua_sin_trayectoria_no_inventa_puntos;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_j_k_actividades.py;test_aceptar_cancelar_deshacer_individual_bloqueo_y_persistencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_j_reutilizacion.py;test_ejecutar_reutiliza_trayectoria_por_serie_y_datos_reales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_j_reutilizacion.py;test_sesion_sin_trayectoria_completa_se_proyecta_de_nuevo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_n_grafica_horizonte.py;test_grafica_sigue_fecha_aplicada_sin_motor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_n_grafica_horizonte.py;test_trayectoria_insuficiente_avisa_y_no_inventa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_p2_comparacion_consulta.py;test_panel_consulta_vigente_escenarios_y_persistencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_p2_comparacion_consulta.py;test_registro_con_indice_ajeno_a_la_trayectoria_sigue_no_demostrable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_p_sincronizacion_mae.py;test_consulta_vigente_sincroniza_historial_resultados_y_grafica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_p_sincronizacion_mae.py;test_mae_por_horizonte_en_cada_punto_y_sin_inventar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase_4i_tabla_editable.py;test_A_insertar_en_posicion_y_persistir_orden;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_B_mover_por_arrastre_y_alternativas_sin_recalcular;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_C_reordenar_con_filtro_respeta_filas_ocultas;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_D_insercion_cancelada_o_sin_analisis_no_crea_nada;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_E_edicion_directa_valida_invalida_y_solo_lectura;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_F_pegar_en_tabla_y_formatos_de_pegado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_G_formatos_pesos_y_porcentaje_en_tabla_resultado_y_excel;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_fase_4i_tabla_editable.py;test_J_version_titulo_y_logo_oficial;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_justificacion_publicada_no_menciona_la_ponderacion_retirada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_justificacion_publicada_no_promete_salvaguarda_sustitutiva;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_justificacion_publicada_describe_la_regla_vigente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_mape_no_finito_no_bloquea_el_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_mape_no_calculable_se_publica_como_advertencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_sin_ventanas_suficientes_el_punto_sigue_pero_el_intervalo_no;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_banda_no_valida_se_declara_sin_bloquear_el_punto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_lo_que_bloquea_son_imposibilidades_del_resultado_no_carencias_de_evidencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_construccion_del_intervalo_tiene_fuente_completa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_muestra_de_evaluacion_de_la_seleccion_esta_fundamentada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_seleccion_no_escala_los_errores_y_declara_por_que;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_los_cortes_de_amplitud_no_se_publican_como_bloqueo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_los_cortes_de_benchmark_retirados_no_se_publican_como_vigentes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_evaluacion_de_cobertura_cita_su_fuente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_el_minimo_de_ventanas_se_deriva_del_intervalo_y_no_de_la_metrica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_ruta_productiva_no_invoca_el_selector_de_respaldo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_el_selector_de_respaldo_no_se_importa_en_la_ruta_productiva;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_sin_evidencia_comparable_el_horizonte_no_se_entrega;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_el_selector_retirado_conserva_su_definicion_para_auditoria;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_ningun_literal_sin_fuente_gobierna_el_catalogo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_el_catalogo_excluye_solo_por_parametro_sin_sustento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_huber_no_se_excluye_por_un_minimo_sin_fuente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_elegibilidad_la_resuelve_cada_modelo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fundamentacion_metodologica.py;test_la_matriz_conserva_tipos_admitidos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_historial_empalme_fase_4b.py;test_cinco_ejecuciones_selectores_independientes_sin_recalculo;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_historial_empalme_fase_4b.py;test_edicion_borrado_snapshot_y_cambios_no_guardados;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_historial_empalme_fase_4b.py;test_sesion_nueva_sin_fuente_y_rechazo_no_destructivo;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_historial_empalme_fase_4b.py;test_sesion_ambos_historiales_y_compatibilidad_anteriores;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_historial_empalme_fase_4b.py;test_proyeccion_empalme_async_no_invade_icociv;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_historial_empalme_fase_4b.py;test_fuente_disponible_y_historial_archivado_exportable;falla;c;historicas;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_horizonte_24_ic95_mae.py;test_caso1_horizonte_personalizado_1_17_24_validos_25_invalido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso1_mensaje_entero_positivo_se_conserva_para_casos_no_enteros;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso1_widget_spin_horizonte_personalizado_no_permite_25;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso2_fecha_maxima_alcance_dinamica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso3_no_aparece_texto_retirado_en_ventana_principal;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso4_ic95_retirado_de_resultados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_24_ic95_mae.py;test_caso56_g1a_h17_banda_y_horizonte_intermedio;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_editable.py;test_todos_los_predefinidos_flechas_y_retorno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_editable.py;test_limites_1_24_y_sin_ciclos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_editable.py;test_bloqueos_legitimos_sin_archivo_sin_grupo_y_ocupado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_editable.py;test_12_13_11_meses_ambos_temas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_limites_distinguen_validado_y_escenario;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_serie_corta_publica_su_cobertura_y_niega_solo_por_ventanas;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: no_admisible
+assert 'no_admisible' == 'proyeccion_tecnica'
+  
+  - proyeccion_tecnica
+  + no_ad"
+tests/test_horizonte_evidencia_reducida.py;test_la_rejilla_de_horizontes_no_tiene_tope_historico_ni_cascada;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: ([], [], [51, 52, 53, 54, 55])
+assert [] == [1, 2, 3, 4, 5, 6, ...]
+  
+  Right contains 55 mor"
+tests/test_horizonte_evidencia_reducida.py;test_serie_larga_conserva_proyeccion_tecnica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert False is True def test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista() -> None:
+        """""""
+tests/test_horizonte_evidencia_reducida.py;test_banda_de_cautela_existe_en_todo_horizonte;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_intervalo_amplio_en_horizonte_corto_no_bloquea_pero_degrada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_trayectoria_no_depende_del_horizonte_solicitado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_horizonte_evidencia_reducida.py;test_modelo_agregado_minimiza_el_error_oos_global;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_importes_presupuestales_fase_4e.py;test_01_servicio_real_990_y_matriz_cantidades_tres_modos;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_importes_presupuestales_fase_4e.py;test_02_extremos_y_metadata_invalida_sin_ceros_inventados;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_importes_presupuestales_fase_4e.py;test_03_formulario_icociv_metadata_y_precision_original;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_04_edicion_icociv_dialogo_real_guardar_cancelar_sin_servicio;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_05_slider_individual_global_rueda_y_resumen_por_id;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_06_empalme_real_acero_edicion_cancelada_y_archivo;falla;c;dane;Necesita docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json (no publicado: AS-007)
+tests/test_importes_presupuestales_fase_4e.py;test_07_sesion_mixta_sin_fuente_y_rechazo_no_destructivo;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_08_excel_estructuras_formulas_vivas_ids_y_no_inyeccion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_09_documentos_sin_nuevas_columnas_ni_repetir_estadistica;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_importes_presupuestales_fase_4e.py;test_10_ui_temas_resoluciones_seleccion_copia_y_vistas;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_imports_modulos.py;test_importar_modulos_principales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_ejecutivo_genera_docx_y_pdf_con_las_secciones_correctas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_ejecutivo_lleva_una_sola_grafica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_ejecutivo_muestra_advertencias_y_limitaciones_en_recuadro;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tabla_resumida_tiene_las_columnas_pedidas;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: assert ['Periodo', '...'Observación'] == ['Periodo', '...'Observación']
+  
+  At index 2 diff: "
+tests/test_informes_rediseno.py;test_resumen_ejecutivo_es_dinamico_y_no_generico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_portada_no_expone_rutas_internas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tecnico_incluye_todo_el_detalle_metodologico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tecnico_declara_la_evidencia_oos_sin_publicar_cobertura;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tecnico_no_afirma_ljung_box_cuando_no_esta_disponible;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tecnico_conserva_reproducibilidad_y_referencias;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tecnico_es_navegable_y_conserva_toda_la_evidencia;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: (24, 0)
+assert [1, 2, 3, 4, 5, 6, ...] == []
+  
+  Left contains 24 more items, first extra ite"
+tests/test_informes_rediseno.py;test_tecnico_publica_los_bloqueos_metodologicos_vigentes;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_personalizado_respeta_exactamente_la_seleccion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_personalizado_no_deja_titulos_vacios_ni_paginas_en_blanco;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_seccion_sin_datos_se_omite_por_completo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_grafica_desmarcada_no_se_dibuja;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_empalme_muestra_formulas_con_sustitucion_numerica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_empalme_diferencia_indice_oficial_de_proyectado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_empalme_incluye_advertencias_contractuales;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_empalme_registra_criterio_de_i0_y_se_exporta;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_empalme_acero_documenta_z;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_docx_abre_y_trae_tablas_editables_estilos_e_imagenes;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_docx_ejecutivo_no_lleva_indice_por_ser_corto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_docx_campos_institucionales_llegan_a_la_portada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_pdf_pagina_indice_marcadores_y_fuentes_incrustadas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_pdf_conserva_las_graficas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_pdf_repite_encabezados_y_no_parte_filas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_pdf_y_docx_cuentan_lo_mismo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_generar_informes_no_altera_ningun_resultado_estadistico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_dos_ejecuciones_del_informe_dan_el_mismo_contenido;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_horizonte_bloqueado_no_inventa_proyeccion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_convenciones_de_formato;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_identificador_y_nombres_de_archivo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_identificador_aparece_en_portada_y_pie;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_tablas_no_superan_ocho_columnas;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_interpretacion_cubre_tendencia_incertidumbre_y_uso;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_interpretacion_explica_el_patron_calendario_cuando_se_aplica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_grafica_principal_ya_no_dibuja_banda_de_intervalo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_rediseno.py;test_graficas_sin_datos_devuelven_none_en_lugar_de_una_figura_vacia;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_la_serie_sintetica_queda_efectivamente_bloqueada;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: La metodología de proyección de SAVIP (N0=12, alcance máximo H=24 meses) requiere al menos 36 "
+tests/test_informes_serie_bloqueada.py;test_la_grafica_de_residuos_se_omite_sin_reventar;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_csv_docx_y_pdf_se_generan_con_ajuste_vacio_como_en_c11;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_la_grafica_principal_muestra_solo_el_historico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_csv_docx_y_pdf_se_generan_para_una_serie_bloqueada;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_el_informe_bloqueado_declara_las_ausencias_y_no_inventa_trayectoria;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_el_motivo_del_bloqueo_es_el_mismo_en_interfaz_y_en_reportes;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_el_informe_bloqueado_conserva_diagnosticos_y_modelos_evaluados;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: falta la sección «Modelos evaluados»
+assert 'Modelos evaluados' in 'Resumen ejecutivo\nPara la"
+tests/test_informes_serie_bloqueada.py;test_la_tabla_de_modelos_lee_las_claves_que_el_catalogo_publica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_ninguna_metrica_aparece_disponible_en_una_seccion_y_no_disponible_en_otra;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_informes_serie_bloqueada.py;test_la_tabla_y_el_texto_publican_el_mismo_rmse;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_f1_el_calendario_no_modifica_el_pronostico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_f2_el_perfil_se_sigue_midiendo_como_diagnostico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_f3_las_puertas_no_deciden_ninguna_salida;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_f4_el_texto_no_afirma_que_el_fenomeno_no_exista;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_f5_no_se_anadio_ningun_modelo_calendario;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_h1_el_bucle_no_se_detiene_en_el_primer_horizonte_no_recomendable;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_h2_el_tope_30_ya_no_recorta_la_evidencia;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_h3_el_tope_60_solo_restringe_la_entrada;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es"
+tests/test_integracion_fhg.py;test_h4_el_maximo_publicado_declara_que_admite_huecos;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: falta el campo explicito de publicacion
+assert 'horizonte_maximo_publicable_continuo' in {'alc"
+tests/test_integracion_fhg.py;test_g1_cinco_ventanas_no_vetan;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g2_la_longitud_no_veta_la_proyeccion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g3_no_hay_escalera_de_confianza_sin_fuente;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g4_el_intervalo_no_sustentado_no_cancela_el_punto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g5_existe_estado_metodologico_explicito;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g6_p0e_bloqueado_impide_declarar_resultado_sustentado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g7_el_intervalo_no_se_publica_como_sustentado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g8_c_wf_002_no_se_publica_como_derivacion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_g9_los_diagnosticos_siguen_sin_vetar;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_integracion_fhg.py;test_p0abd_intactos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interaccion_fase_3c_a.py;test_a_acciones_geometria_click_teclado_y_senales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interaccion_fase_3c_a.py;test_b_empalme_paso_limites_disabled_teclado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interaccion_fase_3c_a.py;test_c_zoom_pan_reset_preservan_datos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interaccion_fase_3c_a.py;test_a_alternancia_con_movimiento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_tarjeta_metrica_expone_estado_sin_depender_del_color;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_tarjeta_metrica_es_accesible_por_teclado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_navegacion_conserva_los_nombres_al_contraerse;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_navegacion_precede_a_las_acciones_de_archivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_navegacion_se_desplaza_en_ventanas_bajas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_navegacion_es_exclusiva_y_emite_indice;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_cabecera_refleja_el_estado_del_archivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_notificaciones_limitan_las_visibles_y_los_errores_persisten;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_velo_de_carga_cubre_y_libera_el_area;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_velo_ofrece_cancelar_solo_cuando_es_viable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_pantalla_inicio_resume_el_estado_de_la_sesion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_movimiento_reducido_deja_el_estado_final;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_sombras_se_pueden_desactivar_por_completo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_elevacion_nula_no_crea_efecto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_capacidades_de_ventana_se_detectan_sin_efectos_secundarios;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_tarjeta_agrupa_contenido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_componentes.py;test_detener_todas_no_falla_sin_animaciones;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_plantilla_sin_colores_literales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_hoja_se_resuelve_por_completo_en_ambos_temas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_los_dos_temas_producen_hojas_distintas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_ambas_paletas_tienen_las_mismas_claves;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_todos_los_colores_son_hexadecimales_validos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_contraste_de_texto_cumple_wcag_aa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_contraste_de_acentos_y_estados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_texto_sobre_color_principal_es_legible;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_tema_oscuro_eleva_aclarando;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_tema_claro_oscurece_el_fondo_respecto_de_la_tarjeta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_normalizar_tema_admite_entradas_invalidas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_rgba_y_mezclar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_contexto_incluye_forma_y_tipografia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_escala_de_espaciado_es_multiplo_de_cuatro;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_duraciones_de_animacion_son_breves;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_elevaciones_crecen_de_forma_monotona;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_las_areas_de_desplazamiento_declaran_fondo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_los_controles_deshabilitados_no_destacan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_los_campos_se_distinguen_de_su_contenedor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_interfaz_tema.py;test_compatibilidad_con_constantes_visuales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_contencion_y_limites_validos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_errores_separados_por_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_muestra_pequena_ensancha_por_sigma_estimada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_las_colas_pesadas_ensanchan_la_banda;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_el_sesgo_ensancha_la_banda_pero_no_la_desplaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_paso_sin_errores_no_fabrica_banda;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_la_amplitud_de_cada_paso_refleja_su_propia_evidencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_factor_calendario_escala_los_limites;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_cobertura_empirica_estructura_y_valores;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_cobertura_sin_muestra_es_honesta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_intervalos_prediccion.py;test_proyeccion_reporta_cobertura_y_sin_banda_minima;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_estadistico_coincide_con_scipy_en_casos_variados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_valor_p_coincide_con_scipy;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_asimetria_y_curtosis_usan_momentos_centrales_de_divisor_n;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_p_es_cola_chi2_dos_gl;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_la_cola_no_es_la_de_cuatro_grados_de_libertad;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_caso_normal_no_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_caso_no_normal_rechaza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_caso_cercano_a_alpha_cambia_la_decision_tras_la_correccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_serie_constante_no_es_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_muestra_minima_y_por_debajo_del_minimo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_valores_no_finitos_se_descartan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_residuos_normales_no_alertan;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_el_diagnostico_expone_estadistico_asimetria_y_curtosis;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_la_alerta_de_normalidad_sigue_el_valor_p_corregido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_jarque_bera.py;test_evaluar_residuos_con_muestra_corta_no_falla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_el_calculo_sigue_dando_valor_p_con_muestra_suficiente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_muestra_corta_no_es_calculable_y_dice_por_que;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_los_rezagos_siguen_la_regla_de_la_fuente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_el_texto_de_muestra_corta_no_culpa_a_la_distribucion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_residuos_constantes_no_son_calculables_y_dicen_por_que;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_el_texto_de_residuos_constantes_es_el_exigido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_statsmodels_esta_instalado_y_se_puede_informar_su_version;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_ningun_motivo_atribuye_la_ausencia_a_la_distribucion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_mensajes_ljung_box.py;test_el_informe_declara_dependencia_disponible_y_diagnostico_no_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_a_n0_backtesting_es_12;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_b_h_operativo_max_es_24;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_c_rectangulo_n65_da_w_estrella_30_y_mismos_origenes_por_h;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_d_seleccion_usa_muestra_comun_y_rmse_global_del_rectangulo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_efg_horizonte_solicitado_no_cambia_modelo_ni_trayectoria;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_h_distingue_rmse_seleccion_de_rmse_horizonte_solicitado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_i_historia_insuficiente_devuelve_estado_explicito_no_fallback;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_i_frontera_n36_es_suficiente_w_estrella_1;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metodologia_n0_12_h24.py;test_j_no_existe_tolerancia_smape_productiva;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_no_quedan_constantes_de_banda;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_se_conserva_la_referencia_de_mase_frente_a_uno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mase_menor_que_uno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mase_igual_a_uno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mase_mayor_que_uno;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_la_interpretacion_publica_siempre_los_valores;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mape_no_calculable_no_inventa_lectura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mape_con_observado_cero_se_excluye_y_no_rompe;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_smape_se_calcula_y_no_se_clasifica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_sesgo_positivo_y_negativo_conservan_signo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_mase_se_calcula_con_la_escala_de_entrenamiento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_ningun_modulo_vivo_usa_las_bandas_retiradas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_el_catalogo_ya_no_declara_bandas_internas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_metricas_sin_bandas.py;test_no_se_introdujeron_etiquetas_nuevas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_microcorreccion_fase_4d_c.py;test_columnas_0_1_3_y_multiples_sin_cambio_economico;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_fechas_mixtas_filtro_tooltip_y_tsv;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_rueda_48_eventos_con_scroll_sin_senales_ni_recalculo;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_interaccion_explicita_teclado_clic_arrastre_y_manual;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_selector_compacto_nombres_largos_ids_y_geometria;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_excel_15_reales_formulas_y_fechas_en_traza;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_microcorreccion_fase_4d_c.py;test_documentos_fechas_por_id_sin_columnas_adicionales;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_nmin_adversarial.py;test_holt_amortiguado_en_n6_deja_parametros_en_la_frontera;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_holt_lineal_en_n5_deja_parametros_en_la_frontera;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_holt_en_n6_no_interpola;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_huber_y_regresiones_ajustan_por_debajo_de_su_nmin_declarado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_variacion_respeta_exactamente_su_nmin;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_naive_declara_un_minimo_inalcanzable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_muestra_comun_intacta_desde_el_primer_origen;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_anti_leakage_y_pares_por_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_no_reaparecen_18_ni_060;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_nmin_adversarial.py;test_p0a_p0b_p0d_intactos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_escritura_caracter_a_caracter_antes_de_perder_foco;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_cursor_edicion_intermedia_seleccion_y_borrado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_pegado_real_formatos_y_ambiguedades_sin_mutacion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_limites_precision_original_y_negativos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_deshacer_rehacer_agrupado_y_carga_programatica;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_diez_cifras_dinamicas_en_los_tres_controles;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_geometria_tres_campos_tamanos_temas_foco_y_sin_foco;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_numericos_icociv.py;test_regresion_calculo_json_excel_antes_despues;falla;c;historicas;Necesita docs/fase_2c_b/respaldo_inicio/app_icociv__interfaz__widgets__proyecciones_icociv.py.bak (no publicado: AS-007)
+tests/test_origen_inicial_backtesting.py;test_no_existe_literal_18_ni_060_en_criterios;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_ningun_modulo_reintroduce_los_literales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_minimos_por_modelo_declarados_y_derivados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_origen_inicial_es_el_maximo_del_catalogo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_origen_inicial_no_depende_de_la_longitud_de_la_serie;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_techo_derivado_por_disponibilidad;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_una_sola_definicion_del_primer_origen;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_todos_los_candidatos_estimables_en_el_primer_origen;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_mismo_origen_inicial_para_todos_los_modelos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_pares_por_horizonte_coinciden_con_la_derivacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_sin_fuga_el_entrenamiento_es_anterior_al_objetivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_ventana_expansiva_conservada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_p0a_el_selector_de_respaldo_sigue_retirado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_p0b_el_catalogo_sigue_gobernado_por_estimabilidad;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_p0d_la_regla_de_seleccion_no_cambia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_determinismo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_origen_inicial_backtesting.py;test_criterio_publicado_sin_atribucion_falsa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0c_objeto_publico_sin_intervalo.py;tests.test_p0c_objeto_publico_sin_intervalo;error;c;historicas;Importa tests.test_p0c_retiro_intervalos_no_sustentados, que no existe en el repositorio ni en el árbol de desarrollo
+tests/test_p0c_regresion_negativa_c2.py;tests.test_p0c_regresion_negativa_c2;error;c;historicas;Importa tests.test_p0c_retiro_intervalos_no_sustentados, que no existe en el repositorio ni en el árbol de desarrollo
+tests/test_p0d_rmse_orden_exacto.py;test_d1_el_contraejemplo_de_una_ulp_se_decide_de_forma_unica;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d2_invertir_el_orden_de_candidatos_no_cambia_el_ganador;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d3_un_empate_exacto_conserva_el_desempate_historico;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d4_permutar_la_muestra_comun_no_cambia_nada;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d5_en_el_rango_ordinario_gana_el_minimo_matematico;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d6_errores_enormes_finitos_no_desbordan;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d7_un_candidato_con_inf_no_gana;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d8_un_candidato_con_nan_no_gana;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d9_sin_candidatos_utilizables_no_se_inventa_ninguno;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d10_la_muestra_comun_sigue_siendo_la_interseccion;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d11_los_pesos_siguen_siendo_uniformes;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d12_la_decision_no_usa_ninguna_tolerancia;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0d_rmse_orden_exacto.py;test_d13_el_acumulador_entero_coincide_con_fraction_puro;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_p0g_desacople_punto_intervalo.py;test_g1_n8_dos_pares_entrega_el_punto_sin_banda;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: La metodología de proyección de SAVIP (N0=12, alcance máximo H=24 meses) requiere al menos 36 "
+tests/test_p0g_desacople_punto_intervalo.py;test_g2_dos_frente_a_tres_pares_solo_cambia_el_intervalo;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert False is True def test_g2_dos_frente_a_tres_pares_solo_cambia_el_intervalo() -> None:
+        """"""G2. Pa"
+tests/test_p0g_desacople_punto_intervalo.py;test_g3_no_hay_salto_global_en_el_literal_ocho;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: (8, 'La metodología de proyección de SAVIP (N0=12, alcance máximo H=24 meses) requiere al meno"
+tests/test_p0g_desacople_punto_intervalo.py;test_g4_un_intervalo_no_sustentado_no_reduce_el_horizonte;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: ValueError: max() iterable argument is empty def test_g4_un_intervalo_no_sustentado_no_reduce_el_horizonte() -"
+tests/test_p0g_desacople_punto_intervalo.py;test_g5_cobertura_no_evaluable_no_cancela_la_entrega;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert False is True def test_g5_cobertura_no_evaluable_no_cancela_la_entrega() -> None:
+        """"""G5. La cob"
+tests/test_p0g_desacople_punto_intervalo.py;test_g6_los_limites_invertidos_se_clasifican_sin_bloquear_el_punto;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_desacople_punto_intervalo.py;test_g7_un_punto_no_finito_sigue_bloqueando;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_desacople_punto_intervalo.py;test_g8_p0c_se_declara_y_nada_se_presenta_como_validado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_desacople_punto_intervalo.py;test_g9_p0e_marca_la_evidencia_como_provisional;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_desacople_punto_intervalo.py;test_g10_los_diagnosticos_no_vetan;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: La metodología de proyección de SAVIP (N0=12, alcance máximo H=24 meses) requiere al menos 36 "
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u1_la_interfaz_declara_p0c_y_p0e_cuando_hay_punto;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: assert False is True def test_u1_la_interfaz_declara_p0c_y_p0e_cuando_hay_punto() -> None:
+        """"""U1. Con "
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u2_la_interfaz_declara_el_estado_sin_proyeccion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u3_la_interfaz_distingue_lo_tecnico_de_lo_metodologico;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u4_el_csv_trae_los_cuatro_campos_con_proyeccion;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: assert 'no_calculable' == 'calculable_m...gia_pendiente'
+  
+  - calculable_metodologia_pendien"
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u5_el_csv_trae_los_cuatro_campos_sin_proyeccion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_p0g_ui_csv_estado_metodologico.py;test_u6_la_serializacion_de_bloqueos_es_determinista;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoA_catalogo_tiene_exactamente_21_candidatos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoB_fourier_k1_periodo_y_reestacionalizacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoC_seasonal_naive_valores_h1_h12_h13_h24;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoD_muestra_comun_w_estrella_30_con_n_65;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoE_selector_rmse_comun_un_ganador_y_h_no_lo_altera;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoF_refit_fourier_ganador_24_puntos_y_coeficientes_reproducibles;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoG_tabla_mae_h_corresponde_al_candidato_final;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoH_reporte_muestra_estrategia_sin_ic95_ni_maximo_estadistico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoI_ui_smoke_ganador_fourier_y_ganador_base;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoJ_ids_internos_no_visibles_en_ui_ni_reportes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoK_cache_fourier_depende_de_y_y_t;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_pool_calendario_fourier_seasonal.py;test_casoL_k_fourier_es_k_base_mas_4_y_no_cambia_seleccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_popup_carga_empalme_y_tema_observaciones.py;test_popup_de_carga_se_muestra_y_corre_en_segundo_plano;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_popup_carga_empalme_y_tema_observaciones.py;test_popup_de_carga_se_cierra_tambien_si_falla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_popup_carga_empalme_y_tema_observaciones.py;test_observaciones_generales_usa_qplaintextedit_con_infraestructura_de_tema;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_popup_carga_empalme_y_tema_observaciones.py;test_observaciones_generales_cambia_con_el_tema_en_vivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_presentacion_resultados_muestra_tarjetas_y_tablas_clave;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_formateadores_ui_no_exponen_valores_crudos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_presentacion_horizonte_restringido_es_explicita_y_segura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_presentacion_no_expone_ensambles;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_visor_resultados_no_tiene_tooltip_y_permite_scroll_horizontal_controlado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_detalle_horizonte_separa_razones_largas_de_la_tabla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_seis_tarjetas_tienen_explicaciones_especificas_y_sin_valores_crudos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_modo_oscuro_cambia_ui_grafica_html_y_persiste_preferencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_exportable_diferencia_recomendado_evaluado_y_limite_operativo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_horizonte_no_salta_un_corte_no_viable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_iteraciones_insuficientes_limitan_el_intervalo_no_el_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_presentacion_resultados.py;test_docx_final_no_tiene_tablas_deformadas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_proyecto_componente_registros_y_calculo_sin_regresion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_guardar_cerrar_reabrir_y_sesion_antigua;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_excel_operativa_y_regresion_hoja_tecnica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_tablas_vacias_filas_y_distribucion_real;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_sesion_malformada_no_reemplaza_metadatos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_integracion_sesion_con_excel_y_trabajadores_reales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3.py;test_serializacion_exacta_sin_codigo_ejecutable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3.py;test_sidebar_titulo_y_historial_vacio;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3.py;test_recuperar_ruta_profunda_con_checkbox_dinamicos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3.py;test_tres_analisis_motor_real_recuperacion_sesion_excel_y_regresion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3b.py;test_formato_ui_y_modelo_empalme_no_cambia;falla;c;historicas;Necesita docs/fase_3b/EJEMPLOS_NUMERICOS.json (no publicado: AS-007)
+tests/test_proyecciones_fase_3b.py;test_banda_lateral_continua_temas_tamanos_contraccion_y_carga;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3b.py;test_inferencia_componente_y_nombres_compatibles;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_3b.py;test_calculo_sesion_excel_identicos_al_respaldo_3b;falla;c;historicas;Necesita docs/fase_3b/respaldo_inicio/app_icociv__interfaz__widgets__proyecciones_icociv.py.bak (no publicado: AS-007)
+tests/test_proyecciones_fase_3b.py;test_tres_proyecciones_selectores_precision_historial_y_exportacion_reales;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
+tests/test_proyecciones_redisenio_visual.py;test_jerarquia_y_casillas_conservan_senales_y_filtros;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_redisenio_visual.py;test_boton_calcular_y_columnas_conservan_resultado_actual;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_redisenio_visual.py;test_layout_adaptable_y_temas_sin_cambiar_entrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_publicacion_horizonte.py;test_lo_publicado_no_excede_lo_solicitado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_publicacion_horizonte.py;test_lo_publicado_no_excede_el_limite_operativo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_publicacion_horizonte.py;test_la_evidencia_interna_si_puede_superar_lo_solicitado;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: ValueError: max() iterable argument is empty def test_la_evidencia_interna_si_puede_superar_lo_solicitado() ->"
+tests/test_publicacion_horizonte.py;test_la_razon_de_parada_no_atribuye_a_un_limite_que_no_actuo;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: KeyError: 'horizonte_maximo_evaluado' def test_la_razon_de_parada_no_atribuye_a_un_limite_que_no_actuo() -> No"
+tests/test_publicacion_horizonte.py;test_los_cinco_horizontes_se_publican_por_separado;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: horizonte_maximo_evaluado
+assert 'horizonte_maximo_evaluado' in {'alcance_maximo_proyeccion': "
+tests/test_referencia_economica_fase_4d_b.py;test_inicializacion_movimiento_real_y_retorno_sin_drift;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_selectores_sincronizados_filtro_senales_y_scroll;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_individual_global_atomico_y_desactivacion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_global_fuente_ambigua_sin_interseccion_y_error_economico;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_migracion_v1_sin_repricing_y_aplicacion_explicita;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_i0_original_discrepante_y_legados_no_reinterpretados;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_fechas_encabezados_uniformes_mixtos_y_copia_numerica;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_excel_cinco_hojas_formulas_y_trazabilidad;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_sesion_v2_mixta_reapertura_sin_fuente_y_corrupcion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_historial_nuevo_global_y_referencias_huerfanas;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_referencia_economica_fase_4d_b.py;test_documentos_escenario_efectivo_sin_capitulo_duplicado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h1_ningun_mensaje_publico_cita_intervalos_como_fundamento;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h1_la_defensa_de_un_horizonte_sin_cautelas_no_menciona_intervalos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h2_la_salvaguarda_nunca_cambia_el_modelo_final;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h2_benchmark_habria_ampliado_no_implica_sustitucion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h2_ningun_texto_publico_afirma_sustitucion_o_fallo_no_evaluado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h3_ljung_box_no_reduce_el_horizonte_maximo_publicado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h3_longitud_18_24_36_60_84_no_crea_cap_ad_hoc;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h3_seleccion_y_punto_no_cambian_para_un_caso_representativo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_remediacion_r2_h1_h2_h3_h7.py;test_h7_el_fallback_de_justificacion_describe_rmse_oos_global;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_predeterminado_admisible_centra_h12_y_conserva_tabla_completa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_manual_admisible_identifica_origen_y_h7;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_no_admisible_nunca_se_llama_proyeccion_tecnica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_h32_no_admisible_no_expone_proyeccion_y_marca_no_evaluados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_restriccion_no_hace_pasar_h12_como_resultado_de_h18;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_horizonte_manual_invalido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_evaluacion_es_mensual_continua;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_h45_se_rechaza_explicitamente_h12_se_genera_normalmente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_maximo_tarjeta_usa_alcance_operativo_vigente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_resultado_horizonte_solicitado.py;test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rmse_global_estable.py;test_t1_ordinario_coincide_con_la_formula_directa;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t2_dos_errores_enormes_no_desbordan;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t3_caso_del_hallazgo_no_levanta_overflow;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t4_todos_ceros_dan_cero;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t5_un_error_infinito_produce_rmse_no_finito;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t6_un_error_nan_produce_rmse_no_finito;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t6b_una_suma_que_no_cabe_en_float_da_infinito_sin_excepcion;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t7_un_candidato_divergente_no_aborta_y_pierde;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t7b_un_rmse_calculado_no_finito_no_gana;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t8_la_muestra_comun_no_cambia;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rmse_global_estable.py;test_t9_el_desempate_sigue_siendo_el_orden_de_aparicion;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_rutas_empaquetado.py;test_recursos_internos_existen_desde_codigo_fuente;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rutas_empaquetado.py;test_version_se_lee_del_archivo_unico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rutas_empaquetado.py;test_ruta_recurso_congelado_usa_meipass;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rutas_empaquetado.py;test_salidas_nunca_dentro_del_bundle;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rutas_empaquetado.py;test_asegurar_carpeta_es_idempotente_y_no_lanza;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_rutas_empaquetado.py;test_spec_declara_los_recursos_internos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_salvaguarda_benchmarks.py;test_arena_ya_no_necesita_ser_rescatada_por_un_benchmark;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_salvaguarda_benchmarks.py;test_un_solo_modelo_en_toda_la_trayectoria;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_salvaguarda_benchmarks.py;test_modelo_estable_frente_al_horizonte_solicitado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_salvaguarda_benchmarks.py;test_sin_fallo_no_se_activa_salvaguarda;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_salvaguarda_benchmarks.py;test_una_serie_erratica_se_entrega_con_su_incertidumbre;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: La metodología de proyección de SAVIP (N0=12, alcance máximo H=24 meses) requiere al menos 36 "
+tests/test_salvaguarda_benchmarks.py;test_serie_corta_evalua_todo_lo_medible_y_no_intenta_rescate;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: AssertionError: None
+assert None == []
+ +  where None = <built-in method get of dict object at 0x0000028CCB0C0"
+tests/test_salvaguarda_benchmarks.py;test_orden_de_benchmarks_es_conservador_y_trazable;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_seleccion_rmse_global.py;test_elige_el_minimo_rmse_global;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_el_valor_es_la_raiz_del_error_cuadratico_medio;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_no_hay_peso_por_horizonte;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_solo_compara_pares_presentes_en_todos;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_sin_muestra_comun_no_se_elige;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_banco_vacio_devuelve_none;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_los_errores_no_finitos_no_participan;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_invariante_al_orden_de_los_horizontes;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_invariante_al_orden_de_los_candidatos;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_el_empate_exacto_se_resuelve_por_orden_de_aparicion;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_es_reproducible;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_la_regla_no_consulta_umbrales_ni_identidad;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_no_queda_el_peso_1_h_en_la_ruta_de_seleccion;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_la_regla_retirada_ya_no_se_invoca_en_la_ruta_productiva;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_un_solo_modelo_para_toda_la_trayectoria;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_seleccion_rmse_global.py;test_el_resultado_se_reproduce_desde_los_errores;pasa;e;historicas;Pasa, pero ejercita el selector global retirado (seleccionar_modelo_por_rmse_oos_global / _rmse_global_estable): AS-006
+tests/test_semantica_temporal.py;test_a_mapeo_temporal_calendario_actual;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_semantica_temporal.py;test_bc_tau_obs_y_tau_futuro_del_modelo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_semantica_temporal.py;test_c_construccion_directa_tau;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_semantica_temporal.py;test_d_independencia_de_metadatos_del_periodo_base_economico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_semantica_temporal.py;test_ef_savip10_no_se_valida_aqui;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_combo_actualiza_fecha_objetivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_fecha_objetivo_actualiza_horizonte;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_meses_personalizados_actualizan_fecha;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_fecha_anterior_da_horizonte_no_positivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_cambio_de_serie_recalcula_fecha;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_sincronizacion_horizonte_ui.py;test_sin_ciclos_infinitos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_slider_comparacion_historica_fase_4d.py;test_dos_porcentajes_independientes_slider_manual_y_teclas;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_tres_analisis_dos_series_selecciones_propias_y_ambos_selectores;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_meses_discontinuos_invalidos_legados_y_series_incompatibles;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_sesion_mixta_reabierta_sin_fuente_sin_motor_y_empalme_intacto;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_metadatos_corruptos_rechazo_no_destructivo;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_filtro_seleccion_detalle_y_borrados_con_historial_conservado;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_excel_18_columnas_formulas_comparativas_y_originales_iguales;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_slider_comparacion_historica_fase_4d.py;test_informes_tecnicos_y_constructor_empalme_intactos;falla;c;dane;Necesita docs/fase_4d_slider/respaldo_inicio/app_icociv__reportes__sesion_modulos.py.bak (no publicado: AS-007)
+tests/test_slider_comparacion_historica_fase_4d.py;test_temas_resoluciones_foco_y_controles_sin_scroll_externo_horizontal;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_switch_tema_sesion_dane.py;test_switch_tema_pastilla_alterna_y_no_se_recorta;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_switch_tema_sesion_dane.py;test_sin_dane_no_se_abre_sesion;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_switch_tema_sesion_dane.py;test_dane_igual_abre_sin_recalcular_ni_alterar;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_switch_tema_sesion_dane.py;test_dane_posterior_abre_y_dane_antiguo_no;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_switch_tema_sesion_dane.py;test_guardar_registra_corte_dane;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_ui_navegacion_y_usabilidad.py;test_caso1_orden_navegacion_inicio_proyecciones_empalme_resultados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso2_indicador_resultados_sin_con_y_tras_eliminar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso3_seleccionar_todas_marca_solo_habilitadas_y_llega_al_generador;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso4_popup_horizonte_24_valido_25_manual_y_fecha_equivalen_un_popup;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso5_glosario_contiene_solo_estados_reales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso6_proyecciones_icociv_eliminar_seleccionado_y_todo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_ui_navegacion_y_usabilidad.py;test_caso7_empalme_eliminar_seleccionado_y_todo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_las_dos_ramas_de_090_comparten_toda_consecuencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_mover_el_corte_no_mueve_ninguna_decision;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_ningun_corte_de_cobertura_degrada_ya;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_por_debajo_de_080_se_advierte_con_el_valor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_090_sigue_eligiendo_la_redaccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_el_umbral_de_aceptacion_sigue_siendo_inclusivo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_el_papel_descriptivo_viaja_en_el_resultado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_el_criterio_publicado_nombra_la_regla_real;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_la_lectura_reune_las_seis_magnitudes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_la_lectura_cabe_en_una_celda_de_tabla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_sin_medicion_no_se_inventa_lectura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_ninguna_salida_convierte_090_en_una_regla;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_los_otros_dos_criterios_siguen_intactos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_el_minimo_de_contrastes_ya_no_degrada_pero_se_declara;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_umbral_090_descriptivo.py;test_g2_no_se_ve_afectada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[300-200-anexo];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[300-200-resultados];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[300-200-sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[626-450-anexo];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[626-450-resultados];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[626-450-sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1340-650-anexo];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1340-650-resultados];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1340-650-sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1900-980-anexo];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1900-980-resultados];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_esqueleto_no_sale_de_su_area[1900-980-sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_variantes_tienen_geometria_distinta;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_franja_indeterminada_no_inventa_porcentaje;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_velo_sin_medicion_nunca_muestra_porcentaje;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_progreso_medido_se_completa_solo_con_exito;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_trabajador_informa_progreso_en_el_hilo_de_interfaz;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_trabajador_sin_progreso_conserva_su_firma;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_velo_esqueleto_cubre_el_area_y_se_limpia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_velo_panel_para_exportar;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_tarea_breve_no_destella;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_desvanecimiento_no_oculta_una_operacion_nueva;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_ciclos_repetidos_sin_fugas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_movimiento_reducido_esqueleto_estatico;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_cancelar_retira_y_avisa;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana0];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana1];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana2];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana3];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana4];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano0-ventana5];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana0];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana1];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana2];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana3];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana4];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano1-ventana5];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana0];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana1];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana2];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana3];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana4];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano2-ventana5];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana0];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana1];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana2];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana3];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana4];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_cabe_en_la_ventana[tamano3-ventana5];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_minimo_que_no_cabe_usa_el_monitor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_ventana_parcialmente_fuera_del_monitor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_segundo_monitor_coordenadas_globales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_mensaje_largo_dentro_de_la_ventana_y_botones_visibles;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_mensaje_muy_largo_desplaza_solo_el_texto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_dialogo_de_escritorio_se_adapta_a_snap_un_tercio;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_show_se_procesa_una_sola_vez;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_portada_refleja_el_anexo_cargado_sin_cambiar_de_seccion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01_esqueleto_dialogos.py;test_ventana_ocupada_y_error_de_anexo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_franja_inmediata_visible_y_esqueleto_solo_tras_el_umbral;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_franja_sin_esqueleto_no_cambia_y_se_retira;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_pintar_ahora_aplica_el_umbral_vencido_sin_bucle_de_eventos;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_franja_estatica_con_animaciones_de_windows_desactivadas;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_ciclos_franja_sin_fugas;pasa;a;dane;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_1_abrir_desde_menu_boton_y_portada_franja_inmediata;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_2_abrir_sesion_grande_lenta_esqueleto_etapas_y_respuesta;falla;c-DANE;dane;Necesita docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (sesión con datos DANE reales, no publicable)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_3_errores_de_apertura_sin_falso_exito_ni_velo_perpetuo;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_4_abrir_otra_guardando_la_actual_primero;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_5_ctrl_s_ruta_conocida_lento_exito_solo_tras_persistir;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_6_sin_ruta_guardar_como_y_selector_cancelado;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_7_errores_de_escritura_no_marcan_guardado;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_8_dos_guardados_consecutivos_y_ciclos_abrir_cerrar;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_9_cerrar_sesion_guardar_y_cerrar_desde_menu_y_boton;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_10_cerrar_sin_guardar_y_cancelar_sin_escritura_ni_loader;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_11_dialogo_de_cierre_real_en_snap_un_tercio;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_12_salir_guardar_y_cerrar_cierra_solo_tras_persistir;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_13_salir_con_fallo_cancelacion_o_sin_guardar;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01b_indicadores_sesiones.py;test_T01B_14_salir_durante_una_apertura_se_ignora_y_avisa;falla;c;dane;Necesita docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx (no publicado: AS-007)
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[20-640];pasa;a;gui;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[20-1280];pasa;a;gui;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[50-640];falla;d;gui;"Offscreen sin fuentes Segoe registradas mide mal el ancho; pasa si otro módulo las registra antes (01B)"
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[50-1280];falla;d;gui;"Offscreen sin fuentes Segoe registradas mide mal el ancho; pasa si otro módulo las registra antes (01B)"
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[200-640];falla;d;gui;"Offscreen sin fuentes Segoe registradas mide mal el ancho; pasa si otro módulo las registra antes (01B)"
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_largo_muestra_varias_lineas[200-1280];falla;d;gui;"Offscreen sin fuentes Segoe registradas mide mal el ancho; pasa si otro módulo las registra antes (01B)"
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_corto_sin_desplazamiento_y_entero[640];pasa;a;gui;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_v112_01c_dialogos_legibles.py;test_mensaje_corto_sin_desplazamiento_y_entero[1280];pasa;a;gui;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_variacion_indice_empalme.py;test_porcentajes_extremos_precision_y_datos_invalidos;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_variacion_indice_empalme.py;test_columna_solo_visible_orden_alineacion_y_actualizacion;falla;c;historicas;Necesita docs/fase_4a_variacion_indice/respaldo_inicio/app_icociv__interfaz__widgets__empalme_iccp_icociv.py.bak (no publicado: AS-007)
+tests/test_variacion_indice_empalme.py;test_seleccion_detalle_edicion_y_eliminacion;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_variacion_indice_empalme.py;test_edicion_recalcula_sin_cambiar_resultados_ni_identificadores;falla;c;historicas;Necesita docs/fase_4a_variacion_indice/respaldo_inicio/app_icociv__interfaz__widgets__empalme_iccp_icociv.py.bak (no publicado: AS-007)
+tests/test_verificabilidad_paso_exacto.py;test_h2_con_15_errores_no_hereda_la_verificabilidad_de_h1;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_el_mensaje_de_h2_nombra_el_paso_y_no_culpa_al_conjunto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_la_cobertura_expone_el_detalle_del_paso_exacto;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_h12_con_15_errores_se_mide_y_se_publica_con_su_muestra;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_h12_con_16_errores_y_cobertura_092_es_nominal;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_h12_con_16_errores_y_cobertura_085_es_admisible_con_advertencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_h12_con_16_errores_y_cobertura_075_se_advierte_y_no_degrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_el_minimo_de_16_sigue_siendo_inclusivo_como_referencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_los_cuatro_casos_de_la_reauditoria_publican_su_muestra;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_el_paso_se_evalua_con_su_propia_muestra;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_la_correccion_no_altera_pronosticos_ni_limites;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_sin_paso_exacto_se_conserva_el_comportamiento_anterior;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_verificabilidad_paso_exacto.py;test_ninguna_clasificacion_promete_garantia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_visual_fase_3c_b.py;test_a_numericos_empalme_conservan_valores_edicion_y_flechas;falla;c;historicas;Necesita docs/fase_3c_b/respaldo_inicio/app_icociv__interfaz__widgets__empalme_iccp_icociv.py.bak (no publicado: AS-007)
+tests/test_visual_fase_3c_b.py;test_b_contraste_efectivo_estados_y_paleta_documental;falla;c;historicas;Necesita docs/fase_3c_b/DESPUES_COLORES.json (no publicado: AS-007)
+tests/test_visual_fase_3c_b.py;test_c_scroll_empalme_tab_senales_y_datos;falla;c;historicas;Usa el anexo que crea una prueba anterior del mismo archivo, la cual falla por docs/ no publicados
+tests/test_visual_fase_3c_b.py;test_d_texto_resultados_separado_sin_alterar_contenido;falla;c;historicas;Necesita docs/fase_3c_b/ANTES_claro_RESULTADOS_H1.txt (no publicado: AS-007)
+tests/test_visual_fase_3c_b.py;test_e_fechas_sin_superposicion_datos_y_zoom_pan_reset;falla;c;historicas;Necesita docs/fase_3c_b/ANTES_GRAFICAS.json (no publicado: AS-007)
+tests/test_vocabulario_cobertura.py;test_el_metodo_de_evaluacion_se_declara_en_el_resultado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_sin_evaluacion_el_metodo_no_se_supone;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_la_frase_del_metodo_sigue_al_resultado_y_no_es_fija;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_la_interfaz_nombra_el_metodo_desde_el_resultado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_la_etiqueta_se_deriva_de_la_clasificacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_ninguna_etiqueta_afirma_cobertura_cumplida;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_nominal_describe_el_nivel_no_un_resultado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_tipo_de_banda_y_estado_de_horizonte_son_campos_distintos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_nivel_nominal_y_cobertura_observada_van_separados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_la_cobertura_se_publica_como_x_sobre_y;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_ninguna_salida_afirma_cobertura_garantizada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_cobertura.py;test_el_minimo_de_errores_se_lee_en_ejecucion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_existen_exactamente_las_tres_etiquetas;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_todo_identificador_publicado_pertenece_al_vocabulario;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_ningun_identificador_publicado_es_un_termino_prohibido;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_ninguna_etiqueta_afirma_cobertura;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_banda_calculada_cuando_la_banda_existe_y_se_evaluo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_rango_de_referencia_con_evidencia_limitada_o_respaldo_no_confirmado;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_banda_no_calculable_solo_por_imposibilidad_matematica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_la_banda_ausente_no_bloquea_el_punto_pero_el_punto_no_finito_si;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_una_banda_valida_nunca_es_no_calculable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_la_imposibilidad_matematica_manda_sobre_cualquier_umbral;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_los_campos_viajan_separados;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_el_nivel_nominal_no_es_la_cobertura_observada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_la_clave_de_decision_sigue_siendo_auditable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_vc_no_cambia_la_degradacion;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_vc_no_cambia_los_cortes;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_vc_no_publica_ninguna_cifra_del_intervalo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_c18_h3_con_cobertura_0727_es_rango_de_referencia;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_vocabulario_vc.py;test_c11_h12_con_cobertura_1000_y_15_errores_es_banda_calculada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_consultas_h11_y_h23_comparten_modelo_y_trayectoria[tendencia_lineal_ruido];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_motor[tendencia_lineal_ruido];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_consultas_h11_y_h23_comparten_modelo_y_trayectoria[estacional];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_motor[estacional];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_consultas_h11_y_h23_comparten_modelo_y_trayectoria[exponencial];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_motor[exponencial];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_consultas_h11_y_h23_comparten_modelo_y_trayectoria[paseo_aleatorio];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_motor[paseo_aleatorio];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_consultas_h11_y_h23_comparten_modelo_y_trayectoria[lineal_exacta_empate];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_motor[lineal_exacta_empate];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_motor.py;test_golden_rechazos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_golden_economico[factores];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_golden_economico[importes];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_golden_economico[rechazos];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_golden_economico[factor_legado];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_golden_economico[empalme];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_economico.py;test_factor_es_exacto_en_decimal;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[invariantes];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[consultas_serie1];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[excel_sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[pdf_sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[docx_sesion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[factor_legado];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_golden_sesion_exportables[informe_proyeccion];pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_invariantes_del_flujo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_excel_cinco_hojas_y_formulas_round_half_up;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_version_1_1_2_y_mae_no_presentado_como_intervalo;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_fase0_golden_sesion_exportables.py;test_sesion_grande_determinista_abre_sin_motor;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock

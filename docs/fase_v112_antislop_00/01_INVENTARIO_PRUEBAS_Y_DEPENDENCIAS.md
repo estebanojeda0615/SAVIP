@@ -71,9 +71,11 @@ Recuento real de `python scripts/pruebas_fase0.py --listar` en un clon limpio:
 
 **Contaminación entre módulos (heredada, documentada sin corregir).**
 - `tests/test_proyecciones_redisenio_visual.py` llama a `establecer_sombras(False)` y `establecer_movimiento_reducido(True)` **al importarse**.
-- Si pytest lo recolecta junto con `test_interfaz_componentes.py`, falla `test_sombras_se_pueden_desactivar_por_completo`. Así pasó en la primera ejecución completa del perfil esencial: 612 pasan y 2 fallan; la otra era una comprobación de esta fase, ya corregida.
+- Lo importan, directa o transitivamente, `test_numericos_icociv`, `test_horizonte_editable`, `test_proyecciones_fase_2b`, `test_proyecciones_fase_3` y otros 10 archivos.
+- Si pytest recolecta cualquiera de ellos junto con `test_interfaz_componentes.py`, falla `test_sombras_se_pueden_desactivar_por_completo`. Así pasó en las dos primeras ejecuciones completas del perfil esencial (612 + 2 fallos y 613 + 1 fallo). La segunda falla de la primera ejecución era una comprobación de esta fase, ya corregida.
+- Un plugin espía (`sombras_habilitadas()` tras cada prueba) lo localizó: las sombras ya estaban apagadas al terminar la primera prueba, es decir, desde la recolección.
 - Es la «falla heredada que depende del entorno» del informe del release.
-- Solución: `scripts/pruebas_fase0.py` ejecuta ese archivo en un proceso propio (`AISLADOS`), sin modificar ninguna de las dos pruebas.
+- Solución: `scripts/pruebas_fase0.py` ejecuta la víctima (`test_interfaz_componentes.py`) en un proceso propio (`AISLADOS`), sin modificar ninguna prueba existente.
 
 **Lista manual del perfil gui:**
 - equipo sin Python;
