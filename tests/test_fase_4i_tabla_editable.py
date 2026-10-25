@@ -185,12 +185,12 @@ def test_J_version_titulo_y_logo_oficial():
     from app_icociv.config.rutas import VERSION, TITULO_APLICACION, ruta_recurso
     from app_icociv.interfaz.ventana_principal import VentanaPrincipal
     from PIL import Image
-    assert (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "1.1.1" == VERSION
-    assert TITULO_APLICACION.startswith("SAVIP v1.1.1") and TITULO_APLICACION.count("SAVIP") == 1
+    assert (ROOT / "VERSION").read_text(encoding="utf-8").strip() == "1.1.2" == VERSION
+    assert TITULO_APLICACION.startswith("SAVIP v1.1.2") and TITULO_APLICACION.count("SAVIP") == 1
     v = VentanaPrincipal()
     try:
         assert v.windowTitle() == TITULO_APLICACION and not v.windowIcon().isNull()
-        assert v.pantalla_inicio.version.text() == "SAVIP v1.1.1"
+        assert v.pantalla_inicio.version.text() == "SAVIP v1.1.2"
     finally:
         v.close()
     oficial = Image.open(ruta_recurso("app_icociv/interfaz/recursos/savip_logo.png")).convert("RGBA").resize((64, 64))

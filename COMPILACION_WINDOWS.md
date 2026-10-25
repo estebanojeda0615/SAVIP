@@ -1,4 +1,4 @@
-# Compilar SAVIP 1.1.1 en Windows x64
+# Compilar SAVIP 1.1.2 en Windows x64
 
 Esta guía produce `SAVIP.exe` y el ZIP portátil desde un clon limpio de este repositorio. Solo se necesita lo que está versionado, Python y las dependencias de PyPI. No hace falta ningún archivo del equipo donde se desarrolló SAVIP.
 
@@ -42,7 +42,7 @@ Qué hace `build_portatil.ps1`:
    - Limpia `build\` y `dist\` y ejecuta `PyInstaller packaging\SAVIP.spec --noconfirm --clean`.
    - Comprueba los recursos empaquetados y ejecuta `SAVIP.exe --autocomprobacion`. La compilación se aborta si falla.
 2. **`scripts\empaquetar_portatil.py`**
-   - Arma `release\SAVIP_1.1.1_Portatil_Windows_x64.zip` con una sola carpeta raíz `SAVIP_1.1.1_Portatil\`, que contiene `SAVIP.exe`, `_internal\` y `LEEME_PORTATIL.txt`.
+   - Arma `release\SAVIP_1.1.2_Portatil_Windows_x64.zip` con una sola carpeta raíz `SAVIP_1.1.2_Portatil\`, que contiene `SAVIP.exe`, `_internal\` y `LEEME_PORTATIL.txt`.
    - Verifica el CRC de todas las entradas y escribe el `.sha256`.
 3. **Prueba del ZIP extraído.** Lo extrae en una carpeta temporal y ejecuta allí `SAVIP.exe --autocomprobacion`, sin variables `PYTHON*`, `VIRTUAL_ENV` ni `CONDA*`.
 
@@ -53,9 +53,9 @@ Tiempo medido en el equipo de referencia (Windows 11, Python 3.12.10) desde un c
 | Ruta | Contenido |
 |---|---|
 | `dist\SAVIP\` | Distribución *onedir*: `SAVIP.exe` + `_internal\` (unos 1617 archivos) |
-| `release\SAVIP_1.1.1_Portatil_Windows_x64.zip` | Paquete portátil para entregar (unos 126 MiB, 1618 entradas) |
-| `release\SAVIP_1.1.1_Portatil_Windows_x64.zip.sha256` | Huella SHA-256 del ZIP |
-| `release\SAVIP-1.1.1-windows\` | Copia de `dist\SAVIP` con `VERSION.txt` (la genera `build_exe.ps1`) |
+| `release\SAVIP_1.1.2_Portatil_Windows_x64.zip` | Paquete portátil para entregar (unos 126 MiB, 1618 entradas) |
+| `release\SAVIP_1.1.2_Portatil_Windows_x64.zip.sha256` | Huella SHA-256 del ZIP |
+| `release\SAVIP-1.1.2-windows\` | Copia de `dist\SAVIP` con `VERSION.txt` (la genera `build_exe.ps1`) |
 | `release\verificacion_lock.json`, `release\autocomprobacion.txt` | Evidencia de la compilación |
 
 `SAVIP.exe` necesita su carpeta `_internal\` al lado. No distribuya el EXE solo.
@@ -72,9 +72,9 @@ Get-Content auto.txt
 Get-FileHash "release\SAVIP_${v}_Portatil_Windows_x64.zip" -Algorithm SHA256
 ```
 
-- `ProductVersion` debe ser `1.1.1`.
-- `ExitCode` debe ser `0`, y `auto.txt` debe mostrar «Autocomprobacion de SAVIP 1.1.1» con 7/7 comprobaciones.
-- Después, abra `SAVIP.exe` con doble clic. La ventana se titula «SAVIP v1.1.1 — Sistema de Análisis de Variaciones de Precios».
+- `ProductVersion` debe ser `1.1.2`.
+- `ExitCode` debe ser `0`, y `auto.txt` debe mostrar «Autocomprobacion de SAVIP 1.1.2» con 7/7 comprobaciones.
+- Después, abra `SAVIP.exe` con doble clic. La ventana se titula «SAVIP v1.1.2 — Sistema de Análisis de Variaciones de Precios».
 
 ## 5. Pruebas focalizadas
 

@@ -1,8 +1,8 @@
 # SAVIP — Sistema de Análisis de Variaciones de Precios
 
-**Versión 1.1.1** · Aplicación de escritorio para Windows x64 · Autor: **Esteban Ojeda**
+**Versión 1.1.2 (en pruebas)** · Aplicación de escritorio para Windows x64 · Autor: **Esteban Ojeda**
 
-> **Rama `develop/v1.1.2`: en desarrollo, no es una versión publicada.** Contiene la 1.1.1 más los indicadores de carga con esqueleto (Skeleton Loaders), diálogos que se ajustan a la ventana e indicadores al abrir, guardar y cerrar sesiones. Tiene pruebas automáticas, pero aún faltan la revisión manual y la aprobación del autor. `VERSION` sigue en 1.1.1 y no hay ZIP de 1.1.2. La versión estable es la de `main`.
+> **Rama `develop/v1.1.2`: versión en pruebas, no es la versión estable.** Contiene la 1.1.1 más los indicadores de carga con esqueleto (Skeleton Loaders), diálogos que se ajustan a la ventana e indicadores al abrir, guardar y cerrar sesiones. Tiene pruebas automáticas, pero aún faltan la revisión manual y la aprobación del autor. La versión estable sigue siendo la 1.1.1 de `main`.
 
 SAVIP ayuda a actualizar precios de presupuestos de obra civil con los índices **ICOCIV** (Índice de Costos de la Construcción de Obras Civiles) que publica el DANE en Colombia. Carga el anexo oficial del DANE, proyecta la serie elegida hasta la fecha objetivo del presupuesto y calcula el valor actualizado de cada actividad. Guarda el trabajo en sesiones y exporta el resultado a Excel, PDF o Word.
 
@@ -22,10 +22,20 @@ SAVIP ayuda a actualizar precios de presupuestos de obra civil con los índices 
 - Las proyecciones son estimaciones a partir de la serie publicada. No garantizan el valor que el DANE publique después. Si llega un anexo más reciente, conviene actualizar los análisis con él.
 - SAVIP es una herramienta de apoyo. Las cifras de cualquier presupuesto deben ser revisadas y aprobadas por el profesional responsable. El autor no asume responsabilidad por decisiones tomadas solo con los resultados del programa.
 
+## Descargar versión de desarrollo para Windows
+
+La compilación de prueba de esta rama está publicada como **pre-release** en GitHub Releases: **[SAVIP 1.1.2 (v1.1.2-rc.1)](https://github.com/estebanojeda0615/SAVIP/releases/tag/v1.1.2-rc.1)**. Todas las versiones publicadas están en [Releases](https://github.com/estebanojeda0615/SAVIP/releases).
+
+1. En la página del release, abra **Assets** y descargue `SAVIP_1.1.2_Portatil_Windows_x64.zip`. Junto a él está su `.sha256` para comprobar la descarga.
+2. Extraiga **el ZIP completo** y abra `SAVIP_1.1.2_Portatil\SAVIP.exe` dentro de la carpeta extraída. El EXE no es autónomo: necesita la carpeta `_internal\` a su lado.
+3. Requisitos: Windows 10/11 x64. No hace falta instalar Python.
+
+Es una versión en pruebas: para el trabajo diario use la 1.1.1 estable. Para reconstruirla desde el código, vea «Compilar desde este repositorio».
+
 ## Usar la versión portátil
 
-1. Extraiga **todo** el ZIP `SAVIP_1.1.1_Portatil_Windows_x64.zip`. No ejecute el programa desde dentro del ZIP.
-2. Abra `SAVIP_1.1.1_Portatil\SAVIP.exe`. No hace falta instalar Python. La carpeta `_internal\` debe quedar siempre junto al EXE.
+1. Extraiga **todo** el ZIP `SAVIP_1.1.2_Portatil_Windows_x64.zip`. No ejecute el programa desde dentro del ZIP.
+2. Abra `SAVIP_1.1.2_Portatil\SAVIP.exe`. No hace falta instalar Python. La carpeta `_internal\` debe quedar siempre junto al EXE.
 3. Cargue el anexo ICOCIV del DANE (botón «Cargar archivo Excel»). Luego use Proyecciones, Empalme y Resultados.
 
 El ejecutable no tiene firma digital, así que Windows SmartScreen puede advertir «editor desconocido». Las instrucciones para el usuario final están en [`packaging/LEEME_PORTATIL.txt`](packaging/LEEME_PORTATIL.txt), que también va dentro del ZIP.
@@ -41,12 +51,12 @@ Requisitos:
 Desde PowerShell:
 
 ```powershell
-git clone https://github.com/estebanojeda0615/SAVIP.git
+git clone -b develop/v1.1.2 https://github.com/estebanojeda0615/SAVIP.git
 cd SAVIP
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\build_portatil.ps1
 ```
 
-Resultado: `release\SAVIP_1.1.1_Portatil_Windows_x64.zip` (junto con su `.sha256`) y la carpeta `dist\SAVIP\`. La guía completa, con los errores típicos y cómo verificar el EXE, está en **[COMPILACION_WINDOWS.md](COMPILACION_WINDOWS.md)**.
+Resultado: `release\SAVIP_1.1.2_Portatil_Windows_x64.zip` (junto con su `.sha256`) y la carpeta `dist\SAVIP\`. La guía completa, con los errores típicos y cómo verificar el EXE, está en **[COMPILACION_WINDOWS.md](COMPILACION_WINDOWS.md)**.
 
 También se puede compilar en GitHub Actions. Vaya a *Actions › build-windows › Run workflow* y descargue el artefacto con el ZIP.
 

@@ -1,4 +1,4 @@
-SAVIP 1.1.1 - Version portatil para Windows x64
+SAVIP 1.1.2 - Version portatil para Windows x64
 Sistema de Analisis de Variaciones de Precios (indices ICOCIV del DANE)
 =======================================================================
 
@@ -8,7 +8,7 @@ Sistema de Analisis de Variaciones de Precios (indices ICOCIV del DANE)
    - No necesita instalar Python ni ningun otro programa: todo lo necesario
      esta en esta carpeta (SAVIP.exe y la carpeta _internal).
    - No borre ni mueva por separado la carpeta _internal: debe quedar siempre
-     junto a SAVIP.exe. Puede mover la carpeta SAVIP_1.1.1_Portatil completa.
+     junto a SAVIP.exe. Puede mover la carpeta SAVIP_1.1.2_Portatil completa.
    - El paquete NO incluye el Excel oficial del DANE: descarguelo de la pagina
      del DANE (anexo ICOCIV, formato .xlsx o .xlsb).
 
@@ -60,4 +60,4 @@ Sistema de Analisis de Variaciones de Precios (indices ICOCIV del DANE)
    - El tema claro/oscuro se recuerda en las preferencias de Windows del
      usuario.
 
-SAVIP 1.1.1 - Secretaria de Infraestructura del Cauca
+SAVIP 1.1.2 - Secretaria de Infraestructura del Cauca
