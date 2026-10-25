@@ -30,7 +30,10 @@ def recorrido(tmp_path_factory):
 @pytest.mark.parametrize("seccion", ["invariantes", "consultas_serie1", "sesion", "excel_sesion", "pdf_sesion",
                                      "docx_sesion", "factor_legado", "informe_proyeccion"])
 def test_golden_sesion_exportables(recorrido, seccion):
-    assert c.diferencias(GOLDEN[seccion], recorrido[1][seccion], seccion) == []
+    # PDF/DOCX imprimen métricas de candidatos con optimizador iterativo (p. ej. Holt amortiguado) con 4 decimales:
+    # admiten la holgura documentada en captura.textos_numericos_equivalentes; el resto del texto es exacto.
+    impresos = seccion in ("pdf_sesion", "docx_sesion", "informe_proyeccion")
+    c.afirmar_igual(GOLDEN[seccion], recorrido[1][seccion], seccion, texto_numerico=impresos)
 
 
 def test_invariantes_del_flujo(recorrido):

@@ -742,7 +742,7 @@ tests/test_proyecciones_fase_2b.py;test_guardar_cerrar_reabrir_y_sesion_antigua;
 tests/test_proyecciones_fase_2b.py;test_excel_operativa_y_regresion_hoja_tecnica;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_proyecciones_fase_2b.py;test_tablas_vacias_filas_y_distribucion_real;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_proyecciones_fase_2b.py;test_sesion_malformada_no_reemplaza_metadatos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
-tests/test_proyecciones_fase_2b.py;test_integracion_sesion_con_excel_y_trabajadores_reales;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_fase_2b.py;test_integracion_sesion_con_excel_y_trabajadores_reales;pasa;d;gui;"Carrera heredada: guarda justo después de proyectar sin esperar el indicador de carga; en GitHub Actions guardar_sesion_actual devolvió False (causa probable: regla 01B)"
 tests/test_proyecciones_fase_3.py;test_serializacion_exacta_sin_codigo_ejecutable;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_proyecciones_fase_3.py;test_sidebar_titulo_y_historial_vacio;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_proyecciones_fase_3.py;test_recuperar_ruta_profunda_con_checkbox_dinamicos;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
@@ -754,7 +754,7 @@ tests/test_proyecciones_fase_3b.py;test_calculo_sesion_excel_identicos_al_respal
 tests/test_proyecciones_fase_3b.py;test_tres_proyecciones_selectores_precision_historial_y_exportacion_reales;falla;b;historicas;"Espera que el motor vuelva a ejecutarse (proyectar()==1); desde 4I-J la misma serie y datos reutilizan la trayectoria guardada (0)"
 tests/test_proyecciones_redisenio_visual.py;test_jerarquia_y_casillas_conservan_senales_y_filtros;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_proyecciones_redisenio_visual.py;test_boton_calcular_y_columnas_conservan_resultado_actual;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
-tests/test_proyecciones_redisenio_visual.py;test_layout_adaptable_y_temas_sin_cambiar_entrada;pasa;a;esenciales;Pasa en un clon limpio, solo con el repositorio y el lock
+tests/test_proyecciones_redisenio_visual.py;test_layout_adaptable_y_temas_sin_cambiar_entrada;pasa;d;gui;"Carrera heredada: comprueba el layout tras un solo processEvents() y la ventana lo adapta con un temporizador de 60 ms; falló en una corrida local conjunta y en GitHub Actions"
 tests/test_publicacion_horizonte.py;test_lo_publicado_no_excede_lo_solicitado;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_publicacion_horizonte.py;test_lo_publicado_no_excede_el_limite_operativo;pasa;a;historicas;Pasa en un clon limpio, solo con el repositorio y el lock
 tests/test_publicacion_horizonte.py;test_la_evidencia_interna_si_puede_superar_lo_solicitado;falla;b;historicas;"Espera la metodología anterior a 12/24 (series de menos de 36 meses proyectadas, claves o textos retirados); certeza media: ValueError: max() iterable argument is empty def test_la_evidencia_interna_si_puede_superar_lo_solicitado() ->"

@@ -12,7 +12,7 @@ OBTENIDO = c.capturar_economico()
 
 @pytest.mark.parametrize("seccion", ["factores", "importes", "rechazos", "factor_legado", "empalme"])
 def test_golden_economico(seccion):
-    assert c.diferencias(GOLDEN[seccion], OBTENIDO[seccion], seccion) == []
+    c.afirmar_igual(GOLDEN[seccion], OBTENIDO[seccion], seccion)
 
 
 def test_factor_es_exacto_en_decimal():

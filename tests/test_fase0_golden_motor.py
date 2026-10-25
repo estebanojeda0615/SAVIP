@@ -56,13 +56,22 @@ def test_golden_motor(capturado):
             assert o["modelo_codigo"] in empate and o["modelo_codigo"] == o["ranking_rmse_rect"][0][0]
             for clave in ("modelo_codigo", "model_name", "modelo_segundo"):
                 e.pop(clave), o.pop(clave)
-        rank_e, rank_o = e.pop("ranking_rmse_rect"), o.pop("ranking_rmse_rect")
-        assert c.diferencias(dict(rank_e), dict(rank_o), f"{nombre}.h{consulta}.ranking") == []
-        pos = {m: i for i, (m, _) in enumerate(rank_o)}
-        invertidos = [(a, b) for (a, ra) in rank_e for (b, rb) in rank_e if ra < rb and not _cerca(ra, rb) and pos[a] > pos[b]]
+        rank_e, rank_o = dict(e.pop("ranking_rmse_rect")), dict(o.pop("ranking_rmse_rect"))
+        assert set(rank_e) == set(rank_o)
+        # Candidatos con optimizador iterativo: holgura documentada en captura.REL_TOL_OPTIMIZADOR.
+        for optimizador, rel, abs_ in ((False, c.REL_TOL, c.ABS_TOL), (True, c.REL_TOL_OPTIMIZADOR, c.ABS_TOL_OPTIMIZADOR)):
+            parte = [m for m in rank_e if c.es_optimizador(m) == optimizador]
+            c.afirmar_igual({m: rank_e[m] for m in parte}, {m: rank_o[m] for m in parte},
+                            f"{nombre}.h{consulta}.ranking", rel_tol=rel, abs_tol=abs_)
+        pos = {m: i for i, m in enumerate(rank_o)}  # el dict conserva el orden del ranking obtenido
+
+        def separados(a, b):
+            rel = c.REL_TOL_OPTIMIZADOR if c.es_optimizador(a) or c.es_optimizador(b) else c.REL_TOL
+            return rank_e[b] - rank_e[a] > max(rel * rank_e[b], c.ABS_TOL_OPTIMIZADOR)
+        invertidos = [(a, b) for a in rank_e for b in rank_e if separados(a, b) and pos[a] > pos[b]]
         assert not invertidos, f"orden del RMSErect distinto del golden: {invertidos[:5]}"
-    assert c.diferencias(esperado, obtenido, nombre) == []
+    c.afirmar_igual(esperado, obtenido, nombre)
 
 
 def test_golden_rechazos():
-    assert c.diferencias(GOLDEN["rechazos"], c.capturar_rechazos(), "rechazos") == []
+    c.afirmar_igual(GOLDEN["rechazos"], c.capturar_rechazos(), "rechazos")

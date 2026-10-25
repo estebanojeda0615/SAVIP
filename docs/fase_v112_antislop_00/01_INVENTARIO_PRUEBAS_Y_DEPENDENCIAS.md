@@ -20,11 +20,13 @@
 
 | Categoría (prompt B1) | Pruebas | Estado en clon limpio | Comentario |
 |---|---|---|---|
-| **a** Productivas y autónomas | 769 + 29 nuevas | Pasan | 585 viven en archivos que pasan completos (perfil esencial). Otras 184 pasan dentro de archivos que también tienen fallos (perfiles histórico, DANE y GUI). |
+| **a** Productivas y autónomas | 767 + 29 nuevas | Pasan | 583 viven en archivos que pasan completos (perfil esencial). Otras 184 pasan dentro de archivos que también tienen fallos (perfiles histórico, DANE y GUI). |
 | **b** Expectativas obsoletas | 36 | Fallan | Detalle en §2 |
 | **c** Dependen de `docs/` o de fixtures no publicados (AS-007) | 61 + 3 errores de recolección | Fallan | Detalle en §3 |
 | **c-DANE** Necesitan la sesión con datos DANE reales | 87 | Fallan | `docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json` (15 MB, no publicable) |
-| **d** Dependientes del entorno gráfico | 4 | Fallan | `test_v112_01c_dialogos_legibles`, casos de 50 y 200 líneas: offscreen sin fuentes Segoe registradas mide mal el ancho. Pasan 8/8 si antes se importa un módulo que registra Segoe (`test_v112_01b_indicadores_sesiones`). |
+| **d** Dependientes del entorno gráfico o del tiempo | 4 + 2 | 4 fallan; 2 pasan por archivo pero fallan de forma intermitente | `test_v112_01c_dialogos_legibles`, casos de 50 y 200 líneas: offscreen sin fuentes Segoe registradas mide mal el ancho; pasan 8/8 si antes se importa un módulo que registra Segoe (`test_v112_01b_indicadores_sesiones`). Carreras de tiempo heredadas, movidas por nodo al perfil gui (`GUI_NODOS`):
+  - `test_proyecciones_redisenio_visual::test_layout_adaptable_y_temas_sin_cambiar_entrada`: comprueba el layout tras un solo `processEvents()` y la ventana lo adapta con un temporizador de 60 ms. Falló en una corrida local conjunta y en GitHub Actions.
+  - `test_proyecciones_fase_2b::test_integracion_sesion_con_excel_y_trabajadores_reales`: guarda justo después de proyectar. En el runner, más lento, `guardar_sesion_actual` devolvió falso sin escribir; causa probable: la regla 01B de no guardar durante una carga, no confirmada. |
 | **e** Protegen el selector retirado (AS-006) | 40 | Pasan | `test_rmse_global_estable` (11), `test_seleccion_rmse_global` (16) y `test_p0d_rmse_orden_exacto` (13): ejercitan `seleccionar_modelo_por_rmse_oos_global` y `_rmse_global_estable`, que el flujo productivo ya no usa para elegir el modelo. |
 | **f** Carencias esenciales | — | — | Se cubrieron con los Golden Masters (§5); lo que sigue sin cubrir está en §6 |
 
@@ -61,10 +63,10 @@ Recuento real de `python scripts/pruebas_fase0.py --listar` en un clon limpio:
 
 | Perfil | Archivos | Pruebas | Estado en clon limpio | Dónde corre |
 |---|---|---|---|---|
-| **esenciales**: tests autocontenidos esenciales | 55 (3 golden + 52 existentes) | **614** | **Todas pasan** (ver 04) | GitHub Actions (`fase0-pruebas.yml`) y local |
+| **esenciales**: tests autocontenidos esenciales | 55 archivos (3 golden + 52 existentes), menos 2 nodos | **612** | **Todas pasan** (ver 04) | GitHub Actions (`fase0-pruebas.yml`) y local |
 | **dane**: integración externa con DANE | 20 | 133 | 22 pasan, 111 fallan sin la sesión real | Solo con `docs/` locales |
 | **historicas**: pruebas históricas obsoletas | 32 | 271 (+3 errores de recolección) | 198 pasan; 73 fallan y 3 errores (b, c, e) | Local, informativo |
-| **gui**: ejecución GUI física Windows | 1 + lista manual | 8 | 4 pasan, 4 dependen de las fuentes | Local; la parte física es manual |
+| **gui**: ejecución GUI física Windows | 1 archivo + 2 nodos + lista manual | 10 | 4 dependen de las fuentes; 2 carreras de tiempo (pasan por archivo, intermitentes en conjunto); 4 pasan | Local; la parte física es manual |
 | **Total** | 108 | 1026 recolectadas | | |
 
 1026 = 1029 − 3, porque los archivos con errores de recolección no aportan pruebas.

@@ -23,12 +23,54 @@ GOLDEN = Path(__file__).resolve().parent / "golden"
 #: 1e-9 relativo deja seis órdenes de margen sobre ese ruido y queda muy por debajo de lo que la
 #: aplicación muestra (2 a 4 decimales). Textos, códigos, enteros, booleanos y órdenes: exactos.
 REL_TOL, ABS_TOL = 1e-9, 1e-12
+#: Candidatos ajustados con un optimizador iterativo (Holt lineal/amortiguado vía statsmodels, Huber vía
+#: scikit-learn, y sus variantes Fourier): su resultado solo está determinado hasta la tolerancia de
+#: convergencia, y la ruta SIMD de cada CPU la recorre distinto. Medido entre el equipo de referencia y el
+#: runner de GitHub (run 40240413329): hasta 5e-7 relativo en RMSErect y 3,5e-5 en MAE/MASE mostrados con
+#: 4 decimales. Para ellos (y para los números impresos en PDF/DOCX) se admite 1e-4 relativo; ningún
+#: modelo ganador, trayectoria, punto consultado ni cifra económica necesitó esa holgura.
+REL_TOL_OPTIMIZADOR, ABS_TOL_OPTIMIZADOR = 1e-4, 1e-8
+FAMILIAS_OPTIMIZADOR = ("holt", "huber")
 HORIZONTES_CONSULTA = (11, 23)
 
 
+def es_optimizador(codigo: str) -> bool:
+    return any(f in codigo for f in FAMILIAS_OPTIMIZADOR)
+
+
+_NUMERO_TEXTO = re.compile(r"^-?(\d{1,3}(\.\d{3})+|\d+)(,(\d+))?$")
+
+
+def _numero_texto(token: str) -> tuple[float, int] | None:
+    """«2,0026» o «1.234,5» → (valor, decimales); None si el token no es un número en formato es-CO."""
+    m = _NUMERO_TEXTO.match(token)
+    if not m:
+        return None
+    return float(token.replace(".", "").replace(",", ".")), len(m.group(4) or "")
+
+
+def textos_numericos_equivalentes(e: str, o: str) -> bool:
+    """Mismo texto salvo métricas impresas con 3+ decimales que difieren en ≤ 1e-4 relativo o 1 unidad del último decimal."""
+    te, to = e.split(), o.split()
+    if len(te) != len(to):
+        return False
+    for a, b in zip(te, to):
+        if a == b:
+            continue
+        na, nb = _numero_texto(a), _numero_texto(b)
+        if na is None or nb is None or na[1] != nb[1]:
+            return False
+        # Solo las métricas impresas con 3+ decimales (MAE, RMSE, MASE…) admiten holgura; importes (2 decimales),
+        # porcentajes, páginas y recuentos deben coincidir exactos.
+        if na[1] < 3 or abs(na[0] - nb[0]) > max(REL_TOL_OPTIMIZADOR * max(abs(na[0]), abs(nb[0])), 10 ** -na[1] + 1e-12):
+            return False
+    return True
+
+
 # ----------------------------------------------------------------------------------- comparación
-def diferencias(esperado, obtenido, ruta="$", limite=25) -> list[str]:
-    """Lista de diferencias (vacía si coinciden) con la tolerancia documentada para flotantes."""
+def diferencias(esperado, obtenido, ruta="$", limite=25, rel_tol=REL_TOL, abs_tol=ABS_TOL, texto_numerico=False) -> list[str]:
+    """Lista de diferencias (vacía si coinciden) con la tolerancia documentada para flotantes.
+    ``texto_numerico``: en textos de PDF/DOCX, los números impresos se comparan con ``textos_numericos_equivalentes``."""
     salida: list[str] = []
 
     def rec(e, o, r):
@@ -36,12 +78,13 @@ def diferencias(esperado, obtenido, ruta="$", limite=25) -> list[str]:
             return
         if isinstance(e, bool) or isinstance(o, bool) or e is None or o is None or isinstance(e, str):
             if e != o or type(e) is not type(o):
-                salida.append(f"{r}: esperado {e!r}, obtenido {o!r}")
+                if not (texto_numerico and isinstance(e, str) and isinstance(o, str) and textos_numericos_equivalentes(e, o)):
+                    salida.append(f"{r}: esperado {e!r}, obtenido {o!r}")
         elif isinstance(e, (int, float)) and isinstance(o, (int, float)):
             if isinstance(e, int) and isinstance(o, int):
                 if e != o:
                     salida.append(f"{r}: esperado {e}, obtenido {o}")
-            elif not (math.isclose(e, o, rel_tol=REL_TOL, abs_tol=ABS_TOL) or (math.isnan(e) and math.isnan(o))):
+            elif not (math.isclose(e, o, rel_tol=rel_tol, abs_tol=abs_tol) or (math.isnan(e) and math.isnan(o))):
                 salida.append(f"{r}: esperado {e!r}, obtenido {o!r}")
         elif isinstance(e, dict) and isinstance(o, dict):
             if set(e) != set(o):
@@ -59,6 +102,12 @@ def diferencias(esperado, obtenido, ruta="$", limite=25) -> list[str]:
 
     rec(esperado, obtenido, ruta)
     return salida
+
+
+def afirmar_igual(esperado, obtenido, ruta="$", **opciones) -> None:
+    """``assert`` con la lista completa de diferencias en el mensaje (pytest trunca las listas largas)."""
+    lista = diferencias(esperado, obtenido, ruta, **opciones)
+    assert not lista, f"{len(lista)} diferencia(s) con el golden:\n" + "\n".join(lista)
 
 
 def json_estable(objeto):

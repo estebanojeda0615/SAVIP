@@ -55,7 +55,16 @@ DANE = [
     "tests/test_microcorreccion_fase_4d_c.py", "tests/test_referencia_economica_fase_4d_b.py",
     "tests/test_slider_comparacion_historica_fase_4d.py", "tests/test_switch_tema_sesion_dane.py", "tests/test_v112_01b_indicadores_sesiones.py",
 ]
-GUI = ["tests/test_v112_01c_dialogos_legibles.py"]
+GUI = ["tests/test_v112_01c_dialogos_legibles.py"]  # anchos offscreen sin fuentes Segoe registradas
+#: Pruebas sueltas con carreras de tiempo heredadas: salen del perfil esencial (--deselect) y van al perfil gui.
+GUI_NODOS = [
+    # Comprueba el layout tras UN processEvents(), pero la ventana lo adapta con un temporizador de 60 ms
+    # (resizeEvent -> _temporizador_ancho): falló en una corrida local conjunta y en el runner de GitHub.
+    "tests/test_proyecciones_redisenio_visual.py::test_layout_adaptable_y_temas_sin_cambiar_entrada",
+    # Guarda justo tras proyectar sin esperar a que termine el indicador de carga; en el runner (más lento)
+    # guardar_sesion_actual devolvió False sin escribir (causa probable: regla 01B de no guardar durante una carga).
+    "tests/test_proyecciones_fase_2b.py::test_integracion_sesion_con_excel_y_trabajadores_reales",
+]
 #: Se ejecutan en su propio proceso. test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE,
 #: y lo importan (directa o transitivamente) test_numericos_icociv, test_horizonte_editable, test_proyecciones_fase_2b
 #: y _3, entre otros: recolectado junto a ellos, test_interfaz_componentes::test_sombras_… falla (contaminación heredada).
@@ -74,7 +83,9 @@ def historicas() -> list[str]:
     return sorted(p.relative_to(RAIZ).as_posix() for p in (RAIZ / "tests").glob("test_*.py") if p.relative_to(RAIZ).as_posix() not in asignados)
 
 
-PERFILES = {"esenciales": ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI}
+PERFILES = {"esenciales": ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI + GUI_NODOS}
+#: Opciones fijas por perfil (las pruebas de GUI_NODOS no se ejecutan dos veces).
+OPCIONES = {"esenciales": [f"--deselect={n}" for n in GUI_NODOS], "historicas": ["--continue-on-collection-errors"]}
 
 
 def _entorno() -> dict:
@@ -85,13 +96,13 @@ def listar() -> int:
     total = 0
     for nombre, archivos in PERFILES.items():
         r = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider",
-                            "--continue-on-collection-errors", *archivos], cwd=RAIZ, env=_entorno(), capture_output=True,
+                            "--continue-on-collection-errors", *OPCIONES.get(nombre, []), *archivos], cwd=RAIZ, env=_entorno(), capture_output=True,
                            text=True, encoding="utf-8", errors="replace")
         pruebas = sum(1 for linea in r.stdout.splitlines() if "::" in linea)
         errores = len(re.findall(r"^ERROR ", r.stdout, re.M))
         total += pruebas
-        print(f"{nombre:<11} {len(archivos):>3} archivos  {pruebas:>4} pruebas recolectadas  {errores} errores de recolección")
-    print(f"{'total':<11} {sum(map(len, PERFILES.values())):>3} archivos  {total:>4} pruebas")
+        print(f"{nombre:<11} {len(archivos):>3} entradas  {pruebas:>4} pruebas  {errores} errores de recolección")
+    print(f"{'total':<11} {total:>4} pruebas")
     print("gui (manual): " + "; ".join(GUI_MANUAL))
     return 0
 
@@ -104,10 +115,10 @@ def main(argv: list[str]) -> int:
     perfil, extra = argv[0], argv[1:]
     if perfil not in PERFILES:
         sys.exit(f"Perfil desconocido: {perfil}. Opciones: {', '.join(PERFILES)}")
-    faltan = [a for a in PERFILES[perfil] if not (RAIZ / a).exists()]
+    faltan = [a for a in PERFILES[perfil] if not (RAIZ / a.split("::")[0]).exists()]
     if faltan:
         sys.exit(f"Archivos de prueba inexistentes en el perfil {perfil}: {faltan}")
-    opciones = ["--continue-on-collection-errors"] if perfil == "historicas" else []
+    opciones = OPCIONES.get(perfil, [])
     juntos = [a for a in PERFILES[perfil] if a not in AISLADOS]
     aislados = [a for a in PERFILES[perfil] if a in AISLADOS]
     codigos = []
