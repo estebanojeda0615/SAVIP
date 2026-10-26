@@ -12,6 +12,7 @@ from app_icociv.persistencia.gestor_sesiones import cargar_sesion
 from app_icociv.persistencia.historial_empalme import validar_sesion_empalme, campos_componente
 from app_icociv.servicios.empalme_iccp_icociv import calcular_empalme_iccp_icociv
 from tests.test_historial_empalme_fase_4b import registrar_casos, guardar, abrir, ICCP, ROOT, PREVIO
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 
 COMPONENTES=[('Capítulo','Estructuras de concreto'),('Subclase de obra','Puentes y vías — Ñandú'),
              ('Actividad','Fundir losa'),('Insumo','Acero corrugado Ø ½'),('Otro','Frente norte')]
@@ -155,7 +156,7 @@ def test_sesion_mixta_y_metadata_corrupta_no_destructiva(tmp_path):
 def test_sesion_anterior_neutra_edicion_y_exportacion(tmp_path):
     v=VentanaPrincipal();w=v.widget_empalme
     try:
-        datos=json.loads((ROOT/'docs/fase_4b/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+        datos=cargar_sesion_sintetica('FASE_4B_FIXTURE_DATOS')
         p=tmp_path/'anterior.json';p.write_text(json.dumps(datos),encoding='utf-8');abrir(v,p)
         assert w.datos_sesion()==datos['empalme_iccp_icociv'] and w.tipo_componente.currentData() is None
         assert w.nombre_componente.text()==''

@@ -15,6 +15,7 @@ from app_icociv.interfaz.widgets.empalme_iccp_icociv import WidgetEmpalmeICCPICO
 from tests.test_variacion_indice_empalme import registros
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV
 from app_icociv.exportables.archivo_atomico import guardar_atomico
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 app=QApplication.instance() or QApplication([])
 
 def test_a_valor_original_display_y_copia_numericos():
@@ -45,7 +46,7 @@ def test_a_valor_original_display_y_copia_numericos():
     finally:w.close()
 
 def proyecciones_guardadas():
-    data=json.loads((ROOT/'docs/auditoria_better_ui_v11/temporal/sesion_auditoria.json').read_text(encoding='utf-8'))['proyecciones_icociv']
+    data=cargar_sesion_sintetica('SESION_AUDITORIA_UI')['proyecciones_icociv']
     w=WidgetProyeccionesICOCIV();w.restaurar_datos_sesion(data)
     return w
 

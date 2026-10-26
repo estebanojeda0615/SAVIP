@@ -25,7 +25,7 @@ from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV, COLUMNAS_VALORES, plan_columnas_valores
 from app_icociv.interfaz.widgets.historial_series import identidad_serie, huella_datos, firma_ejecucion
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
-from app_icociv.servicios.actualizacion_icociv import factor_aplicado
+from app_icociv.servicios.actualizacion_icociv import es_factor_legado, factor_aplicado
 from tests.fixtures.salidas import carpeta_salida
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -381,7 +381,11 @@ def test_C_cuatro_combinaciones_en_qt_y_excel(tmp_path):
             from openpyxl.utils import get_column_letter as L
             for f in range(3, 3 + len(w.valores)):
                 factor = s.cell(f, C["factor"])
-                assert factor.data_type == "f" and factor.value == f"={L(C['i_icociv'])}{f}/{L(C['i0_icociv'])}{f}"
+                # Fase 1A (AS-007): expectativa anterior a la regla 4I-C (factor I/I0 sin redondear). Contrato vigente: el Excel
+                # exporta el escenario vigente de cada registro y usa I/I0 solo si ese registro es legado (sin criterio 4I-C).
+                I, I0 = L(C['i_icociv']), L(C['i0_icociv'])
+                legado = es_factor_legado(w.escenario_registro(w.valores[f - 3])[0])
+                assert factor.data_type == "f" and factor.value == (f"={I}{f}/{I0}{f}" if legado else f"=1+ROUND(({I}{f}/{I0}{f}-1)*100,2)/100")
                 for clave in ("base_unitaria", "valor_unitario", "diferencia"):
                     assert s.cell(f, C[clave]).data_type == "f"
                     assert not any(L(C[k]) + str(f) in s.cell(f, C[clave]).value for k in ("fecha_i0", "fecha_i") if k in C)

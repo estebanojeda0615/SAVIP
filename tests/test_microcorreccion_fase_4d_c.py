@@ -12,6 +12,7 @@ from tests.test_slider_comparacion_historica_fase_4d import APP,cargar,reales,si
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV,COLUMNAS_VALORES,COLUMNAS_PROYECCIONES
 from app_icociv.reportes.sesion_modulos import construir_proyecciones
+from app_icociv.servicios.actualizacion_icociv import es_factor_legado  # Fase 1A (AS-007)
 
 TITULOS=['N.º','Proyecto','Componente del proyecto','Ítem / insumo','Unidad','Cantidad','P','A','Base ajustable unitaria (COP)','Base ajustable total (COP)','I0 ICOCIV','I ICOCIV proyectado','Factor','Valor proyectado unitario (COP)','Valor proyectado total (COP)','Diferencia %','Observación técnica']
 for fuente in ('segoeui.ttf','segoeuib.ttf','seguisb.ttf'):
@@ -135,7 +136,12 @@ def test_excel_15_reales_formulas_y_fechas_en_traza(tmp_path):
             assert not any(c>19 for _,c in s._cells) and not any(k in s.column_dimensions for k in ('T','U'))
             assert [s.cell(2,c).value for c in (11,12,13,14)]==['I0 ICOCIV','Fecha I0 (AAAA-MM)','I ICOCIV proyectado','Fecha de I proyectado (AAAA-MM)']
             for i,r in enumerate(w.valores,3):
-                assert [s.cell(i,c).value for c in (9,15,16,18)]==[f'=G{i}-H{i}',f'=M{i}/K{i}',f'=I{i}+I{i}*(O{i}-1)',f'=(O{i}-1)*100']
+                # Fase 1A (AS-007): expectativa anterior a la regla 4I-C (factor I/I0 sin redondear). Contrato vigente: el Excel
+                # exporta el escenario vigente y elige la fórmula por fila: I/I0 solo si ese registro es legado; un escenario con
+                # I0 de referencia modificado se recalcula con el criterio vigente (comparacion_historica.escenario_registro).
+                legado=es_factor_legado(w.escenario_registro(r)[0])
+                factor,diferencia=(f'=M{i}/K{i}',f'=(O{i}-1)*100') if legado else (f'=1+ROUND((M{i}/K{i}-1)*100,2)/100',f'=ROUND((O{i}-1)*100,2)')
+                assert [s.cell(i,c).value for c in (9,15,16,18)]==[f'=G{i}-H{i}',factor,f'=I{i}+I{i}*(O{i}-1)',diferencia]
                 assert all(s.cell(i,c).data_type=='n' for c in (6,7,8,11,13))
                 assert [s.cell(i,c).value for c in (12,14)]==list(w.fechas_registro(r))
                 assert (t.cell(i,9).value,t.cell(i,11).value)==w.fechas_registro(r) and t.cell(i,2).value==r['calculo_id']

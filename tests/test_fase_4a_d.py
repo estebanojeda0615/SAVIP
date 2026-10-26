@@ -10,6 +10,7 @@ from PySide6.QtWidgets import QApplication,QLabel,QScrollArea,QStyle,QStyleOptio
 from PySide6.QtTest import QTest,QSignalSpy
 from PySide6.QtGui import QFont,QFontDatabase
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 app=QApplication.instance() or QApplication([])
 for filename in ('segoeui.ttf','segoeuib.ttf','seguisb.ttf'):
     QFontDatabase.addApplicationFont(str(Path('C:/Windows/Fonts')/filename))
@@ -70,7 +71,7 @@ def test_b_intentos_reales_h24_y_asignaciones_silenciosas():
 
 def test_d_resultados_texto_tarjetas_y_historial_sin_motor():
     v=ventana()
-    fixture=json.loads((ROOT/'docs/fase_4a_c/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_C_FIXTURE_DATOS')
     v.widget_proyecciones.restaurar_datos_sesion(deepcopy(fixture['proyecciones']))
     before=v.widget_proyecciones.datos_sesion()
     try:
@@ -103,7 +104,7 @@ def test_c_excel_formulas_estaticos_inyeccion_y_escenario(tmp_path):
     from app_icociv.exportables.excel_modulos import agregar_calculos_editables
     from app_icociv.interfaz.widgets.empalme_iccp_icociv import WidgetEmpalmeICCPICOCIV
     from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV
-    fixture=json.loads((ROOT/'docs/fase_4a_d/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     p=WidgetProyeccionesICOCIV();p.restaurar_datos_sesion(deepcopy(fixture['proyecciones']))
     e=WidgetEmpalmeICCPICOCIV();e.calculos=deepcopy(fixture['empalme'])
     p.valores[0]['item']='=1+1';e.calculos[0]['item']='=1+1'

@@ -1,7 +1,6 @@
 import json,math,os,types
 from pathlib import Path
 from copy import deepcopy
-from functools import lru_cache
 from unittest.mock import patch
 import pandas as pd
 from PySide6.QtCore import QCoreApplication  # Fase 4I-G: la apertura de sesiones termina en el bucle de eventos
@@ -17,12 +16,14 @@ from app_icociv.persistencia.historial_icociv import serializar_resultado,recupe
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
 from tests.test_historial_empalme_fase_4b import guardar,abrir
 from tests.fixtures.fase0.generadores import anexo_slider_4d
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/fase_4d_slider'
 APP=QApplication.instance() or QApplication([])
 
-@lru_cache(maxsize=1)
-def _reales():return json.loads((OUT/'fixtures/TRES_ANALISIS_REALES.json').read_text(encoding='utf-8'))
-def reales():return deepcopy(_reales())
+# Fase 1A (AS-007): sesión SINTÉTICA de 3 análisis (motor real sobre el anexo sintético), antes en
+# docs/fase_4d_slider/fixtures/TRES_ANALISIS_REALES.json (no publicado; el nombre «REALES» se refería al motor,
+# no a datos DANE). Trasladada saneando solo sus rutas locales; procedencia en tests/fixtures/sesiones_sinteticas/README.md.
+def reales():return cargar_sesion_sintetica('TRES_ANALISIS_SINTETICOS')
 def cargar(v):
     v.sesion_pendiente={'proyecciones_icociv':reales()};v._restaurar_sesion_pendiente();return v.widget_proyecciones
 def originales(w):
@@ -111,7 +112,7 @@ def test_sesion_mixta_reabierta_sin_fuente_sin_motor_y_empalme_intacto(tmp_path)
         fuente=anexo_slider_4d(tmp_path/'anexo.xlsx')  # Fase 1A (AS-007): regenerado idéntico; antes se copiaba de docs/
         for a in w.historial:a['archivo_excel']=str(fuente)
         v.controlador.ruta_archivo=fuente
-        emp=json.loads((ROOT/'docs/fase_4c/FIXTURE_DATOS.json').read_text(encoding='utf-8'))['empalme_iccp_icociv']
+        emp=cargar_sesion_sintetica('FASE_4C_FIXTURE_DATOS')['empalme_iccp_icociv']
         v.widget_empalme.restaurar_datos_sesion(emp)
         for i,a in enumerate(w.historial):
             v._activar_analisis(a['id']);w.seleccionar_referencia_historica(w._periodos_slider[i*5])
@@ -194,7 +195,7 @@ def test_informes_tecnicos_y_constructor_empalme_intactos():
         despues['secciones']=[s for s in despues['secciones'] if s['clave']!='valores']
         assert antes==despues
         # 4E autoriza sólo los párrafos presupuestales; tablas y contenido económico previo siguen idénticos.
-        fixture=json.loads((ROOT/'docs/fase_4c/FIXTURE_DATOS.json').read_text(encoding='utf-8'))['empalme_iccp_icociv']
+        fixture=cargar_sesion_sintetica('FASE_4C_FIXTURE_DATOS')['empalme_iccp_icociv']
         with patch('app_icociv.reportes.contenido_empalme.datetime') as reloj:
             reloj.now.return_value=momento
             antes=asdict(m.construir_empalme(fixture['calculos'],fixture['generales'],historial=fixture['historial_empalme']))

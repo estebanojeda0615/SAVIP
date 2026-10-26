@@ -215,7 +215,7 @@ def test_tres_analisis_motor_real_recuperacion_sesion_excel_y_regresion():
             w.selector_analisis.showPopup()
             QTest.qWait(100)
             assert w.selector_analisis.view().window().grab().save(str(
-                ROOT / "docs/fase_3/capturas/selector_desplegado_tres_analisis.png"))
+                carpeta_salida("fase_3_capturas") / "selector_desplegado_tres_analisis.png"))  # Fase 1A (AS-007): antes docs/
             w.selector_analisis.hidePopup()
             with patch.object(v.controlador, "ejecutar_analisis", side_effect=AssertionError("Motor invocado al recuperar")) as motor, \
                  patch.object(v, "ejecutar_proyeccion", side_effect=AssertionError("Ejecutar invocado al recuperar")):

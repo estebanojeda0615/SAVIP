@@ -23,6 +23,7 @@ from app_icociv.interfaz.widgets.visor_grafica import VisorGraficaDialog
 from app_icociv.interfaz.tema.colores import contraste
 from app_icociv.interfaz.animaciones import establecer_movimiento_reducido
 import app_icociv.interfaz.ventana_principal as ui
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 def reducir_movimiento():
     establecer_movimiento_reducido(True)
     return True
@@ -134,7 +135,7 @@ def capture_graphs(stage):
     records=[]
     try:
         with patch.object(v.controlador,'ejecutar_analisis',side_effect=AssertionError('Recalcular al consultar')):
-            abrir(v,ROOT/'docs/auditoria_better_ui_v11/temporal/sesion_auditoria.json')
+            abrir(v,ruta_sesion_sintetica('SESION_AUDITORIA_UI'))
             for index,horizon in ((0,1),(1,3)):
                 ident=v.widget_proyecciones.historial[index]['id']
                 v.selector_resultados_icociv.setCurrentIndex(v.selector_resultados_icociv.findData(ident))

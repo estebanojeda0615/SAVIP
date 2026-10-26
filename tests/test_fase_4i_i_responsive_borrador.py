@@ -18,6 +18,7 @@ from tests.test_slider_comparacion_historica_fase_4d import APP, cargar, reales
 from tests.test_proyecciones_redisenio_visual import ventana_de_prueba
 from tests.test_switch_tema_sesion_dane import MOTOR, _ventana_con_dane
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 
 for _fuente in ("segoeui.ttf", "segoeuib.ttf", "seguisb.ttf", "seguisym.ttf"):
     QFontDatabase.addApplicationFont(str(Path("C:/Windows/Fonts") / _fuente))
@@ -170,7 +171,7 @@ def test_aviso_sesion_guardada_no_falla_al_destruir_la_ventana():
 
 def test_edicion_de_fila_empalme_en_curso_se_reabre_en_edicion(tmp_path):
     from tests.test_historial_empalme_fase_4b import abrir as abrir_4b, guardar as guardar_4b
-    datos = json.loads((Path(__file__).resolve().parents[1] / "docs/fase_4b/FIXTURE_DATOS.json").read_text(encoding="utf-8"))
+    datos = cargar_sesion_sintetica('FASE_4B_FIXTURE_DATOS')
     p = tmp_path / "anterior.json"; p.write_text(json.dumps(datos), encoding="utf-8")
     v = VentanaPrincipal(); w = v.widget_empalme
     try:

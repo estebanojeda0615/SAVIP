@@ -5,12 +5,13 @@ from openpyxl import load_workbook
 from PySide6.QtWidgets import QApplication
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV, COLUMNAS_VALORES
 from app_icociv.interfaz.widgets.empalme_iccp_icociv import WidgetEmpalmeICCPICOCIV
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 
 ROOT=Path(__file__).resolve().parents[1]
 APP=QApplication.instance() or QApplication([])
 
 def test_icociv_principal_formulas_fuentes_auditoria_y_sesion(tmp_path):
-    fixture=json.loads((ROOT/'docs/fase_4a_d/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     w=WidgetProyeccionesICOCIV();w.restaurar_datos_sesion(deepcopy(fixture['proyecciones']))
     try:
         for r in w.valores:r['modalidad_importe']='unitario'
@@ -45,7 +46,7 @@ def test_icociv_principal_formulas_fuentes_auditoria_y_sesion(tmp_path):
     finally:w.close()
 
 def test_empalme_principal_escenarios_acero_y_heredados(tmp_path):
-    fixture=json.loads((ROOT/'docs/fase_4a_d/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     w=WidgetEmpalmeICCPICOCIV();w.calculos=deepcopy(fixture['empalme'])
     inherited=deepcopy(w.calculos[0]);inherited.pop('caso');inherited['item']='=1+1'
     missing=deepcopy(w.calculos[0]);missing.pop('i0_iccp')
@@ -75,7 +76,7 @@ def test_excel_cancelacion_permiso_y_escritura_atomica_principales(tmp_path):
     from unittest.mock import patch
     from PySide6.QtWidgets import QFileDialog,QMessageBox
     from openpyxl import Workbook
-    fixture=json.loads((ROOT/'docs/fase_4a_d/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     p=WidgetProyeccionesICOCIV();p.restaurar_datos_sesion(deepcopy(fixture['proyecciones']))
     e=WidgetEmpalmeICCPICOCIV();e.calculos=deepcopy(fixture['empalme'])
     try:
@@ -94,7 +95,7 @@ def test_excel_cancelacion_permiso_y_escritura_atomica_principales(tmp_path):
     finally:p.close();e.close()
 
 def test_registros_incompletos_no_inventan_formulas_ni_notas_numericas(tmp_path):
-    fixture=json.loads((ROOT/'docs/fase_4a_d/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     p=WidgetProyeccionesICOCIV();p.restaurar_datos_sesion(deepcopy(fixture['proyecciones']))
     e=WidgetEmpalmeICCPICOCIV();e.calculos=deepcopy(fixture['empalme'])
     p.valores[0]['i0_icociv']=0;p.valores[1]['precio_base']=None

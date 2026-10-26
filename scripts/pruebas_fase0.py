@@ -5,8 +5,8 @@
 
 Perfiles (clasificación y motivos: docs/fase_v112_antislop_00/01_INVENTARIO_PRUEBAS_Y_DEPENDENCIAS.md):
   esenciales  autocontenidos: solo el repositorio publicado, datos sintéticos y el lock. Incluye los Golden Masters.
-  dane        integración externa: necesitan la sesión con datos DANE reales (docs/fase_4d_slider/fixtures/
-              TRES_ANALISIS_REALES.json), que no se publica. Fallan en un clon limpio por diseño.
+  dane        integración externa con datos DANE reales. Vacío desde la Fase 1A: la sesión que se creía real era
+              sintética y está publicada en tests/fixtures/sesiones_sinteticas.
   historicas  expectativas obsoletas, artefactos de docs/ no publicados o código retirado (AS-006, AS-007).
   gui         dependen del entorno gráfico (fuentes Segoe registradas por otro módulo) o son verificación
               física en Windows (lista manual al final del inventario).
@@ -48,29 +48,23 @@ ESENCIALES = [
     "tests/test_sincronizacion_horizonte_ui.py", "tests/test_ui_navegacion_y_usabilidad.py", "tests/test_umbral_090_descriptivo.py",
     "tests/test_v112_01_esqueleto_dialogos.py", "tests/test_verificabilidad_paso_exacto.py", "tests/test_vocabulario_cobertura.py",
     "tests/test_vocabulario_vc.py",
-]
-DANE = [
+    # Fase 1A (AS-007): antes «dane» o históricas; pasan completas en clon limpio con los fixtures sintéticos
+    # trasladados a tests/fixtures (sesiones_sinteticas, anexo_slider_4d) y, en 3 de ellas, la expectativa del
+    # factor actualizada a la regla 4I-C (base_valor_4e_a, microcorreccion_4d_c, 4g_historial).
     "tests/test_ajuste_tooltips_pantalla_dividida.py", "tests/test_base_valor_presupuestal_fase_4e_a.py",
-    "tests/test_fase_4g_historial_dane_fechas.py", "tests/test_fase_4i_a_deshacer_historial_pegado.py",
+    "tests/test_componente_empalme_fase_4b_a.py", "tests/test_empalme_fase_4c.py", "tests/test_excel_formulas_principales.py",
+    "tests/test_fase_4a_d.py", "tests/test_fase_4g_historial_dane_fechas.py", "tests/test_fase_4i_a_deshacer_historial_pegado.py",
     "tests/test_fase_4i_a_v4_grafica_pegado_progreso.py", "tests/test_fase_4i_b_progreso_grafica_auditoria.py",
     "tests/test_fase_4i_c_factor_grafica_carga.py", "tests/test_fase_4i_d_legados_factor.py", "tests/test_fase_4i_d_verificacion_ventana.py",
-    "tests/test_fase_4i_e_tema_rendimiento.py", "tests/test_fase_4i_g_sesiones.py", "tests/test_fase_4i_i_responsive_borrador.py",
-    "tests/test_fase_4i_j_fecha_comun.py", "tests/test_fase_4i_tabla_editable.py", "tests/test_importes_presupuestales_fase_4e.py",
-    "tests/test_microcorreccion_fase_4d_c.py", "tests/test_referencia_economica_fase_4d_b.py",
-    "tests/test_slider_comparacion_historica_fase_4d.py", "tests/test_switch_tema_sesion_dane.py", "tests/test_v112_01b_indicadores_sesiones.py",
+    "tests/test_fase_4i_g_sesiones.py", "tests/test_fase_4i_i_responsive_borrador.py", "tests/test_fase_4i_j_fecha_comun.py",
+    "tests/test_fase_4i_tabla_editable.py", "tests/test_historial_empalme_fase_4b.py", "tests/test_importes_presupuestales_fase_4e.py",
+    "tests/test_microcorreccion_fase_4d_c.py", "tests/test_referencia_economica_fase_4d_b.py", "tests/test_switch_tema_sesion_dane.py",
+    "tests/test_v112_01b_indicadores_sesiones.py",
 ]
-#: Fase 1A (AS-007): pruebas autocontenidas dentro de archivos del perfil dane (que también usan la sesión real):
-#: pasan en clon limpio con el anexo sintético regenerado (`generadores.anexo_slider_4d`), 2/2 corridas estables.
-NODOS_A_ESENCIALES = [
-    "tests/test_switch_tema_sesion_dane.py::test_switch_tema_pastilla_alterna_y_no_se_recorta",
-    "tests/test_fase_4i_i_responsive_borrador.py::test_aviso_sesion_guardada_no_falla_al_destruir_la_ventana",
-    *(f"tests/test_v112_01b_indicadores_sesiones.py::{n}" for n in (
-        "test_franja_inmediata_visible_y_esqueleto_solo_tras_el_umbral", "test_franja_sin_esqueleto_no_cambia_y_se_retira",
-        "test_pintar_ahora_aplica_el_umbral_vencido_sin_bucle_de_eventos", "test_franja_estatica_con_animaciones_de_windows_desactivadas",
-        "test_ciclos_franja_sin_fugas", "test_T01B_1_abrir_desde_menu_boton_y_portada_franja_inmediata",
-        "test_T01B_3_errores_de_apertura_sin_falso_exito_ni_velo_perpetuo", "test_T01B_14_salir_durante_una_apertura_se_ignora_y_avisa")),
-]
-GUI = ["tests/test_v112_01c_dialogos_legibles.py"]  # anchos offscreen sin fuentes Segoe registradas
+#: Fase 1A: vacío. Ninguna prueba necesita datos DANE reales: la «sesión DANE real» de la Fase 0
+#: (TRES_ANALISIS_REALES.json) era sintética y ya está en tests/fixtures/sesiones_sinteticas.
+DANE: list[str] = []
+GUI =["tests/test_v112_01c_dialogos_legibles.py"]  # anchos offscreen sin fuentes Segoe registradas
 #: Pruebas sueltas con carreras de tiempo heredadas: salen del perfil esencial (--deselect) y van al perfil gui.
 GUI_NODOS = [
     # Comprueba el layout tras UN processEvents(), pero la ventana lo adapta con un temporizador de 60 ms
@@ -101,13 +95,13 @@ def historicas() -> list[str]:
     return sorted(p.relative_to(RAIZ).as_posix() for p in (RAIZ / "tests").glob("test_*.py") if p.relative_to(RAIZ).as_posix() not in asignados)
 
 
-PERFILES = {"esenciales": ESENCIALES + NODOS_A_ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI + GUI_NODOS}
+PERFILES = {"esenciales": ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI + GUI_NODOS}
 
 
 def opciones(perfil: str) -> list[str]:
     """Cada prueba en un solo perfil: los nodos movidos se deseleccionan en el perfil de su archivo de origen."""
     propios = set(PERFILES[perfil]); archivos = {a for a in propios if "::" not in a}
-    movidos = [f"--deselect={n}" for n in NODOS_A_ESENCIALES + GUI_NODOS if n not in propios and n.split("::")[0] in archivos]
+    movidos = [f"--deselect={n}" for n in GUI_NODOS if n not in propios and n.split("::")[0] in archivos]
     return (["--continue-on-collection-errors"] if perfil == "historicas" else []) + movidos
 
 
@@ -118,6 +112,8 @@ def _entorno() -> dict:
 def listar() -> int:
     total = 0
     for nombre, archivos in PERFILES.items():
+        if not archivos:  # pytest sin rutas recolectaría toda la carpeta
+            print(f"{nombre:<11}   0 entradas     0 pruebas"); continue
         r = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider",
                             "--continue-on-collection-errors", *opciones(nombre), *archivos], cwd=RAIZ, env=_entorno(), capture_output=True,
                            text=True, encoding="utf-8", errors="replace")
@@ -138,6 +134,8 @@ def main(argv: list[str]) -> int:
     perfil, extra = argv[0], argv[1:]
     if perfil not in PERFILES:
         sys.exit(f"Perfil desconocido: {perfil}. Opciones: {', '.join(PERFILES)}")
+    if not PERFILES[perfil]:
+        print(f"El perfil {perfil} está vacío: no hay pruebas que ejecutar."); return 0
     faltan = [a for a in PERFILES[perfil] if not (RAIZ / a.split("::")[0]).exists()]
     if faltan:
         sys.exit(f"Archivos de prueba inexistentes en el perfil {perfil}: {faltan}")

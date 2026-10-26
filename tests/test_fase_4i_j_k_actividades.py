@@ -14,14 +14,15 @@ from PySide6.QtCore import Qt, QTimer
 from PySide6.QtTest import QTest
 from PySide6.QtWidgets import QApplication, QDialog, QFileDialog, QMessageBox, QPushButton
 
-from tests.test_fase_4i_j_fecha_comun import APP, CAPTURAS, _calcular, _cargar
+from tests.fixtures.salidas import carpeta_salida
+from tests.test_fase_4i_j_fecha_comun import APP, _calcular, _cargar
 from tests.test_fase_4i_j_reutilizacion import _Contador, _anexo, _ejecutar
 from app_icociv.interfaz.controladores.controlador_principal import ControladorPrincipal
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV
 from app_icociv.servicios import fecha_objetivo as fo
 
-CAPTURAS_K = CAPTURAS.parent.parent / "fase_4i_j_k" / "capturas"
+CAPTURAS_K = carpeta_salida("fase_4i_j_k_capturas")  # Fase 1A (AS-007): antes en docs/, no publicado
 CONSERVADOS = ("calculo_id", "analisis_id", "item", "unidad", "cantidad", "precio_base", "anticipo_amortizado",
                "i0_icociv", "periodo_base", "modalidad_importe", "nombre_componente", "tipo_componente")
 

@@ -13,23 +13,12 @@ APP=QApplication.instance() or QApplication([])
 ICCP={'Total ICCP':{'2021_1':100.,'2021_6':105.,'2021_12':110.}}
 from app_icociv.persistencia.historial_icociv import recuperar_resultado
 from app_icociv.interfaz.widgets.proyecciones_icociv import _extraer_contexto
-_RUTA_PREVIO=ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json'
-
-
-class _FixtureNoPublicado(dict):
-    """Fase 0: este fixture de desarrollo no está publicado. Importar el módulo ya no falla; los casos
-    que lo usan fallan al usarlo, con este motivo (perfil histórico, ver docs/fase_v112_antislop_00)."""
-    def _falta(self,*_):
-        raise FileNotFoundError(f'Fixture de desarrollo no publicado: {_RUTA_PREVIO.relative_to(ROOT).as_posix()}')
-    __getitem__=get=keys=items=values=__iter__=__len__=__contains__=_falta
-
-
-if _RUTA_PREVIO.exists():
-    PREVIO=json.loads(_RUTA_PREVIO.read_text(encoding='utf-8'))
-    FUTURO=_extraer_contexto(recuperar_resultado(PREVIO['proyecciones']['historial_analisis'][-1]['resultado']))
-    INDICES={'2021_12':100.,'2022_1':120.,'2022_6':150.,'2027_3':FUTURO['indice_proyectado']}
-else:
-    PREVIO=FUTURO=INDICES=_FixtureNoPublicado()
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
+# Fase 1A (AS-007): fixture sintético trasladado de docs/fase_4a_excel_formulas_simples/ a tests/fixtures; el
+# centinela de la Fase 0 ya no hace falta porque el fixture siempre está disponible.
+PREVIO=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
+FUTURO=_extraer_contexto(recuperar_resultado(PREVIO['proyecciones']['historial_analisis'][-1]['resultado']))
+INDICES={'2021_12':100.,'2022_1':120.,'2022_6':150.,'2027_3':FUTURO['indice_proyectado']}
 
 def registrar_casos(w):
     entradas=[]
@@ -59,7 +48,7 @@ def abrir(v,path):
 def test_cinco_ejecuciones_selectores_independientes_sin_recalculo():
     v=VentanaPrincipal();w=v.widget_empalme
     try:
-        fixture=json.loads((ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+        fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
         v.widget_proyecciones.restaurar_datos_sesion(deepcopy(fixture['proyecciones']));v._sincronizar_selector_resultados()
         ico=deepcopy(v.widget_proyecciones.datos_sesion());registrar_casos(w)
         assert 'revisión 2' in w.historial_empalme[-1]['nombre']
@@ -126,7 +115,7 @@ def test_sesion_nueva_sin_fuente_y_rechazo_no_destructivo(tmp_path):
     finally:v.close()
 
 def test_sesion_ambos_historiales_y_compatibilidad_anteriores(tmp_path):
-    fixture=json.loads((ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+    fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     v=VentanaPrincipal()
     try:
         v.sesion_pendiente={'proyecciones_icociv':deepcopy(fixture['proyecciones'])};v._restaurar_sesion_pendiente()
@@ -155,7 +144,7 @@ def test_proyeccion_empalme_async_no_invade_icociv():
     from PySide6.QtTest import QTest
     v=VentanaPrincipal();source={'proyeccion':{'resultado_horizonte_solicitado':{}},'serie_df':None}
     try:
-        fixture=json.loads((ROOT/'docs/fase_4a_excel_formulas_simples/FIXTURE_DATOS.json').read_text(encoding='utf-8'))
+        fixture=cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
         v.sesion_pendiente={'proyecciones_icociv':deepcopy(fixture['proyecciones'])};v._restaurar_sesion_pendiente()
         ico=deepcopy(v.widget_proyecciones.datos_sesion());visible=deepcopy(v.resultado_ui_actual)
         fechas=(v.spin_anio.value(),v.spin_mes.value());calls=[]

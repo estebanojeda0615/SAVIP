@@ -12,6 +12,7 @@ from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesIC
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.persistencia.historial_icociv import recuperar_resultado,serializar_resultado
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 ROOT=Path(__file__).resolve().parents[1]
 HOJAS=['Resumen','Valores proyectados','Proyecciones ICOCIV','Trazabilidad','Metodología y fórmulas']
 
@@ -185,7 +186,7 @@ def test_excel_cinco_hojas_formulas_y_trazabilidad(tmp_path):
 def test_sesion_v2_mixta_reapertura_sin_fuente_y_corrupcion(tmp_path):
     v=VentanaPrincipal();w=cargar(v);otro=None
     try:
-        emp=json.loads((ROOT/'docs/fase_4c/FIXTURE_DATOS.json').read_text(encoding='utf-8'))['empalme_iccp_icociv'];v.widget_empalme.restaurar_datos_sesion(emp)
+        emp=cargar_sesion_sintetica('FASE_4C_FIXTURE_DATOS')['empalme_iccp_icociv'];v.widget_empalme.restaurar_datos_sesion(emp)
         ausente=tmp_path/'DANE_AUSENTE.xlsx';assert not ausente.exists()
         for a in w.historial:a['archivo_excel']=str(ausente)
         v.controlador.ruta_archivo=ausente

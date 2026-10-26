@@ -23,6 +23,7 @@ from app_icociv.interfaz.widgets.visor_grafica import VisorGraficaDialog, mes_le
 from app_icociv.persistencia.historial_icociv import recuperar_resultado
 from app_icociv.servicios.actualizacion_icociv import CRITERIO_FACTOR, calcular_actualizacion_icociv, es_factor_legado
 from app_icociv.utilidades.importes_presupuestales import desglose_presupuestal
+from tests.fixtures.sesiones import cargar as cargar_sesion_sintetica, ruta_temporal as ruta_sesion_sintetica  # Fase 1A (AS-007)
 
 ROOT = Path(__file__).resolve().parents[1]
 MATRIZ = ((102.741, 2.74, 1.0274, 102740.0), (102.745, 2.75, 1.0275, 102750.0), (97.255, -2.75, 0.9725, 97250.0),
@@ -122,7 +123,7 @@ def test_C4_excel_pdf_word_y_sesion_con_el_factor_aplicado(tmp_path):
 
 
 def test_C5_legados_se_conservan_y_solo_se_actualizan_expresamente(tmp_path):
-    fixture = json.loads((ROOT / "docs/fase_4a_d/FIXTURE_DATOS.json").read_text(encoding="utf-8"))
+    fixture = cargar_sesion_sintetica('FASE_4A_FIXTURE_DATOS')
     w = WidgetProyeccionesICOCIV(); w.restaurar_datos_sesion(deepcopy(fixture["proyecciones"]))
     try:
         antes = deepcopy(w.valores); r0 = w.valores[0]

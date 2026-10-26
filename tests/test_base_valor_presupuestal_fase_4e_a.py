@@ -118,7 +118,9 @@ def test_05_excel_mixto_formulas_nulas_entradas_invalidas_y_sin_inyeccion(tmp_pa
             assert b.sheetnames==['Resumen','Valores proyectados','Proyecciones ICOCIV','Trazabilidad','Metodología y fórmulas']
             s=b['Valores proyectados'];t=b['Trazabilidad'];f=bloque(t)
             assert s.max_column==17 and b['Proyecciones ICOCIV'].max_column==21 and s.auto_filter.ref=='A2:Q7'
-            assert [s[c].value for c in ('I3','J3','M3','N3','O3','P3')]==['=G3-H3','=I3*F3','=L3/K3','=I3+I3*(M3-1)','=N3*F3','=(M3-1)*100']
+            # Fase 1A (AS-007): expectativa anterior a la regla 4I-C (factor I/I0 sin redondear). Contrato vigente: el Excel
+            # escribe F = 1+ROUND((I/I0-1)*100,2)/100 para registros calculados con el criterio vigente (este lo crea el calculador).
+            assert [s[c].value for c in ('I3','J3','M3','N3','O3','P3')]==['=G3-H3','=I3*F3','=1+ROUND((L3/K3-1)*100,2)/100','=I3+I3*(M3-1)','=N3*F3','=ROUND((M3-1)*100,2)']
             assert [s[c].value for c in ('I4','J4','N4','O4')]==['=J4/F4','=G4-H4','=O4/F4','=J4+J4*(M4-1)']
             assert all(s.cell(5,c).value is None for c in (9,10,14,15))
             assert s['J6'].value is s['O6'].value is s['I7'].value is s['N7'].value is None
