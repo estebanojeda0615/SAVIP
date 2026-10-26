@@ -81,7 +81,7 @@
 - **Fixtures de versiones anteriores del motor:** las sesiones trasladadas tienen `resultado` de motores anteriores. Las pruebas que las usan comprueban apertura y edición sin recalcular, no cifras del motor actual (las fija el Golden Master).
 - **Duración del CI:** el perfil esencial tarda ~1 h en el runner; el límite es de 150 min.
 - **Variación entre CPU (Fase 0, 02 §5 bis):** Holt/Huber pueden variar entre runners. La serie 1 de la sesión golden tiene un ganador Holt lineal comparado a 1e-9; hasta ahora sin fallos.
-- **Pruebas intermitentes:** en el perfil gui quedan 5 carreras de tiempo heredadas. Tres son de guardado tras una carga: `test_B` de 4G, la integración de 2B y la principal de 4I-J. Las otras dos: el layout de rediseño y `T01B_5`, que depende de la velocidad. Estabilizarlas esperando el fin de la carga requiere decidir la prueba, no el producto.
+- **Pruebas intermitentes:** el perfil esencial reintenta una vez cada prueba fallida y lista por nombre las que pasan al reintento. Así se evitan rojos falsos del runner, como `test_interaccion_fase_3c_a::test_a` en el run 40385457727, sin ocultar fallos deterministas. Riesgo: una regresión que falle solo a veces podría pasar al reintento; por eso la lista de intermitentes debe revisarse en cada run. En el perfil gui quedan 5 carreras de tiempo heredadas. Tres son de guardado tras una carga: `test_B` de 4G, la integración de 2B y la principal de 4I-J. Las otras dos: el layout de rediseño y `T01B_5`, que depende de la velocidad. Estabilizarlas esperando el fin de la carga requiere decidir la prueba, no el producto.
 
 ## 5. ¿Listos para AS-001 (Fase 1B)?
 
@@ -103,5 +103,5 @@ Ya existen:
 |---|---|
 | Rama | https://github.com/estebanojeda0615/SAVIP/tree/maintenance/v1.1.2-fase1a-as006-as007 |
 | Comparación con la Fase 0 | https://github.com/estebanojeda0615/SAVIP/compare/maintenance/v1.1.2-fase0-reproducibilidad...maintenance/v1.1.2-fase1a-as006-as007 |
-| Commits | `aa4ceca`, `ba6a3c9`, `5f40295`, `50df00e`, `cd59281`, `e341515` y el commit de documentación de cierre |
+| Commits | `aa4ceca`, `ba6a3c9`, `5f40295`, `50df00e`, `cd59281`, `e341515`, `3e63cab` (docs), `a1ed3f3` (reintento) y el commit de documentación de cierre |
 | CI | Runs en 03 §2.2; run del commit final: PENDIENTE_CI |

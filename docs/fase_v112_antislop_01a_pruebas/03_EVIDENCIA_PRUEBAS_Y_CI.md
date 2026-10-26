@@ -52,7 +52,14 @@ python -m venv .venv-test
 | CI [40272254960](https://github.com/estebanojeda0615/SAVIP/actions/runs/40272254960), `50df00e` (784 pruebas en una sesión de pytest) | — | — | — | — | **cancelled** a los 150 min. Se observan 1 F en `test_historial_empalme_fase_4b::test_edicion_borrado…` (pasa 6/6 aislado) y luego una prueba sin terminar. Contaminación entre módulos: se pasa a un proceso por archivo (`cd59281`) |
 | **Local, `cd59281`** (copia limpia, un proceso por archivo) | **783** | **0** | **1** (AS-001) | **0** | 80 archivos; «Archivos con fallo: ninguno»; código 0 |
 | CI [40373565637](https://github.com/estebanojeda0615/SAVIP/actions/runs/40373565637), `cd59281` | 781 | **2** | 1 | 0 | **failure**, solo en el runner. `test_fase_4i_j_fecha_comun::test_presupuesto…`: `guardar_sesion_actual` → False (guardado tras una carga). `01B::test_T01B_5`: 3 de ≥ 10 muestras del indicador. Ambas pasan en local; pasan al perfil gui en `e341515`, sin cambiar expectativas |
-| CI del commit de cierre | PENDIENTE_CI | | | | |
+| CI [40385457727](https://github.com/estebanojeda0615/SAVIP/actions/runs/40385457727), `3e63cab` | 781 | **1** | 1 | 0 | **failure**, solo en el runner. `test_interaccion_fase_3c_a::test_a…` recibió 2 señales `contraccion_cambiada` en vez de 1. Con el mismo código pasó en los runs 40267519823 y 40373565637: carrera intermitente. Se añade un único reintento por prueba fallida (`a1ed3f3`) |
+| CI del commit final (con reintento) | PENDIENTE_CI | | | | |
+
+**Política de reintento (`a1ed3f3`).**
+- Cada archivo con fallos reintenta **una vez** solo sus pruebas fallidas.
+- Si vuelven a fallar, el perfil falla. Comprobado con `01C`: sus 4 fallos de fuentes fallan también al reintentar y el perfil gui queda en rojo.
+- Si pasan, la salida las lista por nombre en «Intermitentes (fallaron y pasaron al reintento)», y el JUnit del reintento queda junto al original (`__reintento.xml`).
+- No reemplaza la estabilización de esas pruebas: queda pendiente para la limpieza.
 
 ## 3. Golden Masters sin cambios
 
