@@ -8,6 +8,7 @@ on:
     branches:
       - maintenance/v1.1.2-fase0-reproducibilidad
       - maintenance/v1.1.2-fase1a-as006-as007
+      - maintenance/v1.1.2-fase1b-as001
   workflow_dispatch:
 
 permissions:
