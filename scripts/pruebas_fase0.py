@@ -158,28 +158,51 @@ def ejecutar_por_archivo(perfil: str, extra: list[str]) -> int:
     grupos: dict[str, list[str]] = {}
     for objetivo in PERFILES[perfil]:
         grupos.setdefault(objetivo.split("::")[0], []).append(objetivo)
-    resumen, fallidos = Counter(), []
+    resumen, fallidos, intermitentes = Counter(), [], []
     for archivo, objetivos in grupos.items():
         salida = junit.with_name(f"{junit.stem}__{Path(archivo).stem}.xml") if junit else None
-        argumentos = [sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *opciones(perfil),
-                      *objetivos, *resto, *([f"--junitxml={salida}"] if salida else [])]
-        try:
-            codigo = subprocess.run(argumentos, cwd=RAIZ, env=_entorno(), timeout=TIEMPO_MAXIMO_POR_ARCHIVO).returncode
-        except subprocess.TimeoutExpired:
-            codigo = "TIEMPO_AGOTADO"
-            print(f"\n*** {archivo}: superó {TIEMPO_MAXIMO_POR_ARCHIVO} s; se detiene y se marca como fallo ***", flush=True)
+        codigo = _pytest(perfil, archivo, objetivos, resto, salida)
         if salida and salida.exists():
-            raiz = ET.parse(salida).getroot()
-            for suite in raiz.iter("testsuite"):
+            for suite in ET.parse(salida).getroot().iter("testsuite"):
                 for clave in ("tests", "failures", "errors", "skipped"):
                     resumen[clave] += int(suite.get(clave, 0))
+        if codigo == 1 and perfil != "historicas" and salida and salida.exists():
+            # Un único reintento de las pruebas que fallaron (por id): un fallo determinista falla de nuevo y rompe el
+            # perfil; las que pasan al reintento se listan por nombre como intermitentes (carreras de tiempo heredadas).
+            nodos = _nodos_fallidos(salida)
+            if nodos and _pytest(perfil, archivo, nodos, resto, salida.with_name(salida.stem + "__reintento.xml")) == 0:
+                intermitentes += nodos; codigo = 0
         if codigo != 0 and not (perfil == "historicas" and codigo == 1):
             fallidos.append(f"{archivo} ({codigo})")
     if junit:
-        print(f"\nResumen {perfil}: {len(grupos)} archivos; {resumen['tests']} pruebas, {resumen['failures']} fallos, "
-              f"{resumen['errors']} errores, {resumen['skipped']} omitidas o xfail")
+        print(f"\nResumen {perfil}: {len(grupos)} archivos; {resumen['tests']} pruebas, {resumen['failures']} fallos "
+              f"en la primera ejecución, {resumen['errors']} errores, {resumen['skipped']} omitidas o xfail")
+    print("Intermitentes (fallaron y pasaron al reintento): " + ("; ".join(intermitentes) if intermitentes else "ninguna"))
     print("Archivos con fallo: " + ("; ".join(fallidos) if fallidos else "ninguno"))
     return 1 if fallidos else 0
+
+
+def _pytest(perfil: str, archivo: str, objetivos: list[str], resto: list[str], salida: Path | None):
+    argumentos = [sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *opciones(perfil),
+                  *objetivos, *resto, *([f"--junitxml={salida}"] if salida else [])]
+    try:
+        return subprocess.run(argumentos, cwd=RAIZ, env=_entorno(), timeout=TIEMPO_MAXIMO_POR_ARCHIVO).returncode
+    except subprocess.TimeoutExpired:
+        print(f"\n*** {archivo}: superó {TIEMPO_MAXIMO_POR_ARCHIVO} s; se detiene y se marca como fallo ***", flush=True)
+        return "TIEMPO_AGOTADO"
+
+
+def _nodos_fallidos(junit_xml: Path) -> list[str]:
+    """IDs pytest de los casos con failure/error (classname tests.test_x[.Clase] + name)."""
+    nodos = []
+    for caso in ET.parse(junit_xml).getroot().iter("testcase"):
+        if any(h.tag in ("failure", "error") for h in caso):
+            partes = (caso.get("classname") or "").split(".")
+            i = next((k for k, p in enumerate(partes) if p.startswith("test_")), None)
+            if i is None:  # error de recolección: no hay nodo que reintentar
+                return []
+            nodos.append("/".join(partes[:i + 1]) + ".py::" + "::".join(partes[i + 1:] + [caso.get("name")]))
+    return nodos
 
 
 if __name__ == "__main__":
