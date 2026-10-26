@@ -58,8 +58,8 @@ Evidencia de la frase:
 ## 3. Publicado en GitHub y comprobado / preparado localmente
 
 **Publicado y comprobado en GitHub:**
-- la rama, sus 5 commits y los archivos de §5;
-- el workflow y sus 3 runs: el último commit de código, `d6daa3f`, en verde;
+- la rama, sus 6 commits y los archivos de §5;
+- el workflow y sus runs: los dos primeros fallaron (04 §2) y desde `d6daa3f`, el último commit de código, todos en verde;
 - el Release intacto.
 
 **Solo local** (`C:\Pruebas SAVIP\Fase0\`, no publicado a propósito):
@@ -109,7 +109,7 @@ Evidencia de la frase:
 |---|---|
 | Rama | https://github.com/estebanojeda0615/SAVIP/tree/maintenance/v1.1.2-fase0-reproducibilidad |
 | Comparación con `develop/v1.1.2` | https://github.com/estebanojeda0615/SAVIP/compare/develop/v1.1.2...maintenance/v1.1.2-fase0-reproducibilidad |
-| Commits | `78fe2c1`, `41d35c8`, `d6daa3f`, `edff801` (docs 04) y el commit de este informe; todos de Esteban Ojeda `<346522303+estebanojeda0615@users.noreply.github.com>` y sin trailers |
+| Commits | `78fe2c1`, `41d35c8`, `d6daa3f`, `edff801` (docs 04), `9e598c7` (docs 05) y el commit de correcciones de redacción de este informe; todos de Esteban Ojeda `<346522303+estebanojeda0615@users.noreply.github.com>` y sin trailers |
 | CI verde de referencia | https://github.com/estebanojeda0615/SAVIP/actions/runs/40245287987 (`d6daa3f`, success, 612/612) |
 | Release existente, sin cambios | https://github.com/estebanojeda0615/SAVIP/releases/tag/v1.1.2-rc.1 |
 
@@ -129,8 +129,8 @@ Evidencia de la frase:
 
 1. **Anti-Slop, Fase 1**, con esta red como freno: correr `python scripts/pruebas_fase0.py esenciales` antes y después de cada cambio.
    - Primero: reapuntar o retirar las pruebas de AS-006 y las 36 obsoletas.
-   - Luego: mover a `tests/fixtures/` los fixtures sintéticos de `docs/` (AS-007), por ejemplo `ANEXO_SINTETICO.xlsx`, que ya tiene generador.
-2. **Corregir AS-001** (desborde en `_sse_exacto` con candidatos divergentes). Exige decisión, porque toca el motor; su golden ya existe.
+   - Luego: mover a `tests/fixtures/` los fixtures sintéticos de `docs/` (AS-007), por ejemplo `ANEXO_SINTETICO.xlsx`, sustituible por el generador sintético ya publicado (`tests/fixtures/fase0/generadores.anexo_sintetico` o `_anexo` de `test_fase_4i_j_reutilizacion`).
+2. **Corregir AS-001** (desborde en `_sse_exacto` con candidatos divergentes). Exige decisión, porque toca el motor. El golden del motor protege que el arreglo no cambie la selección de los 5 escenarios, pero ningún escenario reproduce el desborde: habrá que añadir su caso.
 3. **Estabilizar las 3 pruebas** con carreras de tiempo o contaminación, esperando el temporizador o la carga y sin estado global al importar. Después, devolverlas al perfil esencial.
 4. **Decidir la política** de tolerancia y semilla de los optimizadores Holt/Huber (02 §5 bis).
 5. **Prueba física** de la lista gui en un equipo sin Python.
