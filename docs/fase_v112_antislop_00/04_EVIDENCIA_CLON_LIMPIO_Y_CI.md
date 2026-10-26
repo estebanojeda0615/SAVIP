@@ -14,7 +14,8 @@
 | [`78fe2c1`](https://github.com/estebanojeda0615/SAVIP/commit/78fe2c15d883dd5366f7d08ffaeb6220246c34d6) | Fixtures y Golden Masters, 3 archivos de prueba, `scripts/pruebas_fase0.py`, workflow, `requirements-test.txt`, excepción de `.gitignore`, ajuste de `test_historial_empalme_fase_4b`, informes 00–03 |
 | [`41d35c8`](https://github.com/estebanojeda0615/SAVIP/commit/41d35c8d71f4bbf686ec1df56ff8dfdf28b214ee) | CI en entorno virtual, aislamiento de `test_interfaz_componentes`, `01_INVENTARIO_PRUEBAS.csv` |
 | [`d6daa3f`](https://github.com/estebanojeda0615/SAVIP/commit/d6daa3f52c469c48f7204736da58a5b8a9f025ac) | Tolerancia para candidatos con optimizador iterativo, 2 nodos con carreras de tiempo al perfil gui, mensajes completos de diferencias |
-| Este commit | Informes 04 y 05 y ajustes de 02/03 |
+| [`edff801`](https://github.com/estebanojeda0615/SAVIP/commit/edff8010291211fdf12c2ebf457155e45183da8f) | Informe 04 y hallazgo entre CPU en 02/03 (CI [40256137859](https://github.com/estebanojeda0615/SAVIP/actions/runs/40256137859): success) |
+| Commit final | Informe 05 y cifras finales de 04 |
 
 **Los golden (`tests/fixtures/fase0/golden/*.json`) no cambiaron desde `78fe2c1`.** `git diff 78fe2c1 d6daa3f -- tests/fixtures/fase0/golden` sale vacío.
 
@@ -41,7 +42,7 @@
 | 1 | `78fe2c1` (antes del aislamiento) | 612 pasan, 2 fallan | Duró 1 h 53 min porque el portátil se suspendió. Fallos: una comprobación de la Fase 0 («±MAE» con «no corresponde a»), ya corregida, y `test_sombras_…` por contaminación entre módulos |
 | 2 | Aislando `test_proyecciones_redisenio_visual` | 613 pasan, 1 falla | El contaminante entra por importación transitiva desde otras suites; el espía localizó el origen. Se cambió a aislar la víctima |
 | 3 | Aislando `test_interfaz_componentes` | 613 pasan, 1 falla | `test_layout_adaptable_…`: carrera de tiempo, después confirmada en el runner |
-| 4 (final) | `d6daa3f` | Ver 05 §2 | Se ejecutó al cierre |
+| 4 (final) | `d6daa3f` | **595 pasan + 17/17 aisladas = 612/612, código 0** (34 min) | Copia limpia sin `docs/`, misma configuración que el CI verde |
 
 ## 4. Reproducción desde cero (cualquier equipo Windows x64)
 
