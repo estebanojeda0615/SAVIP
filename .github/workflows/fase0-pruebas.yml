@@ -1,11 +1,13 @@
 # Fase 0 (SAVIP 1.1.2): perfil de pruebas autocontenidas desde un clon limpio, con las versiones exactas
-# del lock. Solo se ejecuta en la rama de la Fase 0 o a petición. No compila, no publica y no usa secretos.
+# del lock. Solo se ejecuta en las ramas de mantenimiento Anti-Slop o a petición. No compila, no publica y no
+# usa secretos.
 name: fase0-pruebas
 
 on:
   push:
     branches:
       - maintenance/v1.1.2-fase0-reproducibilidad
+      - maintenance/v1.1.2-fase1a-as006-as007
   workflow_dispatch:
 
 permissions:
