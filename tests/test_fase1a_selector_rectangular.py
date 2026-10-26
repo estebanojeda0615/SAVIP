@@ -227,10 +227,9 @@ def test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente():
     # Un candidato que no es ganador ni segundo pasa a tener errores de 1,2258e240 en todos los pares: la proyección
     # completa no aborta y el ganador, el segundo, sus RMSE y la trayectoria de 24 meses son idénticos.
     serie = gen.serie("tendencia_lineal_ruido")
-    anio, mes = gen.objetivo(serie, 11)
     original = sp._matriz_rectangular_12_24
     with patch.object(sp, "_matriz_rectangular_12_24", wraps=original) as espia:
-        base = sp.ejecutar_proyeccion(serie, anio, mes, 2020)
+        base = sp.ejecutar_proyeccion(serie, *gen.objetivo(serie, 11), 2020)
     modelos = espia.call_args.args[1]
     elegido = next(c for c in modelos if c not in (base["modelo_codigo"], base["modelo_segundo"]))
 
@@ -239,11 +238,16 @@ def test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente():
         matriz["datos"][elegido] = {par: (1.2258e240,) + fila[1:] for par, fila in matriz["datos"][elegido].items()}
         return matriz
 
-    with patch.object(sp, "_matriz_rectangular_12_24", side_effect=con_divergente):
-        r = sp.ejecutar_proyeccion(serie, anio, mes, 2020)
     assert len(modelos) == 21
-    for clave in ("modelo_codigo", "rmse_seleccion_oos", "modelo_segundo", "rmse_segundo_oos", "trayectoria_24_meses"):
-        assert r[clave] == base[clave], clave
+    # Con el divergente, cambiar el horizonte consultado (11, 1 o 24 meses) no cambia la selección ni la trayectoria
+    # y cada ejecución llama una sola vez al selector rectangular.
+    for h in (11, 1, 24):
+        with patch.object(sp, "_matriz_rectangular_12_24", side_effect=con_divergente), \
+             patch.object(sp, "_seleccionar_modelo_rectangular", wraps=SELECTOR) as vigente:
+            r = sp.ejecutar_proyeccion(serie, *gen.objetivo(serie, h), 2020)
+        assert vigente.call_count == 1, h
+        for clave in ("modelo_codigo", "rmse_seleccion_oos", "modelo_segundo", "rmse_segundo_oos", "trayectoria_24_meses"):
+            assert r[clave] == base[clave], (h, clave)
 
 
 # ------------------------------------------------------------------ sensibilidad: el conjunto detecta mutantes
