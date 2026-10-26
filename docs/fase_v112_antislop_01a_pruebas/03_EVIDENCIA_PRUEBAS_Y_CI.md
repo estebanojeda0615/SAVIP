@@ -53,7 +53,7 @@ python -m venv .venv-test
 | **Local, `cd59281`** (copia limpia, un proceso por archivo) | **783** | **0** | **1** (AS-001) | **0** | 80 archivos; «Archivos con fallo: ninguno»; código 0 |
 | CI [40373565637](https://github.com/estebanojeda0615/SAVIP/actions/runs/40373565637), `cd59281` | 781 | **2** | 1 | 0 | **failure**, solo en el runner. `test_fase_4i_j_fecha_comun::test_presupuesto…`: `guardar_sesion_actual` → False (guardado tras una carga). `01B::test_T01B_5`: 3 de ≥ 10 muestras del indicador. Ambas pasan en local; pasan al perfil gui en `e341515`, sin cambiar expectativas |
 | CI [40385457727](https://github.com/estebanojeda0615/SAVIP/actions/runs/40385457727), `3e63cab` | 781 | **1** | 1 | 0 | **failure**, solo en el runner. `test_interaccion_fase_3c_a::test_a…` recibió 2 señales `contraccion_cambiada` en vez de 1. Con el mismo código pasó en los runs 40267519823 y 40373565637: carrera intermitente. Se añade un único reintento por prueba fallida (`a1ed3f3`) |
-| CI del commit final (con reintento) | PENDIENTE_CI | | | | |
+| **CI [40394420320](https://github.com/estebanojeda0615/SAVIP/actions/runs/40394420320), `903a61f`** (con reintento) | **781** | **0** | **1** (AS-001) | **0** | **success** (59 min): 80 archivos y 782 pruebas, 0 fallos ya en la primera ejecución, ninguna intermitente; «Archivos con fallo: ninguno» |
 
 **Política de reintento (`a1ed3f3`).**
 - Cada archivo con fallos reintenta **una vez** solo sus pruebas fallidas.

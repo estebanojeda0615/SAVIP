@@ -2,7 +2,7 @@
 
 ## Veredicto: **APTO CON RESERVAS**
 
-**CI del commit final:** PENDIENTE_CI.
+**CI del último commit de código y documentación (`903a61f`):** [run 40394420320](https://github.com/estebanojeda0615/SAVIP/actions/runs/40394420320), **success**. Resultado: 782 pruebas esenciales, 781 pasan y 1 `xfail` (AS-001), 0 fallos en la primera ejecución y ninguna intermitente.
 
 **Resumen:**
 - **AS-006 resuelto** en lo que pedía esta fase: el selector vigente queda protegido por pruebas de contrato y de sensibilidad, y AS-001 queda reproducido como `xfail` estricto.
@@ -85,7 +85,7 @@
 
 ## 5. ¿Listos para AS-001 (Fase 1B)?
 
-**Sí, con una condición: que el CI del commit final quede verde.**
+**Sí.** El CI del commit final está en verde ([40394420320](https://github.com/estebanojeda0615/SAVIP/actions/runs/40394420320)).
 
 Ya existen:
 - la prueba de regresión `test_as001_candidato_divergente_no_aborta_la_seleccion`;
@@ -103,5 +103,5 @@ Ya existen:
 |---|---|
 | Rama | https://github.com/estebanojeda0615/SAVIP/tree/maintenance/v1.1.2-fase1a-as006-as007 |
 | Comparación con la Fase 0 | https://github.com/estebanojeda0615/SAVIP/compare/maintenance/v1.1.2-fase0-reproducibilidad...maintenance/v1.1.2-fase1a-as006-as007 |
-| Commits | `aa4ceca`, `ba6a3c9`, `5f40295`, `50df00e`, `cd59281`, `e341515`, `3e63cab` (docs), `a1ed3f3` (reintento) y el commit de documentación de cierre |
-| CI | Runs en 03 §2.2; run del commit final: PENDIENTE_CI |
+| Commits | `aa4ceca`, `ba6a3c9`, `5f40295`, `50df00e`, `cd59281`, `e341515`, `3e63cab` (docs), `a1ed3f3` (reintento), `903a61f` (docs) y el commit de documentación de cierre |
+| CI | Runs en 03 §2.2. Verde de referencia: [40394420320](https://github.com/estebanojeda0615/SAVIP/actions/runs/40394420320) (`903a61f`) |
