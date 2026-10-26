@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import hashlib
 import math
+from decimal import Decimal, localcontext
 from fractions import Fraction
 from datetime import datetime, timezone
 from typing import Any
@@ -946,7 +947,7 @@ def _seleccionar_modelo_rectangular(
         if not all(math.isfinite(v) for v in valores):
             continue
         sse = _sse_exacto(valores)
-        rmse = math.sqrt(float(sse) / len(valores))
+        rmse = _rmse_desde_sse(sse, len(valores))
         resultados.append((modelo, sse, rmse))
     if not resultados:
         return None
@@ -3207,6 +3208,26 @@ def _sse_exacto(valores: list[float]) -> Fraction:
         factor = denominador_comun // den
         total += (numerador * factor) ** 2
     return Fraction(total, denominador_comun * denominador_comun)
+
+
+def _rmse_desde_sse(sse: Fraction, n: int) -> float:
+    """RMSE informado, `sqrt(sse / n)`, a partir del SSE exacto de `_sse_exacto`.
+
+    AS-001. Con errores finitos pero enormes (p. ej. 1,2258e240) el SSE exacto no
+    cabe en float y `float(sse)` lanza OverflowError, abortando la seleccion. El
+    RMSE en cambio siempre es representable, porque RMSE <= max|e| <= DBL_MAX.
+
+    En el rango ordinario se conserva la expresion de siempre, bit a bit. Solo si
+    `float(sse)` desborda, la raiz se calcula desde la fraccion exacta con Decimal
+    a 60 digitos y se redondea una unica vez a float. No altera el orden: este
+    valor es informativo y la seleccion sigue ordenando por `sse`.
+    """
+    try:
+        return math.sqrt(float(sse) / n)
+    except OverflowError:
+        with localcontext() as ctx:
+            ctx.prec = 60
+            return float((Decimal(sse.numerator) / Decimal(sse.denominator) / n).sqrt())
 
 
 def _rmse_global_estable(valores: list[float]) -> float:

@@ -5,10 +5,12 @@ Ruta productiva (verificada por traza dinámica, docs/fase_v112_antislop_01a_pru
 
 Las propiedades que protegían el selector retirado `seleccionar_modelo_por_rmse_oos_global`
 (test_seleccion_rmse_global, test_p0d_rmse_orden_exacto, test_rmse_global_estable) se verifican aquí sobre el
-selector vigente con bancos artificiales explícitos. No se modifica el motor: el defecto AS-001 queda registrado
-como xfail estricto (`test_as001_*`), que pasará a PASS —y obligará a quitar el marcador— cuando se corrija."""
+selector vigente con bancos artificiales explícitos. El defecto AS-001, registrado como xfail estricto en la Fase 1A,
+se corrige en la Fase 1B: las pruebas `test_as001_*` pasan sin marcador."""
 
 import math
+import sys
+from decimal import Decimal, localcontext
 from fractions import Fraction
 from unittest.mock import patch
 
@@ -123,17 +125,125 @@ def test_rmse_reportado_coincide_con_sse_exacto():
     assert SELECTOR(m, mod)["rmse_seleccion_oos"] == math.sqrt(float(sse) / len(errores))
 
 
-# ------------------------------------------------------------------ AS-001 (defecto conocido, NO corregido)
-@pytest.mark.xfail(strict=True, raises=OverflowError,
-                   reason="AS-001: _seleccionar_modelo_rectangular calcula el RMSE informativo con float(Fraction) y "
-                          "lanza OverflowError si el SSE exacto de un candidato no cabe en float. Corrección autorizada "
-                          "solo en la Fase 1B; al corregirla esta prueba pasará y el marcador xfail debe retirarse.")
+# ------------------------------------------------------------------ AS-001 (corregido en la Fase 1B)
+# El SSE exacto de errores finitos enormes no cabe en float; el RMSE sí (RMSE <= max|e| <= DBL_MAX). La selección
+# sigue ordenando por SSE exacto y el RMSE informado debe ser finito, sin excepción. Todas pasan por SELECTOR, de
+# modo que contra el código anterior a la corrección fallan con OverflowError (evidencia en docs/fase_v112_antislop_01b_as001).
+MAXIMO = sys.float_info.max
+
+
+def _rmse_referencia(errores: list[float]) -> float:
+    """sqrt(SSE/n) desde la fracción exacta con Decimal a 100 dígitos: referencia independiente del selector."""
+    sse = sum(Fraction(e) ** 2 for e in errores)
+    with localcontext() as ctx:
+        ctx.prec = 100
+        return float((Decimal(sse.numerator) / Decimal(sse.denominator) / len(errores)).sqrt())
+
+
+def _a_una_ulp(valor: float, referencia: float) -> bool:
+    return abs(valor - referencia) <= math.ulp(referencia)
+
+
 def test_as001_candidato_divergente_no_aborta_la_seleccion():
     # Errores finitos del orden del hallazgo (1,2258e240): su cuadrado (~1,5e480) no cabe en float.
     m, mod = _banco(divergente=[1.2258e240, 1.2258e240], sano=[1.0, 2.0])
     r = SELECTOR(m, mod)
-    # Contrato esperado tras la corrección: la selección (por SSE exacto) no cambia y no hay excepción.
     assert r["modelo"] == "sano" and r["modelo_segundo"] == "divergente"
+    assert r["rmse_seleccion_oos"] == math.sqrt(2.5) and r["rmse_segundo_oos"] == 1.2258e240
+    assert math.isfinite(r["diferencia_absoluta"]) and math.isfinite(r["diferencia_porcentual"])
+    assert r["diferencia_absoluta"] == 1.2258e240 - math.sqrt(2.5)
+
+
+def test_as001_dos_candidatos_enormes_ordenados_por_sse_exacto_y_rmse_preciso():
+    errores = {"a": [1.2258e240, 1e240, -3e239], "b": [1.2258e240, 1.1e240, -3e239], "c": [1e300, 1e300, 1e300]}
+    m, mod = _banco(**errores)
+    r = SELECTOR(m, mod)
+    assert (r["modelo"], r["modelo_segundo"]) == ("a", "b")
+    assert _a_una_ulp(r["rmse_seleccion_oos"], _rmse_referencia(errores["a"]))
+    assert _a_una_ulp(r["rmse_segundo_oos"], _rmse_referencia(errores["b"]))
+    assert r["diferencia_absoluta"] > 0 and math.isfinite(r["diferencia_porcentual"])
+
+
+def test_as001_empate_exacto_a_escala_extrema_gana_el_primero_del_banco():
+    m, mod = _banco(x=[1e300, -2e300], y=[-2e300, 1e300], z=[1e300, 2e300])  # SSE idéntico (5e600) en los tres
+    assert SELECTOR(m, mod)["modelo"] == "x" and SELECTOR(m, ("z", "y", "x"))["modelo"] == "z"
+    r = SELECTOR(m, mod)
+    assert r["rmse_seleccion_oos"] == r["rmse_segundo_oos"] and r["diferencia_absoluta"] == 0.0 == r["diferencia_porcentual"]
+
+
+def test_as001_una_ulp_en_el_borde_de_dbl_max():
+    # Errores de ~1,7976e308: el SSE exacto distingue una ULP y el RMSE de cada uno es exactamente su error.
+    menor = math.nextafter(MAXIMO, 0.0)
+    m, mod = _banco(a=[MAXIMO] * 3, b=[menor] * 3)
+    r = SELECTOR(m, mod)
+    assert (r["modelo"], r["modelo_segundo"]) == ("b", "a")
+    assert r["rmse_seleccion_oos"] == menor and r["rmse_segundo_oos"] == MAXIMO
+    assert r["diferencia_absoluta"] == math.ulp(menor)
+
+
+def test_as001_errores_no_finitos_siguen_excluidos_junto_a_enormes():
+    m, mod = _banco(infinito=[math.inf, 0.1], nan=[math.nan, 0.1], enorme=[1.2258e240, 1.0], sano=[1.0, 1.0])
+    r = SELECTOR(m, mod)
+    assert (r["modelo"], r["modelo_segundo"]) == ("sano", "enorme") and math.isfinite(r["rmse_segundo_oos"])
+
+
+def test_as001_muestra_comun_y_pesos_uniformes_a_escala_extrema():
+    # b no tiene el par (12, 3), donde a tiene un error enorme: no cuenta y gana a en la muestra común.
+    m = _matriz({"a": {(12, 1): 1e200, (12, 2): 1e200, (12, 3): 1e308}, "b": {(12, 1): 1e201, (12, 2): 1e201}}, 1, 3)
+    r = SELECTOR(m, ("a", "b"))
+    assert r["modelo"] == "a" and r["pares_comunes"] == 2 and r["pares_esperados"] == 3 and r["rmse_seleccion_oos"] == 1e200
+    # Mismo error enorme en h=1 o en h=2: empate exacto (pesos uniformes) -> primero del banco.
+    m, mod = _banco(a=[2e200, 0.0], b=[0.0, 2e200])
+    assert SELECTOR(m, mod)["modelo"] == "a"
+
+
+@pytest.mark.parametrize("escala", [1e-150, 1e-20, 1e-3, 1.0, 37.5, 1e6, 1e50, 1e150])
+def test_as001_rango_ordinario_rmse_identico_bit_a_bit(escala):
+    # En el rango ordinario el RMSE informado es la expresión de siempre, sin ningún cambio de redondeo.
+    a = [escala * f for f in (0.1, -0.7, 2.3, 1e-3, -1.9, 0.30000000000000004)]
+    b = [e * 3 for e in a]
+    m, mod = _banco(a=a, b=b)
+    r = SELECTOR(m, mod)
+    assert r["rmse_seleccion_oos"] == math.sqrt(float(sp._sse_exacto(a)) / len(a))
+    assert r["rmse_segundo_oos"] == math.sqrt(float(sp._sse_exacto(b)) / len(b))
+
+
+def test_as001_diferencia_porcentual_no_representable_es_inf_y_los_consumidores_la_omiten():
+    # Ganador con RMSE diminuto y segundo enorme: la razón (~1e400) no cabe en float. La división flotante devuelve
+    # inf sin excepción; el contrato no cambia y los consumidores ya tratan los no finitos como "no disponible".
+    from app_icociv.interfaz.presentacion_resultados import formatear_porcentaje
+    from app_icociv.persistencia.gestor_sesiones import _convertir_json_seguro
+    from app_icociv.reportes.modelo import es_numero
+
+    m, mod = _banco(fino=[1e-100, 1e-100], enorme=[1e300, 1e300])
+    r = SELECTOR(m, mod)
+    assert r["modelo"] == "fino" and math.isfinite(r["rmse_segundo_oos"]) and math.isfinite(r["diferencia_absoluta"])
+    assert r["diferencia_porcentual"] == math.inf
+    assert formatear_porcentaje(r["diferencia_porcentual"]) == "No disponible"
+    assert not es_numero(r["diferencia_porcentual"]) and _convertir_json_seguro(r["diferencia_porcentual"]) is None
+
+
+def test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente():
+    # Un candidato que no es ganador ni segundo pasa a tener errores de 1,2258e240 en todos los pares: la proyección
+    # completa no aborta y el ganador, el segundo, sus RMSE y la trayectoria de 24 meses son idénticos.
+    serie = gen.serie("tendencia_lineal_ruido")
+    anio, mes = gen.objetivo(serie, 11)
+    original = sp._matriz_rectangular_12_24
+    with patch.object(sp, "_matriz_rectangular_12_24", wraps=original) as espia:
+        base = sp.ejecutar_proyeccion(serie, anio, mes, 2020)
+    modelos = espia.call_args.args[1]
+    elegido = next(c for c in modelos if c not in (base["modelo_codigo"], base["modelo_segundo"]))
+
+    def con_divergente(*args, **kwargs):
+        matriz = original(*args, **kwargs)
+        matriz["datos"][elegido] = {par: (1.2258e240,) + fila[1:] for par, fila in matriz["datos"][elegido].items()}
+        return matriz
+
+    with patch.object(sp, "_matriz_rectangular_12_24", side_effect=con_divergente):
+        r = sp.ejecutar_proyeccion(serie, anio, mes, 2020)
+    assert len(modelos) == 21
+    for clave in ("modelo_codigo", "rmse_seleccion_oos", "modelo_segundo", "rmse_segundo_oos", "trayectoria_24_meses"):
+        assert r[clave] == base[clave], clave
 
 
 # ------------------------------------------------------------------ sensibilidad: el conjunto detecta mutantes
