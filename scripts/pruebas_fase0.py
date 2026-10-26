@@ -78,6 +78,11 @@ GUI_NODOS = [
     # Fase 1A: expectativa del factor actualizada a la regla 4I-C; ya no necesita docs/. Pasa 3/3 aislada, pero
     # falló 1 de 4 al correr junto a otras suites (guardar sin esperar a que termine la carga): misma carrera que la anterior.
     "tests/test_fase_4g_historial_dane_fechas.py::test_B_sesion_agosto_con_dane_octubre_invariante_actualizacion_y_restauracion",
+    # Fase 1A: pasan en local (copia limpia, cd59281) pero fallaron en el runner (run 40373565637): la primera por la
+    # misma carrera de guardado tras una carga (guardar_sesion_actual -> False); la segunda cuenta >= 10 muestras del
+    # indicador durante un guardado lento simulado y el runner, más lento, tomó 3.
+    "tests/test_fase_4i_j_fecha_comun.py::test_presupuesto_fecha_comun_excepcion_exportacion_y_reanalisis_dane",
+    "tests/test_v112_01b_indicadores_sesiones.py::test_T01B_5_ctrl_s_ruta_conocida_lento_exito_solo_tras_persistir",
 ]
 #: Fase 1A: cada archivo corre en su propio proceso (ver ejecutar_por_archivo). Motivo documentado: p. ej.
 #: test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE y lo importan otras suites, de modo
