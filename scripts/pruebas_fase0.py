@@ -18,6 +18,8 @@ import os
 import re
 import subprocess
 import sys
+import xml.etree.ElementTree as ET
+from collections import Counter
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parents[1]
@@ -77,10 +79,10 @@ GUI_NODOS = [
     # falló 1 de 4 al correr junto a otras suites (guardar sin esperar a que termine la carga): misma carrera que la anterior.
     "tests/test_fase_4g_historial_dane_fechas.py::test_B_sesion_agosto_con_dane_octubre_invariante_actualizacion_y_restauracion",
 ]
-#: Se ejecutan en su propio proceso. test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE,
-#: y lo importan (directa o transitivamente) test_numericos_icociv, test_horizonte_editable, test_proyecciones_fase_2b
-#: y _3, entre otros: recolectado junto a ellos, test_interfaz_componentes::test_sombras_… falla (contaminación heredada).
-AISLADOS = {"tests/test_interfaz_componentes.py"}
+#: Fase 1A: cada archivo corre en su propio proceso (ver ejecutar_por_archivo). Motivo documentado: p. ej.
+#: test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE y lo importan otras suites, de modo
+#: que recolectado junto a ellas test_interfaz_componentes::test_sombras_… falla (contaminación heredada).
+TIEMPO_MAXIMO_POR_ARCHIVO = 1200
 #: Verificación física en Windows que ninguna prueba automática cubre (se marca a mano).
 GUI_MANUAL = [
     "Equipo sin Python instalado: extraer el ZIP del Release y abrir SAVIP.exe",
@@ -139,16 +141,40 @@ def main(argv: list[str]) -> int:
     faltan = [a for a in PERFILES[perfil] if not (RAIZ / a.split("::")[0]).exists()]
     if faltan:
         sys.exit(f"Archivos de prueba inexistentes en el perfil {perfil}: {faltan}")
-    fijas = opciones(perfil)
-    juntos = [a for a in PERFILES[perfil] if a not in AISLADOS]
-    aislados = [a for a in PERFILES[perfil] if a in AISLADOS]
-    codigos = []
-    for grupo, sufijo in ((juntos, ""), (aislados, "_aislados")):
-        if grupo:
-            argumentos = [a.replace(".xml", f"{sufijo}.xml") if a.startswith("--junitxml") else a for a in extra]
-            codigos.append(subprocess.run([sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *fijas,
-                                           *grupo, *argumentos], cwd=RAIZ, env=_entorno()).returncode)
-    return max(codigos)
+    return ejecutar_por_archivo(perfil, extra)
+
+
+def ejecutar_por_archivo(perfil: str, extra: list[str]) -> int:
+    """Cada archivo en su propio proceso, con límite de tiempo: la suite heredada tiene estado global (interruptores
+    de sombras/movimiento al importar, ventanas, QSettings) y, juntos, unos archivos hacen fallar a otros o los cuelgan.
+    Con --junitxml=<ruta>.xml se escribe un XML por archivo junto a esa ruta (<ruta>__<archivo>.xml)."""
+    junit = next((Path(a.split("=", 1)[1]) for a in extra if a.startswith("--junitxml=")), None)
+    resto = [a for a in extra if not a.startswith("--junitxml=")]
+    grupos: dict[str, list[str]] = {}
+    for objetivo in PERFILES[perfil]:
+        grupos.setdefault(objetivo.split("::")[0], []).append(objetivo)
+    resumen, fallidos = Counter(), []
+    for archivo, objetivos in grupos.items():
+        salida = junit.with_name(f"{junit.stem}__{Path(archivo).stem}.xml") if junit else None
+        argumentos = [sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *opciones(perfil),
+                      *objetivos, *resto, *([f"--junitxml={salida}"] if salida else [])]
+        try:
+            codigo = subprocess.run(argumentos, cwd=RAIZ, env=_entorno(), timeout=TIEMPO_MAXIMO_POR_ARCHIVO).returncode
+        except subprocess.TimeoutExpired:
+            codigo = "TIEMPO_AGOTADO"
+            print(f"\n*** {archivo}: superó {TIEMPO_MAXIMO_POR_ARCHIVO} s; se detiene y se marca como fallo ***", flush=True)
+        if salida and salida.exists():
+            raiz = ET.parse(salida).getroot()
+            for suite in raiz.iter("testsuite"):
+                for clave in ("tests", "failures", "errors", "skipped"):
+                    resumen[clave] += int(suite.get(clave, 0))
+        if codigo != 0 and not (perfil == "historicas" and codigo == 1):
+            fallidos.append(f"{archivo} ({codigo})")
+    if junit:
+        print(f"\nResumen {perfil}: {len(grupos)} archivos; {resumen['tests']} pruebas, {resumen['failures']} fallos, "
+              f"{resumen['errors']} errores, {resumen['skipped']} omitidas o xfail")
+    print("Archivos con fallo: " + ("; ".join(fallidos) if fallidos else "ninguno"))
+    return 1 if fallidos else 0
 
 
 if __name__ == "__main__":
