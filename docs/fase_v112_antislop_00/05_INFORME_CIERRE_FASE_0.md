@@ -36,6 +36,7 @@ Evidencia de la frase:
 | **GitHub Actions** (`windows-latest`, Python 3.12.10, `.venv-test` del lock), commit `d6daa3f` | **595 pasan + 17/17 aisladas = 612/612**; 2 deseleccionadas (pasan al perfil gui) |
 | **Clon limpio local, corrida final** (Windows 11, copia de `d6daa3f` sin `docs/`) | **595 pasan + 17/17 aisladas = 612/612**, código 0, 34 min |
 | GitHub Actions, commit `edff801` (solo docs) | success ([40256137859](https://github.com/estebanojeda0615/SAVIP/actions/runs/40256137859)) |
+| GitHub Actions, commit `9e598c7` (solo docs, mismo código) | **failure**, 610/612 ([40258877105](https://github.com/estebanojeda0615/SAVIP/actions/runs/40258877105)): 2 diferencias en el RMSErect de Holt amortiguado (perdedor) por encima de la holgura de entonces, 1e-4. Se recalibró a 1e-2 |
 
 **Golden Masters, 29 pruebas:**
 
@@ -59,7 +60,7 @@ Evidencia de la frase:
 
 **Publicado y comprobado en GitHub:**
 - la rama, sus 6 commits y los archivos de §5;
-- el workflow y sus runs: los dos primeros fallaron (04 §2) y desde `d6daa3f`, el último commit de código, todos en verde;
+- el workflow y sus runs (04 §2): verdes en `d6daa3f` y `edff801`. Fallaron los dos primeros (instalación; diferencias entre CPU y carreras) y el de `9e598c7`, por la variación de Holt amortiguado entre runners. Con la holgura recalibrada se publicó un commit nuevo; su run figura en el mensaje de cierre;
 - el Release intacto.
 
 **Solo local** (`C:\Pruebas SAVIP\Fase0\`, no publicado a propósito):
@@ -86,7 +87,7 @@ Evidencia de la frase:
 
    Las variantes de esquema 1.1.0/1.1.1 se cubren solo por forma (03 §3) y por el **factor legado** sintético. **No se afirma compatibilidad con todas las sesiones reales de terceros.**
 4. **B6:** solo se comparan texto, tablas y fórmulas. Quedan fuera los estilos de Excel, el aspecto visual de PDF/DOCX y los exportables del Empalme. Tampoco se comprueban los valores calculados de las fórmulas Excel (openpyxl no evalúa).
-5. **Reproducibilidad entre CPU** (hallazgo nuevo, 02 §5 bis): los candidatos con optimizador iterativo (Holt, Huber) difieren hasta 5e-7 en RMSErect y 3,5e-5 en métricas impresas. Hoy no cambia ninguna selección, pero no es bit a bit. Sus comparaciones usan 1e-4 relativo.
+5. **Reproducibilidad entre CPU** (hallazgo nuevo, 02 §5 bis): los candidatos con optimizador iterativo (Holt, Huber) difieren entre runners: hasta 1,2e-3 en el RMSErect de Holt amortiguado y 3,5e-5 en métricas impresas. Hoy no cambia ninguna selección, pero no es bit a bit. Sus comparaciones usan 1e-2 relativo. La sesión sintética tiene un ganador de esa familia (Fourier + Holt lineal), comparado a 1e-9: riesgo declarado en 02 §5 bis.
 6. **Pruebas con carreras de tiempo y contaminación heredadas:**
    - `test_layout_adaptable_…` y `test_integracion_sesion_con_excel_…` pasaron al perfil gui;
    - `test_interfaz_componentes` corre en un proceso propio.
@@ -109,7 +110,7 @@ Evidencia de la frase:
 |---|---|
 | Rama | https://github.com/estebanojeda0615/SAVIP/tree/maintenance/v1.1.2-fase0-reproducibilidad |
 | Comparación con `develop/v1.1.2` | https://github.com/estebanojeda0615/SAVIP/compare/develop/v1.1.2...maintenance/v1.1.2-fase0-reproducibilidad |
-| Commits | `78fe2c1`, `41d35c8`, `d6daa3f`, `edff801` (docs 04), `9e598c7` (docs 05) y el commit de correcciones de redacción de este informe; todos de Esteban Ojeda `<346522303+estebanojeda0615@users.noreply.github.com>` y sin trailers |
+| Commits | `78fe2c1`, `41d35c8`, `d6daa3f`, `edff801` (docs 04), `9e598c7` (docs 05), `9ed97c6` (precisiones) y el de la holgura recalibrada; todos de Esteban Ojeda `<346522303+estebanojeda0615@users.noreply.github.com>` y sin trailers |
 | CI verde de referencia | https://github.com/estebanojeda0615/SAVIP/actions/runs/40245287987 (`d6daa3f`, success, 612/612) |
 | Release existente, sin cambios | https://github.com/estebanojeda0615/SAVIP/releases/tag/v1.1.2-rc.1 |
 

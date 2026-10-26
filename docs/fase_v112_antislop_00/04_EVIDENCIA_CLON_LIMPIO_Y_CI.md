@@ -15,7 +15,8 @@
 | [`41d35c8`](https://github.com/estebanojeda0615/SAVIP/commit/41d35c8d71f4bbf686ec1df56ff8dfdf28b214ee) | CI en entorno virtual, aislamiento de `test_interfaz_componentes`, `01_INVENTARIO_PRUEBAS.csv` |
 | [`d6daa3f`](https://github.com/estebanojeda0615/SAVIP/commit/d6daa3f52c469c48f7204736da58a5b8a9f025ac) | Tolerancia para candidatos con optimizador iterativo, 2 nodos con carreras de tiempo al perfil gui, mensajes completos de diferencias |
 | [`edff801`](https://github.com/estebanojeda0615/SAVIP/commit/edff8010291211fdf12c2ebf457155e45183da8f) | Informe 04 y hallazgo entre CPU en 02/03 (CI [40256137859](https://github.com/estebanojeda0615/SAVIP/actions/runs/40256137859): success) |
-| Commit final | Informe 05 y cifras finales de 04 |
+| [`9e598c7`](https://github.com/estebanojeda0615/SAVIP/commit/9e598c7f477448020b0b24019fbbc6bd3bf8ce41) y [`9ed97c6`](https://github.com/estebanojeda0615/SAVIP/commit/9ed97c66a5aa87faeb7e8b3cf561d93c6e37410e) | Informe 05 y precisiones |
+| Commit siguiente (tolerancia 1e-2) | Holgura de la familia con optimizador recalibrada con lo observado en el run 40258877105; documentación |
 
 **Los golden (`tests/fixtures/fase0/golden/*.json`) no cambiaron desde `78fe2c1`.** `git diff 78fe2c1 d6daa3f -- tests/fixtures/fase0/golden` sale vacío.
 
@@ -32,6 +33,10 @@
 | [40236320271](https://github.com/estebanojeda0615/SAVIP/actions/runs/40236320271) | `78fe2c1` | **failure** en la instalación (1 min 36 s) | `pip check`: el Python del runner trae `pipx 1.18.4`, que exige `packaging>=26.3`, y el lock fija `26.0`. Se corrigió instalando en `.venv-test`, como hace `build_portatil.ps1` con `.venv-build`. |
 | [40240413329](https://github.com/estebanojeda0615/SAVIP/actions/runs/40240413329) | `41d35c8` | **failure**: 588 pasan y 9 fallan, + 17/17 aislados (55 min) | **(1) Diferencias entre CPU** en candidatos con optimizador iterativo (5 escenarios del motor y 2 secciones PDF/DOCX). Ver 02 §5 bis: los ganadores, trayectorias, puntos y cifras económicas coincidieron con 1e-9. **(2)** `test_layout_adaptable_y_temas_sin_cambiar_entrada`: carrera con el temporizador de 60 ms. **(3)** `test_integracion_sesion_con_excel_y_trabajadores_reales`: guarda sin esperar el fin de la carga. |
 | [**40245287987**](https://github.com/estebanojeda0615/SAVIP/actions/runs/40245287987) | **`d6daa3f`** | **success: 595 pasan, 2 deseleccionadas, + 17/17 aislados = 612/612** (38 min) | Todos los pasos en verde. `pip check`: «No broken requirements found». Recuento de `--listar` idéntico al local: 612 / 133 / 271 (+3 errores de recolección) / 10. Artefacto `fase0-esenciales-junit` (id 12620220066) |
+
+| [40256137859](https://github.com/estebanojeda0615/SAVIP/actions/runs/40256137859) | `edff801` (docs) | **success** | Mismo código que `d6daa3f` |
+| [40258877105](https://github.com/estebanojeda0615/SAVIP/actions/runs/40258877105) | `9e598c7` (docs) | **failure: 593 pasan, 2 fallan**, + 17/17 aisladas | Mismo código que el run verde. Fallaron `test_golden_motor[estacional]` y `[exponencial]`, una diferencia cada uno, ambas en el RMSErect de Holt amortiguado (perdedor): 5,1412 → 5,1427 y 6,2673 → 6,2750, hasta 1,2e-3 relativo, por encima de la holgura de 1e-4. Confirma que la variación entre CPU depende del runner asignado. La holgura se recalibró a 1e-2 en el commit siguiente (02 §5). |
+| [40258969848](https://github.com/estebanojeda0615/SAVIP/actions/runs/40258969848) | `9ed97c6` (docs) | **failure**, mismas 2 diferencias | Valores **idénticos** al run anterior (5,142693001520366 y 6,2749902170288205): la variación es determinista para cada tipo de CPU del runner, no aleatoria. Hay al menos dos perfiles de CPU en los runners `windows-latest`. |
 
 **Lo que el CI no ejecuta:** los perfiles `dane`, `historicas` y `gui`. Fallan por diseño en un clon limpio o necesitan pantalla física.
 

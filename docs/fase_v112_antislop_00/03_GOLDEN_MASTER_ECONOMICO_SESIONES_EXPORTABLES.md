@@ -141,7 +141,7 @@ Recorrido real en la ventana (`VentanaPrincipal`, Qt offscreen), con un **anexo 
 | Carpeta temporal del recorrido | `<TMP>` |
 | Claves `fecha_calculo`, `fecha_guardado`, `creado`, `fecha`, `fecha_exportacion` y `actualizado` | `<VOLATIL>` |
 | Espacios repetidos | Uno solo |
-| Métricas impresas con 3+ decimales en PDF/DOCX | ≤ 1e-4 relativo o 1 unidad del último decimal. Las tablas de candidatos muestran métricas de modelos con optimizador iterativo, que difieren entre CPU (ver 02 §5 bis). Importes (2 decimales), porcentajes, páginas y recuentos se comparan exactos. |
+| Métricas impresas con 3+ decimales en PDF/DOCX | ≤ 1e-2 relativo (la misma holgura que en 02 §5) o 1 unidad del último decimal. Las tablas de candidatos muestran métricas de modelos con optimizador iterativo, que difieren entre CPU (ver 02 §5 bis). Importes (2 decimales), porcentajes, páginas y recuentos se comparan exactos. |
 
 De la sesión guardada se fijan:
 - las claves de primer nivel;
