@@ -72,7 +72,18 @@ Los cinco escenarios cubren familias distintas:
 | Flotantes | `rel_tol = 1e-9`, `abs_tol = 1e-12` | El lock fija versiones, pero los núcleos BLAS/LAPACK (OpenBLAS de numpy/scipy) eligen rutas SIMD según la CPU. Pueden variar en los últimos bits (~1e-15 relativo). El margen es seis órdenes mayor que ese ruido y muy inferior a lo que SAVIP muestra (2 a 4 decimales). |
 | Texto, códigos, enteros, booleanos, `None` | Exacta | No dependen de la CPU. |
 | Orden del ranking | Exacto entre candidatos cuyo RMSErect difiere más que la tolerancia | Dos candidatos separados por menos de 1e-9 relativo pueden intercambiarse por ruido de CPU sin cambiar ninguna cifra visible. |
+| RMSErect de candidatos con **optimizador iterativo** (`holt_lineal`, `holt_amortiguado`, `huber` y sus variantes `fourier_k1__…`) | `rel_tol = 1e-4`, `abs_tol = 1e-8` | **Medido en GitHub Actions (run 40240413329)** frente al equipo de referencia: hasta 5e-7 relativo (`holt_lineal` en `exponencial`: 2,838256752 frente a 2,838255296). El optimizador (statsmodels/scikit-learn) converge hasta su tolerancia por rutas SIMD distintas según la CPU. Ningún ganador ni segundo lugar de estos escenarios es de esa familia. |
 | Ganador en empate exacto | Debe pertenecer al grupo empatado del golden y ser el mínimo obtenido | Con datos sin ruido, `lineal`, `holt_lineal` y `drift` tienen SSE 0. El desempate documentado (primer candidato del banco) decide solo si el empate sigue siendo exacto. Un error de 1e-15 en otra CPU lo rompería legítimamente. |
+
+## 5 bis. Hallazgo de reproducibilidad entre equipos (documentado, sin corregir)
+
+**Observación en CPU distintas.** Con las mismas versiones exactas del lock, los candidatos ajustados por optimización iterativa no dan resultados bit a bit iguales:
+- RMSErect: hasta 5e-7 relativo;
+- métricas impresas (MAE/MASE de «Holt tendencia amortiguada»): hasta 3,5e-5, visibles con 4 decimales (`5,7422` → `5,7424`).
+
+**Cuándo podría importar.** Si alguna vez uno de estos candidatos queda a menos de ~1e-6 relativo del ganador, la selección podría cambiar de equipo a equipo. En los 5 escenarios y en la sesión sintética no ocurre: el margen mínimo entre ganador y segundo es 8,25 %, y 0 en el empate exacto, que no es de esta familia.
+
+**Recomendación** para una fase posterior: fijar la tolerancia o la semilla de los optimizadores, o documentar la cota.
 
 ## 6. Qué NO cubre
 
