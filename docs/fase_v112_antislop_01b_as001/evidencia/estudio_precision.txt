@@ -1,0 +1,5 @@
+casos extremos: 20000, con float(sse) desbordado: 20000
+corrección (Decimal 60 dígitos): peor error 0.000 ULP, distintos del redondeo correcto: 0
+alternativa escalado max|e|: peor error 2.000 ULP, distintos del redondeo correcto: 6674
+tiempo medio del camino Decimal: 22.7 us por candidato
+rango ordinario (20000 casos): corrección idéntica bit a bit en todos; escalado difiere en 6625

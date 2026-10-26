@@ -1,0 +1,42 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.7.0 -- C:\Pruebas SAVIP\Fase0\venv-test\Scripts\python.exe
+rootdir: C:\Users\Esteban\Desktop\SAVIP_V112_FASE1B_AS001
+collecting ... collected 35 items
+
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_minimo_sse] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_rmse_coherente] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_sse_exacto_decide_una_ulp] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_empate_primer_candidato_del_banco] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_pesos_uniformes_por_horizonte] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_solo_pares_comunes] PASSED
+tests/test_fase1a_selector_rectangular.py::test_selector_vigente_cumple[p_invariante_al_orden_de_entrada] PASSED
+tests/test_fase1a_selector_rectangular.py::test_sin_muestra_comun_o_banco_vacio_devuelve_none PASSED
+tests/test_fase1a_selector_rectangular.py::test_un_error_no_finito_excluye_solo_a_ese_candidato PASSED
+tests/test_fase1a_selector_rectangular.py::test_candidato_sano_gana_frente_a_divergente_en_rango_representable PASSED
+tests/test_fase1a_selector_rectangular.py::test_es_reproducible_y_no_muta_la_matriz PASSED
+tests/test_fase1a_selector_rectangular.py::test_rmse_reportado_coincide_con_sse_exacto PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_candidato_divergente_no_aborta_la_seleccion PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_dos_candidatos_enormes_ordenados_por_sse_exacto_y_rmse_preciso PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_empate_exacto_a_escala_extrema_gana_el_primero_del_banco PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_una_ulp_en_el_borde_de_dbl_max PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_errores_no_finitos_siguen_excluidos_junto_a_enormes PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_muestra_comun_y_pesos_uniformes_a_escala_extrema PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1e-150] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1e-20] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[0.001] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1.0] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[37.5] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1000000.0] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1e+50] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_rango_ordinario_rmse_identico_bit_a_bit[1e+150] PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_diferencia_porcentual_no_representable_es_inf_y_los_consumidores_la_omiten PASSED
+tests/test_fase1a_selector_rectangular.py::test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente PASSED
+tests/test_fase1a_selector_rectangular.py::test_la_referencia_sin_defectos_cumple_todas_las_propiedades PASSED
+tests/test_fase1a_selector_rectangular.py::test_cada_mutante_es_detectado[suma_flotante] PASSED
+tests/test_fase1a_selector_rectangular.py::test_cada_mutante_es_detectado[ultimo_en_empate] PASSED
+tests/test_fase1a_selector_rectangular.py::test_cada_mutante_es_detectado[peso_1_h] PASSED
+tests/test_fase1a_selector_rectangular.py::test_cada_mutante_es_detectado[todos_los_pares] PASSED
+tests/test_fase1a_selector_rectangular.py::test_cada_mutante_es_detectado[rmse_sin_n] PASSED
+tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado PASSED
+
+======================== 35 passed in 65.84s (0:01:05) ========================

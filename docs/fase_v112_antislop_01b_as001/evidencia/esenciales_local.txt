@@ -1,0 +1,165 @@
+...........                                                              [100%]
+11 passed in 127.28s (0:02:07)
+......                                                                   [100%]
+6 passed in 2.60s
+............                                                             [100%]
+12 passed in 94.83s (0:01:34)
+...................................                                      [100%]
+35 passed in 35.32s
+....                                                                     [100%]
+4 passed in 44.74s
+......                                                                   [100%]
+6 passed in 0.94s
+........                                                                 [100%]
+8 passed in 0.85s
+.............                                                            [100%]
+13 passed in 23.11s
+...............                                                          [100%]
+15 passed in 2.13s
+...............                                                          [100%]
+15 passed in 18.14s
+.......                                                                  [100%]
+7 passed in 0.18s
+............                                                             [100%]
+12 passed in 1.63s
+...................                                                      [100%]
+19 passed in 1.60s
+...................                                                      [100%]
+19 passed in 1.84s
+........................                                                 [100%]
+24 passed in 2.46s
+.................                                                        [100%]
+17 passed in 2.31s
+......                                                                   [100%]
+6 passed in 103.70s (0:01:43)
+...................                                                      [100%]
+19 passed in 2.16s
+.......                                                                  [100%]
+7 passed in 4.50s
+.........                                                                [100%]
+9 passed in 4.20s
+............                                                             [100%]
+12 passed in 0.93s
+.                                                                        [100%]
+1 passed in 51.02s
+..                                                                       [100%]
+2 passed in 91.94s (0:01:31)
+..                                                                       [100%]
+2 passed in 56.77s
+..                                                                       [100%]
+2 passed in 51.09s
+..                                                                       [100%]
+2 passed in 64.46s (0:01:04)
+........................                                                 [100%]
+24 passed in 2.44s
+.......                                                                  [100%]
+7 passed in 19.20s
+....                                                                     [100%]
+4 passed in 8.69s
+.                                                                        [100%]
+1 passed in 3.46s
+....                                                                     [100%]
+4 passed in 12.44s
+.................                                                        [100%]
+17 passed in 0.46s
+....................                                                     [100%]
+20 passed in 0.34s
+...........                                                              [100%]
+11 passed in 12.79s
+...............                                                          [100%]
+15 passed in 2.07s
+.........                                                                [100%]
+9 passed in 2.53s
+.........                                                                [100%]
+9 passed in 62.26s (0:01:02)
+..............                                                           [100%]
+14 passed in 2.06s
+..........                                                               [100%]
+10 passed in 4.63s
+.................                                                        [100%]
+17 passed in 4.30s
+............                                                             [100%]
+12 passed in 119.60s (0:01:59)
+....                                                                     [100%]
+4 passed in 26.49s
+.............                                                            [100%]
+13 passed in 25.99s
+.....                                                                    [100%]
+5 passed, 1 deselected in 15.70s
+....                                                                     [100%]
+4 passed in 112.95s (0:01:52)
+..                                                                       [100%]
+2 passed, 1 deselected in 5.65s
+.........                                                                [100%]
+9 passed in 3.18s
+...............                                                          [100%]
+15 passed in 22.98s
+......                                                                   [100%]
+6 passed in 0.31s
+.....                                                                    [100%]
+5 passed in 43.00s
+......                                                                   [100%]
+6 passed in 11.70s
+.......                                                                  [100%]
+7 passed in 9.69s
+...............                                                          [100%]
+15 passed in 3.11s
+..........................................................               [100%]
+58 passed in 25.29s
+.............                                                            [100%]
+13 passed in 3.48s
+............                                                             [100%]
+12 passed in 4.15s
+..................                                                       [100%]
+18 passed in 3.33s
+...                                                                      [100%]
+3 passed in 28.12s
+........                                                                 [100%]
+8 passed in 56.56s
+......                                                                   [100%]
+6 passed in 99.19s (0:01:39)
+.......                                                                  [100%]
+7 passed in 275.77s (0:04:35)
+....                                                                     [100%]
+4 passed in 25.44s
+....                                                                     [100%]
+4 passed in 28.31s
+........                                                                 [100%]
+8 passed, 1 deselected in 574.40s (0:09:34)
+....                                                                     [100%]
+4 passed in 12.84s
+.......                                                                  [100%]
+7 passed in 28.03s
+......                                                                   [100%]
+6 passed in 23.88s
+.......                                                                  [100%]
+7 passed in 22.85s
+.....                                                                    [100%]
+5 passed in 18.61s
+.                                                                        [100%]
+1 passed in 16.69s
+.....                                                                    [100%]
+5 passed in 130.56s (0:02:10)
+.....                                                                    [100%]
+5 passed in 72.86s (0:01:12)
+.                                                                        [100%]
+1 passed, 1 deselected in 6.95s
+........                                                                 [100%]
+8 passed in 19.31s
+......                                                                   [100%]
+6 passed in 74.24s (0:01:14)
+..........                                                               [100%]
+10 passed in 68.65s (0:01:08)
+.......                                                                  [100%]
+7 passed in 97.85s (0:01:37)
+...........                                                              [100%]
+11 passed in 80.86s (0:01:20)
+.....                                                                    [100%]
+5 passed in 49.16s
+..................                                                       [100%]
+18 passed, 1 deselected in 208.07s (0:03:28)
+
+Resumen esenciales: 80 archivos; 797 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+codigo=0

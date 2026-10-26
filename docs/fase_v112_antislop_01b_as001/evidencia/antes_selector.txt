@@ -1,0 +1,4 @@
+............x.......                                                     [100%]
+=========================== short test summary info ===========================
+XFAIL tests/test_fase1a_selector_rectangular.py::test_as001_candidato_divergente_no_aborta_la_seleccion - AS-001: _seleccionar_modelo_rectangular calcula el RMSE informativo con float(Fraction) y lanza OverflowError si el SSE exacto de un candidato no cabe en float. Corrección autorizada solo en la Fase 1B; al corregirla esta prueba pasará y el marcador xfail debe retirarse.
+19 passed, 1 xfailed in 23.75s

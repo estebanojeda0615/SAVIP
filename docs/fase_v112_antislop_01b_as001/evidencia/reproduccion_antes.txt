@@ -1,0 +1,5 @@
+SSE exacto (Fraction) bits del numerador: 1597 | cabe en float: False
+EXCEPCION: OverflowError integer division result too large for a float
+en C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py linea 316 : return int(self.numerator) / int(self.denominator)
+division 1.2258e+240 / 1e-300 = inf
+division 1e+308 / 1e-10 = inf

@@ -1,0 +1,28 @@
+FFFFFF........FF                                                         [100%]
+================================== FAILURES ===================================
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+E   OverflowError: integer division result too large for a float
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\numbers.py:316: OverflowError: integer division result too large for a float
+=========================== short test summary info ===========================
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_candidato_divergente_no_aborta_la_seleccion
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_dos_candidatos_enormes_ordenados_por_sse_exacto_y_rmse_preciso
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_empate_exacto_a_escala_extrema_gana_el_primero_del_banco
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_una_ulp_en_el_borde_de_dbl_max
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_errores_no_finitos_siguen_excluidos_junto_a_enormes
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_muestra_comun_y_pesos_uniformes_a_escala_extrema
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_diferencia_porcentual_no_representable_es_inf_y_los_consumidores_la_omiten
+FAILED tests/test_fase1a_selector_rectangular.py::test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente
+8 failed, 8 passed, 19 deselected in 24.00s
