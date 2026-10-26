@@ -107,8 +107,9 @@ logs/
 # fuente publico. Las pruebas historicas escriben evidencia en docs/fase_*;
 # esa evidencia, las entregas y las presentaciones no se versionan.
 /docs/*
-# Fase 0 (1.1.2): unica excepcion publicada, los informes de reproducibilidad y Golden Master.
+# Anti-Slop 1.1.2: unicas excepciones publicadas, los informes de las Fases 0 y 1A.
 !/docs/fase_v112_antislop_00/
+!/docs/fase_v112_antislop_01a_pruebas/
 /ENTREGA_SAVIP_1_1/
 /entregables/
 CONTEXTO_CHAT_*.md
