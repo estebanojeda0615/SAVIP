@@ -140,6 +140,6 @@ if __name__=='__main__':
     for name,fn in sorted(list(globals().items())):
         if name.startswith('test_') and callable(fn):
             if 'tmp_path' in inspect.signature(fn).parameters:
-                with tempfile.TemporaryDirectory(dir=ROOT/'docs/fase_4a_c/temporal') as folder:fn(Path(folder))
+                with tempfile.TemporaryDirectory() as folder:fn(Path(folder))
             else:fn()
             print('PASS '+name,flush=True)

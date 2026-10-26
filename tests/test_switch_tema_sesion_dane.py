@@ -2,6 +2,7 @@
 
 import json
 import os
+import tempfile
 from copy import deepcopy
 from pathlib import Path
 from unittest.mock import patch
@@ -14,9 +15,11 @@ from PySide6.QtWidgets import QFileDialog, QMessageBox
 from tests.test_slider_comparacion_historica_fase_4d import APP, reales
 from tests.test_proyecciones_redisenio_visual import ventana_de_prueba
 from app_icociv.interfaz.ventana_principal import TEXTO_SIN_DANE, VentanaPrincipal, corte_requerido_sesion
+from tests.fixtures.fase0.generadores import anexo_slider_4d
 
 ROOT = Path(__file__).resolve().parents[1]
-ANEXO = ROOT / "docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx"  # periodos 2024-01 … 2026-12
+# Fase 1A (AS-007): el anexo sintético ya no se lee de docs/ (no publicado); se regenera idéntico celda a celda.
+ANEXO = anexo_slider_4d(Path(tempfile.mkdtemp(prefix="savip_anexo_4d_")) / "ANEXO_SINTETICO.xlsx")  # periodos 2024-01 … 2026-12
 MOTOR = "app_icociv.interfaz.controladores.controlador_principal.ControladorPrincipal.ejecutar_analisis"
 NOMBRE_LARGO = "anex-ICOCIV-IndicesCostosConstruccionInfraestructura-2026-agosto-revisado-final.xlsx"
 

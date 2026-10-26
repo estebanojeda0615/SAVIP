@@ -102,3 +102,20 @@ VECTORES_IMPORTE = [  # (precio P, anticipo A, I, I0, cantidad)
     (2500.55, 100.1, 118.92, 112.37, 12.0), (0.01, 0.0, 133.3333, 123.4567, 1000.0), (987654321.99, 12345.67, 150.0, 149.99, 2.0),
     (1234.5, 0.0, 97.255, 100.0, 0.25),
 ]
+
+
+def anexo_slider_4d(ruta):
+    """Fase 1A (AS-007): reproduce `docs/fase_4d_slider/fixtures/ANEXO_SINTETICO.xlsx` (no publicado; SHA-256 del
+    original 135b3358…0588e), verificado celda a celda: 2 grupos por tabla, 2024-01 a 2026-12 (36 meses), valor
+    100 + grupo + 0,2·i + 0,1·sen(i/3). Es el mismo patrón que `_anexo` de test_fase_4i_j_fecha_comun."""
+    libro = Workbook(); hoja = libro.active; hoja.title = "Anexo 16"
+    periodos = _periodos(36, 2024)
+    for tag, columnas in COLUMNAS_FIJAS_TABLAS.items():
+        hoja.append([tag + ". PRUEBA - datos sintéticos"]); hoja.append(columnas + periodos)
+        for grupo in (1, 2):
+            hoja.append([100.0 if "Ponderacion" in c else grupo if "cod" in c.lower() else f"{c} sintético {grupo}" for c in columnas]
+                        + [100 + grupo + i * .2 + math.sin(i / 3) * .1 for i in range(36)])
+        for _ in range(3):
+            hoja.append([None])
+    libro.save(ruta)
+    return ruta

@@ -24,9 +24,10 @@ from tests.test_slider_comparacion_historica_fase_4d import sin_motor
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV
 from app_icociv.interfaz.widgets.historial_series import resolver_alcance, analisis_en_ambito
+from tests.fixtures.salidas import carpeta_salida
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs/fase_4g_b_consulta_exportacion"
+OUT = carpeta_salida("fase_4g_b_consulta_exportacion")  # Fase 1A (AS-007): antes en docs/, no publicado
 HOJAS = ["Resumen", "Valores proyectados", "Proyecciones ICOCIV", "Trazabilidad", "Metodología y fórmulas"]
 
 

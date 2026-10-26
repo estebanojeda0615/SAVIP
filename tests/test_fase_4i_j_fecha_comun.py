@@ -25,10 +25,11 @@ from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV
 from app_icociv.servicios import fecha_objetivo as fo
 from app_icociv.utilidades.utilidades import COLUMNAS_FIJAS_TABLAS
+from tests.fixtures.salidas import carpeta_salida
 
 for _fuente in ("segoeui.ttf", "segoeuib.ttf", "seguisb.ttf", "seguisym.ttf"):
     QFontDatabase.addApplicationFont(str(Path("C:/Windows/Fonts") / _fuente))
-CAPTURAS = Path(__file__).resolve().parents[1] / "docs/fase_4i_j/capturas"
+CAPTURAS = carpeta_salida("fase_4i_j_capturas")  # Fase 1A (AS-007): antes en docs/, no publicado
 _MOTOR_REAL = ControladorPrincipal.ejecutar_analisis
 
 

@@ -29,6 +29,7 @@ from app_icociv.interfaz.tema.colores import paleta, contraste
 from app_icociv.persistencia.historial_icociv import serializar_resultado, recuperar_resultado
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
 from app_icociv.utilidades.utilidades import COLUMNAS_FIJAS_TABLAS
+from tests.fixtures.salidas import carpeta_salida
 
 
 def esperar(v, condicion):
@@ -87,7 +88,7 @@ def calcular(w, componente):
 
 
 def capturar(v, nombre, widget=None):
-    out = ROOT / "docs/fase_3/capturas"
+    out = carpeta_salida("fase_3_capturas")  # Fase 1A (AS-007): antes en docs/, no publicado
     out.mkdir(parents=True, exist_ok=True)
     v.resize(1366, 768)
     v._cambiar_seccion(1)
@@ -298,7 +299,7 @@ def test_tres_analisis_motor_real_recuperacion_sesion_excel_y_regresion():
                     "sesion_exacta": True, "excel_json_completo_exacto": True,
                     "sin_duplicacion_tecnica": True, "datos": "Anexo sintético; motor real intacto",
                     "sesion_bytes": ruta.stat().st_size, "excel_bytes": xlsx.stat().st_size}
-                (ROOT / "docs/fase_3/INTEGRACION_REAL.json").write_text(json.dumps(validacion, ensure_ascii=False, indent=2), encoding="utf-8")
+                (carpeta_salida("fase_3") / "INTEGRACION_REAL.json").write_text(json.dumps(validacion, ensure_ascii=False, indent=2), encoding="utf-8")
             # La ruta de Excel guardada en la sesión ya no existe: no se busca ni se abre; con un DANE
             # compatible cargado antes, la sesión se recupera desde sus instantáneas sin ejecutar el motor.
             sin_fuente = deepcopy(datos_guardados)

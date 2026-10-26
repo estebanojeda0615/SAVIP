@@ -25,14 +25,16 @@ from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.interfaz.widgets.proyecciones_icociv import WidgetProyeccionesICOCIV, COLUMNAS_VALORES, plan_columnas_valores
 from app_icociv.interfaz.widgets.historial_series import identidad_serie, huella_datos, firma_ejecucion
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
+from app_icociv.servicios.actualizacion_icociv import factor_aplicado
+from tests.fixtures.salidas import carpeta_salida
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / "docs/fase_4g"
+OUT = carpeta_salida("fase_4g")  # Fase 1A (AS-007): antes en docs/, no publicado
 TITULOS = [t for _, t in COLUMNAS_VALORES]
 
 
 def evidencia(nombre, datos):
-    """Guarda evidencia legible en docs/fase_4g; el verificador histórico puede prohibirlo."""
+    """Guarda evidencia legible en una carpeta temporal (antes docs/fase_4g)."""
     try:
         (OUT / nombre).write_text(json.dumps(datos, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
     except PermissionError:
@@ -220,7 +222,10 @@ def test_B_sesion_agosto_con_dane_octubre_invariante_actualizacion_y_restauracio
                 for r in n.valores:
                     e, estado = n.escenario_registro(r)
                     assert e["i0_icociv"] == octubre and e["i_icociv"] == r["i_icociv"] and estado.startswith("Referencia modificada")
-                    assert e["factor_icociv"] == r["i_icociv"] / octubre
+                    # Fase 1A (AS-007): la expectativa era el factor I/I0 sin redondear, anterior a la regla 4I-C.
+                    # Contrato vigente (comparacion_historica.escenario_registro -> aplicar_factor, golden economico):
+                    # F = 1 + ROUND_HALF_UP(((I/I0) - 1) * 100; 2) / 100.
+                    assert e["factor_icociv"] == float(factor_aplicado(r["i_icociv"], octubre)[1])
                 assert n.valores == original and n.historial[0]["resultado"] == analisis["resultado"]
                 escenarios["C_octubre_expreso"] = {"I0": octubre, "escenarios": [n.escenario_registro(r)[0] for r in n.valores]}
                 sesion_oct = tmp / "octubre.json"; guardar(otro, sesion_oct)

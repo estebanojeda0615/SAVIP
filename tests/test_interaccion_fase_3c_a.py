@@ -7,7 +7,10 @@ from unittest.mock import patch, Mock
 from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = ROOT / 'docs/fase_3c_a'
+sys.path.insert(0, str(ROOT))
+from tests.fixtures.salidas import carpeta_salida
+OUT = carpeta_salida('fase_3c_a')  # Fase 1A (AS-007): antes en docs/, no publicado
+HISTORICO = ROOT / 'docs/fase_3c_a'  # solo lectura: copias .bak del modo --antes del script (evidencia histórica)
 RUNTIME = OUT / 'temporal'
 RUNTIME.mkdir(parents=True, exist_ok=True)
 os.environ.update(QT_QPA_PLATFORM='offscreen', MPLCONFIGDIR=str(RUNTIME/'matplotlib'))
@@ -245,12 +248,12 @@ if __name__=='__main__':
         import app_icociv.interfaz.tema.estilos as styles
         baseline=[]
         for name in ('componentes/navegacion','widgets/empalme_iccp_icociv','widgets/visor_grafica'):
-            p=OUT/'respaldo_inicio'/('app_icociv__interfaz__'+name.replace('/','__')+'.py.bak')
+            p=HISTORICO/'respaldo_inicio'/('app_icociv__interfaz__'+name.replace('/','__')+'.py.bak')
             module=types.ModuleType('baseline_'+name.replace('/','_'))
             exec(compile(p.read_text(encoding='utf-8-sig'),str(p),'exec'),module.__dict__)
             baseline.append(module)
         VisorGraficaDialog=baseline[2].VisorGraficaDialog
-        with patch.object(ui,'NavegacionLateral',baseline[0].NavegacionLateral), patch.object(ui,'WidgetEmpalmeICCPICOCIV',baseline[1].WidgetEmpalmeICCPICOCIV), patch.object(styles,'RUTA_PLANTILLA',OUT/'respaldo_inicio/app_icociv__interfaz__tema__plantilla.qss.bak'):
+        with patch.object(ui,'NavegacionLateral',baseline[0].NavegacionLateral), patch.object(ui,'WidgetEmpalmeICCPICOCIV',baseline[1].WidgetEmpalmeICCPICOCIV), patch.object(styles,'RUTA_PLANTILLA',HISTORICO/'respaldo_inicio/app_icociv__interfaz__tema__plantilla.qss.bak'):
             styles.limpiar_cache()
             registrar_geometria('ANTES')
     else:

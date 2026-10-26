@@ -18,8 +18,9 @@ from tests.test_slider_comparacion_historica_fase_4d import APP, reales
 from tests.test_switch_tema_sesion_dane import MOTOR, _ventana_con_dane
 from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.persistencia import gestor_sesiones
+from tests.fixtures.salidas import carpeta_salida
 
-CAPTURAS = Path(__file__).resolve().parents[1] / "docs/fase_4i_g/capturas"
+CAPTURAS = carpeta_salida("fase_4i_g_capturas")  # Fase 1A (AS-007): antes en docs/, no publicado
 for _fuente in ("segoeui.ttf", "segoeuib.ttf", "seguisb.ttf", "seguisym.ttf"):  # capturas legibles (offscreen)
     QFontDatabase.addApplicationFont(str(Path("C:/Windows/Fonts") / _fuente))
 CLAVES_REFERENCIA = ("i0_icociv", "i_icociv", "periodo_base", "periodo_proyectado", "factor_icociv", "diferencia_porcentual",

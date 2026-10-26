@@ -16,6 +16,7 @@ from app_icociv.interfaz.ventana_principal import VentanaPrincipal
 from app_icociv.persistencia.historial_icociv import serializar_resultado,recuperar_resultado
 from app_icociv.persistencia.gestor_sesiones import cargar_sesion
 from tests.test_historial_empalme_fase_4b import guardar,abrir
+from tests.fixtures.fase0.generadores import anexo_slider_4d
 ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'docs/fase_4d_slider'
 APP=QApplication.instance() or QApplication([])
 
@@ -107,7 +108,7 @@ def test_meses_discontinuos_invalidos_legados_y_series_incompatibles():
 def test_sesion_mixta_reabierta_sin_fuente_sin_motor_y_empalme_intacto(tmp_path):
     v=VentanaPrincipal();w=cargar(v);otro=None
     try:
-        fuente=tmp_path/'anexo.xlsx';fuente.write_bytes((OUT/'fixtures/ANEXO_SINTETICO.xlsx').read_bytes())
+        fuente=anexo_slider_4d(tmp_path/'anexo.xlsx')  # Fase 1A (AS-007): regenerado idéntico; antes se copiaba de docs/
         for a in w.historial:a['archivo_excel']=str(fuente)
         v.controlador.ruta_archivo=fuente
         emp=json.loads((ROOT/'docs/fase_4c/FIXTURE_DATOS.json').read_text(encoding='utf-8'))['empalme_iccp_icociv']

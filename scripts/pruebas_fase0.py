@@ -27,6 +27,8 @@ ESENCIALES = [
     "tests/test_fase0_golden_motor.py", "tests/test_fase0_golden_economico.py", "tests/test_fase0_golden_sesion_exportables.py",
     # Fase 1A (AS-006): contrato del selector vigente _seleccionar_modelo_rectangular (+ AS-001 como xfail estricto)
     "tests/test_fase1a_selector_rectangular.py",
+    # Fase 1A (AS-007): ejecutable sin docs/ al regenerar el anexo sintético (4/4 en clon limpio)
+    "tests/test_fase_4i_h_encabezado.py",
     # Suites existentes que pasan completas en un clon limpio (caracterización de la Fase 0)
     "tests/test_alertas_boton_cerrar.py", "tests/test_atipicos_calendario.py", "tests/test_auditoria_formulas_estadisticas.py",
     "tests/test_banda_prediccion_valida.py", "tests/test_calendario_y_clasificacion_intervalo.py", "tests/test_caso_acero_reproducible.py",
@@ -57,6 +59,17 @@ DANE = [
     "tests/test_microcorreccion_fase_4d_c.py", "tests/test_referencia_economica_fase_4d_b.py",
     "tests/test_slider_comparacion_historica_fase_4d.py", "tests/test_switch_tema_sesion_dane.py", "tests/test_v112_01b_indicadores_sesiones.py",
 ]
+#: Fase 1A (AS-007): pruebas autocontenidas dentro de archivos del perfil dane (que también usan la sesión real):
+#: pasan en clon limpio con el anexo sintético regenerado (`generadores.anexo_slider_4d`), 2/2 corridas estables.
+NODOS_A_ESENCIALES = [
+    "tests/test_switch_tema_sesion_dane.py::test_switch_tema_pastilla_alterna_y_no_se_recorta",
+    "tests/test_fase_4i_i_responsive_borrador.py::test_aviso_sesion_guardada_no_falla_al_destruir_la_ventana",
+    *(f"tests/test_v112_01b_indicadores_sesiones.py::{n}" for n in (
+        "test_franja_inmediata_visible_y_esqueleto_solo_tras_el_umbral", "test_franja_sin_esqueleto_no_cambia_y_se_retira",
+        "test_pintar_ahora_aplica_el_umbral_vencido_sin_bucle_de_eventos", "test_franja_estatica_con_animaciones_de_windows_desactivadas",
+        "test_ciclos_franja_sin_fugas", "test_T01B_1_abrir_desde_menu_boton_y_portada_franja_inmediata",
+        "test_T01B_3_errores_de_apertura_sin_falso_exito_ni_velo_perpetuo", "test_T01B_14_salir_durante_una_apertura_se_ignora_y_avisa")),
+]
 GUI = ["tests/test_v112_01c_dialogos_legibles.py"]  # anchos offscreen sin fuentes Segoe registradas
 #: Pruebas sueltas con carreras de tiempo heredadas: salen del perfil esencial (--deselect) y van al perfil gui.
 GUI_NODOS = [
@@ -66,6 +79,9 @@ GUI_NODOS = [
     # Guarda justo tras proyectar sin esperar a que termine el indicador de carga; en el runner (más lento)
     # guardar_sesion_actual devolvió False sin escribir (causa probable: regla 01B de no guardar durante una carga).
     "tests/test_proyecciones_fase_2b.py::test_integracion_sesion_con_excel_y_trabajadores_reales",
+    # Fase 1A: expectativa del factor actualizada a la regla 4I-C; ya no necesita docs/. Pasa 3/3 aislada, pero
+    # falló 1 de 4 al correr junto a otras suites (guardar sin esperar a que termine la carga): misma carrera que la anterior.
+    "tests/test_fase_4g_historial_dane_fechas.py::test_B_sesion_agosto_con_dane_octubre_invariante_actualizacion_y_restauracion",
 ]
 #: Se ejecutan en su propio proceso. test_proyecciones_redisenio_visual apaga las sombras globales AL IMPORTARSE,
 #: y lo importan (directa o transitivamente) test_numericos_icociv, test_horizonte_editable, test_proyecciones_fase_2b
@@ -85,9 +101,14 @@ def historicas() -> list[str]:
     return sorted(p.relative_to(RAIZ).as_posix() for p in (RAIZ / "tests").glob("test_*.py") if p.relative_to(RAIZ).as_posix() not in asignados)
 
 
-PERFILES = {"esenciales": ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI + GUI_NODOS}
-#: Opciones fijas por perfil (las pruebas de GUI_NODOS no se ejecutan dos veces).
-OPCIONES = {"esenciales": [f"--deselect={n}" for n in GUI_NODOS], "historicas": ["--continue-on-collection-errors"]}
+PERFILES = {"esenciales": ESENCIALES + NODOS_A_ESENCIALES, "dane": DANE, "historicas": historicas(), "gui": GUI + GUI_NODOS}
+
+
+def opciones(perfil: str) -> list[str]:
+    """Cada prueba en un solo perfil: los nodos movidos se deseleccionan en el perfil de su archivo de origen."""
+    propios = set(PERFILES[perfil]); archivos = {a for a in propios if "::" not in a}
+    movidos = [f"--deselect={n}" for n in NODOS_A_ESENCIALES + GUI_NODOS if n not in propios and n.split("::")[0] in archivos]
+    return (["--continue-on-collection-errors"] if perfil == "historicas" else []) + movidos
 
 
 def _entorno() -> dict:
@@ -98,7 +119,7 @@ def listar() -> int:
     total = 0
     for nombre, archivos in PERFILES.items():
         r = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider",
-                            "--continue-on-collection-errors", *OPCIONES.get(nombre, []), *archivos], cwd=RAIZ, env=_entorno(), capture_output=True,
+                            "--continue-on-collection-errors", *opciones(nombre), *archivos], cwd=RAIZ, env=_entorno(), capture_output=True,
                            text=True, encoding="utf-8", errors="replace")
         pruebas = sum(1 for linea in r.stdout.splitlines() if "::" in linea)
         errores = len(re.findall(r"^ERROR ", r.stdout, re.M))
@@ -120,14 +141,14 @@ def main(argv: list[str]) -> int:
     faltan = [a for a in PERFILES[perfil] if not (RAIZ / a.split("::")[0]).exists()]
     if faltan:
         sys.exit(f"Archivos de prueba inexistentes en el perfil {perfil}: {faltan}")
-    opciones = OPCIONES.get(perfil, [])
+    fijas = opciones(perfil)
     juntos = [a for a in PERFILES[perfil] if a not in AISLADOS]
     aislados = [a for a in PERFILES[perfil] if a in AISLADOS]
     codigos = []
     for grupo, sufijo in ((juntos, ""), (aislados, "_aislados")):
         if grupo:
             argumentos = [a.replace(".xml", f"{sufijo}.xml") if a.startswith("--junitxml") else a for a in extra]
-            codigos.append(subprocess.run([sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *opciones,
+            codigos.append(subprocess.run([sys.executable, "-W", "ignore", "-m", "pytest", "-p", "no:cacheprovider", "-q", *fijas,
                                            *grupo, *argumentos], cwd=RAIZ, env=_entorno()).returncode)
     return max(codigos)
 

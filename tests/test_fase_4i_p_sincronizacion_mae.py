@@ -17,8 +17,9 @@ from tests.test_fase_4i_j_reutilizacion import _Contador, _anexo, _ejecutar
 from app_icociv.interfaz import ventana_principal as vp
 from app_icociv.interfaz.controladores.controlador_principal import ControladorPrincipal
 from app_icociv.servicios import fecha_objetivo as fo
+from tests.fixtures.salidas import carpeta_salida
 
-CAPTURAS = Path(__file__).resolve().parents[1] / "docs/fase_4i_p/capturas"
+CAPTURAS = carpeta_salida("fase_4i_p_capturas")  # Fase 1A (AS-007): antes en docs/, no publicado
 
 
 def _tabla_mae(analisis):

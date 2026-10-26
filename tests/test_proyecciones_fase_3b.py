@@ -29,8 +29,10 @@ from app_icociv.persistencia.gestor_sesiones import cargar_sesion
 from app_icociv.interfaz.tema import tokens
 from app_icociv.interfaz.widgets.modelo_tabla import ModeloTablaPandas
 import pandas as pd
+from tests.fixtures.salidas import carpeta_salida
 
-OUT = ROOT / "docs/fase_3b"
+OUT = carpeta_salida("fase_3b")  # Fase 1A (AS-007): antes en docs/, no publicado
+HISTORICO = ROOT / "docs/fase_3b"  # solo lectura: copia .bak anterior a la fase (evidencia histórica)
 
 
 def capturar(v, nombre, resultados=False, widget=None):
@@ -118,7 +120,7 @@ def test_inferencia_componente_y_nombres_compatibles():
 
 
 def test_calculo_sesion_excel_identicos_al_respaldo_3b():
-    fuente = OUT / "respaldo_inicio/app_icociv__interfaz__widgets__proyecciones_icociv.py.bak"
+    fuente = HISTORICO / "respaldo_inicio/app_icociv__interfaz__widgets__proyecciones_icociv.py.bak"
     base = types.ModuleType("baseline_fase3b")
     exec(compile(fuente.read_text(encoding="utf-8-sig"), str(fuente), "exec"), base.__dict__)
     antiguo = base.WidgetProyeccionesICOCIV()
