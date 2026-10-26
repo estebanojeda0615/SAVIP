@@ -25,6 +25,8 @@ RAIZ = Path(__file__).resolve().parents[1]
 ESENCIALES = [
     # Golden Masters de la Fase 0
     "tests/test_fase0_golden_motor.py", "tests/test_fase0_golden_economico.py", "tests/test_fase0_golden_sesion_exportables.py",
+    # Fase 1A (AS-006): contrato del selector vigente _seleccionar_modelo_rectangular (+ AS-001 como xfail estricto)
+    "tests/test_fase1a_selector_rectangular.py",
     # Suites existentes que pasan completas en un clon limpio (caracterización de la Fase 0)
     "tests/test_alertas_boton_cerrar.py", "tests/test_atipicos_calendario.py", "tests/test_auditoria_formulas_estadisticas.py",
     "tests/test_banda_prediccion_valida.py", "tests/test_calendario_y_clasificacion_intervalo.py", "tests/test_caso_acero_reproducible.py",
