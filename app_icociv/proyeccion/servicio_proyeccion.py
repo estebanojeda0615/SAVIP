@@ -10,11 +10,9 @@ de recolectar esos parÃ¡metros antes de llamar a estas funciones.
 
 from __future__ import annotations
 
-import hashlib
 import math
 from decimal import Decimal, localcontext
 from fractions import Fraction
-from datetime import datetime, timezone
 from typing import Any
 
 import pandas as pd
@@ -38,7 +36,6 @@ from app_icociv.estadistica.criterios import (
     UMBRAL_IC95_REL_OPERATIVO,
     UMBRAL_MASE_ADVERTENCIA,
     UMBRAL_RRMSE_PEOR_BENCHMARK,
-    TOLERANCIA_DETERIORO_AJUSTE_CALENDARIO,
     TOLERANCIA_RRMSE_BENCHMARK,
 )
 from app_icociv.utilidades.utilidades import (
@@ -58,7 +55,6 @@ from app_icociv.estadistica.calendario_anual import (
     _mes_de_periodo,
     aplicar_ajuste_calendario,
     eneros_en_horizonte,
-    evaluar_ajuste_en_backtesting,
     perfil_salto_anual,
     resumen_trazabilidad,
 )
@@ -67,7 +63,6 @@ from app_icociv.estadistica.diagnostico_residuos import (
     generar_interpretacion_estadistica,
 )
 from app_icociv.estadistica.metricas import (
-    calcular_escala_naive_insample,
     calcular_mae,
     calcular_mape,
     calcular_mase_por_origen,
@@ -2161,66 +2156,6 @@ def _limites_auditoria_horizontes(n_obs: int) -> tuple[int, int, int, int]:
     )
 
 
-def _metadatos_auditoria_horizontes(
-    serie_trabajo: pd.DataFrame,
-    horizonte_solicitado: int,
-    origen_horizonte: str,
-) -> dict[str, Any]:
-    """Firma la entrada y documenta los límites que hacen reproducible la auditoría."""
-    serie_firma = serie_trabajo[["Periodo", "Indice"]].copy()
-    firma = hashlib.sha256(
-        pd.util.hash_pandas_object(serie_firma, index=False).to_numpy().tobytes()
-    ).hexdigest()
-    entrenamiento, maximo_datos, limite, maximo_validado = _limites_auditoria_horizontes(len(serie_firma))
-    n_obs = int(len(serie_firma))
-    ventanas_solicitado = ventanas_oos_disponibles(n_obs, int(horizonte_solicitado))
-    return {
-        "firma_serie_sha256": firma,
-        "fecha_inicial_serie": str(serie_firma["Periodo"].iloc[0]) if not serie_firma.empty else "",
-        "fecha_final_serie": str(serie_firma["Periodo"].iloc[-1]) if not serie_firma.empty else "",
-        "numero_observaciones": n_obs,
-        "horizonte_solicitado": int(horizonte_solicitado),
-        "origen_horizonte": str(origen_horizonte),
-        # P0-H: ya no hay tope configurado; la busqueda la fija el dato.
-        "horizonte_maximo_busqueda_configurado": int(maximo_datos),
-        "horizonte_maximo_evaluable_por_datos": int(maximo_datos),
-        # HGRID, 17-08-2026 (V-CODEX-R3, residual 2). RENOMBRADO desde
-        # `horizonte_maximo_validado_por_datos`. Aquel nombre convertia una cota de
-        # EXISTENCIA en una afirmacion de VALIDACION: con n=7 la aplicacion
-        # publicaba a la vez «horizonte maximo validado por datos: 1» y «ventanas
-        # minimas requeridas: 6», teniendo UNA sola ventana. Ninguna fuente
-        # sustenta llamar validado a un horizonte por tener una observacion fuera
-        # de muestra, y el numero de ventanas exigido no es un requisito: es el
-        # tramo descriptivo superior. El campo se conserva porque el dato -hasta
-        # donde la muestra de errores deja de ser muy limitada- es informacion
-        # legitima; lo que se retira es la palabra.
-        "horizonte_maximo_evidencia_oos_no_limitada": int(maximo_validado),
-        "horizonte_maximo_auditoria": int(limite),
-        "entrenamiento_inicial": int(entrenamiento),
-        # RENOMBRADAS: no son requisitos que haya que cumplir, son las fronteras de
-        # los tres tramos con que se comunica el tamano de la muestra de errores.
-        "ventanas_tramo_evidencia_disponible": int(MIN_ITERACIONES_WF_ESCENARIO),
-        "ventanas_tramo_evidencia_no_limitada": int(MIN_ITERACIONES_BACKTESTING),
-        # Cuenta y vocabulario del horizonte que se pidio, para que la salida no
-        # obligue a reconstruir `W` desde n y N0.
-        "ventanas_oos_horizonte_solicitado": int(ventanas_solicitado),
-        "tramo_evidencia_oos_horizonte_solicitado": tramo_evidencia_oos(ventanas_solicitado),
-        "evidencia_oos_horizonte_solicitado": _texto_evidencia_oos(ventanas_solicitado),
-        "formula_ventanas_oos": "W = n - N0 - h + 1; existe evidencia OOS si W >= 1, luego h <= n - N0",
-        "primer_origen_provisional": True,
-        "version_criterios": VERSION_CRITERIOS_HORIZONTE,
-        "timestamp_ejecucion_utc": datetime.now(timezone.utc).isoformat(),
-    }
-
-
-def _numero_parametros_modelo(nombre_modelo: str) -> int:
-    """Número aproximado de parámetros para AIC/R2 ajustado."""
-    nombre = nombre_modelo.lower()
-    if "polin" in nombre:
-        return 3
-    return 2
-
-
 def _horizontes_evaluacion(horizonte_solicitado: int, n_obs: int) -> tuple[int, ...]:
     """Horizontes a validar con evidencia temporal mensual.
 
@@ -2527,46 +2462,6 @@ def _estado_por_horizonte(horizonte: int, ancho_95: float, cautelas: list[str]) 
         tramo = "Horizonte corto"
     detalle = "con advertencias registradas" if cautelas else "sin advertencias registradas"
     return f"{tramo} ({detalle})", f"descriptivo: {tramo.lower()}, {detalle}"
-
-
-def _metricas_desde_predicciones(predicciones: pd.DataFrame, entrenamiento: np.ndarray) -> dict[str, float]:
-    observado = predicciones["Observado"].to_numpy(dtype=float)
-    predicho = predicciones["Predicho"].to_numpy(dtype=float)
-    errores = predicciones["Error"].to_numpy(dtype=float)
-    abs_err = np.abs(errores[np.isfinite(errores)])
-    # D-8: misma deteccion compartida por puntaje z modificado; salida descriptiva.
-    periodos = predicciones["Periodo"].tolist() if "Periodo" in predicciones.columns else None
-    detalle_extremos = detectar_errores_extremos(errores, periodos)
-    extremos = detalle_extremos["proporcion"]
-    if len(abs_err) == 0:
-        estabilidad = float("nan")
-    else:
-        estabilidad = float(np.std(abs_err, ddof=1) / np.mean(abs_err)) if len(abs_err) > 1 and np.mean(abs_err) > 0 else 0.0
-    if "Escala_naive_insample" in predicciones.columns:
-        escalas_mase = pd.to_numeric(predicciones["Escala_naive_insample"], errors="coerce").to_numpy(dtype=float)
-    else:
-        escala_unica = calcular_escala_naive_insample(entrenamiento)
-        escalas_mase = np.full(len(errores), escala_unica, dtype=float)
-    mase = calcular_mase_por_origen(np.abs(errores), escalas_mase)
-    escalas_validas = escalas_mase[np.isfinite(escalas_mase) & (np.abs(escalas_mase) > EPS_NUMERICO)]
-    return {
-        "mae": calcular_mae(observado, predicho),
-        "rmse": calcular_rmse(observado, predicho),
-        "mape": calcular_mape(observado, predicho),
-        "smape": calcular_smape(observado, predicho),
-        "mase": mase,
-        "mase_denominador": "naive no estacional por origen walk-forward",
-        "mase_denominador_promedio": float(np.mean(escalas_validas)) if len(escalas_validas) else float("nan"),
-        "mase_denominadores_validos": int(len(escalas_validas)),
-        "mase_advertencia": "" if len(escalas_validas) else "MASE no estable: escala naive in-sample nula o no disponible.",
-        "sesgo_medio": calcular_sesgo_medio(observado, predicho),
-        "error_medio": calcular_sesgo_medio(observado, predicho),
-        "desviacion_error": float(np.std(errores, ddof=1)) if len(errores) > 1 else 0.0,
-        "porcentaje_errores_extremos": extremos,
-        "errores_extremos": detalle_extremos,
-        "estabilidad_error": estabilidad,
-        "iteraciones": int(len(predicciones)),
-    }
 
 
 def peor_que_benchmark_naive(rrmse_naive: Any, es_benchmark: Any) -> bool:
@@ -4354,20 +4249,6 @@ def _resultado_sin_proyeccion(
     }
 
 
-def _explicacion_factibilidad(razones: list[str]) -> str:
-    if not razones:
-        return "La proyección no se genera porque no cumple criterios metodologicos mínimos."
-    for razon in razones:
-        texto = str(razon)
-        if "autocorrelacion residual severa" in texto:
-            return texto
-    for razon in razones:
-        texto = str(razon)
-        if "MASE > 1" in texto:
-            return texto
-    return "La proyección no se genera porque " + " ".join(str(r) for r in razones[:3])
-
-
 def _numero_finito(valor: Any) -> float:
     try:
         numero = float(valor)
@@ -4380,72 +4261,6 @@ def _ratio_local(numerador: float, denominador: float) -> float:
     if not (np.isfinite(numerador) and np.isfinite(denominador)) or abs(float(denominador)) <= EPS_NUMERICO:
         return float("nan")
     return float(numerador / denominador)
-
-
-def _validar_ajuste_calendario_serie(
-    serie: pd.DataFrame,
-    backtesting_comparativo: dict[str, dict],
-    modelo_codigo: str,
-) -> dict:
-    """Mide el respaldo retrospectivo del ajuste calendario. **Ya no decide nada.**
-
-    P0-F, 12-08-2026: el tratamiento se retiro del camino productivo, de modo que
-    esta funcion produce un DIAGNOSTICO que se publica y no modifica ningun
-    pronostico. `_ajustar_salto_anual` fija `aplicado = False` de forma
-    incondicional sin consultar este resultado.
-
-    Lo que mide: la validación retrospectiva se agrega sobre un conjunto fijo de
-    horizontes de referencia (`HORIZONTES_VALIDACION_CALENDARIO`), de modo que la
-    lectura sea una propiedad de la serie y del modelo y no cambie con lo que
-    solicite el usuario; se compara contra la tolerancia de deterioro de MAE y
-    RMSE, y `gamma` se reestima por origen sin fuga dentro de
-    `evaluar_ajuste_en_backtesting`.
-
-    Ese conjunto `(1, 3, 6)` es, el mismo, un literal sin fuente -uno de los
-    cuatro motivos de la retirada-, razon de mas para no devolverle efecto.
-    """
-    mae_base = mae_ajustado = rmse2_base = rmse2_ajustado = 0.0
-    ventanas = 0
-    detalle: list[dict[str, Any]] = []
-    for horizonte in HORIZONTES_VALIDACION_CALENDARIO:
-        bt = backtesting_comparativo.get(f"{modelo_codigo}_h{int(horizonte)}") or {}
-        parcial = evaluar_ajuste_en_backtesting(
-            serie=serie,
-            predicciones=bt.get("predicciones"),
-            horizonte=int(horizonte),
-        )
-        if not parcial.get("evaluado"):
-            continue
-        n = int(parcial.get("ventanas", 0) or 0)
-        if n <= 0:
-            continue
-        ventanas += n
-        mae_base += float(parcial["mae_base"]) * n
-        mae_ajustado += float(parcial["mae_ajustado"]) * n
-        rmse2_base += float(parcial["rmse_base"]) ** 2 * n
-        rmse2_ajustado += float(parcial["rmse_ajustado"]) ** 2 * n
-        detalle.append({"horizonte": int(horizonte), **{k: parcial[k] for k in ("ventanas", "mejora_mae", "mejora_rmse")}})
-
-    if ventanas == 0:
-        return {"evaluado": False, "recomendado": False, "ventanas": 0, "horizontes_validacion": list(HORIZONTES_VALIDACION_CALENDARIO)}
-
-    mae_b, mae_a = mae_base / ventanas, mae_ajustado / ventanas
-    rmse_b = float(np.sqrt(rmse2_base / ventanas))
-    rmse_a = float(np.sqrt(rmse2_ajustado / ventanas))
-    tolerancia = TOLERANCIA_DETERIORO_AJUSTE_CALENDARIO
-    return {
-        "evaluado": True,
-        "ventanas": ventanas,
-        "horizontes_validacion": list(HORIZONTES_VALIDACION_CALENDARIO),
-        "mae_base": mae_b,
-        "mae_ajustado": mae_a,
-        "rmse_base": rmse_b,
-        "rmse_ajustado": rmse_a,
-        "mejora_mae": (mae_b - mae_a) / mae_b * 100.0 if mae_b > 0 else 0.0,
-        "mejora_rmse": (rmse_b - rmse_a) / rmse_b * 100.0 if rmse_b > 0 else 0.0,
-        "detalle_por_horizonte": detalle,
-        "recomendado": bool(mae_b > 0 and rmse_b > 0 and mae_a <= mae_b * tolerancia and rmse_a <= rmse_b * tolerancia),
-    }
 
 
 def _ajustar_salto_anual(
