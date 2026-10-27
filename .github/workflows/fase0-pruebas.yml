@@ -9,6 +9,7 @@ on:
       - maintenance/v1.1.2-fase0-reproducibilidad
       - maintenance/v1.1.2-fase1a-as006-as007
       - maintenance/v1.1.2-fase1b-as001
+      - maintenance/v1.1.2-fase2a-as003
   workflow_dispatch:
 
 permissions:
