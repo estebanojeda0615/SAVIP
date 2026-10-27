@@ -205,12 +205,13 @@ def test_la_regla_no_consulta_umbrales_ni_identidad():
 
 
 def test_la_regla_retirada_ya_no_se_invoca_en_la_ruta_productiva():
-    """`_modelo_trayectoria_consistente` se conserva por historia, no por uso."""
+    """`_modelo_trayectoria_consistente` se retiro en la Fase 2B (AS-003): ni definicion ni llamadas."""
     fuente_modulo = inspect.getsource(sp)
     llamadas = fuente_modulo.count("_modelo_trayectoria_consistente(")
-    assert llamadas == 1, (
-        f"solo debe quedar su definicion, no llamadas ({llamadas})"
+    assert llamadas == 0, (
+        f"no debe quedar ninguna llamada ({llamadas})"
     )
+    assert not hasattr(sp, "_modelo_trayectoria_consistente")
 
 
 def test_un_solo_modelo_para_toda_la_trayectoria():

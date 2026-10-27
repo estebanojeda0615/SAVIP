@@ -298,8 +298,12 @@ def test_cada_mutante_es_detectado(mutante):
 def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado():
     serie = gen.serie("tendencia_lineal_ruido")
     anio, mes = gen.objetivo(serie, 11)
-    retirados = ("seleccionar_modelo_por_rmse_oos_global", "_rmse_global_estable", "_modelo_consistente_desde_comparativo",
-                 "_modelo_trayectoria_consistente", "determinar_horizonte_maximo_estadistico", "_evaluar_horizontes_proyeccion")
+    # Fase 2B (AS-003, opción B): estas tres se retiraron del módulo; se exige su AUSENCIA.
+    eliminados = ("_rmse_global_estable", "_modelo_consistente_desde_comparativo", "_modelo_trayectoria_consistente")
+    assert [n for n in eliminados if hasattr(sp, n)] == []
+    # Selectores y evaluadores heredados que siguen definidos: se espían y la ruta productiva no debe llamarlos.
+    retirados = ("seleccionar_modelo_por_rmse_oos_global", "determinar_horizonte_maximo_estadistico",
+                 "_evaluar_horizontes_proyeccion")
     espias = {n: patch.object(sp, n, wraps=getattr(sp, n)) for n in retirados}
     with patch.object(sp, "_seleccionar_modelo_rectangular", wraps=SELECTOR) as vigente, \
          patch.object(sp, "_matriz_rectangular_12_24", wraps=sp._matriz_rectangular_12_24) as matriz:

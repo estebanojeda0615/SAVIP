@@ -3125,38 +3125,6 @@ def _rmse_desde_sse(sse: Fraction, n: int) -> float:
             return float((Decimal(sse.numerator) / Decimal(sse.denominator) / n).sqrt())
 
 
-def _rmse_global_estable(valores: list[float]) -> float:
-    """RMSE de una lista de errores, evaluado sin desbordar en los intermedios.
-
-    Misma expresion de siempre, escrita de otra forma:
-
-        sqrt((e_1^2 + ... + e_n^2) / n)  =  hypot(e_1, ..., e_n) / sqrt(n)
-
-    HALLAZGO CLASE B, 13-08-2026. La forma anterior era
-    ``math.sqrt(sum(e ** 2 for e in valores) / n)``. Con errores
-    **individualmente finitos** pero muy grandes -medido: 3,72e155 en la serie
-    erratica de 72 observaciones- el cuadrado excede el rango del flotante y, al
-    ser `float` de Python, ``**`` levanta ``OverflowError`` en vez de devolver
-    ``inf``. La guarda ``np.isfinite`` de quien llama, escrita justamente para
-    excluir candidatos divergentes, nunca se alcanzaba: la excepcion abortaba
-    `ejecutar_proyeccion` entera con traceback.
-
-    ``math.hypot`` es variadico desde Python 3.8 y calcula la norma euclidea con
-    escalado interno, de modo que nunca materializa los cuadrados. Devuelve
-    ``inf`` -no excepcion- cuando el resultado real no cabe en un flotante, y
-    propaga ``inf``/``nan`` como no finitos, que es lo que la guarda espera.
-
-    La correccion es **puramente numerica**: no cambia la metrica, ni la muestra
-    comun, ni los pesos, ni el orden de candidatos, ni el desempate. No hay
-    recorte, epsilon, umbral de magnitud, descarte por tamano ni tope de
-    horizonte. El cap 30 retirado en P0-H no creo la divergencia: la hizo
-    observable, porque antes esos horizontes no se median.
-    """
-    if not valores:
-        return float("nan")
-    return math.hypot(*valores) / math.sqrt(len(valores))
-
-
 def _errores_oos_por_par(
     backtesting_comparativo: dict[str, dict],
     horizontes: tuple[int, ...],
@@ -3266,84 +3234,6 @@ def seleccionar_modelo_por_rmse_oos_global(
         if mejor_sse is None or sse < mejor_sse:
             mejor_nombre, mejor_sse = nombre, sse
     return mejor_nombre
-
-
-def _modelo_consistente_desde_comparativo(
-    backtesting_comparativo: dict[str, dict],
-    horizontes: tuple[int, ...],
-) -> str | None:
-    """Variante que puntua directamente sobre el backtesting comparativo.
-
-    Permite fijar el modelo antes de evaluar los horizontes, de modo que la
-    clasificación de admisibilidad, las métricas, los intervalos y la
-    trayectoria correspondan todos al mismo modelo.
-    """
-    # C-SEL-001: la seleccion es el minimo RMSE fuera de muestra global sobre la
-    # muestra comun. Sustituye desde el 08-08-2026 al promedio ponderado con
-    # peso 1/h, que era la ultima heuristica decisoria sin fuente del producto.
-    return seleccionar_modelo_por_rmse_oos_global(backtesting_comparativo, horizontes)
-
-
-def _modelo_trayectoria_consistente(evaluaciones: list[dict[str, Any]]) -> str | None:
-    """RETIRADA COMO REGLA DE SELECCION el 08-08-2026. Se conserva por historia.
-
-    Elegia un unico modelo para toda la trayectoria puntuando cada uno por su
-    RMSE relativo al mejor de cada horizonte y promediando **con peso 1/h**.
-
-    La consistencia de trayectoria que esta funcion introdujo -que el modelo sea
-    una propiedad de la serie y no del horizonte que el usuario pida- **se
-    conserva y sigue siendo obligatoria**; lo que se retira es la ponderacion.
-    El peso `1/h` no tenia fuente: su justificacion era operativa y cambiaba el
-    modelo entregado, de modo que era una heuristica decisoria.
-
-    La sustituye `seleccionar_modelo_por_rmse_oos_global`, que minimiza la
-    perdida cuadratica fuera de muestra realmente observada, sobre la muestra
-    comun a todos los candidatos y sin ningun parametro libre.
-
-    **Ya no la llama nadie en la ruta productiva.** Se mantiene definida porque
-    la comparacion entre las dos reglas es parte del registro de auditoria: la
-    medicion del 08-08-2026 sobre las diez series del anexo esta en
-    `CIERRE_FINAL_H9_RMSE_GLOBAL_SAVIP_2026-08-08`.
-    """
-    relevantes = [
-        ev
-        for ev in evaluaciones
-        if int(ev.get("horizonte", 0) or 0) >= 1 and ev.get("backtesting_por_modelo")
-    ]
-    if not relevantes:
-        return None
-
-    suma: dict[str, float] = {}
-    peso_total: dict[str, float] = {}
-    apariciones: dict[str, int] = {}
-    for ev in relevantes:
-        horizonte = int(ev.get("horizonte", 0) or 0)
-        rmse_por_modelo: dict[str, float] = {}
-        for nombre, bt in (ev.get("backtesting_por_modelo") or {}).items():
-            valor = _numero_finito(((bt or {}).get("metricas") or {}).get("rmse"))
-            if np.isfinite(valor) and valor > 0:
-                rmse_por_modelo[str(nombre)] = float(valor)
-        if not rmse_por_modelo:
-            continue
-        mejor = min(rmse_por_modelo.values())
-        peso = 1.0 / float(horizonte)
-        for nombre, valor in rmse_por_modelo.items():
-            suma[nombre] = suma.get(nombre, 0.0) + peso * (valor / mejor)
-            peso_total[nombre] = peso_total.get(nombre, 0.0) + peso
-            apariciones[nombre] = apariciones.get(nombre, 0) + 1
-
-    if not suma:
-        return None
-    # Solo compiten modelos presentes en todos los horizontes considerados.
-    cobertura = max(apariciones.values())
-    elegibles = {
-        n: suma[n] / peso_total[n]
-        for n in suma
-        if apariciones[n] == cobertura and peso_total[n] > 0
-    }
-    if not elegibles:
-        elegibles = {n: suma[n] / peso_total[n] for n in suma if peso_total[n] > 0}
-    return min(elegibles, key=elegibles.get) if elegibles else None
 
 
 def _puntaje_rmse_ponderado(
