@@ -164,18 +164,3 @@ def analizar_serie_temporal(
         "posible_estacionalidad": posible_estacionalidad,
         "cambios_bruscos": cambios_bruscos,
     }
-
-
-def resumen_validacion(validacion: dict[str, Any]) -> str:
-    """Resumen textual breve para UI o reporte."""
-    estado = "Serie válida para modelacion" if validacion.get("valida_modelacion") else "Serie con advertencias"
-    return "\n".join(
-        [
-            estado,
-            f"Observaciones: {validacion.get('observaciones', 0)}",
-            f"Valores faltantes: {validacion.get('valores_faltantes', 0)}",
-            f"Duplicados: {validacion.get('duplicados', 0)}",
-            f"Continuidad temporal: {validacion.get('continuidad_temporal', 'REVISAR')}",
-            f"Longitud mínima: {validacion.get('longitud_minima', 'REVISAR')}",
-        ]
-    )
