@@ -1,0 +1,37 @@
+== base (c9166c6)
+test_cierre_metodologico: 1 failed, 23 passed in 1.49s
+test_horizonte_evidencia_reducida: 3 failed, 6 passed in 71.16s (0:01:11)
+test_integracion_fhg: 2 failed, 17 passed in 20.21s
+test_p0c_objeto_publico_sin_intervalo: 1 error in 1.58s
+test_p0c_regresion_negativa_c2: 1 error in 1.92s
+test_p0d_rmse_orden_exacto: 13 passed in 1.29s
+test_p0g_desacople_punto_intervalo: 6 failed, 4 passed in 2.65s
+test_regresiones_auditoria_independiente_bghc: no tests ran in 1.33s
+test_residuales_auditoria_independiente_r3: no tests ran in 1.30s
+test_rmse_global_estable: 11 passed in 1.29s
+test_seleccion_rmse_global: 16 passed in 1.35s
+== lote 1 (c6ca863)
+test_cierre_metodologico: 1 failed, 23 passed in 1.49s
+test_horizonte_evidencia_reducida: 3 failed, 6 passed in 66.74s (0:01:06)
+test_integracion_fhg: 2 failed, 17 passed in 15.66s
+test_p0c_objeto_publico_sin_intervalo: 1 error in 1.38s
+test_p0c_regresion_negativa_c2: 1 error in 1.64s
+test_p0d_rmse_orden_exacto: 13 passed in 1.13s
+test_p0g_desacople_punto_intervalo: 6 failed, 4 passed in 2.36s
+test_regresiones_auditoria_independiente_bghc: no tests ran in 1.16s
+test_residuales_auditoria_independiente_r3: no tests ran in 1.15s
+test_rmse_global_estable: 11 passed in 1.16s
+test_seleccion_rmse_global: 16 passed in 1.18s
+== ids de fallo (4 archivos sin errores de recoleccion), identicos:
+FAILED tests/test_cierre_metodologico.py::test_no_hay_modelo_por_horizonte
+FAILED tests/test_horizonte_evidencia_reducida.py::test_la_rejilla_de_horizontes_no_tiene_tope_historico_ni_cascada
+FAILED tests/test_horizonte_evidencia_reducida.py::test_serie_corta_publica_su_cobertura_y_niega_solo_por_ventanas
+FAILED tests/test_horizonte_evidencia_reducida.py::test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista
+FAILED tests/test_integracion_fhg.py::test_h3_el_tope_60_solo_restringe_la_entrada
+FAILED tests/test_integracion_fhg.py::test_h4_el_maximo_publicado_declara_que_admite_huecos
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g10_los_diagnosticos_no_vetan
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g1_n8_dos_pares_entrega_el_punto_sin_banda
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g2_dos_frente_a_tres_pares_solo_cambia_el_intervalo
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g3_no_hay_salto_global_en_el_literal_ocho
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g4_un_intervalo_no_sustentado_no_reduce_el_horizonte
+FAILED tests/test_p0g_desacople_punto_intervalo.py::test_g5_cobertura_no_evaluable_no_cancela_la_entrega

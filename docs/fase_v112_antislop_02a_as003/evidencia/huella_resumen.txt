@@ -1,0 +1,29 @@
+Huella semántica (huella_semantica.py). Archivos completos (~155 MB) conservados localmente en C:\Pruebas SAVIP\Fase2A.
+  huella_base_1.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_base_2.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_lote1.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+Comparación exacta base_1 vs base_2: 0 diferencias. Base_1 vs lote1: 0 diferencias.
+
+caso | modelo | segundo | RMSErect | pares comunes | meses de trayectoria | claves públicas | llamadas al selector
+estacional|h1 | fourier_k1__exponencial_log_lineal | fourier_k1__huber | 0.42354816475952406 | 888 | 24 | 65 | 1
+estacional|h11 | fourier_k1__exponencial_log_lineal | fourier_k1__huber | 0.42354816475952406 | 888 | 24 | 65 | 1
+estacional|h23 | fourier_k1__exponencial_log_lineal | fourier_k1__huber | 0.42354816475952406 | 888 | 24 | 65 | 1
+estacional|h24 | fourier_k1__exponencial_log_lineal | fourier_k1__huber | 0.42354816475952406 | 888 | 24 | 65 | 1
+exponencial|h1 | exponencial_log_lineal | fourier_k1__exponencial_log_lineal | 0.313069726353369 | 312 | 24 | 65 | 1
+exponencial|h11 | exponencial_log_lineal | fourier_k1__exponencial_log_lineal | 0.313069726353369 | 312 | 24 | 65 | 1
+exponencial|h23 | exponencial_log_lineal | fourier_k1__exponencial_log_lineal | 0.313069726353369 | 312 | 24 | 65 | 1
+exponencial|h24 | exponencial_log_lineal | fourier_k1__exponencial_log_lineal | 0.313069726353369 | 312 | 24 | 65 | 1
+lineal_exacta_empate|h1 | lineal | holt_lineal | 0.0 | 24 | 24 | 65 | 1
+lineal_exacta_empate|h11 | lineal | holt_lineal | 0.0 | 24 | 24 | 65 | 1
+lineal_exacta_empate|h23 | lineal | holt_lineal | 0.0 | 24 | 24 | 65 | 1
+lineal_exacta_empate|h24 | lineal | holt_lineal | 0.0 | 24 | 24 | 65 | 1
+paseo_aleatorio|h1 | seasonal_naive | naive | 3.018305948174487 | 120 | 24 | 65 | 1
+paseo_aleatorio|h11 | seasonal_naive | naive | 3.018305948174487 | 120 | 24 | 65 | 1
+paseo_aleatorio|h23 | seasonal_naive | naive | 3.018305948174487 | 120 | 24 | 65 | 1
+paseo_aleatorio|h24 | seasonal_naive | naive | 3.018305948174487 | 120 | 24 | 65 | 1
+tendencia_lineal_ruido|h1 | fourier_k1__exponencial_log_lineal | exponencial_log_lineal | 1.2765909871825984 | 600 | 24 | 65 | 1
+tendencia_lineal_ruido|h11 | fourier_k1__exponencial_log_lineal | exponencial_log_lineal | 1.2765909871825984 | 600 | 24 | 65 | 1
+tendencia_lineal_ruido|h23 | fourier_k1__exponencial_log_lineal | exponencial_log_lineal | 1.2765909871825984 | 600 | 24 | 65 | 1
+tendencia_lineal_ruido|h24 | fourier_k1__exponencial_log_lineal | exponencial_log_lineal | 1.2765909871825984 | 600 | 24 | 65 | 1
+
+economía: 12 factores, 7 importes, 6 rechazos, factor legado y empalme; rechazos de horizonte y de historia insuficiente.

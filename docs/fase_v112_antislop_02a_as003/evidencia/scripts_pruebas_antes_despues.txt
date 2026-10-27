@@ -1,0 +1,36 @@
+== ejemplo_uso (huella_base)
+Periodo proyectado:   2026_6
+Modelo seleccionado:  Fourier K=1 + Holt lineal
+Ãndice proyectado:    114.6500
+Traceback (most recent call last):
+  File "<copia>\pruebas\ejemplo_uso.py", line 87, in <module>
+    print(f"IC 95%:               [{proj['ci_lo']:.4f}, {proj['ci_hi']:.4f}]")
+                                   ^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__
+== prueba_estadistica (huella_base)
+=== VALIDACIÓN ESTADÍSTICA ===
+Observaciones: 40
+Continuidad: OK
+Tendencia: creciente
+Backtesting iteraciones: 34
+MAPE: 0.11210364185219987
+Durbin-Watson: 2.0
+Reporte: <copia>\reportes_generados\validacion_estadistica_icociv.docx
+== ejemplo_uso (lote1)
+Periodo proyectado:   2026_6
+Modelo seleccionado:  Fourier K=1 + Holt lineal
+Ãndice proyectado:    114.6500
+Traceback (most recent call last):
+  File "<copia>\pruebas\ejemplo_uso.py", line 87, in <module>
+    print(f"IC 95%:               [{proj['ci_lo']:.4f}, {proj['ci_hi']:.4f}]")
+                                   ^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__
+== prueba_estadistica (lote1)
+=== VALIDACIÓN ESTADÍSTICA ===
+Observaciones: 40
+Continuidad: OK
+Tendencia: creciente
+Backtesting iteraciones: 34
+MAPE: 0.11210364185219987
+Durbin-Watson: 2.0
+Reporte: <copia>\reportes_generados\validacion_estadistica_icociv.docx

@@ -1,0 +1,17 @@
+== pyflakes antes (c9166c6)
+servicio_proyeccion.py:23:1: 'app_icociv.estadistica.criterios.UMBRAL_RRMSE_PEOR_BENCHMARK' imported but unused
+servicio_proyeccion.py:23:1: 'app_icociv.estadistica.criterios.TOLERANCIA_RRMSE_BENCHMARK' imported but unused
+servicio_proyeccion.py:57:1: 'app_icociv.estadistica.calendario_anual.aplicar_ajuste_calendario' imported but unused
+servicio_proyeccion.py:57:1: 'app_icociv.estadistica.calendario_anual.eneros_en_horizonte' imported but unused
+servicio_proyeccion.py:69:1: 'app_icociv.estadistica.metricas.calcular_metricas' imported but unused
+servicio_proyeccion.py:1257:5: local variable 'comparacion_benchmarks' is assigned to but never used
+servicio_proyeccion.py:2539:24: undefined name 'detectar_errores_extremos'
+servicio_proyeccion.py:2877:5: local variable 'sesgo' is assigned to but never used
+== pyflakes despues (c6ca863)
+app_icociv.estadistica.criterios.UMBRAL_RRMSE_PEOR_BENCHMARK' imported but unused
+app_icociv.estadistica.criterios.TOLERANCIA_RRMSE_BENCHMARK' imported but unused
+app_icociv.estadistica.calendario_anual.aplicar_ajuste_calendario' imported but unused
+app_icociv.estadistica.calendario_anual.eneros_en_horizonte' imported but unused
+app_icociv.estadistica.metricas.calcular_metricas' imported but unused
+app_icociv/proyeccion/servicio_proyeccion.py:1252:5: local variable 'comparacion_benchmarks' is assigned to but never used
+app_icociv/proyeccion/servicio_proyeccion.py:2772:5: local variable 'sesgo' is assigned to but never used

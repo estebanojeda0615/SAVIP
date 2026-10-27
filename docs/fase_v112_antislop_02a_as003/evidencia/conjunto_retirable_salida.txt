@@ -1,0 +1,44 @@
+RETIRABLES (cerrado): 6 definiciones, 183 líneas
+   validacion_series.py:169-181 (13) resumen_validacion | pruebas no esenciales: ninguna
+   servicio_proyeccion.py:2164-2213 (50) _metadatos_auditoria_horizontes | pruebas no esenciales: ninguna
+   servicio_proyeccion.py:2216-2221 (6) _numero_parametros_modelo | pruebas no esenciales: ninguna
+   servicio_proyeccion.py:2532-2569 (38) _metricas_desde_predicciones | pruebas no esenciales: ninguna
+   servicio_proyeccion.py:4357-4368 (12) _explicacion_factibilidad | pruebas no esenciales: ninguna
+   servicio_proyeccion.py:4385-4448 (64) _validar_ajuste_calendario_serie | pruebas no esenciales: ninguna
+CONSERVADAS: 36 definiciones, 1934 líneas
+   modelos_interpretables.py:280-444 (165) seleccionar_modelo_por_evidencia | prueba esencial: tests/test_fundamentacion_metodologica.py
+   modelos_interpretables.py:447-480 (34) _benchmark_dominante | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:483-540 (58) comparar_modelo_con_benchmarks | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:543-565 (23) resumir_ranking_backtesting | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:568-586 (19) _mejor_candidato_no_elegible | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:589-597 (9) _razones_descartes | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:1352-1355 (4) _ratio | llamada por conservada: comparar_modelo_con_benchmarks
+   modelos_interpretables.py:1358-1363 (6) _mejor_por | llamada por conservada: resumir_ranking_backtesting
+   modelos_interpretables.py:1366-1371 (6) _numero | llamada por conservada: seleccionar_modelo_por_evidencia
+   modelos_interpretables.py:1374-1381 (8) _fmt | llamada por conservada: seleccionar_modelo_por_evidencia
+   validacion_series.py:15-100 (86) validar_serie | script: pruebas/prueba_estadistica.py
+   validacion_series.py:103-123 (21) detectar_outliers_extremos | llamada por conservada: validar_serie
+   servicio_proyeccion.py:2052-2062 (11) tramo_evidencia_oos | prueba esencial: tests/test_cierre_semantico_ps01_ps05.py
+   servicio_proyeccion.py:2431-2440 (10) _backtesting_por_modelo_horizonte | llamada por conservada: _evaluar_horizontes_proyeccion
+   servicio_proyeccion.py:2443-2454 (12) _tipo_uso_horizonte | llamada por conservada: _clasificar_evidencia_horizonte
+   servicio_proyeccion.py:2497-2529 (33) _estado_por_horizonte | llamada por conservada: _clasificar_evidencia_horizonte
+   servicio_proyeccion.py:2572-2604 (33) peor_que_benchmark_naive | ficha documental: app_icociv.estadistica.criterios
+   servicio_proyeccion.py:2607-2651 (45) _comparacion_desde_backtesting | llamada por conservada: _evaluar_horizontes_proyeccion
+   servicio_proyeccion.py:2654-2858 (205) _evaluar_horizontes_proyeccion | prueba esencial: tests/test_fase1a_selector_rectangular.py, tests/test_fundamentacion_metodologica.py
+   servicio_proyeccion.py:2861-3165 (305) _clasificar_evidencia_horizonte | prueba esencial: tests/test_fundamentacion_metodologica.py, tests/test_presentacion_resultados.py, tests/test_remediacion_r2_h1_h2_h3_h7.py, tests/test_vocabulario_vc.py
+   servicio_proyeccion.py:3233-3262 (30) _rmse_global_estable | prueba esencial: tests/test_fase1a_selector_rectangular.py
+   servicio_proyeccion.py:3265-3292 (28) _errores_oos_por_par | prueba esencial: tests/test_nmin_adversarial.py
+   servicio_proyeccion.py:3295-3373 (79) seleccionar_modelo_por_rmse_oos_global | prueba esencial: tests/test_fase1a_selector_rectangular.py, tests/test_origen_inicial_backtesting.py
+   servicio_proyeccion.py:3376-3389 (14) _modelo_consistente_desde_comparativo | prueba esencial: tests/test_fase1a_selector_rectangular.py
+   servicio_proyeccion.py:3392-3451 (60) _modelo_trayectoria_consistente | prueba esencial: tests/test_fase1a_selector_rectangular.py
+   servicio_proyeccion.py:3454-3481 (28) _puntaje_rmse_ponderado | llamada por conservada: _aplicar_salvaguarda_benchmarks
+   servicio_proyeccion.py:3484-3602 (119) _aplicar_salvaguarda_benchmarks | prueba esencial: tests/test_remediacion_r2_h1_h2_h3_h7.py
+   servicio_proyeccion.py:3605-3613 (9) _seleccionar_horizonte_permitido | ficha documental: app_icociv.estadistica.criterios
+   servicio_proyeccion.py:3616-3873 (258) determinar_horizonte_maximo_estadistico | prueba esencial: tests/test_fase1a_selector_rectangular.py, tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+   servicio_proyeccion.py:3876-3945 (70) _serializar_evaluaciones_horizonte | llamada por conservada: determinar_horizonte_maximo_estadistico
+   servicio_proyeccion.py:3948-3964 (17) _item_horizonte_global | llamada por conservada: determinar_horizonte_maximo_estadistico
+   servicio_proyeccion.py:3967-3992 (26) _mayor_horizonte_con | ficha documental: app_icociv.estadistica.criterios
+   servicio_proyeccion.py:3995-4026 (32) _mayor_horizonte_permitido | llamada por conservada: determinar_horizonte_maximo_estadistico
+   servicio_proyeccion.py:4029-4056 (28) _ultimo_horizonte_por_clasificacion | llamada por conservada: determinar_horizonte_maximo_estadistico
+   servicio_proyeccion.py:4059-4079 (21) _evidencia_horizonte | llamada por conservada: determinar_horizonte_maximo_estadistico
+   servicio_proyeccion.py:4082-4103 (22) _mensaje_horizonte_no_permitido | llamada por conservada: _clasificar_evidencia_horizonte
