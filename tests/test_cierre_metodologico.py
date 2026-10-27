@@ -417,17 +417,10 @@ def test_la_seleccion_no_consulta_ningun_umbral():
     assert "rmse" in fuente.lower()
 
 
-def test_la_ponderacion_1_h_ya_no_decide():
-    """H-9 cerrada el 08-08-2026: era la ultima heuristica decisoria.
-
-    El peso `1/h` no tenia fuente y cambiaba el modelo entregado. Lo sustituye
-    el minimo RMSE fuera de muestra global sobre la muestra comun, que no tiene
-    ningun parametro libre. El detalle esta en
-    `tests/test_seleccion_rmse_global.py`.
-    """
-    fuente = inspect.getsource(sp._modelo_consistente_desde_comparativo)
-    assert "1.0 / float(horizonte)" not in fuente
-    assert "seleccionar_modelo_por_rmse_oos_global" in fuente
+# `test_la_ponderacion_1_h_ya_no_decide` (H-9) RETIRADA en la Fase 2B (AS-003): inspeccionaba la
+# fuente de `_modelo_consistente_desde_comparativo`, retirada. La ausencia de peso 1/h en el selector
+# vigente la prueban `p_pesos_uniformes_por_horizonte` y el mutante `peso_1_h` de
+# tests/test_fase1a_selector_rectangular.py.
 
 
 def test_la_seleccion_elige_el_de_menor_error_oos():

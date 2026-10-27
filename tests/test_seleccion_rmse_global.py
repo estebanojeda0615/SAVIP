@@ -106,13 +106,13 @@ def test_no_hay_peso_por_horizonte():
         "largo": {1: [1.3] * 4, 18: [2.0] * 4},
     })
     assert seleccionar_modelo_por_rmse_oos_global(b, (1, 18)) == "largo"
-    # Y la regla retirada elegiria el otro, que es justo lo que se corrige.
-    evaluaciones = [
-        {"horizonte": h, "backtesting_por_modelo": {
-            "corto": {"metricas": {"rmse": rc}}, "largo": {"metricas": {"rmse": rl}}}}
-        for h, rc, rl in ((1, 1.0, 1.3), (18, 3.0, 2.0))
-    ]
-    assert sp._modelo_trayectoria_consistente(evaluaciones) == "corto"
+    # Y la regla retirada elegiria el otro, que es justo lo que se corrige: RMSE relativo al
+    # mejor de cada horizonte, promediado con peso 1/h (`_modelo_trayectoria_consistente`,
+    # retirada en la Fase 2B, AS-003; definicion en 1848275).
+    rmse = {"corto": {1: 1.0, 18: 3.0}, "largo": {1: 1.3, 18: 2.0}}
+    mejor = {h: min(rmse[m][h] for m in rmse) for h in (1, 18)}
+    puntaje = {m: sum(rmse[m][h] / mejor[h] / h for h in (1, 18)) / sum(1 / h for h in (1, 18)) for m in rmse}
+    assert min(puntaje, key=puntaje.get) == "corto"
 
 
 # ======================================================================
@@ -189,20 +189,19 @@ def test_es_reproducible():
 # 4. Lo que la regla NO consulta
 # ======================================================================
 def test_la_regla_no_consulta_umbrales_ni_identidad():
+    # `_modelo_consistente_desde_comparativo` salio de la tupla al retirarse en la Fase 2B (AS-003).
     for funcion in (sp.seleccionar_modelo_por_rmse_oos_global,
-                    sp._errores_oos_por_par,
-                    sp._modelo_consistente_desde_comparativo):
+                    sp._errores_oos_por_par):
         fuente = inspect.getsource(funcion)
         for prohibido in ("UMBRAL_", "TOLERANCIA_", "MIN_ERRORES", "COBERTURA_IC95",
                           "es_benchmark", "MODELOS_BENCHMARK", "estado"):
             assert prohibido not in fuente, (funcion.__name__, prohibido)
 
 
-def test_no_queda_el_peso_1_h_en_la_ruta_de_seleccion():
-    fuente = inspect.getsource(sp._modelo_consistente_desde_comparativo)
-    assert "1.0 / float(horizonte)" not in fuente
-    assert "seleccionar_modelo_por_rmse_oos_global" in fuente
-    assert "_modelo_trayectoria_consistente" not in fuente
+# `test_no_queda_el_peso_1_h_en_la_ruta_de_seleccion` RETIRADA en la Fase 2B (AS-003): inspeccionaba
+# la fuente de `_modelo_consistente_desde_comparativo`, retirada. La ausencia de peso 1/h en el
+# selector vigente la prueban `p_pesos_uniformes_por_horizonte` y el mutante `peso_1_h` de
+# tests/test_fase1a_selector_rectangular.py.
 
 
 def test_la_regla_retirada_ya_no_se_invoca_en_la_ruta_productiva():

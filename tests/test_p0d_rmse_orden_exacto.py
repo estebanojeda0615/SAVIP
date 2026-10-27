@@ -45,7 +45,6 @@ if str(RAIZ) not in sys.path:
 
 from app_icociv.proyeccion.servicio_proyeccion import (  # noqa: E402
     _errores_oos_por_par,
-    _rmse_global_estable,
     _sse_exacto,
     seleccionar_modelo_por_rmse_oos_global,
 )
@@ -92,7 +91,8 @@ def _rmse_directo(valores: list[float]) -> float:
 def test_d1_el_contraejemplo_de_una_ulp_se_decide_de_forma_unica() -> None:
     """D1. Las dos formas flotantes discrepan; el SSE exacto no."""
     directo_a, directo_b = _rmse_directo(ULP_A), _rmse_directo(ULP_B)
-    hypot_a, hypot_b = _rmse_global_estable(ULP_A), _rmse_global_estable(ULP_B)
+    # `_rmse_global_estable` (retirada en la Fase 2B, AS-003) era exactamente esta expresion.
+    hypot_a, hypot_b = (math.hypot(*v) / math.sqrt(len(v)) for v in (ULP_A, ULP_B))
     # La forma directa distingue; hypot empata. Ese es el defecto.
     assert directo_a != directo_b, (directo_a, directo_b)
     assert hypot_a == hypot_b, (hypot_a, hypot_b)

@@ -27,12 +27,10 @@ Ejecucion directa, sin pytest:
 """
 from __future__ import annotations
 
-import math
 import sys
 import traceback
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 RAIZ = Path(__file__).resolve().parents[1]
@@ -40,7 +38,6 @@ if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
 from app_icociv.proyeccion.servicio_proyeccion import (  # noqa: E402
-    _rmse_global_estable,
     seleccionar_modelo_por_rmse_oos_global,
 )
 
@@ -70,59 +67,11 @@ def _banco(errores_por_modelo: dict[str, dict[tuple[int, int], float]]) -> dict:
 
 
 # ==============================
-# T1-T6: el calculo de la norma
+# T1-T6b: RETIRADAS en la Fase 2B (AS-003, opcion B). Probaban solo `_rmse_global_estable`
+# (hypot), retirada de servicio_proyeccion.py; codigo y pruebas en 1848275. Las propiedades
+# vigentes (sin OverflowError, RMSE finito con errores enormes, no finitos excluidos) se
+# prueban sobre el selector vigente en tests/test_fase1a_selector_rectangular.py (test_as001_*).
 # ==============================
-
-
-def test_t1_ordinario_coincide_con_la_formula_directa() -> None:
-    """T1. En el rango ordinario ambas formas dan el mismo numero."""
-    for valores in ([1.0, 2.0, 3.0], [0.5], [-4.0, 4.0], list(np.linspace(-9, 9, 25))):
-        directo = math.sqrt(sum(v ** 2 for v in valores) / len(valores))
-        estable = _rmse_global_estable(valores)
-        assert math.isclose(estable, directo, rel_tol=1e-12, abs_tol=1e-12), (valores, estable, directo)
-
-
-def test_t2_dos_errores_enormes_no_desbordan() -> None:
-    """T2. [1e200, 1e200]: el cuadrado no cabe en float, el RMSE si."""
-    estable = _rmse_global_estable([1e200, 1e200])
-    assert math.isfinite(estable), estable
-    # sqrt((2 * 1e400) / 2) = 1e200
-    assert math.isclose(estable, 1e200, rel_tol=1e-12), estable
-
-
-def test_t3_caso_del_hallazgo_no_levanta_overflow() -> None:
-    """T3. La magnitud exacta medida en el fixture que abortaba."""
-    valores = [3.7243e155, 1.2258e240, 5.0, -2.0]
-    estable = _rmse_global_estable(valores)
-    assert math.isfinite(estable), estable
-    # Domina el mayor: 1.2258e240 / sqrt(4) = 6.129e239
-    assert math.isclose(estable, 1.2258e240 / 2.0, rel_tol=1e-9), estable
-
-
-def test_t4_todos_ceros_dan_cero() -> None:
-    """T4. Sin error no hay RMSE que penalizar."""
-    assert _rmse_global_estable([0.0, 0.0, 0.0]) == 0.0
-    assert _rmse_global_estable([0.0]) == 0.0
-
-
-def test_t5_un_error_infinito_produce_rmse_no_finito() -> None:
-    """T5. `inf` debe propagarse como no finito, no como excepcion."""
-    resultado = _rmse_global_estable([1.0, float("inf"), 2.0])
-    assert not math.isfinite(resultado), resultado
-
-
-def test_t6_un_error_nan_produce_rmse_no_finito() -> None:
-    """T6. `nan` debe propagarse como no finito, no como excepcion."""
-    resultado = _rmse_global_estable([1.0, float("nan"), 2.0])
-    assert not math.isfinite(resultado), resultado
-    # Mezcla inf+nan: basta con que no sea finito; el candidato no gana igual.
-    assert not math.isfinite(_rmse_global_estable([float("inf"), float("nan")]))
-
-
-def test_t6b_una_suma_que_no_cabe_en_float_da_infinito_sin_excepcion() -> None:
-    """El caso D del contrato: si el resultado real no cabe, es `inf`, no error."""
-    resultado = _rmse_global_estable([1e308] * 10)
-    assert not math.isfinite(resultado), resultado
 
 
 # ==============================
