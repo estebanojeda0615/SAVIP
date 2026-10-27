@@ -1,0 +1,35 @@
+Puerta G2 (Fase 2B). Plugin espia_as003.py (Fase 2A) envolviendo SOLO las 3 funciones, sobre el codigo BASE 1848275:
+1) perfil esencial completo (797) y 2) los 4 archivos historicos afectados.
+
+Pruebas que EJECUTARON cada funcion:
+  _rmse_global_estable:
+    tests/test_p0d_rmse_orden_exacto.py::test_d1_el_contraejemplo_de_una_ulp_se_decide_de_forma_unica
+    tests/test_rmse_global_estable.py::test_t1_ordinario_coincide_con_la_formula_directa
+    tests/test_rmse_global_estable.py::test_t2_dos_errores_enormes_no_desbordan
+    tests/test_rmse_global_estable.py::test_t3_caso_del_hallazgo_no_levanta_overflow
+    tests/test_rmse_global_estable.py::test_t4_todos_ceros_dan_cero
+    tests/test_rmse_global_estable.py::test_t5_un_error_infinito_produce_rmse_no_finito
+    tests/test_rmse_global_estable.py::test_t6_un_error_nan_produce_rmse_no_finito
+    tests/test_rmse_global_estable.py::test_t6b_una_suma_que_no_cabe_en_float_da_infinito_sin_excepcion
+  _modelo_consistente_desde_comparativo:
+    ninguna
+  _modelo_trayectoria_consistente:
+    tests/test_seleccion_rmse_global.py::test_no_hay_peso_por_horizonte
+
+Ninguna de las 797 pruebas esenciales (golden, GUI, integracion de 21 candidatos) las ejecuta: todas las llamadas vienen de pruebas historicas retiradas o adaptadas en 73e565c.
+
+Resultado del perfil esencial instrumentado:
+18 passed, 1 deselected in 101.24s (0:01:41)
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: tests/test_v112_01_esqueleto_dialogos.py (1)
+codigo=1
+Resultado de los 4 historicos instrumentados: 1 failed, 63 passed in 0.46s (el FAIL es test_cierre_metodologico::test_no_hay_modelo_por_horizonte, previo)
+
+ANOMALIA: en la corrida instrumentada fallo 1 prueba esencial (primera ejecucion y reintento):
+  tests/test_v112_01_esqueleto_dialogos.py::test_trabajador_informa_progreso_en_el_hilo_de_interfaz
+  assert resultado == ['ok'] -> resultado == [] : la senal 'resultado' del QThread aun no se habia procesado.
+  Es codigo BASE (sin el retiro) y la prueba no toca servicio_proyeccion. Caracterizacion en el mismo equipo:
+  aislada 25 veces en base y 25 en final: 50/50 PASS; archivo completo 5+5 veces: 10/10 PASS (58/58);
+  con el plugin: aislada 15 veces y archivo completo 3 veces: todo PASS. No reproducible: carrera de tiempo
+  heredada (el bucle de espera sale con el hilo terminado sin esperar la senal en cola). Pasa en la base
+  limpia, en el perfil final y en el CI. No se corrige aqui (fuera de alcance).

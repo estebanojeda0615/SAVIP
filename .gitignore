@@ -107,11 +107,12 @@ logs/
 # fuente publico. Las pruebas historicas escriben evidencia en docs/fase_*;
 # esa evidencia, las entregas y las presentaciones no se versionan.
 /docs/*
-# Anti-Slop 1.1.2: unicas excepciones publicadas, los informes de las Fases 0, 1A, 1B y 2A.
+# Anti-Slop 1.1.2: unicas excepciones publicadas, los informes de las Fases 0, 1A, 1B, 2A y 2B.
 !/docs/fase_v112_antislop_00/
 !/docs/fase_v112_antislop_01a_pruebas/
 !/docs/fase_v112_antislop_01b_as001/
 !/docs/fase_v112_antislop_02a_as003/
+!/docs/fase_v112_antislop_02b_opcion_b/
 /ENTREGA_SAVIP_1_1/
 /entregables/
 CONTEXTO_CHAT_*.md

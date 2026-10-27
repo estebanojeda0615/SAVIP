@@ -1,0 +1,4 @@
+2026-10-27T20:31:25.9211006Z No broken requirements found.
+2026-10-27T21:32:17.7702587Z Resumen esenciales: 80 archivos; 797 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+2026-10-27T21:32:17.7703376Z Intermitentes (fallaron y pasaron al reintento): ninguna
+2026-10-27T21:32:17.7704764Z Archivos con fallo: ninguno

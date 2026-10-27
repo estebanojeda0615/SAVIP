@@ -1,0 +1,4 @@
+antes: 797 ids; PASS 797, FAIL 0, SKIP 0
+después: 797 ids; PASS 797, FAIL 0, SKIP 0
+solo antes: 0; solo después: 0; estado cambiado: 0
+CONJUNTO IDÉNTICO

@@ -1,0 +1,16 @@
+pytest --collect-only tests: antes (1848275) 1061 ids, despues (54f7ccf) 1052 ids
+Ids que solo existen antes (retirados en 73e565c):
+< tests/test_cierre_metodologico.py::test_la_ponderacion_1_h_ya_no_decide
+< tests/test_rmse_global_estable.py::test_t1_ordinario_coincide_con_la_formula_directa
+< tests/test_rmse_global_estable.py::test_t2_dos_errores_enormes_no_desbordan
+< tests/test_rmse_global_estable.py::test_t3_caso_del_hallazgo_no_levanta_overflow
+< tests/test_rmse_global_estable.py::test_t4_todos_ceros_dan_cero
+< tests/test_rmse_global_estable.py::test_t5_un_error_infinito_produce_rmse_no_finito
+< tests/test_rmse_global_estable.py::test_t6_un_error_nan_produce_rmse_no_finito
+< tests/test_rmse_global_estable.py::test_t6b_una_suma_que_no_cabe_en_float_da_infinito_sin_excepcion
+< tests/test_seleccion_rmse_global.py::test_no_queda_el_peso_1_h_en_la_ruta_de_seleccion
+Ids que solo existen despues: 0
+Errores de recoleccion (identicos antes y despues):
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py

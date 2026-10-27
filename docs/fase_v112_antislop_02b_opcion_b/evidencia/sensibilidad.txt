@@ -1,0 +1,5 @@
+CTRL_sin_mutacion: PASA | 1 passed in 8.51s |
+S0_produccion_base: FALLA | 1 failed in 1.73s | E       AssertionError: assert ['_rmse_globa..._consistente'] == []
+S1_invoca_selector_heredado: FALLA | 1 failed in 8.56s | E       AssertionError: assert {'seleccionar...royeccion': 0} == {'seleccionar...royeccion': 0}
+S2_selector_mutante: FALLA | 1 failed in 9.00s | E       AssertionError: assert (0 == 1)
+RESULTADO: sensibilidad confirmada
