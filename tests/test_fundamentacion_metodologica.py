@@ -261,11 +261,12 @@ def test_sin_evidencia_comparable_el_horizonte_no_se_entrega():
     assert "modelo_no_seleccionable" in fuente
 
 
-def test_el_selector_retirado_conserva_su_definicion_para_auditoria():
-    """Se conserva sin llamadas, como se hizo con la regla 1/h."""
-    from app_icociv.estadistica import modelos_interpretables as mi
-    assert callable(mi.seleccionar_modelo_por_evidencia)
-    assert "RETIRADA COMO SELECTOR" in (mi.seleccionar_modelo_por_evidencia.__doc__ or "")
+# `test_el_selector_retirado_conserva_su_definicion_para_auditoria` RETIRADA en la Fase 2D, lote 2D-4 (AS-003):
+# solo exigia que existiera `seleccionar_modelo_por_evidencia`, retirada en el mismo commit. Su registro de
+# auditoria pasa a Git (2f70391, modelos_interpretables.py L280-L444) y a
+# docs/fase_v112_antislop_02c_registro_historico/02_REGISTRO_HISTORICO_METODOLOGICO.md (R1). Que la ruta productiva
+# no la llama lo siguen comprobando las pruebas textuales P0-A de este archivo, test_nmin_adversarial y
+# test_origen_inicial_backtesting.
 
 
 # --------------------------------------------------------------------- P0-B
