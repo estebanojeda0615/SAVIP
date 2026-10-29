@@ -1,0 +1,11 @@
+antes: 797 ids; PASS 797, FAIL 0, SKIP 0
+despuÃ©s: 804 ids; PASS 804, FAIL 0, SKIP 0
+solo antes: 0; solo despuÃ©s: 7; estado cambiado: 0
+   ('tests.test_fase2c_contratos_vigentes', 'test_banda_no_construible_no_cancela_el_punto')
+   ('tests.test_fase2c_contratos_vigentes', 'test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[36]')
+   ('tests.test_fase2c_contratos_vigentes', 'test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[37]')
+   ('tests.test_fase2c_contratos_vigentes', 'test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[41]')
+   ('tests.test_fase2c_contratos_vigentes', 'test_la_ruta_vigente_no_referencia_el_subsistema_heredado')
+   ('tests.test_fase2c_contratos_vigentes', 'test_sin_errores_finitos_comunes_no_se_fabrica_un_modelo')
+   ('tests.test_fase2c_contratos_vigentes', 'test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion')
+DIFERENCIAS

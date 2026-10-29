@@ -1,0 +1,15 @@
+Scripts de pruebas/ en una copia limpia de 2f70391 (anexo sintético de 40 meses):
+  prueba_horizonte_dinamico_ui_reportes.py (pytest): 8 failed, 22 passed in 159.28s (0:02:39)
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_horizonte_25_estable_se_permite_si_hay_evidencia
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_horizonte_25_erratico_no_se_fuerza
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_h18_no_se_redacta_como_intervalos_aceptables
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_parametros_drift_receta_y_csv_reproducible
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_pdf_y_docx_contienen_horizontes_con_escenario
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_horizonte_dinamico_con_serie_drift
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_horizonte_dinamico_con_serie_holt
+    FAILED pruebas/prueba_horizonte_dinamico_ui_reportes.py::test_docx_777_separa_advertencias_globales_y_horizonte
+  ejemplo_uso.py: código 1 (ci_lo=None, defecto previo AS-028)
+        print(f"IC 95%:               [{proj['ci_lo']:.4f}, {proj['ci_hi']:.4f}]")
+                                       ^^^^^^^^^^^^^^^^^^^
+    TypeError: unsupported format string passed to NoneType.__format__
+  prueba_estadistica.py: código 0

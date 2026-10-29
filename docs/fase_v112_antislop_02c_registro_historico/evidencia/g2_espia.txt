@@ -1,0 +1,37 @@
+Puerta G2 (Fase 2C). espia_as003.py sobre el perfil esencial completo de la BASE 2f70391 (797 pruebas):
+Resultado de la corrida instrumentada (sin --junitxml, por eso sin línea «Resumen»): Archivos con fallo: ninguno | Intermitentes: ninguna
+Archivos de prueba que ejecutaron cada definición candidata (no alcanzable desde producción):
+  modelos_interpretables.py::seleccionar_modelo_por_evidencia -> ninguno
+  modelos_interpretables.py::_benchmark_dominante -> ninguno
+  modelos_interpretables.py::comparar_modelo_con_benchmarks -> ninguno
+  modelos_interpretables.py::resumir_ranking_backtesting -> ninguno
+  modelos_interpretables.py::_mejor_candidato_no_elegible -> ninguno
+  modelos_interpretables.py::_razones_descartes -> ninguno
+  modelos_interpretables.py::_ratio -> ninguno
+  modelos_interpretables.py::_mejor_por -> ninguno
+  modelos_interpretables.py::_numero -> ninguno
+  modelos_interpretables.py::_fmt -> ninguno
+  validacion_series.py::validar_serie -> ninguno
+  validacion_series.py::detectar_outliers_extremos -> ninguno
+  servicio_proyeccion.py::tramo_evidencia_oos -> tests/test_cierre_semantico_ps01_ps05.py
+  servicio_proyeccion.py::_backtesting_por_modelo_horizonte -> ninguno
+  servicio_proyeccion.py::_tipo_uso_horizonte -> tests/test_fundamentacion_metodologica.py, tests/test_presentacion_resultados.py, tests/test_remediacion_r2_h1_h2_h3_h7.py, tests/test_resultado_horizonte_solicitado.py, tests/test_vocabulario_vc.py
+  servicio_proyeccion.py::_estado_por_horizonte -> tests/test_fundamentacion_metodologica.py, tests/test_presentacion_resultados.py, tests/test_remediacion_r2_h1_h2_h3_h7.py, tests/test_vocabulario_vc.py
+  servicio_proyeccion.py::peor_que_benchmark_naive -> ninguno
+  servicio_proyeccion.py::_comparacion_desde_backtesting -> ninguno
+  servicio_proyeccion.py::_evaluar_horizontes_proyeccion -> ninguno
+  servicio_proyeccion.py::_clasificar_evidencia_horizonte -> tests/test_fundamentacion_metodologica.py, tests/test_presentacion_resultados.py, tests/test_remediacion_r2_h1_h2_h3_h7.py, tests/test_vocabulario_vc.py
+  servicio_proyeccion.py::_errores_oos_por_par -> tests/test_nmin_adversarial.py, tests/test_origen_inicial_backtesting.py
+  servicio_proyeccion.py::seleccionar_modelo_por_rmse_oos_global -> tests/test_nmin_adversarial.py, tests/test_origen_inicial_backtesting.py
+  servicio_proyeccion.py::_puntaje_rmse_ponderado -> ninguno
+  servicio_proyeccion.py::_aplicar_salvaguarda_benchmarks -> tests/test_remediacion_r2_h1_h2_h3_h7.py
+  servicio_proyeccion.py::_seleccionar_horizonte_permitido -> ninguno
+  servicio_proyeccion.py::determinar_horizonte_maximo_estadistico -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_serializar_evaluaciones_horizonte -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_item_horizonte_global -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_mayor_horizonte_con -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_mayor_horizonte_permitido -> tests/test_presentacion_resultados.py, tests/test_remediacion_r2_h1_h2_h3_h7.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_ultimo_horizonte_por_clasificacion -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_evidencia_horizonte -> tests/test_presentacion_resultados.py, tests/test_resultado_horizonte_solicitado.py
+  servicio_proyeccion.py::_mensaje_horizonte_no_permitido -> tests/test_fundamentacion_metodologica.py, tests/test_vocabulario_vc.py
+Ninguna prueba de flujo productivo (golden, GUI, integración de 21 candidatos) ejecuta una definición heredada.

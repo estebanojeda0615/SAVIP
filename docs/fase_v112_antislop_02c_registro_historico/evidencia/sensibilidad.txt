@@ -1,0 +1,8 @@
+CTRL_sin_mutacion: PASA | 7 passed in 32.79s
+M0_publica_el_intervalo: FALLA | 3 failed in 10.33s
+M1_banda_cancela_punto: FALLA | 1 failed in 16.12s
+M2_sin_advertencia_de_escasez: FALLA | 2 failed, 1 passed in 11.18s
+M3_tramo_limitado_validado: FALLA | 1 failed in 1.83s
+M4_modelo_fabricado: FALLA | 1 failed in 10.62s
+M5_ruta_llama_selector_heredado: FALLA | 1 failed in 1.83s
+RESULTADO: sensibilidad confirmada

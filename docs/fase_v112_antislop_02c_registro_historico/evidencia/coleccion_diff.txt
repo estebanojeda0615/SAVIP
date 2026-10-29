@@ -1,0 +1,11 @@
+Recolección (pytest --collect-only tests): antes (2f70391) 1052 tests collected, 3 errors in 18.20s
+después (HEAD de código 7acd0ce): 1059 tests collected, 3 errors in 17.59s
+Ids nuevos:
+> tests/test_fase2c_contratos_vigentes.py::test_banda_no_construible_no_cancela_el_punto
+> tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[36]
+> tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[37]
+> tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[41]
+> tests/test_fase2c_contratos_vigentes.py::test_la_ruta_vigente_no_referencia_el_subsistema_heredado
+> tests/test_fase2c_contratos_vigentes.py::test_sin_errores_finitos_comunes_no_se_fabrica_un_modelo
+> tests/test_fase2c_contratos_vigentes.py::test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion
+Ids desaparecidos: 0

@@ -1,0 +1,6 @@
+esenciales   81 entradas   804 pruebas  0 errores de recolección
+dane          0 entradas     0 pruebas
+historicas   28 entradas   242 pruebas  3 errores de recolección
+gui           6 entradas    13 pruebas  0 errores de recolección
+total       1059 pruebas
+gui (manual): Equipo sin Python instalado: extraer el ZIP del Release y abrir SAVIP.exe; Escalas de pantalla 125 % y 150 %; Segundo monitor y mover la ventana entre monitores; Snap de Windows con teclado (Win + flechas) y diálogo de cierre en un tercio de pantalla; Revisión visual completa de temas claro/oscuro, gráfica y diálogos largos con fuentes reales

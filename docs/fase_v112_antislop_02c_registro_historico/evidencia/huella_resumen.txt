@@ -1,0 +1,5 @@
+Huella semántica (docs/fase_v112_antislop_02a_as003/evidencia/huella_semantica.py), mismo equipo y entorno. JSON completos fuera de Git.
+  huella_base_1.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_base_2.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_final.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+Comparación exacta base_1 vs base_2: 0 diferencias; base_1 vs final: 0 diferencias (20 casos motor×horizonte, economía y rechazos).
