@@ -29,6 +29,8 @@ ESENCIALES = [
     "tests/test_fase0_golden_motor.py", "tests/test_fase0_golden_economico.py", "tests/test_fase0_golden_sesion_exportables.py",
     # Fase 1A (AS-006): contrato del selector vigente _seleccionar_modelo_rectangular (+ AS-001 como xfail estricto)
     "tests/test_fase1a_selector_rectangular.py",
+    # Fase 2C (AS-003): contratos de la ruta vigente que hoy solo se afirman sobre el subsistema heredado
+    "tests/test_fase2c_contratos_vigentes.py",
     # Fase 1A (AS-007): ejecutable sin docs/ al regenerar el anexo sintético (4/4 en clon limpio)
     "tests/test_fase_4i_h_encabezado.py",
     # Suites existentes que pasan completas en un clon limpio (caracterización de la Fase 0)
