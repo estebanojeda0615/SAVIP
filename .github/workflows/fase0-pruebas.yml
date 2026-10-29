@@ -12,6 +12,7 @@ on:
       - maintenance/v1.1.2-fase2a-as003
       - maintenance/v1.1.2-fase2b-as003-opcion-b
       - maintenance/v1.1.2-fase2c-registro-historico
+      - maintenance/v1.1.2-fase2d-lote4
   workflow_dispatch:
 
 permissions:
