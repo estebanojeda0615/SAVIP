@@ -1,0 +1,7 @@
+antes: 804 ids; PASS 802, FAIL 2, SKIP 0
+despuÃ©s: 803 ids; PASS 803, FAIL 0, SKIP 0
+solo antes: 1; solo despuÃ©s: 0; estado cambiado: 2
+   ('tests.test_fundamentacion_metodologica', 'test_el_selector_retirado_conserva_su_definicion_para_auditoria')
+   ('tests.test_fase0_golden_sesion_exportables', 'test_golden_sesion_exportables[pdf_sesion]')
+   ('tests.test_interaccion_fase_3c_a', 'test_a_acciones_geometria_click_teclado_y_senales')
+DIFERENCIAS

@@ -1,0 +1,4 @@
+Resumen esenciales: 81 archivos; 804 pruebas, 2 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): tests/test_fase0_golden_sesion_exportables.py::test_golden_sesion_exportables[pdf_sesion]; tests/test_interaccion_fase_3c_a.py::test_a_acciones_geometria_click_teclado_y_senales
+Archivos con fallo: ninguno
+codigo=0

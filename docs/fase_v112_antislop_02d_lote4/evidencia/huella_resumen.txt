@@ -1,0 +1,5 @@
+Huella semántica (huella_semantica.py de la Fase 2A), mismo equipo y entorno. JSON completos fuera de Git.
+  huella_base_1.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_base_2.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+  huella_despues.json: SHA-256 d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+Comparación exacta base_1 vs base_2: 0 diferencias; base_1 vs después: 0 diferencias.

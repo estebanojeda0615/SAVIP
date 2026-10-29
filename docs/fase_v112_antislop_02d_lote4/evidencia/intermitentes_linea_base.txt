@@ -1,0 +1,7 @@
+Prueba intermitente de la línea base (código sin cambios, 83549e7): tests/test_fase0_golden_sesion_exportables.py::test_golden_sesion_exportables[pdf_sesion]
+Fallo de la primera ejecución (pasó al reintento):
+  pdf_sesion.texto[122]: esperado '... Proyecciones visibles guardadas: 2.' obtenido '... Proyecciones visibles guardadas: 2. Registros'
+  pdf_sesion.texto[123]: esperado 'Registros calculados: 3.' obtenido 'calculados: 3.'
+  Mismo contenido; distinto salto de línea en el texto extraído del PDF.
+Repetición del archivo completo (12 casos) en el mismo equipo: base 4/4 PASS, después 4/4 PASS (96/96 casos).
+La otra intermitente, test_interaccion_fase_3c_a::test_a (contraccion_cambiada emitida 2 veces), es la carrera conocida de la Fase 1A.

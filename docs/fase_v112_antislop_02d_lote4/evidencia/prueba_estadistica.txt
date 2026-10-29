@@ -1,0 +1,1 @@
+pruebas/prueba_estadistica.py con anexo sintético de 40 meses: base código 0, después código 0; salida idéntica (salvo la ruta de la copia).
