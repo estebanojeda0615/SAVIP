@@ -11,6 +11,7 @@ on:
       - maintenance/v1.1.2-fase1b-as001
       - maintenance/v1.1.2-fase2a-as003
       - maintenance/v1.1.2-fase2b-as003-opcion-b
+      - maintenance/v1.1.2-fase2c-registro-historico
   workflow_dispatch:
 
 permissions:
