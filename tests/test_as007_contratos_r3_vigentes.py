@@ -38,9 +38,10 @@ VOCABULARIO_INTERVALO = (
 #: Columnas con las que se reconstruye `sigma_h` (r3, COLUMNAS_PROHIBIDAS_OOS).
 COLUMNAS_PROHIBIDAS_OOS = ("Observado", "Predicho", "Error", "Error_abs", "Error_pct",
                            "Error_escalado_abs", "Escala_naive_insample")
-#: Encabezados de tabla prohibidos en los informes: los de r3 y los nombres internos de las columnas.
-ENCABEZADOS_PROHIBIDOS = {"observado", "predicho", "error abs", "error pct", "error"} | {
-    c.lower() for c in COLUMNAS_PROHIBIDAS_OOS}
+#: Encabezados prohibidos en los informes: cada columna en minúsculas, con «_» y con espacios (el anexo de
+#: backtesting publica `c.replace("_", " ")`). Incluye los de r3: observado, predicho, error, error abs, error pct.
+ENCABEZADOS_PROHIBIDOS = {c.lower() for c in COLUMNAS_PROHIBIDAS_OOS} | {
+    c.lower().replace("_", " ") for c in COLUMNAS_PROHIBIDAS_OOS}
 #: Agregados que SÍ deben publicarse (r3, AGREGADOS_EXIGIDOS).
 AGREGADOS_EXIGIDOS = ("rmse", "mae", "mase")
 
@@ -110,7 +111,7 @@ def _informe():
 
 
 def _texto_informe(informe) -> str:
-    """Todo el texto que dibuja el informe: portada, pie y los ocho tipos de bloque de modelo.py.
+    """Todo el texto de contenido del informe: portada, pie y los ocho tipos de bloque de modelo.py.
 
     Copia de `tests/test_informes_rediseno.py:_texto_informe` (no se importa: ese módulo es histórico y lanza una
     proyección al cargarse), ampliada con `Informe.portada` e `Informe.pie`, que `pdf_render` también dibuja.
@@ -215,15 +216,18 @@ def test_p0c_docx_sin_vocabulario_ni_columnas_de_error():
         with zipfile.ZipFile(ruta) as paquete:
             texto = re.sub(r"<[^>]+>", " ", paquete.read("word/document.xml").decode("utf-8")).lower()
     assert [p for p in VOCABULARIO_INTERVALO if p.lower() in texto] == []
+    tabla_por_ventana = False
     for seccion in informe.secciones_visibles():
         for bloque in seccion.bloques:
             encabezados = [str(x).lower() for x in (getattr(bloque, "encabezados", None) or [])]
             choque = ENCABEZADOS_PROHIBIDOS & set(encabezados)
             assert not choque, (seccion.clave, choque)
+            tabla_por_ventana |= seccion.clave == "anexos" and "origen" in encabezados
+    assert tabla_por_ventana, "El anexo de backtesting no trae la tabla por ventana: la comprobación quedaría vacía."
 
 
 def test_p0c_pdf_sin_vocabulario_de_intervalo():
-    """r3 C7. El PDF se genera y el contenido que dibuja no usa vocabulario del intervalo."""
+    """r3 C7. El PDF se genera y su texto de contenido (portada, pie, bloques) no usa vocabulario del intervalo."""
     from app_icociv.reportes import pdf_render
 
     informe = _informe()
