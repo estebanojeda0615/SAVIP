@@ -1,0 +1,18 @@
+Recoleccion total (pytest --collect-only -q):
+base 6ac158d: 1058 tests collected, 3 errors in 19.01s
+final da04725: 1067 tests collected, 3 errors in 82.12s (0:01:22)
+ids solo en base: 0
+ids solo en final: 9 (los 9 de tests/test_as007_contratos_r3_vigentes.py)
+errores de recoleccion base:
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+errores de recoleccion final:
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+
+scripts/pruebas_fase0.py --listar (final):
+esenciales   82 entradas   812 pruebas  0 errores de recolección
+dane          0 entradas     0 pruebas
+historicas   28 entradas   242 pruebas  3 errores de recolección

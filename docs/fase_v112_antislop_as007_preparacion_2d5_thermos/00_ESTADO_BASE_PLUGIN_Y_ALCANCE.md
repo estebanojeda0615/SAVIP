@@ -45,7 +45,7 @@
 
 **Archivos que esta fase puede cambiar, y cambia:**
 - `tests/test_residuales_auditoria_independiente_r3.py`: cambio conservador para no depender de `tramo_evidencia_oos`;
-- `tests/test_as007_contratos_p0c_vigentes.py`: archivo nuevo;
+- `tests/test_as007_contratos_r3_vigentes.py`: archivo nuevo (se llamó `test_as007_contratos_p0c_vigentes.py` hasta `febd981`);
 - `scripts/pruebas_fase0.py`: una entrada más en `ESENCIALES`;
 - `.github/workflows/fase0-pruebas.yml`: filtro de rama, 1 línea;
 - `.gitignore`: excepción de esta carpeta;

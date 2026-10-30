@@ -26,18 +26,24 @@ El detalle de cada uno está en 01. Por categorías:
 | **C. Históricos o no vigentes** | B, G, C8–C11 y el final de HG6 | Esperan comportamiento anterior a N0=12/H=24: una serie de n=7 u 8 debía proyectar. B, G y HG6 fallan en la base; C8–C11 pasan sin ejercer nada, porque no hay proyección. No se recrean. La regla vigente («pocas ventanas no niegan el punto») la cubre `test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[36|37|41]`, con W*=1, 2 y 6. Se conservan en r3 como registro |
 | **D. Ambiguos o que fallan en la base** | C12 (`Periodo`), HG4, HG5 (claves de traza), H1–H6 | **DECISIÓN PENDIENTE**, §5 |
 
-**Sensibilidad de las 9 pruebas nuevas.** Rompí cada contrato en memoria con un plugin de mutación sin tocar producción. Las 9 pruebas pasan sin mutación y cada una de las 9 mutaciones hace fallar al menos su prueba ([`evidencia/mutaciones_pruebas_nuevas.txt`](evidencia/mutaciones_pruebas_nuevas.txt)):
+**Sensibilidad de las 9 pruebas nuevas.** Rompí cada contrato en memoria con un plugin de mutación sin tocar producción. Las 9 pruebas pasan sin mutación y cada una de las **14 mutaciones** hace fallar al menos su prueba ([`evidencia/mutaciones_pruebas_nuevas.txt`](evidencia/mutaciones_pruebas_nuevas.txt), sobre el código final `1f6fa6a`). Las cinco últimas se añadieron tras las revisiones Thermos:
 
 | Mutación | Pruebas que fallan |
 |---|---|
-| `ci95_lo`/`ci95_hi` publicados | objeto |
-| Tabla con `Origen` + `Error` numérico | objeto |
+| `ci95_lo`/`ci95_hi` publicados | C1 (tablas de ventanas y `ci_*`) |
+| Tabla con `Origen` + `Error` numérico | C1 |
 | `limite_superior_95` en proyecciones | DataFrame |
 | «IC95 cuantil» en `model_name` | interfaz, DOCX y PDF |
 | «cobertura efectiva» en la sesión | sesión |
 | Columna `sigma_h` en el CSV | CSV |
 | Sin `rmse` en las métricas | sesión y agregados |
 | `evidencia_oos_provisional=False` | P0-E |
+| «sigma_h cuantil» en `Formula.general` | DOCX y PDF |
+| Encabezado `Error_abs` en un bloque | DOCX |
+| `model_name` ausente | interfaz |
+| «IC95 cuantil» en `Informe.pie` | PDF |
+| `Error_abs` añadido al anexo de backtesting | DOCX |
+| «Error escalado abs» (forma con espacios) en el anexo | DOCX |
 
 ## 3. Cambio conservador en r3
 

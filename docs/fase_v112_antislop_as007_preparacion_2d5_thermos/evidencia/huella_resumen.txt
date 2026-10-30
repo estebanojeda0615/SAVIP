@@ -1,0 +1,9 @@
+huella_semantica.py (docs/fase_v112_antislop_02a_as003/evidencia), mismo equipo y venv:
+capturados 20 casos de motor, economía y rechazos -> ../huella_base_1.json
+capturados 20 casos de motor, economía y rechazos -> ../huella_base_2.json
+casos de motor: 20 / 20; diferencias exactas: 0
+capturados 20 casos de motor, economía y rechazos -> ../huella_final.json
+casos de motor: 20 / 20; diferencias exactas: 0
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_base_1.json
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_base_2.json
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_final.json

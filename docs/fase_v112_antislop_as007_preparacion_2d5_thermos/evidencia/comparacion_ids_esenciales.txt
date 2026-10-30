@@ -1,0 +1,13 @@
+antes: 803 ids; PASS 803, FAIL 0, SKIP 0
+despues: 812 ids; PASS 812, FAIL 0, SKIP 0
+solo antes: 0; solo despues: 9; estado cambiado: 0
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_conserva_agregados_oos_y_diseno_de_ventanas')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_csv_sin_columnas_de_intervalo_y_con_agregados')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_dataframe_de_proyecciones_sin_columnas_de_intervalo')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_docx_sin_vocabulario_ni_columnas_de_error')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_interfaz_sin_vocabulario_de_intervalo')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_pdf_sin_vocabulario_de_intervalo')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_sesion_json_sin_errores_oos_y_con_agregados')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0c_tablas_de_ventanas_sin_errores_ni_limites_ci')
+   ('tests.test_as007_contratos_r3_vigentes', 'test_p0e_la_evidencia_oos_se_declara_provisional')
+DIFERENCIAS

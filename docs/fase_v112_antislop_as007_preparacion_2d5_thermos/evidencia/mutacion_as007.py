@@ -39,6 +39,12 @@ elif M == "csv_sigma":
         p = _c(ruta, *a, **k); d = pd.read_csv(p, encoding="utf-8-sig"); d["sigma_h"] = 1.0
         d.to_csv(p, index=False, encoding="utf-8-sig"); return p
     g.generar_csv_reproducibilidad = _csv
+elif M == "portada_pie":
+    import app_icociv.reportes.contenido as ct
+    _cp = ct.construir_informe_proyeccion
+    def _inf_p(*a, **k):
+        inf = _cp(*a, **k); inf.pie = (inf.pie or "") + " IC95 cuantil"; return inf
+    ct.construir_informe_proyeccion = _inf_p
 elif M in ("formula_general", "encabezado_error_abs"):
     import app_icociv.reportes.contenido as ct
     _ci = ct.construir_informe_proyeccion
@@ -52,3 +58,15 @@ elif M in ("formula_general", "encabezado_error_abs"):
                     object.__setattr__(b, "encabezados", ["Error_abs"] + list(b.encabezados)[1:]); return inf
         raise RuntimeError("mutacion no aplicada")
     ct.construir_informe_proyeccion = _inf
+elif M == "anexo_error":
+    import app_icociv.reportes.contenido as ct
+    _ca = ct.construir_informe_proyeccion
+    def _inf_a(*a, **k):
+        inf = _ca(*a, **k)
+        for s in inf.secciones_visibles():
+            if s.clave == "anexos":
+                for b in s.bloques:
+                    if getattr(b, "encabezados", None):
+                        object.__setattr__(b, "encabezados", list(b.encabezados) + ["Error_abs"]); return inf
+        raise RuntimeError("anexo de backtesting no presente")
+    ct.construir_informe_proyeccion = _inf_a

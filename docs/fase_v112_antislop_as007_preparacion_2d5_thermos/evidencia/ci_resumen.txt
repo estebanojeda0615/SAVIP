@@ -1,0 +1,22 @@
+CI fase0-pruebas, rama maintenance/v1.1.2-as007-preparacion-2d5-thermos
+== run 41003966465 (fceadea success intento 1)
+Resumen esenciales: 81 archivos; 803 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41004130161 (febd981 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41007527954 (c656e19 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41007657860 (866d2e4 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41012146058 (da04725 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+(1f6fa6a y el HEAD documental: ver el mensaje de entrega)

@@ -1,0 +1,11 @@
+Base 6ac158d (copia limpia, mismo equipo y venv):
+Resumen esenciales: 81 archivos; 803 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+
+Final da04725 (codigo de pruebas de c656e19 + correcciones de la 2.a pasada de Thermos):
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+codigo=0 duracion=3769s
+(duracion inflada: corrian a la vez las revisiones Thermos y las mutaciones; c656e19 sin carga: 1 929 s, 812/812, 0 fallos en 1.a ejecucion)
