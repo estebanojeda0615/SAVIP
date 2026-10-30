@@ -1,0 +1,11 @@
+Installed plugins:
+
+  ❯ ponytail@ponytail
+    Version: 4.8.4
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ thermos@thermos-claude-plugin
+    Version: 1.1.0
+    Scope: user
+    Status: ✔ enabled

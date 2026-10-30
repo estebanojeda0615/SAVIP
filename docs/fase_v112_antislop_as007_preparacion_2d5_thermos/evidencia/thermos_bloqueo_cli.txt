@@ -1,0 +1,12 @@
+Comando: claude -p "/thermos 83549e7...6ac158d" (prompt completo en prompt_A.txt del equipo de pruebas)
+Version CLI: 2.1.238 (Claude Code)
+--- stdout
+Not logged in · Please run /login
+--- stderr
+Warning: no stdin data received in 3s, proceeding without it. If piping from a slow command, redirect stdin explicitly: < /dev/null to skip, or wait longer.
+--- tiempo y codigo
+
+real	0m5.407s
+user	0m0.015s
+sys	0m0.015s
+codigo=1
