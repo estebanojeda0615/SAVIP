@@ -1,8 +1,9 @@
 """AS-007: contratos VIGENTES de `tests/test_residuales_auditoria_independiente_r3.py` como pruebas recolectables.
 
 r3 es un script (`python tests/test_residuales_auditoria_independiente_r3.py`): sus funciones no empiezan por `test_`
-y ningún perfil lo ejecuta. Sus controles C1–C7 (P0-C: el intervalo retirado no se publica en el objeto, el DataFrame,
-la sesión, el CSV, la interfaz, el DOCX ni el PDF) y las partes vigentes de C12 y HG5 (P0-E) pasan sobre la ruta vigente
+y ningún perfil lo ejecuta. Sus controles C1–C7 (P0-C: el intervalo retirado no se publica en las tablas de ventanas
+ni en las claves `ci_*` del objeto -ver la salvedad de abajo-, el DataFrame, la sesión, el CSV, la interfaz, el DOCX
+ni el PDF) y las partes vigentes de C12 y HG5 (P0-E) pasan sobre la ruta vigente
 y no tenían prueba recolectada equivalente: se migran aquí con los mismos datos (serie ondulada n=48, h=6).
 
 Alcance de C1, sin ampliarlo: revisa las tablas de ventanas (DataFrames con `Origen`/`Horizonte`) y las claves `ci_*`.
@@ -18,6 +19,7 @@ import json
 import math
 import re
 import zipfile
+from dataclasses import replace
 from functools import lru_cache
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -36,6 +38,9 @@ VOCABULARIO_INTERVALO = (
 #: Columnas con las que se reconstruye `sigma_h` (r3, COLUMNAS_PROHIBIDAS_OOS).
 COLUMNAS_PROHIBIDAS_OOS = ("Observado", "Predicho", "Error", "Error_abs", "Error_pct",
                            "Error_escalado_abs", "Escala_naive_insample")
+#: Encabezados de tabla prohibidos en los informes: los de r3 y los nombres internos de las columnas.
+ENCABEZADOS_PROHIBIDOS = {"observado", "predicho", "error abs", "error pct", "error"} | {
+    c.lower() for c in COLUMNAS_PROHIBIDAS_OOS}
 #: Agregados que SÍ deben publicarse (r3, AGREGADOS_EXIGIDOS).
 AGREGADOS_EXIGIDOS = ("rmse", "mae", "mase")
 
@@ -97,10 +102,41 @@ def _informe():
         ruta_jerarquica=[{"nivel": "Serie", "valor": "Serie de prueba"}], fila=serie.head(1),
         year_month=list(serie["Periodo"]), usuario="Prueba",
     )
-    return construir_informe_proyeccion(datos, ConfiguracionInforme.desde_tipo("tecnico"))
+    # Con el anexo de backtesting: es la tabla por ventana que publicaba Observado/Predicho/Error_* antes de P0-C.
+    configuracion = ConfiguracionInforme.desde_tipo("tecnico")
+    configuracion = replace(configuracion, secciones=configuracion.secciones | {"anexos"},
+                            incluir_anexo_backtesting=True)
+    return construir_informe_proyeccion(datos, configuracion)
 
 
-def test_p0c_objeto_sin_tablas_de_errores_ni_limites():
+def _texto_informe(informe) -> str:
+    """Todo el texto que dibuja el informe: portada, pie y los ocho tipos de bloque de modelo.py.
+
+    Copia de `tests/test_informes_rediseno.py:_texto_informe` (no se importa: ese módulo es histórico y lanza una
+    proyección al cargarse), ampliada con `Informe.portada` e `Informe.pie`, que `pdf_render` también dibuja.
+    """
+    def fila(valor) -> str:
+        return " | ".join(str(c) for c in valor) if isinstance(valor, (list, tuple)) else str(valor)
+
+    partes = [informe.pie or ""]
+    if informe.portada is not None:
+        portada = informe.portada
+        partes += [portada.titulo, portada.subtitulo, portada.observaciones] + [fila(f) for f in portada.filas]
+    for seccion in informe.secciones_visibles():
+        partes.append(seccion.titulo)
+        for bloque in seccion.bloques:
+            for atributo in ("texto", "titulo", "nota", "fuente", "pie", "etiqueta", "general", "resultado"):
+                valor = getattr(bloque, atributo, None)
+                if isinstance(valor, str):
+                    partes.append(valor)
+            for atributo in ("items", "roles", "encabezados", "sustitucion", "destacados", "filas"):
+                valor = getattr(bloque, atributo, None)
+                if isinstance(valor, (list, tuple)):
+                    partes += [fila(v) for v in valor]
+    return "\n".join(partes)
+
+
+def test_p0c_tablas_de_ventanas_sin_errores_ni_limites_ci():
     """r3 C1. Ninguna tabla de ventanas del objeto lleva columnas de error y no hay límites `ci_*`; el punto sí.
 
     No revisa `errores_extremos.observaciones` (ver docstring del módulo): ese residual queda fuera de esta prueba.
@@ -182,15 +218,13 @@ def test_p0c_docx_sin_vocabulario_ni_columnas_de_error():
     for seccion in informe.secciones_visibles():
         for bloque in seccion.bloques:
             encabezados = [str(x).lower() for x in (getattr(bloque, "encabezados", None) or [])]
-            prohibidas = {"observado", "predicho", "error abs", "error pct", "error"}
-            prohibidas |= {c.lower() for c in COLUMNAS_PROHIBIDAS_OOS}
-            assert not prohibidas & set(encabezados), (seccion.clave, prohibidas & set(encabezados))
+            choque = ENCABEZADOS_PROHIBIDOS & set(encabezados)
+            assert not choque, (seccion.clave, choque)
 
 
 def test_p0c_pdf_sin_vocabulario_de_intervalo():
     """r3 C7. El PDF se genera y el contenido que dibuja no usa vocabulario del intervalo."""
     from app_icociv.reportes import pdf_render
-    from tests.test_informes_rediseno import _texto_informe  # extractor de los ocho tipos de bloque de modelo.py
 
     informe = _informe()
     with TemporaryDirectory() as tmp:
