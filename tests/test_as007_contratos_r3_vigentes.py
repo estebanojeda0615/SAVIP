@@ -1,9 +1,14 @@
 """AS-007: contratos VIGENTES de `tests/test_residuales_auditoria_independiente_r3.py` como pruebas recolectables.
 
 r3 es un script (`python tests/test_residuales_auditoria_independiente_r3.py`): sus funciones no empiezan por `test_`
-y ningún perfil lo ejecuta. Sus controles C1–C7 (P0-C: el intervalo retirado no se puede reconstruir desde ninguna
-superficie pública) y las partes vigentes de C12 y HG5 (P0-E) pasan sobre la ruta vigente y no tenían prueba recolectada
-equivalente: se migran aquí con los mismos datos (serie ondulada n=48, h=6) y las mismas aserciones.
+y ningún perfil lo ejecuta. Sus controles C1–C7 (P0-C: el intervalo retirado no se publica en el objeto, el DataFrame,
+la sesión, el CSV, la interfaz, el DOCX ni el PDF) y las partes vigentes de C12 y HG5 (P0-E) pasan sobre la ruta vigente
+y no tenían prueba recolectada equivalente: se migran aquí con los mismos datos (serie ondulada n=48, h=6).
+
+Alcance de C1, sin ampliarlo: revisa las tablas de ventanas (DataFrames con `Origen`/`Horizonte`) y las claves `ci_*`.
+NO cubre `backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto`, que hoy publica
+el error absoluto de cada ventana y permite reconstruir el IC95 retirado (hallazgo Thermos B-A1, residual P0-C de
+producción, pendiente de decisión del propietario: 04 y 05 del informe de esta fase).
 
 No se importa r3 ni `tramo_evidencia_oos`, y no se recalcula el intervalo: si apareciera una columna de errores, el
 mensaje dice dónde, sin reconstruir la banda. Inventario y destino de los 27 controles de r3:
@@ -28,9 +33,6 @@ VOCABULARIO_INTERVALO = (
     "cobertura empírica", "cobertura empirica", "nivel nominal",
     "ic95", "ic 95", "ip95", "cuantil", "percentil",
 )
-#: Claves cuyo valor ES la declaración de la limitación (r3, CLAVES_DECLARACION).
-CLAVES_DECLARACION = ("motivo_intervalo_no_sustentado", "bloqueos_metodologicos",
-                      "motivo_evidencia_provisional", "intervalo_sustentado")
 #: Columnas con las que se reconstruye `sigma_h` (r3, COLUMNAS_PROHIBIDAS_OOS).
 COLUMNAS_PROHIBIDAS_OOS = ("Observado", "Predicho", "Error", "Error_abs", "Error_pct",
                            "Error_escalado_abs", "Escala_naive_insample")
@@ -45,34 +47,11 @@ def _ondulada(n: int) -> pd.DataFrame:
 
 @lru_cache(maxsize=1)
 def _caso_ordinario() -> dict:
-    """n=48, h=6: el caso con el que se demostró la reconstrucción del IC95 (r3, `_caso_ordinario`)."""
+    """n=48, h=6: el caso con el que se demostró la reconstrucción del IC95 (r3). Compartido: ninguna prueba lo muta."""
     datos = _ondulada(48)
     anio, mes = map(int, datos.iloc[-1]["Periodo"].split("_")[:2])
     total = anio * 12 + mes - 1 + 6
     return ejecutar_proyeccion(datos, total // 12, total % 12 + 1, 2021)
-
-
-def _hojas(objeto, ruta="", vistos=None):
-    vistos = vistos if vistos is not None else set()
-    if isinstance(objeto, (dict, list, tuple, pd.DataFrame, pd.Series)):
-        if id(objeto) in vistos:
-            return
-        vistos.add(id(objeto))
-    if isinstance(objeto, dict):
-        for clave, valor in objeto.items():
-            yield from _hojas(valor, f"{ruta}.{clave}", vistos)
-    elif isinstance(objeto, (list, tuple)):
-        for i, valor in enumerate(objeto):
-            yield from _hojas(valor, f"{ruta}[{i}]", vistos)
-    elif isinstance(objeto, pd.DataFrame):
-        for columna in objeto.columns:
-            for i, valor in enumerate(objeto[columna].tolist()):
-                yield from _hojas(valor, f"{ruta}<{columna}>[{i}]", vistos)
-    elif isinstance(objeto, pd.Series):
-        for i, valor in enumerate(objeto.tolist()):
-            yield from _hojas(valor, f"{ruta}[{i}]", vistos)
-    else:
-        yield ruta, objeto
 
 
 def _tablas_de_ventanas(objeto) -> list[tuple[str, pd.DataFrame]]:
@@ -121,26 +100,11 @@ def _informe():
     return construir_informe_proyeccion(datos, ConfiguracionInforme.desde_tipo("tecnico"))
 
 
-def _texto_informe(informe) -> str:
-    partes = []
-    for seccion in informe.secciones_visibles():
-        partes.append(str(seccion.titulo))
-        for bloque in seccion.bloques:
-            for atributo in ("texto", "titulo", "nota", "fuente"):
-                valor = getattr(bloque, atributo, None)
-                if isinstance(valor, str):
-                    partes.append(valor)
-            for atributo in ("items", "encabezados"):
-                valor = getattr(bloque, atributo, None)
-                if isinstance(valor, (list, tuple)):
-                    partes.extend(str(x) for x in valor)
-            for fila in getattr(bloque, "filas", None) or []:
-                partes.append(" | ".join(str(c) for c in fila) if isinstance(fila, (list, tuple)) else str(fila))
-    return "\n".join(partes)
+def test_p0c_objeto_sin_tablas_de_errores_ni_limites():
+    """r3 C1. Ninguna tabla de ventanas del objeto lleva columnas de error y no hay límites `ci_*`; el punto sí.
 
-
-def test_p0c_objeto_sin_errores_oos_ni_limites():
-    """r3 C1. El objeto público no conserva el vector de errores OOS ni los límites; el punto sí se publica."""
+    No revisa `errores_extremos.observaciones` (ver docstring del módulo): ese residual queda fuera de esta prueba.
+    """
     resultado = _caso_ordinario()
     assert resultado.get("y_proj") is not None and np.isfinite(float(resultado["y_proj"]))
     assert _errores_recuperables(resultado) == []
@@ -202,7 +166,7 @@ def test_p0c_interfaz_sin_vocabulario_de_intervalo():
     resultado = _caso_ordinario()
     html = construir_html_resultados(resultado) + construir_html_detalle_horizonte(resultado)
     assert [p for p in VOCABULARIO_INTERVALO if p.lower() in html.lower()] == []
-    assert str(resultado.get("model_name") or "") in html
+    assert resultado.get("model_name") and str(resultado["model_name"]) in html
 
 
 def test_p0c_docx_sin_vocabulario_ni_columnas_de_error():
@@ -218,13 +182,15 @@ def test_p0c_docx_sin_vocabulario_ni_columnas_de_error():
     for seccion in informe.secciones_visibles():
         for bloque in seccion.bloques:
             encabezados = [str(x).lower() for x in (getattr(bloque, "encabezados", None) or [])]
-            for prohibida in ("observado", "predicho", "error abs", "error pct", "error"):
-                assert prohibida not in encabezados, (seccion.clave, prohibida)
+            prohibidas = {"observado", "predicho", "error abs", "error pct", "error"}
+            prohibidas |= {c.lower() for c in COLUMNAS_PROHIBIDAS_OOS}
+            assert not prohibidas & set(encabezados), (seccion.clave, prohibidas & set(encabezados))
 
 
 def test_p0c_pdf_sin_vocabulario_de_intervalo():
     """r3 C7. El PDF se genera y el contenido que dibuja no usa vocabulario del intervalo."""
     from app_icociv.reportes import pdf_render
+    from tests.test_informes_rediseno import _texto_informe  # extractor de los ocho tipos de bloque de modelo.py
 
     informe = _informe()
     with TemporaryDirectory() as tmp:

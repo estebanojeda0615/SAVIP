@@ -519,7 +519,10 @@ def _tramo(ventanas: int) -> str:
     texto = _texto_evidencia_oos(ventanas)
     if texto.startswith("Sin evidencia"):
         return SIN_EVIDENCIA
-    return MUY_LIMITADA if "muy limitada" in texto else DISPONIBLE
+    if "muy limitada" in texto:
+        return MUY_LIMITADA
+    assert texto.startswith("Evidencia fuera de muestra disponible (n="), f"Texto de tramo no reconocido: {texto!r}"
+    return DISPONIBLE
 
 
 def _ventanas_reales(n: int, horizonte: int) -> int:
