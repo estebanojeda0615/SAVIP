@@ -24,7 +24,7 @@
 
 | Archivo | Cambio |
 |---|---|
-| `tests/test_residuales_auditoria_independiente_r3.py` | Ya no importa `tramo_evidencia_oos` ni `TRAMO_OOS_*`. Usa un `_tramo()` local que lee `_texto_evidencia_oos`, con las mismas fronteras, y falla si no reconoce el texto. Se cambian literales por constantes. Diff de +23/−11, y los 27 controles quedan intactos |
+| `tests/test_residuales_auditoria_independiente_r3.py` | Ya no importa `tramo_evidencia_oos` ni `TRAMO_OOS_*`. Usa un `_tramo()` local que lee `_texto_evidencia_oos`, con las mismas fronteras, y falla si no reconoce el texto. Las constantes se sustituyen por sus literales. Diff de +23/−11, y los 27 controles quedan intactos |
 | `tests/test_as007_contratos_r3_vigentes.py` | **Nuevo**, con 9 pruebas: C1–C7, la parte vigente de C12 y la parte P0-E de HG5. El informe incluye el anexo de backtesting, y el extractor de texto cubre portada, pie y los ocho tipos de bloque |
 | `scripts/pruebas_fase0.py` | +1 entrada en `ESENCIALES` con su comentario |
 | `.github/workflows/fase0-pruebas.yml` | +1 línea en el filtro de ramas |
@@ -51,7 +51,8 @@ No hubo merge, PR, release, EXE ni ZIP. `git diff 6ac158d HEAD -- app_icociv apl
 | `866d2e4` | docs 02, evidencias y salidas de Thermos A y B (1.ª pasada) |
 | `da04725` | Correcciones de la 2.ª pasada de Thermos B |
 | `1f6fa6a` | Correcciones de la 3.ª pasada de Thermos B (último commit de código) |
-| HEAD documental | docs 03–06, evidencias finales y ajustes de 00–02 |
+| `73490c5` | docs 03–06, evidencias finales y ajustes de 00–02 |
+| HEAD documental final | Correcciones de redacción en 00, 05 y 06, y resultados de CI |
 
 ## 3. Resultados
 
@@ -75,8 +76,9 @@ No hubo merge, PR, release, EXE ni ZIP. `git diff 6ac158d HEAD -- app_icociv apl
 | [41007527954](https://github.com/estebanojeda0615/SAVIP/actions/runs/41007527954) | `c656e19` | success · 812/812 · 0 |
 | [41007657860](https://github.com/estebanojeda0615/SAVIP/actions/runs/41007657860) | `866d2e4` | success · 812/812 · 0 |
 | [41012146058](https://github.com/estebanojeda0615/SAVIP/actions/runs/41012146058) | `da04725` | success · 812/812 · 0 |
-| [41014677965](https://github.com/estebanojeda0615/SAVIP/actions/runs/41014677965) | `1f6fa6a` | Ver el mensaje de entrega |
-| — | HEAD documental | Ver el mensaje de entrega |
+| [41014677965](https://github.com/estebanojeda0615/SAVIP/actions/runs/41014677965) | `1f6fa6a` | success · 812/812 · 0 |
+| [41020645276](https://github.com/estebanojeda0615/SAVIP/actions/runs/41020645276) | `73490c5` (docs 03–06) | success · 812/812 · 0 |
+| — | HEAD documental final | Solo corrige docs respecto a `73490c5`. Ver el mensaje de entrega |
 
 Todos los runs terminaron en su primer intento (`run_attempt` 1).
 

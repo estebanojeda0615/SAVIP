@@ -19,4 +19,12 @@ Archivos con fallo: ninguno
 Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
 Intermitentes (fallaron y pasaron al reintento): ninguna
 Archivos con fallo: ninguno
-(1f6fa6a y el HEAD documental: ver el mensaje de entrega)
+== run 41014677965 (1f6fa6a success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41020645276 (73490c5 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+(HEAD documental final: ver el mensaje de entrega)

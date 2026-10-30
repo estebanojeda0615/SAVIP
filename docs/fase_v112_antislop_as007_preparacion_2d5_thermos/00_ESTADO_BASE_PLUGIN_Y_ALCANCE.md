@@ -12,7 +12,7 @@
 | Autor y confirmador del commit base | `Esteban Ojeda <346522303+estebanojeda0615@users.noreply.github.com>` |
 | Rama nueva | `maintenance/v1.1.2-as007-preparacion-2d5-thermos`. Antes de crearla, `git ls-remote` no devolvía nada |
 | Identidad local del clon | `Esteban Ojeda <346522303+estebanojeda0615@users.noreply.github.com>`. Sin trailers de coautoría, a petición del propietario |
-| HEAD nuevo | En 06 y en el mensaje de entrega; esta carpeta se publica por etapas |
+| HEAD nuevo | Último commit de código `1f6fa6a`. El HEAD documental final está en el mensaje de entrega; esta carpeta se publicó por etapas (06 §2) |
 
 **Aislamiento.** Trabajo en un clon limpio aparte, `Desktop/SAVIP_V112_AS007_2D5_THERMOS`. El repositorio de trabajo del usuario tiene cambios sin confirmar y no se tocó: no hubo `reset`, `clean`, checkout destructivo ni sincronización. Las ejecuciones de referencia se hicieron sobre una copia de la base en `C:/Pruebas SAVIP/AS007/base`, fuera del repositorio.
 
@@ -37,9 +37,9 @@
 | Instalación | Desde el marketplace `LayZeeDK/thermos-claude-plugin` (README del plugin), con alcance de usuario. No se añadió a `requirements*`, al empaquetado ni al repositorio |
 | `claude plugin list` | `thermos@thermos-claude-plugin · Version: 1.1.0 · Scope: user · Status: ✔ enabled` ([evidencia](evidencia/thermos_plugin_list.txt)) |
 | Archivos instalados | `skills/thermos/SKILL.md`, `skills/thermo-nuclear-review/SKILL.md`, `skills/thermo-nuclear-code-quality-review/SKILL.md`, `agents/thermo-nuclear-reviewer.md` y `agents/thermo-nuclear-code-quality-reviewer.md` |
-| Ejecución real | **BLOQUEADA en esta sesión.** La sesión en curso arrancó antes de la instalación, así que sus skills y agentes no se cargaron. La vía sin interfaz, `claude -p "/thermos 83549e7...6ac158d"`, terminó en 5 s con código 1 y este error literal: `Not logged in · Please run /login`. La CLI de este equipo no tiene sesión propia: la autenticación es la de la aplicación de escritorio, y no está permitido iniciar sesión por el propietario |
+| Ejecución real | **Bloqueada al principio y resuelta después.** La sesión arrancó antes de la instalación, así que sus skills y agentes no estaban cargados. La vía sin interfaz, `claude -p "/thermos 83549e7...6ac158d"`, terminó en 5 s con código 1 y este error literal: `Not logged in · Please run /login`. La CLI de este equipo no tiene sesión propia: la autenticación es la de la aplicación de escritorio, y no está permitido iniciar sesión por el propietario. Más tarde, durante la misma sesión, Claude Code cargó el plugin instalado y las revisiones se ejecutaron con él (04 §1) |
 
-**Consecuencia.** Mientras no se ejecuten realmente las revisiones A y B en una sesión nueva de Claude Code con el plugin cargado, el requisito Thermos queda **pendiente** y el cierre no puede ser APTO (§3 del prompt). Ninguna revisión manual de este informe se presenta como Thermos.
+**Consecuencia.** El requisito Thermos quedó pendiente solo hasta esa carga. Las revisiones A y B se ejecutaron después de verdad, con los agentes del plugin (04 §1). Ninguna revisión manual de este informe se presenta como Thermos.
 
 ## 4. Alcance
 

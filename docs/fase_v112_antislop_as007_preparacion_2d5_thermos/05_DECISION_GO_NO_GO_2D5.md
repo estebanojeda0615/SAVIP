@@ -14,7 +14,7 @@
 | 6 | Los 803 ids esenciales se conservan | En el JUnit de la primera ejecución están los 803 originales y todos pasan; se suman 9 nuevos y ninguno cambia de estado (03 §2) | **CUMPLE** |
 | 7 | Thermos sin hallazgos altos sin resolver que afecten al cambio | A: ninguno alto. B: los dos ALTOS del cambio quedaron resueltos (falso verde de C1 y extractor del PDF), y la segunda pasada no dejó hallazgos críticos, altos ni medios sin tratar (04 §3). La tercera pasada (delta `c656e19..da04725`): corrección sin hallazgos críticos, altos ni medios; calidad «Aprobado» (04 §3.3) | **CUMPLE** para el cambio |
 | 8 | AS-007 parcial explicado | r3 queda resuelto para 2D-5. Siguen abiertos `test_p0c_*` ×2, `bghc` y PS-02/anexo DANE, que bloquean 2D-3, no 2D-5 (02 §6) | **CUMPLE**, con alcance parcial declarado |
-| 9 | CI ejecutado en la rama nueva | `fceadea` y `febd981`: success, sin fallos en la primera ejecución. El CI de los commits finales figura en 06 y en el mensaje de entrega | Ver 06 |
+| 9 | CI ejecutado en la rama nueva | Todos los commits hasta `73490c5`: success en el primer intento, sin fallos en la primera ejecución (06 §4). El CI del HEAD final figura en el mensaje de entrega | **CUMPLE** |
 
 ## 2. Dictamen
 
