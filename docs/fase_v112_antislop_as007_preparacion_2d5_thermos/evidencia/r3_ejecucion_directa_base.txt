@@ -1,0 +1,36 @@
+OK   C1    n=48,h=6 no reconstruible desde el objeto
+OK   C2    DataFrame de proyecciones sin intervalo
+OK   C3    sesion JSON sin reconstruccion
+OK   C4    CSV sin reconstruccion
+OK   C5    interfaz sin vocabulario del intervalo
+OK   C6    DOCX sin reconstruccion
+OK   C7    PDF sin reconstruccion
+OK   C8    serie n=7
+OK   C9    serie n=8
+OK   C10   un solo par OOS
+OK   C11   dos pares OOS
+FAIL C12   agregados OOS preservados
+       La tabla de ventanas perdio 'Periodo'.
+OK   HG1   n=2..6 sin evidencia OOS
+OK   HG2   n=7 -> W=1
+OK   HG3   formula W == ventanas reales
+FAIL HG4   W=1 no se llama validado
+
+FAIL HG5   primer origen provisional
+       El primer origen no se declara provisional.
+FAIL HG6   los tramos no son umbrales
+       Una sola ventana volvio a negar la proyeccion.
+OK   H1    PASS/FAIL/PASS conserva h3
+OK   H2    h2 visible como no disponible
+OK   H3    el mensaje no dice «se corta»
+OK   H4    la grafica rompe el hueco
+OK   H5    disponibilidad por paso publicada
+OK   H6    sin hueco no se inventa uno
+FAIL B     n=7 no bloqueado por longitud
+       n=7 volvio a bloquearse.
+FAIL G     una ventana entrega punto
+
+OK   D     seleccion sigue exacta
+
+21/27 pruebas verdes, 6 fallo(s).
+codigo=1 duracion=15s

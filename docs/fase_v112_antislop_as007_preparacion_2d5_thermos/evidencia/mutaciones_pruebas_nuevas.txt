@@ -1,0 +1,37 @@
+== ci95
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_objeto_sin_tablas_de_errores_ni_limites
+1 failed, 8 passed in 22.96s
+== errores_ventanas
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_objeto_sin_tablas_de_errores_ni_limites
+1 failed, 8 passed in 20.86s
+== columna_limite
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_dataframe_de_proyecciones_sin_columnas_de_intervalo
+1 failed, 8 passed in 23.26s
+== vocabulario_modelo
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_interfaz_sin_vocabulario_de_intervalo
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_docx_sin_vocabulario_ni_columnas_de_error
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_pdf_sin_vocabulario_de_intervalo
+3 failed, 6 passed in 21.73s
+== sesion_vocabulario
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_sesion_json_sin_errores_oos_y_con_agregados
+1 failed, 8 passed in 21.13s
+== csv_sigma
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_csv_sin_columnas_de_intervalo_y_con_agregados
+1 failed, 8 passed in 21.00s
+== sin_rmse
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_sesion_json_sin_errores_oos_y_con_agregados
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_conserva_agregados_oos_y_diseno_de_ventanas
+2 failed, 7 passed in 22.42s
+== p0e
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0e_la_evidencia_oos_se_declara_provisional
+1 failed, 8 passed in 21.07s
+== formula_general
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_docx_sin_vocabulario_ni_columnas_de_error
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_pdf_sin_vocabulario_de_intervalo
+2 failed, 7 passed in 23.21s
+== encabezado_error_abs
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_docx_sin_vocabulario_ni_columnas_de_error
+1 failed, 8 passed in 22.45s
+== sin_model_name
+FAILED tests/test_as007_contratos_r3_vigentes.py::test_p0c_interfaz_sin_vocabulario_de_intervalo
+1 failed, 8 passed in 23.26s

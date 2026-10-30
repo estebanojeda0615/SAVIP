@@ -1,0 +1,5 @@
+modelo: Exponencial/log-lineal | claves backtesting_comparativo: 504
+exponencial_log_lineal_h6 n observaciones: 31 | claves: ['error_absoluto', 'extremo', 'periodo', 'posicion', 'z_modificado']
+IC95 reconstruido: (117.69742214273187, 125.47330550648688)
+interno antes de retirar: {'ci95_lo': 117.69742214273187, 'ci95_hi': 125.47330550648688, 'limite_inferior_95': None, 'limite_superior_95': None}
+504 r.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto
