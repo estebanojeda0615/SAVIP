@@ -31,6 +31,8 @@ ESENCIALES = [
     "tests/test_fase1a_selector_rectangular.py",
     # Fase 2C (AS-003): contratos de la ruta vigente que hoy solo se afirman sobre el subsistema heredado
     "tests/test_fase2c_contratos_vigentes.py",
+    # AS-007: contratos P0-C/P0-E vigentes que solo afirmaba el script r3 (no recolectado)
+    "tests/test_as007_contratos_p0c_vigentes.py",
     # Fase 1A (AS-007): ejecutable sin docs/ al regenerar el anexo sintético (4/4 en clon limpio)
     "tests/test_fase_4i_h_encabezado.py",
     # Suites existentes que pasan completas en un clon limpio (caracterización de la Fase 0)

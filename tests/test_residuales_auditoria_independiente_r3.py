@@ -42,14 +42,11 @@ from app_icociv.estadistica.modelos_interpretables import MODELOS_ESTADISTICOS  
 from app_icociv.proyeccion.servicio_proyeccion import (  # noqa: E402
     MIN_ITERACIONES_BACKTESTING,
     MIN_ITERACIONES_WF_ESCENARIO,
-    TRAMO_OOS_DISPONIBLE,
-    TRAMO_OOS_MUY_LIMITADA,
-    TRAMO_OOS_SIN_EVIDENCIA,
     _estructurar_resultado_horizontes,
+    _texto_evidencia_oos,
     _multiplicador_intervalo,
     NIVEL_NOMINAL_95,
     ejecutar_proyeccion,
-    tramo_evidencia_oos,
     ventanas_oos_disponibles,
 )
 from app_icociv.validacion.backtesting import ejecutar_backtesting  # noqa: E402
@@ -513,6 +510,18 @@ def c12_agregados_oos_preservados() -> None:
 # ==============================
 
 
+# AS-007: los tramos se leen del texto que se publica (`_texto_evidencia_oos`, mismas fronteras que
+# `tramo_evidencia_oos`), para que r3 no dependa de la funcion candidata a retiro en el lote 2D-5.
+SIN_EVIDENCIA, MUY_LIMITADA, DISPONIBLE = "sin_evidencia_oos", "evidencia_oos_muy_limitada", "evidencia_oos_disponible"
+
+
+def _tramo(ventanas: int) -> str:
+    texto = _texto_evidencia_oos(ventanas)
+    if texto.startswith("Sin evidencia"):
+        return SIN_EVIDENCIA
+    return MUY_LIMITADA if "muy limitada" in texto else DISPONIBLE
+
+
 def _ventanas_reales(n: int, horizonte: int) -> int:
     backtesting = ejecutar_backtesting(
         _lineal(n), 2021, None, horizonte, "seleccion_automatica", MODELOS_ESTADISTICOS
@@ -525,13 +534,13 @@ def hg1_sin_evidencia_por_debajo_del_primer_origen() -> None:
     for n in range(2, 7):
         assert ventanas_oos_disponibles(n, 1) == 0, f"La formula anuncia evidencia con n={n}."
         assert _ventanas_reales(n, 1) == 0, f"El backtesting produjo ventanas con n={n}."
-        assert tramo_evidencia_oos(ventanas_oos_disponibles(n, 1)) == TRAMO_OOS_SIN_EVIDENCIA
+        assert _tramo(ventanas_oos_disponibles(n, 1)) == SIN_EVIDENCIA
 
 
 def hg2_una_ventana_en_n7() -> None:
     assert ventanas_oos_disponibles(7, 1) == 1
     assert _ventanas_reales(7, 1) == 1
-    assert tramo_evidencia_oos(1) == TRAMO_OOS_MUY_LIMITADA
+    assert _tramo(1) == MUY_LIMITADA
 
 
 def hg3_formula_coincide_con_backtesting_en_los_bordes() -> None:
@@ -551,7 +560,7 @@ def hg4_una_ventana_no_se_llama_validada() -> None:
     resultado = _caso("n7h1", _lineal(7), 1)
     traza = (resultado.get("horizonte_info") or {}).get("trazabilidad") or {}
     assert traza.get("ventanas_oos_horizonte_solicitado") == 1
-    assert traza.get("tramo_evidencia_oos_horizonte_solicitado") == TRAMO_OOS_MUY_LIMITADA
+    assert traza.get("tramo_evidencia_oos_horizonte_solicitado") == MUY_LIMITADA
     texto = str(traza.get("evidencia_oos_horizonte_solicitado") or "").lower()
     assert "muy limitada" in texto, f"El texto no declara la limitacion: {texto!r}"
     for palabra in VOCABULARIO_PROHIBIDO:
@@ -572,10 +581,10 @@ def hg5_primer_origen_se_comunica_provisional() -> None:
 
 def hg6_tramos_no_son_umbrales_de_aceptacion() -> None:
     """Las tres fronteras describen; ninguna niega."""
-    assert tramo_evidencia_oos(0) == TRAMO_OOS_SIN_EVIDENCIA
-    assert tramo_evidencia_oos(MIN_ITERACIONES_WF_ESCENARIO - 1) == TRAMO_OOS_MUY_LIMITADA
-    assert tramo_evidencia_oos(MIN_ITERACIONES_WF_ESCENARIO) == TRAMO_OOS_DISPONIBLE
-    assert tramo_evidencia_oos(MIN_ITERACIONES_BACKTESTING) == TRAMO_OOS_DISPONIBLE
+    assert _tramo(0) == SIN_EVIDENCIA
+    assert _tramo(MIN_ITERACIONES_WF_ESCENARIO - 1) == MUY_LIMITADA
+    assert _tramo(MIN_ITERACIONES_WF_ESCENARIO) == DISPONIBLE
+    assert _tramo(MIN_ITERACIONES_BACKTESTING) == DISPONIBLE
     # Con UNA ventana el punto se entrega igualmente (P0-G, no reabrir).
     resultado = _caso("n8h2", _lineal(8), 2)
     assert resultado.get("proyeccion_generada") is True, \
