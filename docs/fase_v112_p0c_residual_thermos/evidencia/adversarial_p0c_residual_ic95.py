@@ -1,87 +1,51 @@
 """P0-C-R · prueba adversarial DIAGNÓSTICA (fuera del perfil esencial y de la recolección por defecto).
 
-Ejecutar a mano, desde la raíz del repositorio:
+Comando canónico (03 §1), desde la raíz del repositorio, en PowerShell o bash:
 
-    QT_QPA_PLATFORM=offscreen python -m pytest docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py -p no:cacheprovider -q
+    python -m pytest docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py -p no:cacheprovider -q -rA
 
 El nombre no empieza por `test_` y vive en `docs/`: `pytest --collect-only` no la recoge y `scripts/pruebas_fase0.py` no la
-asigna a ningún perfil. Así no deja el CI en rojo ni necesita `skip`/`xfail` para ocultar lo que demuestra.
+asigna a ningún perfil, de modo que no deja el CI en rojo ni necesita `skip`/`xfail`.
 
-Qué demuestra en la base `dfcaaa9` (resultado esperado y documentado en 03):
+Tres grupos, que NO deben confundirse si algún día se promueve a `tests/`:
 
-* `test_red_sin_vector_individual_de_errores_oos` FALLA: el objeto público lleva el vector de errores absolutos por ventana
-  en `backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto` (vía A).
-* `test_via_b_*` PASAN, y eso es lo grave: con agregados que el contrato protege (RMSE y su `n`, o desviación y media del
-  error) se reconstruye el IC95 interno EXACTO, sin leer el vector. Por eso retirar solo el vector no cierra P0-C.
-* `test_comparativo_conserva_agregados` y los casos borde PASAN: no hay errores nuevos con historia insuficiente, entradas
-  sin extremos ni estructuras con `None`.
+1. CONTRATO (`test_contrato_*`): lo que debería cumplirse tras una corrección. En la base `dfcaaa9`
+   `test_contrato_sin_vector_individual_de_errores_oos` FALLA (vía A: el vector por ventana está publicado).
+2. CARACTERIZACIÓN DEL NO-GO (`test_caracterizacion_no_go_*`): PASAN en la base y su PASS es la mala noticia. Con agregados
+   que el contrato protege —RMSE y su n (B1), desviación y media del error (B2), MAE y `estabilidad_error` (B4), RMSE_h
+   persistido en h=24 (B3)— sale el IC95 interno EXACTO sin leer el vector; y sin `error_absoluto`, `z_modificado` con
+   mediana y MAD lo reconstruye (A'). Documentan por qué retirar el vector no cierra P0-C. No deben promoverse como
+   regresión: protegerían la vulnerabilidad.
+3. DETECTOR Y ESCENARIO (`test_detector_*`, `test_escenario_*`): sensibilidad y casos borde, sin depender del motor salvo
+   donde se indica. El detector es HEURÍSTICO (por nombre de clave): un verde suyo no prueba irreconstruibilidad. El oráculo
+   semántico es la caracterización, que reconstruye la banda por todas las vías conocidas.
 """
-import math
-
 import numpy as np
 import pandas as pd
 import pytest
 
-import app_icociv.proyeccion.servicio_proyeccion as sp
+from caso_ic95 import banda, entrada_ganadora, proyectar, sin_calendario, sp, vias
 
-#: Nombres con los que un vector por ventana permite recuperar `sigma_h` (ver `COLUMNAS_OOS_RECONSTRUCTIVAS`).
-CLAVES_POR_VENTANA = {"error", "error_abs", "error_absoluto", "error_pct", "error_escalado_abs",
-                      "escala_naive_insample", "observado", "predicho", "real", "pronostico"}
+#: Nombres con los que un vector por ventana permite recuperar `sigma_h`: las columnas que producción ya considera
+#: reconstructivas (`COLUMNAS_OOS_RECONSTRUCTIVAS`) más los alias en minúsculas que usan otras estructuras.
+CLAVES_POR_VENTANA = {c.lower() for c in sp.COLUMNAS_OOS_RECONSTRUCTIVAS} | {
+    "error_absoluto", "z_modificado", "real", "pronostico"}
 AGREGADOS = ("rmse", "mae", "mase", "iteraciones", "sesgo_medio")
+CASOS = ("n48_h6", "n72_h12", "n38_h24", "n72_h24")
 
 
-def _serie(valores):
-    return pd.DataFrame({"Periodo": [f"{2021 + i // 12}_{i % 12 + 1}" for i in range(len(valores))],
-                         "Indice": [float(v) for v in valores]})
-
-
-def _ondulada(n):
-    return _serie([100.0 + 0.4 * i + 3.0 * math.sin(i * 0.7) for i in range(n)])
-
-
-def _ruidosa(n, semilla=7):
-    rng = np.random.default_rng(semilla)
-    return _serie([120.0 + 0.6 * i + rng.normal(0.0, 2.5) for i in range(n)])
-
-
-CASOS = {"n48_h6": (_ondulada(48), 6), "n72_h12": (_ruidosa(72), 12), "n38_h24": (_ondulada(38), 24),
-         "n72_h24": (_ruidosa(72), 24)}
-_CACHE: dict = {}
-
-
-def _ejecutar(caso):
-    """Resultado público e IC95 interno (capturado antes de que `_retirar_intervalo_de_publicacion` lo vacíe)."""
-    if caso not in _CACHE:
-        df, h = CASOS[caso]
-        anio, mes = map(int, df.iloc[-1]["Periodo"].split("_")[:2])
-        total = anio * 12 + mes - 1 + h
-        interno = {}
-        original = sp._retirar_intervalo_de_publicacion
-
-        def espia(resultado, *a, **k):
-            interno.update(lo=resultado.get("ci95_lo"), hi=resultado.get("ci95_hi"))
-            return original(resultado, *a, **k)
-
-        sp._retirar_intervalo_de_publicacion = espia
-        try:
-            publico = sp.ejecutar_proyeccion(df, total // 12, total % 12 + 1, 2021)
-        finally:
-            sp._retirar_intervalo_de_publicacion = original
-        _CACHE[caso] = (publico, interno, h)
-    return _CACHE[caso]
+def _numericos(valores) -> int:
+    return sum(isinstance(v, (int, float, np.number)) and not isinstance(v, bool) and np.isfinite(v) for v in valores)
 
 
 def vectores_por_ventana(objeto) -> list[str]:
     """Rutas públicas con >= 2 números bajo un nombre de error/observado/predicho por ventana.
 
-    Recorre dicts, listas, tuplas, DataFrames, Series y arrays con protección de ciclos. Detecta listas de registros
-    (`[{..., "error_absoluto": x}, ...]`), columnas de DataFrame y claves cuyo valor ya es una secuencia numérica.
+    Recorre dicts, listas, tuplas, DataFrames (columnas y celdas anidadas) y Series (por su `name` y por su contenido),
+    con protección de ciclos. Detecta listas de registros (`[{..., "error_absoluto": x}, ...]`), columnas, Series con
+    nombre de error y claves de dict cuyo valor es una secuencia numérica (lista, tupla, array o Series).
     """
     hallados, vistos = [], set()
-
-    def numeros(valores):
-        return sum(isinstance(v, (int, float, np.number)) and not isinstance(v, bool) and np.isfinite(v)
-                   for v in valores)
 
     def recorrer(nodo, ruta):
         if isinstance(nodo, (dict, list, tuple, pd.DataFrame, pd.Series, np.ndarray)):
@@ -91,24 +55,30 @@ def vectores_por_ventana(objeto) -> list[str]:
         if isinstance(nodo, dict):
             for clave, valor in nodo.items():
                 if str(clave).lower() in CLAVES_POR_VENTANA and isinstance(valor, (list, tuple, np.ndarray, pd.Series)):
-                    if numeros(list(valor)) >= 2:
+                    if _numericos(list(valor)) >= 2:
                         hallados.append(f"{ruta}.{clave}")
                 recorrer(valor, f"{ruta}.{clave}")
         elif isinstance(nodo, (list, tuple)):
             registros = [x for x in nodo if isinstance(x, dict)]
             if len(registros) >= 2:
                 for clave in {str(k) for x in registros for k in x}:
-                    if clave.lower() in CLAVES_POR_VENTANA and numeros([x.get(clave) for x in registros]) >= 2:
+                    if clave.lower() in CLAVES_POR_VENTANA and _numericos([x.get(clave) for x in registros]) >= 2:
                         hallados.append(f"{ruta}[*].{clave}")
             for i, valor in enumerate(nodo):
                 recorrer(valor, f"{ruta}[{i}]")
+        elif isinstance(nodo, pd.Series):
+            if str(nodo.name).lower() in CLAVES_POR_VENTANA and _numericos(nodo.tolist()) >= 2:
+                hallados.append(f"{ruta}<Series {nodo.name}>")
+            for valor in nodo.tolist():
+                if isinstance(valor, (dict, list, pd.Series, pd.DataFrame)):
+                    recorrer(valor, ruta)
         elif isinstance(nodo, pd.DataFrame):
             for columna in nodo.columns:
                 if str(columna).lower() in CLAVES_POR_VENTANA:
-                    if len(pd.to_numeric(nodo[columna], errors="coerce").dropna()) >= 2:
+                    if _numericos(pd.to_numeric(nodo[columna], errors="coerce").tolist()) >= 2:
                         hallados.append(f"{ruta}<{columna}>")
                 for valor in nodo[columna].tolist():
-                    if isinstance(valor, (dict, list)):
+                    if isinstance(valor, (dict, list, pd.Series, pd.DataFrame)):
                         recorrer(valor, f"{ruta}<{columna}>")
 
     recorrer(objeto, "resultado")
@@ -117,70 +87,113 @@ def vectores_por_ventana(objeto) -> list[str]:
 
 def _resumir(rutas):
     import re
-    genericas = sorted({re.sub(r"\.[a-z0-9_]+_h\d+\.", ".<modelo_h>.", r) for r in rutas})
-    return f"{len(rutas)} rutas; formas: {genericas}"
+
+    formas = sorted({re.sub(r"\.[a-z0-9_]+_h\d+\.", ".<modelo_h>.", r) for r in rutas})
+    return f"{len(rutas)} rutas; formas: {formas}"
 
 
-@pytest.mark.parametrize("caso", sorted(CASOS))
-def test_red_sin_vector_individual_de_errores_oos(caso):
-    publico, _, _ = _ejecutar(caso)
+def _con_banda(caso):
+    publico, interno, h = proyectar(caso)
+    assert interno is not None, f"{caso}: el motor no construyó banda interna finita; elegir otro escenario."
+    assert publico.get("ci95_lo") is None and publico.get("ci95_hi") is None, "El IC95 volvió a publicarse."
+    assert sin_calendario(publico), f"{caso}: hay ajuste de calendario; la fórmula sin factor no aplica."
+    return publico, interno, h
+
+
+# 1. CONTRATO ---------------------------------------------------------------------------------------------------------
+
+@pytest.mark.parametrize("caso", CASOS)
+def test_contrato_sin_vector_individual_de_errores_oos(caso):
+    publico, _, _ = proyectar(caso)
     rutas = vectores_por_ventana(publico)
     assert not rutas, f"Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): {_resumir(rutas)}"
 
 
-@pytest.mark.parametrize("caso", sorted(CASOS))
-def test_comparativo_conserva_agregados(caso):
-    publico, _, h = _ejecutar(caso)
-    entrada = publico["backtesting_comparativo"][f"{publico['modelo_codigo']}_h{h}"]
-    metricas = entrada["metricas"]
-    assert all(metricas.get(a) is not None for a in AGREGADOS), [a for a in AGREGADOS if metricas.get(a) is None]
-    assert len(publico["backtesting_comparativo"]) > 0
+@pytest.mark.parametrize("caso", CASOS)
+def test_contrato_el_comparativo_conserva_los_agregados(caso):
+    publico, _, h = proyectar(caso)
+    metricas = entrada_ganadora(publico, h)["metricas"]
+    assert [a for a in AGREGADOS if metricas.get(a) is None or not np.isfinite(float(metricas[a]))] == []
 
 
-def _banda(publico, sigma, n):
-    c = sp._multiplicador_intervalo(sp.NIVEL_NOMINAL_95, int(n))
-    y = float(publico["y_proj"])
-    return y - c * sigma, y + c * sigma
+# 2. CARACTERIZACIÓN DEL NO-GO (su PASS demuestra la contradicción) ------------------------------------------------
 
-
-@pytest.mark.parametrize("caso", sorted(CASOS))
-def test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto(caso):
-    """Comprobación INDEPENDIENTE de la vía B: no lee `observaciones`. Igualdad exacta, sin tolerancia."""
-    publico, interno, h = _ejecutar(caso)
-    metricas = publico["backtesting_comparativo"][f"{publico['modelo_codigo']}_h{h}"]["metricas"]
-    assert interno["lo"] is not None and publico.get("ci95_lo") is None  # existe banda interna y no se publica
-    assert _banda(publico, float(metricas["rmse"]), metricas["iteraciones"]) == (interno["lo"], interno["hi"])
+@pytest.mark.parametrize("caso", CASOS)
+@pytest.mark.parametrize("via", ["B1 (rmse+iteraciones)", "B2 (desviacion ddof1+media)", "B4 (mae+estabilidad_error)"])
+def test_caracterizacion_no_go_los_agregados_del_comparativo_reconstruyen_el_ic95_exacto(caso, via):
+    """Sin leer `observaciones`. Igualdad exacta, sin tolerancia."""
+    publico, interno, h = _con_banda(caso)
+    sigma, n = vias(publico, h)[via]
+    assert banda(publico, sigma, n) == interno
 
 
 @pytest.mark.parametrize("caso", ["n38_h24", "n72_h24"])
-def test_via_b_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24(caso):
-    """En H=24 la muestra rectangular W* es la misma que la del intervalo: `tabla_horizontes` (y CSV y sesión) bastan."""
-    publico, interno, h = _ejecutar(caso)
-    fila = next(f for f in publico["horizonte_info"]["tabla_horizontes"] if int(f["horizonte"]) == h)
-    assert _banda(publico, float(fila["rmse"]), fila["W"]) == (interno["lo"], interno["hi"])
+def test_caracterizacion_no_go_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24(caso):
+    """En h=24 la muestra rectangular W* coincide con la del intervalo: `tabla_horizontes` (y CSV y sesión) bastan."""
+    publico, interno, h = _con_banda(caso)
+    sigma, n = vias(publico, h)["B3 (RMSE_h rectangular+W)"]
+    assert banda(publico, sigma, n) == interno
 
 
-def test_historia_insuficiente_no_rompe_el_recorrido():
-    df = _ruidosa(30)
-    anio, mes = map(int, df.iloc[-1]["Periodo"].split("_")[:2])
-    total = anio * 12 + mes - 1 + 3
-    publico = sp.ejecutar_proyeccion(df, total // 12, total % 12 + 1, 2021)
-    assert publico.get("proyeccion_generada") is False
+def test_caracterizacion_no_go_retirar_solo_el_vector_no_cierra_p0c():
+    """La «corrección parcial»: sin `observaciones` el contrato del vector pasaría, pero B1 sigue dando el IC95 exacto."""
+    publico, interno, h = _con_banda("n48_h6")
+    parcial = {k: v for k, v in publico.items() if k != "backtesting_comparativo"}
+    parcial["backtesting_comparativo"] = {
+        clave: {**e, "metricas": {**(e.get("metricas") or {}), "errores_extremos": {
+            k: v for k, v in ((e.get("metricas") or {}).get("errores_extremos") or {}).items() if k != "observaciones"}}}
+        for clave, e in publico["backtesting_comparativo"].items()}
+    assert vectores_por_ventana(parcial) == []
+    sigma, n = vias(parcial, h)["B1 (rmse+iteraciones)"]
+    assert banda(parcial, sigma, n) == interno
+
+
+def test_caracterizacion_no_go_retirar_solo_error_absoluto_no_basta():
+    """Sin la clave `error_absoluto`, `z_modificado` con la mediana y el MAD publicados devuelve el vector |e| (A')."""
+    publico, interno, h = _con_banda("n48_h6")
+    entrada = entrada_ganadora(publico, h)
+    extremos = entrada["metricas"]["errores_extremos"]
+    entrada_sin_ea = {**entrada, "metricas": {**entrada["metricas"], "errores_extremos": {
+        **extremos, "observaciones": [{k: v for k, v in o.items() if k != "error_absoluto"}
+                                      for o in extremos["observaciones"]]}}}
+    sin_ea = {**publico, "backtesting_comparativo": {
+        **publico["backtesting_comparativo"], f"{publico['modelo_codigo']}_h{h}": entrada_sin_ea}}
+    assert all("error_absoluto" not in o for o in entrada_sin_ea["metricas"]["errores_extremos"]["observaciones"])
+    sigma, n = vias(sin_ea, h)["A' (z_modificado+mediana+MAD)"]
+    assert banda(sin_ea, sigma, n) == interno
+
+
+# 3. DETECTOR Y ESCENARIO --------------------------------------------------------------------------------------------
+
+@pytest.mark.parametrize("objeto, esperado", [
+    ({"diagnostico": [{"origen": i, "Error": 0.1 * i} for i in range(5)]}, ["resultado.diagnostico[*].Error"]),
+    ({"bt": {"predicciones": pd.DataFrame({"Origen": [1, 2], "Predicho": [1.0, 2.0]})}}, ["resultado.bt.predicciones<Predicho>"]),
+    ({"extremos": {"error_absoluto": [0.5, 0.7, 0.9]}}, ["resultado.extremos.error_absoluto"]),
+    ({"extremos": {"error_absoluto": np.array([0.5, 0.7])}}, ["resultado.extremos.error_absoluto"]),
+    ({"x": [pd.Series([1.0, 2.0], name="Error")]}, ["resultado.x[0]<Series Error>"]),
+    ({"anidado": {"t": pd.DataFrame({"Origen": [1, 2], "Observado": [1.0, 2.0]})}}, ["resultado.anidado.t<Observado>"]),
+    ({"obs": [{"posicion": i, "z_modificado": 0.1 * i} for i in range(3)]}, ["resultado.obs[*].z_modificado"]),
+    ({"solo_uno": [{"error_absoluto": 0.3}]}, []),
+    ({"c": {"a_h1": None, "b_h1": {"metricas": None}, "c_h1": {"metricas": {"errores_extremos": {"observaciones": []}}},
+            "d_h1": {"metricas": {"errores_extremos": {"observaciones": None}}}}}, []),
+], ids=["registros_Error", "columna_Predicho", "lista_error_absoluto", "array_error_absoluto", "series_Error",
+        "dataframe_anidado", "registros_z_modificado", "un_solo_registro", "none_y_vacios"])
+def test_detector_sensibilidad(objeto, esperado):
+    assert vectores_por_ventana(objeto) == esperado
+
+
+def test_escenario_historia_insuficiente_sin_banda_ni_vectores():
+    publico, interno, _ = proyectar("n30_h3")
+    assert publico.get("proyeccion_generada") is False and interno is None
     assert vectores_por_ventana(publico) == []
 
 
-def test_el_recorrido_tolera_none_y_estructuras_faltantes():
-    sintetico = {"backtesting_comparativo": {"a_h1": None, "b_h1": {"metricas": None},
-                                             "c_h1": {"metricas": {"errores_extremos": {"observaciones": []}}},
-                                             "d_h1": {"metricas": {"errores_extremos": {"observaciones": None}}}}}
-    assert vectores_por_ventana(sintetico) == []
-
-
-def test_entradas_sin_extremos_siguen_publicando_el_vector():
-    """Un candidato sin observaciones extremas (`cantidad == 0`) publica igualmente el vector completo."""
-    publico, _, _ = _ejecutar("n48_h6")
-    sin_extremos = [k for k, e in publico["backtesting_comparativo"].items()
-                    if (e.get("metricas") or {}).get("errores_extremos", {}).get("cantidad") == 0]
-    assert sin_extremos, "El caso ya no tiene candidatos sin extremos: elegir otro."
-    entrada = publico["backtesting_comparativo"][sin_extremos[0]]
-    assert len(entrada["metricas"]["errores_extremos"]["observaciones"]) == entrada["iteraciones"]
+def test_escenario_entradas_sin_extremos_publican_el_vector_completo():
+    """Un candidato sin observaciones extremas (`cantidad == 0`) publica igualmente un registro por ventana."""
+    publico, _, _ = proyectar("n48_h6")
+    sin_extremos = [e for e in publico["backtesting_comparativo"].values()
+                    if ((e.get("metricas") or {}).get("errores_extremos") or {}).get("calculable")
+                    and e["metricas"]["errores_extremos"].get("cantidad") == 0]
+    assert sin_extremos, "El escenario ya no tiene candidatos sin extremos: elegir otro."
+    entrada = sin_extremos[0]
+    assert len(entrada["metricas"]["errores_extremos"]["observaciones"]) == entrada["metricas"]["iteraciones"]

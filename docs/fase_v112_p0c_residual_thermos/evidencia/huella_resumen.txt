@@ -1,4 +1,12 @@
-huella_semantica.py (Fase 2A) en la rama nueva, sin cambios de produccion:
-casos de motor: 20 / 20; diferencias exactas: 0 frente a la base de AS-007
-d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_base_1.json
-d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_p0c.json
+Huella semantica de la Fase 2A en la rama P0-C-R (sin cambios de produccion), mismo equipo y venv que la base.
+
+Comandos, desde la raiz del repositorio:
+  python docs/fase_v112_antislop_02a_as003/evidencia/huella_semantica.py capturar <salida.json>
+  python docs/fase_v112_antislop_02a_as003/evidencia/huella_semantica.py comparar <base.json> <salida.json>
+
+Base: captura de dfcaaa9 hecha en la fase AS-007 (huella_base_1.json, fuera del repositorio por tamano).
+Rama: captura sobre 12319df (huella_p0c.json, fuera del repositorio).
+
+Resultado de "comparar": casos de motor: 20 / 20; diferencias exactas: 0
+SHA-256 base: d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191
+SHA-256 rama: d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191

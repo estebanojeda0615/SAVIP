@@ -1,54 +1,47 @@
 # 03 · Prueba adversarial RED y sensibilidad
 
-**No hay GREEN.** El contrato de irreconstruibilidad del IC95 es inviable mientras se conserven los agregados protegidos (01). Por eso **no hay corrección**, y tampoco un GREEN fingido.
+**No hay GREEN.** El contrato de irreconstruibilidad del IC95 no es viable mientras se conserven los agregados protegidos (01). No hay corrección y no simulo un GREEN.
 
-## 1. Prueba adversarial (diagnóstica, fuera del perfil esencial)
+## 1. Prueba adversarial diagnóstica (fuera del perfil esencial)
 
-**Archivo:** [`evidencia/adversarial_p0c_residual_ic95.py`](evidencia/adversarial_p0c_residual_ic95.py).
-- Vive en `docs/` y su nombre no empieza por `test_`. Por eso `pytest --collect-only` no la recoge y `scripts/pruebas_fase0.py` no la asigna a ningún perfil.
-- No deja el CI en rojo y no usa `skip` ni `xfail`.
+**Archivo:** [`evidencia/adversarial_p0c_residual_ic95.py`](evidencia/adversarial_p0c_residual_ic95.py), con las utilidades de [`evidencia/caso_ic95.py`](evidencia/caso_ic95.py).
+- Vive en `docs/` y su nombre no empieza por `test_`: `pytest --collect-only` no la recoge y `scripts/pruebas_fase0.py` no la asigna a ningún perfil. No deja el CI en rojo y no usa `skip` ni `xfail`.
+- `caso_ic95.py` fija `QT_QPA_PLATFORM=offscreen` y añade la raíz a `sys.path`, así que el comando funciona igual en PowerShell y en bash.
 
-**Comando:**
+**Comando canónico**, desde la raíz:
 
 ```text
-QT_QPA_PLATFORM=offscreen PYTHONDONTWRITEBYTECODE=1 python -m pytest docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py -p no:cacheprovider -q -rA
+python -m pytest docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py -p no:cacheprovider -q -rA
 ```
 
-**Ejecución sobre la base `dfcaaa9`.** La rama no cambia producción, así que la base es el mismo código. Entorno de 00. **Código de salida 1**: 4 fallos y 13 PASS en 25,75 s. Salida en [`evidencia/salida_adversarial_red_base.txt`](evidencia/salida_adversarial_red_base.txt).
+**Ejecución sobre la base.** El código de producción es el de `dfcaaa9`, porque la rama no lo modifica. Entorno de 00, con `PYTHONDONTWRITEBYTECODE=1`.
 
-| Prueba | Casos | Resultado en la base | Qué significa |
-|---|---|---|---|
-| `test_red_sin_vector_individual_de_errores_oos` | n48_h6, n72_h12, n38_h24, n72_h24 | **4 FAIL** | Mensaje: «Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 504 rutas; formas: ['resultado.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto']» |
-| `test_comparativo_conserva_agregados` | 4 | PASS | El comparativo publica `rmse`, `mae`, `mase`, `iteraciones` y `sesgo_medio` |
-| `test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto` | 4 | **PASS** | Con `metricas.rmse` y `iteraciones`, sin leer el vector, se obtiene el IC95 interno **exacto** (`==`). Esto **demuestra la contradicción**; no es un éxito |
-| `test_via_b_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24` | n38_h24, n72_h24 | **PASS** | Con `tabla_horizontes[24].rmse` y `W` sale la banda exacta del paso 24 |
-| `test_historia_insuficiente_no_rompe_el_recorrido` | n=30 | PASS | Sin proyección y sin vectores, y el recorrido no falla |
-| `test_el_recorrido_tolera_none_y_estructuras_faltantes` | sintético | PASS | Admite entradas `None` y `observaciones` vacías o `None` |
-| `test_entradas_sin_extremos_siguen_publicando_el_vector` | n48_h6 | PASS | Un candidato con `cantidad == 0` publica igualmente `observaciones` completas (= `iteraciones`) |
+**Código de salida 1:** 4 FAIL y 31 PASS en 29,4 s. La salida completa, sin filtrar, está en [`evidencia/salida_adversarial_red_base.txt`](evidencia/salida_adversarial_red_base.txt).
+
+| Grupo | Prueba | Casos | Base | Qué significa |
+|---|---|---|---|---|
+| Contrato | `test_contrato_sin_vector_individual_de_errores_oos` | n48_h6, n72_h12, n38_h24, n72_h24 | **4 FAIL** | «Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 1008 rutas; formas: [`…observaciones[*].error_absoluto`, `…observaciones[*].z_modificado`]» (504 entradas × 2 claves) |
+| Contrato | `test_contrato_el_comparativo_conserva_los_agregados` | 4 | PASS | Se publican `rmse`, `mae`, `mase`, `iteraciones` y `sesgo_medio`, y todos son finitos |
+| Caracterización del NO-GO | `test_caracterizacion_no_go_los_agregados_del_comparativo_reconstruyen_el_ic95_exacto` | 4 × {B1, B2, B4} | **12 PASS** | Sin leer el vector, B1, B2 y B4 dan el IC95 interno **exacto** (`==`). El PASS **demuestra la contradicción** |
+| Caracterización del NO-GO | `test_caracterizacion_no_go_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24` | n38_h24, n72_h24 | **2 PASS** | `tabla_horizontes[24].rmse` y `W` dan la banda exacta del paso 24 |
+| Caracterización del NO-GO | `test_caracterizacion_no_go_retirar_solo_el_vector_no_cierra_p0c` | n48_h6 | **PASS** | Sin `observaciones`, el detector no encuentra nada, pero B1 sigue siendo exacta: sería un **cierre falso** |
+| Caracterización del NO-GO | `test_caracterizacion_no_go_retirar_solo_error_absoluto_no_basta` | n48_h6 | **PASS** | Sin la clave `error_absoluto`, `z_modificado` + mediana + MAD devuelven el vector y la banda exacta (A') |
+| Detector | `test_detector_sensibilidad` | 9 objetos | 9 PASS | Detecta registros con `Error`, la columna `Predicho`, `error_absoluto` como lista y como array, una Series llamada `Error`, un DataFrame anidado con `Observado` y registros con `z_modificado`. Descarta un único registro y las estructuras con `None` o vacías |
+| Escenario | `test_escenario_historia_insuficiente_sin_banda_ni_vectores` | n30_h3 | PASS | `proyeccion_generada=False`: no hay banda interna finita, no hay vectores y el recorrido no falla |
+| Escenario | `test_escenario_entradas_sin_extremos_publican_el_vector_completo` | n48_h6 | PASS | Un candidato calculable con `cantidad == 0` publica igualmente `observaciones` completas, tantas como `iteraciones` |
 
 **Por qué no es un falso verde ni un falso rojo:**
-- **El detector recorre todo el objeto:** dicts, listas, tuplas, DataFrames, Series y arrays, con protección de ciclos. Busca listas de registros, columnas y secuencias con nombres de error, observado o predicho.
-- **El fallo da la ruta real** y el número de apariciones.
-- **Las pruebas de la vía B usan igualdad exacta**, sin tolerancia, y comprueban antes que existe una banda interna y que no se publica.
+- El detector recorre dicts, listas, tuplas, DataFrames (columnas y celdas anidadas) y Series (por nombre y por contenido), con protección de ciclos. Los arrays se detectan cuando cuelgan de una clave con nombre de error. **Es heurístico, porque busca por nombre de clave**: un verde suyo no prueba que la banda sea irreconstruible. El oráculo semántico es la caracterización, que reconstruye la banda por todas las vías conocidas (A, A', B1, B2, B4 y B3 en h=24).
+- Su sensibilidad se comprueba con asserts, no por inspección visual.
+- El fallo del contrato da la ruta real y el número de apariciones.
+- La caracterización usa igualdad exacta sin tolerancia. Antes comprueba, en todos sus casos, que la banda interna es finita, que no se publica y que no hay ajuste de calendario (`_con_banda`).
 
-## 2. Sensibilidad (mutaciones en memoria, sin tocar producción)
+**Cómo usarla si se promueve.** Solo el grupo «Contrato» y el «Detector» sirven como regresión en `tests/`. El grupo «Caracterización» protegería la vulnerabilidad y debe quedarse como diagnóstico. Convendría además unificar el detector con los de `tests/` (`_errores_recuperables` y `_tablas_de_ventanas`) en lugar de que convivan (05).
 
-Script: [`evidencia/mutaciones_adversarial.py`](evidencia/mutaciones_adversarial.py). Salida: [`evidencia/salida_mutaciones_adversarial.txt`](evidencia/salida_mutaciones_adversarial.txt).
+## 2. Huella y regresión
 
-| Mutación | Detector | Lectura |
-|---|---|---|
-| M0, base | 504 rutas | RED |
-| **M1, «corrección parcial»: retirar `observaciones` de todo el comparativo** | **0 rutas** (la prueba RED pasaría a verde) | **…pero la vía B sigue exacta: `True`.** Es exactamente el cierre falso que el prompt prohíbe |
-| M2, lista de registros con `Error` en otra ruta | detectado | |
-| M3, columna `Predicho` en `backtesting.predicciones` | detectado | |
-| M4, clave `error_absoluto` con una secuencia numérica | detectado | |
-| M5, DataFrame anidado con `Observado` | detectado | |
-| M6, un único registro (no es un vector) | no detectado (correcto) | |
+**Huella.** No hay cambios de producción. `huella_semantica.py` (Fase 2A) en la rama nueva da 20/20 casos con **0 diferencias** y el mismo SHA-256 que la base: `d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191`. Comando y resultado en [`evidencia/huella_resumen.txt`](evidencia/huella_resumen.txt).
 
-## 3. Huella y regresión
-
-**Huella.** No hay cambios de producción. `huella_semantica.py` (Fase 2A) en la rama nueva da 20/20 casos y **0 diferencias**. SHA-256 `d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191`, idéntico al de la base ([evidencia](evidencia/huella_resumen.txt)).
-
-**Comparador con lista blanca (§5.1):** no aplica, porque no se retiró ninguna ruta.
+**Comparación con lista blanca (§5.1 del prompt de la fase):** no aplica, porque no se ha retirado ninguna ruta (04).
 
 **Perfil esencial y golden:** son los de `dfcaaa9`. La rama solo añade documentación, scripts en `docs/` y dos líneas de configuración. El CI de la rama los ejecuta (06).
