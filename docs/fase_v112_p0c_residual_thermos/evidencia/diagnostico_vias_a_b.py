@@ -12,6 +12,7 @@ se vacíe y se reconstruye con `y ± c(n)·sigma` desde cada vía de `caso_ic95.
   B4 : `…metricas.mae` y `…metricas.estabilidad_error` (= std(|e|, ddof=1)/mean(|e|)): sigma² = mae²·(1 + estab²·(n−1)/n).
   B3 : RMSE_h de `horizonte_info.tabla_horizontes` con su `W` (muestra rectangular). Es la misma cifra que
        `backtesting.metricas.rmse`, la columna `rmse_horizonte` del CSV, la sesión JSON, la interfaz y los informes.
+  B5 : el texto público `…<ganador>_h<h>.interpretacion` («RMSE=x.xxx», 3 decimales) con `iteraciones`.
 
 Igualdad EXACTA (==); se informa además la diferencia absoluta.
 """
@@ -36,7 +37,7 @@ def main():
             semiancho = (interno[1] - interno[0]) / 2
             print(f"    {via:<30} n={n:<3} sigma={sigma!r:<22} exacto={exacto!s:<5} "
                   f"|dif|=({abs(lo - interno[0]):.3e}, {abs(hi - interno[1]):.3e}) "
-                  f"= {abs(hi - interno[1]) / semiancho:.1%} del semiancho")
+                  f"= {abs(hi - interno[1]) / semiancho:.3%} del semiancho")
 
 
 if __name__ == "__main__":

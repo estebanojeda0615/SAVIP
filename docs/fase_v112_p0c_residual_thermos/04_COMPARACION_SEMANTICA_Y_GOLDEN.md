@@ -20,7 +20,7 @@ La rama no toca `app_icociv/**`, `tests/**`, `scripts/**` ni `tests/fixtures/**`
 
 | Control | Resultado |
 |---|---|
-| Golden Masters y perfil esencial (812 ids), AS-001 (16/16) | Mismo código que `dfcaaa9`, cuyo CI dio 812/812 con 29/29 golden. El CI de esta rama vuelve a ejecutarlos (06) |
+| Golden Masters y perfil esencial (812 ids), AS-001 (16/16) | Mismo código de producción y de pruebas que `73490c5` y `dfcaaa9`: este último solo cambió documentación. El CI de `73490c5` dio 812/812 con 29/29 golden. El CI de esta rama vuelve a ejecutarlos (06) |
 | Recolección (`pytest --collect-only -q` en la rama) | 1 067 recolectadas y los **3 errores históricos**, igual que en la base. Ni la prueba ni los scripts de `docs/` se recolectan |
 | `scripts/pruebas_fase0.py --listar` | Esenciales: 82 entradas y 812 pruebas, sin cambios (verificado por la revisión Thermos de corrección, 05) |
 | r3 directo | Mismo código. No se ejecutó de nuevo porque no puede cambiar: sigue en 21/27, como en `dfcaaa9` |

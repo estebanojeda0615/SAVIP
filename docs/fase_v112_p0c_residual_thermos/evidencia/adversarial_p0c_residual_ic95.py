@@ -12,14 +12,18 @@ Tres grupos, que NO deben confundirse si algún día se promueve a `tests/`:
 1. CONTRATO (`test_contrato_*`): lo que debería cumplirse tras una corrección. En la base `dfcaaa9`
    `test_contrato_sin_vector_individual_de_errores_oos` FALLA (vía A: el vector por ventana está publicado).
 2. CARACTERIZACIÓN DEL NO-GO (`test_caracterizacion_no_go_*`): PASAN en la base y su PASS es la mala noticia. Con agregados
-   que el contrato protege —RMSE y su n (B1), desviación y media del error (B2), MAE y `estabilidad_error` (B4), RMSE_h
-   persistido en h=24 (B3)— sale el IC95 interno EXACTO sin leer el vector; y sin `error_absoluto`, `z_modificado` con
-   mediana y MAD lo reconstruye (A'). Documentan por qué retirar el vector no cierra P0-C. No deben promoverse como
+   que el contrato protege sale el IC95 interno sin leer el vector: EXACTO con el RMSE y su n (B1) y con el RMSE_h
+   persistido en h=24 (B3); salvo un ULP con desviación y media (B2) o MAE y `estabilidad_error` (B4); salvo el redondeo
+   a 3 decimales con el texto `interpretacion` (B5). El vector (A) y, sin `error_absoluto`, `z_modificado` con mediana y
+   MAD (A') también lo reconstruyen. Documentan por qué retirar el vector no cierra P0-C. No deben promoverse como
    regresión: protegerían la vulnerabilidad.
 3. DETECTOR Y ESCENARIO (`test_detector_*`, `test_escenario_*`): sensibilidad y casos borde, sin depender del motor salvo
-   donde se indica. El detector es HEURÍSTICO (por nombre de clave): un verde suyo no prueba irreconstruibilidad. El oráculo
-   semántico es la caracterización, que reconstruye la banda por todas las vías conocidas.
+   donde se indica. El detector es HEURÍSTICO (por nombre de clave; no mira cadenas de texto): un verde suyo no prueba
+   irreconstruibilidad. El oráculo semántico es la caracterización, con las vías identificadas en esta fase (no se
+   garantiza que sean todas).
 """
+import math
+
 import numpy as np
 import pandas as pd
 import pytest
@@ -32,6 +36,8 @@ CLAVES_POR_VENTANA = {c.lower() for c in sp.COLUMNAS_OOS_RECONSTRUCTIVAS} | {
     "error_absoluto", "z_modificado", "real", "pronostico"}
 AGREGADOS = ("rmse", "mae", "mase", "iteraciones", "sesgo_medio")
 CASOS = ("n48_h6", "n72_h12", "n38_h24", "n72_h24")
+#: Todos los escenarios de `caso_ic95` con banda interna finita (n30_h3 no la tiene).
+CON_BANDA = ("n48_h6", "n72_h12", "n38_h24", "n60_h9", "n48_h24", "n72_h24")
 
 
 def _numericos(valores) -> int:
@@ -118,13 +124,27 @@ def test_contrato_el_comparativo_conserva_los_agregados(caso):
 
 # 2. CARACTERIZACIÓN DEL NO-GO (su PASS demuestra la contradicción) ------------------------------------------------
 
-@pytest.mark.parametrize("caso", CASOS)
-@pytest.mark.parametrize("via", ["B1 (rmse+iteraciones)", "B2 (desviacion ddof1+media)", "B4 (mae+estabilidad_error)"])
-def test_caracterizacion_no_go_los_agregados_del_comparativo_reconstruyen_el_ic95_exacto(caso, via):
-    """Sin leer `observaciones`. Igualdad exacta, sin tolerancia."""
+@pytest.mark.parametrize("caso", CON_BANDA)
+@pytest.mark.parametrize("via", ["A (vector error_absoluto)", "B1 (rmse+iteraciones)"])
+def test_caracterizacion_no_go_cada_via_reconstruye_el_ic95_exacto(caso, via):
+    """A (vector) y B1 (el RMSE publicado, que ES sigma): igualdad exacta, sin tolerancia, en los 6 escenarios."""
     publico, interno, h = _con_banda(caso)
     sigma, n = vias(publico, h)[via]
     assert banda(publico, sigma, n) == interno
+
+
+@pytest.mark.parametrize("caso", CON_BANDA)
+@pytest.mark.parametrize("via", ["A' (z_modificado+mediana+MAD)", "B2 (desviacion ddof1+media)",
+                                 "B4 (mae+estabilidad_error)"])
+def test_caracterizacion_no_go_via_algebraica_reconstruye_el_ic95_salvo_un_ulp(caso, via):
+    """A', B2 y B4 son identidades exactas, pero reordenan la aritmética de coma flotante: la sigma puede diferir de la
+    interna en el último dígito. Hoy la banda coincide bit a bit salvo B2 en n48_h24 (2,8e-14, ~2e-16 relativo).
+    Tolerancia declarada: `rel_tol=1e-15` (unos cinco ULP)."""
+    publico, interno, h = _con_banda(caso)
+    sigma, n = vias(publico, h)[via]
+    lo, hi = banda(publico, sigma, n)
+    assert math.isclose(lo, interno[0], rel_tol=1e-15, abs_tol=0.0)
+    assert math.isclose(hi, interno[1], rel_tol=1e-15, abs_tol=0.0)
 
 
 @pytest.mark.parametrize("caso", ["n38_h24", "n72_h24"])
@@ -133,6 +153,17 @@ def test_caracterizacion_no_go_el_rmse_h_persistido_reconstruye_el_ic95_exacto_e
     publico, interno, h = _con_banda(caso)
     sigma, n = vias(publico, h)["B3 (RMSE_h rectangular+W)"]
     assert banda(publico, sigma, n) == interno
+
+
+@pytest.mark.parametrize("caso", CON_BANDA)
+def test_caracterizacion_no_go_el_texto_interpretacion_da_el_ic95_salvo_el_redondeo_a_3_decimales(caso):
+    """B5: `interpretacion` publica «RMSE=x.xxx». El redondeo a 3 decimales acota |sigma_texto − sigma| <= 5e-4, luego
+    |límite − interno| <= c(n)·5e-4. La cota se deduce del formato, no es una tolerancia elegida."""
+    publico, interno, h = _con_banda(caso)
+    sigma, n = vias(publico, h)["B5 (texto interpretacion, 3 decimales)"]
+    cota = sp._multiplicador_intervalo(sp.NIVEL_NOMINAL_95, n) * 5e-4 * (1 + 1e-9)
+    lo, hi = banda(publico, sigma, n)
+    assert abs(lo - interno[0]) <= cota and abs(hi - interno[1]) <= cota
 
 
 def test_caracterizacion_no_go_retirar_solo_el_vector_no_cierra_p0c():

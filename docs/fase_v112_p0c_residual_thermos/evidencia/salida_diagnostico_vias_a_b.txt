@@ -1,50 +1,56 @@
 == n48_h6: proyeccion_generada=True modelo=exponencial_log_lineal y_proj=121.58536382460937
     IC95 interno=(117.69742214273187, 125.47330550648688)  publicado=(None, None)
-    A (vector error_absoluto)      n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=31  sigma=1.9063084328995534     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=13  sigma=1.9151024099696756     exacto=False |dif|=(2.494e-01, 2.494e-01) = 6.4% del semiancho
+    A (vector error_absoluto)      n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=31  sigma=1.9063084328995534     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=31  sigma=1.9063084328995537     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=13  sigma=1.9151024099696756     exacto=False |dif|=(2.494e-01, 2.494e-01) = 6.414% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=31  sigma=1.906                  exacto=False |dif|=(6.291e-04, 6.291e-04) = 0.016% del semiancho
 == n72_h12: proyeccion_generada=True modelo=fourier_k1__exponencial_log_lineal y_proj=172.9869830617309
     IC95 interno=(167.18760360160763, 178.7863625218542)  publicado=(None, None)
-    A (vector error_absoluto)      n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=49  sigma=2.885873269620861      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=37  sigma=2.505393931437676      exacto=False |dif|=(7.230e-01, 7.230e-01) = 12.5% del semiancho
+    A (vector error_absoluto)      n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=49  sigma=2.885873269620861      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=49  sigma=2.8858732696208613     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=37  sigma=2.505393931437676      exacto=False |dif|=(7.230e-01, 7.230e-01) = 12.466% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=49  sigma=2.886                  exacto=False |dif|=(2.547e-04, 2.547e-04) = 0.004% del semiancho
 == n38_h24: proyeccion_generada=True modelo=lineal y_proj=123.46203071495582
     IC95 interno=(121.33543064928134, 125.5886307806303)  publicado=(None, None)
-    A (vector error_absoluto)      n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=3   sigma=0.6682281055751869     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=3   sigma=0.6682281055751869     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
+    A (vector error_absoluto)      n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=3   sigma=0.6682281055751869     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=3   sigma=0.6682281055751869     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=3   sigma=0.668228105575187      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=3   sigma=0.668                  exacto=False |dif|=(7.259e-04, 7.259e-04) = 0.034% del semiancho
 == n60_h9: proyeccion_generada=True modelo=fourier_k1__lineal y_proj=117.49898474245434
     IC95 interno=(115.6303942642813, 119.36757522062737)  publicado=(None, None)
-    A (vector error_absoluto)      n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=40  sigma=0.924552585784477      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=25  sigma=0.9971393181574136     exacto=False |dif|=(1.851e-01, 1.851e-01) = 9.9% del semiancho
+    A (vector error_absoluto)      n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=40  sigma=0.9245525857844769     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=40  sigma=0.924552585784477      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=25  sigma=0.9971393181574136     exacto=False |dif|=(1.851e-01, 1.851e-01) = 9.904% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=40  sigma=0.925                  exacto=False |dif|=(9.043e-04, 9.043e-04) = 0.048% del semiancho
 == n48_h24: proyeccion_generada=True modelo=exponencial_log_lineal y_proj=129.69670679595552
     IC95 interno=(124.42269058034775, 134.97072301156328)  publicado=(None, None)
-    A (vector error_absoluto)      n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=13  sigma=2.4412575140036568     exacto=False |dif|=(0.000e+00, 2.842e-14) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
+    A (vector error_absoluto)      n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=13  sigma=2.4412575140036568     exacto=False |dif|=(0.000e+00, 2.842e-14) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=13  sigma=2.4412575140036563     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=13  sigma=2.441                  exacto=False |dif|=(5.563e-04, 5.563e-04) = 0.011% del semiancho
 == n72_h24: proyeccion_generada=True modelo=fourier_k1__exponencial_log_lineal y_proj=182.30015509819188
     IC95 interno=(175.30509403485252, 189.29521616153124)  publicado=(None, None)
-    A (vector error_absoluto)      n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    A' (z_modificado+mediana+MAD)  n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B1 (rmse+iteraciones)          n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B2 (desviacion ddof1+media)    n=37  sigma=3.452318173606229      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B4 (mae+estabilidad_error)     n=37  sigma=3.4523181736062294     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
-    B3 (RMSE_h rectangular+W)      n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.0% del semiancho
+    A (vector error_absoluto)      n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    A' (z_modificado+mediana+MAD)  n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B1 (rmse+iteraciones)          n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B2 (desviacion ddof1+media)    n=37  sigma=3.452318173606229      exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B4 (mae+estabilidad_error)     n=37  sigma=3.4523181736062294     exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B3 (RMSE_h rectangular+W)      n=37  sigma=3.45231817360623       exacto=True  |dif|=(0.000e+00, 0.000e+00) = 0.000% del semiancho
+    B5 (texto interpretacion, 3 decimales) n=37  sigma=3.452                  exacto=False |dif|=(6.447e-04, 6.447e-04) = 0.009% del semiancho
 == n30_h3: proyeccion_generada=False modelo=None y_proj=nan
     sin banda interna finita: no hay nada que reconstruir

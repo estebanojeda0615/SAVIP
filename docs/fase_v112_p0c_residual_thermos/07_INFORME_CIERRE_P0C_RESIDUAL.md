@@ -9,8 +9,9 @@ El IC95 retirado se reconstruye desde el vector de errores filtrado (vía A), y 
 | Vía | Datos usados | Resultado |
 |---|---|---|
 | B1 | `backtesting_comparativo[<modelo>_h<p>].metricas.rmse` + `iteraciones` | Exacto bit a bit en los 6 escenarios con banda. Ese RMSE **es** la `sigma_h` del intervalo |
-| B2 | `desviacion_error` (ddof=1) + `error_medio` + n | Exacto (un caso con 2,8·10⁻¹⁴) |
+| B2 | `desviacion_error` (ddof=1) + `error_medio` + n | Exacto salvo un ULP (2,8·10⁻¹⁴ en n48_h24) |
 | B4 | `mae` + `estabilidad_error` + n | Exacto en los 6 |
+| B5 | Texto público `interpretacion` de la misma entrada («RMSE=x.xxx») + `iteraciones` | Casi exacto en **todos** los horizontes: 0,004–0,05 % del semiancho, acotado por el redondeo a 3 decimales |
 | B3 | RMSE_h persistido (tabla de horizontes, CSV, sesión, interfaz e informes) con su W | **Exacto en h=24 para cualquier serie**, porque ahí las muestras coinciden. En los demás horizontes es una aproximación: 6–13 % del semiancho, 0,16–0,42 % del pronóstico |
 
 Retirar solo `errores_extremos.observaciones` pondría en verde la prueba del vector sin volver irreconstruible el intervalo: sería un cierre falso. Lo demuestran `test_caracterizacion_no_go_retirar_solo_el_vector_no_cierra_p0c` y `…retirar_solo_error_absoluto_no_basta`, en 03. El detalle está en 01.
@@ -20,9 +21,9 @@ Retirar solo `errores_extremos.observaciones` pondría en verde la prueba del ve
 **Hecho:**
 - Diagnóstico de las vías A, A', B1–B4 con `ejecutar_proyeccion` real en 7 escenarios. En el de historia insuficiente no hay banda.
 - Inventario de superficies y consumidores, incluidos los alias.
-- Prueba adversarial reproducible, RED en la base: 4 FAIL del contrato y 31 PASS (caracterización, detector y escenarios).
+- Prueba adversarial reproducible, RED en la base: 4 FAIL del contrato y 55 PASS (contrato de agregados, 40 caracterizaciones, 9 casos de detector y 2 escenarios).
 - Huella sin cambios.
-- Dos pasadas de Thermos sobre el diff (05).
+- Dos pasadas completas de Thermos sobre el diff, con los dos agentes cada vez: `dfcaaa9...12319df` y `dfcaaa9...f8c8336`. Los ajustes posteriores a la segunda pasada están en 05; no hubo tercera pasada.
 
 **No hecho, por decisión del GATE 0:**
 - ningún cambio en `app_icociv/**`;
@@ -55,8 +56,8 @@ La comparación con lista blanca (04) **no aplica**, porque no se retiró ningun
 - **En contra:** la banda sigue siendo deducible por quien haga la cuenta. P0-C queda redefinido, no «cerrado» en su sentido original.
 
 **B. Revisión formal del contrato de publicación de agregados.** *Requiere nueva autorización y una evaluación académica.*
-- **Qué es:** dejar de publicar en el objeto las métricas por modelo y horizonte del comparativo (`rmse`, `desviacion_error`, `error_medio`, `mae` + `estabilidad_error` y el detalle de extremos), y conservarlas solo internamente.
-- **A favor:** elimina las vías B1, B2 y B4 del objeto.
+- **Qué es:** dejar de publicar en el objeto las métricas por modelo y horizonte del comparativo (`rmse`, `desviacion_error`, `error_medio`, `mae` + `estabilidad_error` y el detalle de extremos) **y las cifras del texto `interpretacion`**, y conservarlas solo internamente.
+- **A favor:** elimina del objeto las vías B1, B2, B4 y B5.
 - **En contra:**
   - **no basta**: B3 sigue dando la banda exacta en h=24 desde el RMSE_h protegido, y la aproxima en el resto;
   - para la irreconstruibilidad total habría que retirar o alterar el RMSE_h o su W, y eso choca con el REQ 16 y con la sustentación;
@@ -81,10 +82,10 @@ Detalle en 03, 05 y 06.
 | Control | Resultado |
 |---|---|
 | Huella | Idéntica: SHA-256 `d6be699b…0191`, 0 diferencias. No hay cambios de producción |
-| Prueba adversarial en la base | RED: 4 FAIL del contrato del vector, con mensaje y rutas reales (1 008). Las 16 pruebas de caracterización dan PASS, lo que demuestra la contradicción |
+| Prueba adversarial en la base | RED: 4 FAIL del contrato del vector, con mensaje y rutas reales (1 008). Las 40 pruebas de caracterización dan PASS, lo que demuestra la contradicción |
 | Sensibilidad | 9 casos del detector con asserts y 2 «correcciones parciales» simuladas (sin el vector y sin `error_absoluto`). Las dos demuestran un cierre falso |
 | Perfil esencial y golden | El código es el mismo que en `dfcaaa9` (812/812, 29/29). El CI de la rama se informa en 06 |
-| Thermos | Ver 05 |
+| Thermos | Dos pasadas con los dos agentes. Ningún hallazgo crítico ni alto de corrección. La corrección confirma y refuerza el NO-GO: aportó B4, A' y B5. Calidad: «aprobable con cambios menores» en la segunda pasada. Ningún hallazgo medio queda abierto en el diff; los bajos diferidos están en 05 |
 
 ## 6. Siguiente paso propuesto
 

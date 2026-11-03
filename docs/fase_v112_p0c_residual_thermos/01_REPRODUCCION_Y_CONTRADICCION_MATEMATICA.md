@@ -6,7 +6,7 @@
 2. **Banda** (`_intervalos_prediccion`, línea 4497, y `_cuantiles_intervalo`, línea 4318):
    - `sigma = sqrt(mean(e²))` sobre los errores finitos del paso;
    - `c = _multiplicador_intervalo(nivel, n)`, un cuantil t con n grados de libertad;
-   - límites = `(base ± c·sigma)·factor` con `base = y/factor`. El límite inferior se recorta con `max(…, 0)` (líneas 4560 y 4562).
+   - límites = `(base ± c·sigma)·factor` con `base = y/factor`. El límite inferior se recorta con `max(…, 0)` (líneas 4554 y 4556).
    - Desde P0-F, `factor` vale siempre 1: `_ajustar_salto_anual` no aplica el ajuste. Se publica en `ajuste_calendario.factores_por_paso` (línea 4223), y vale `[1.0]` en los escenarios examinados.
    - Por tanto, límites = `y ± c·sigma`, salvo el recorte en 0, que solo actúa en series cercanas a cero.
 3. **Publicación** (`ejecutar_proyeccion`, línea 578). `_retirar_intervalo_de_publicacion` vacía `ci95_lo`/`ci95_hi` y sus réplicas, y quita las columnas de error de `backtesting.predicciones` y de `backtesting_comparativo[*].predicciones`. **No toca `metricas`.**
@@ -30,23 +30,27 @@
 - El IC95 interno se captura con un espía justo antes de que se vacíe; el espía se restaura siempre.
 - **A** lee el vector `error_absoluto`.
 - **A'** reconstruye ese vector sin `error_absoluto`, con `|e| = mediana + z_modificado·MAD/factor`.
-- **B1**, **B2**, **B4** y **B3** usan solo agregados.
+- **B1**, **B2**, **B4**, **B3** y **B5** usan solo agregados. B5 es el texto público `interpretacion` de la entrada (`backtesting.py:409-413`), que dice «RMSE=x.xxx» con 3 decimales.
 
-| Escenario | n | A | A' | B1 `rmse`+`iteraciones` | B2 `desviacion_error`+`error_medio` | B4 `mae`+`estabilidad_error` | B3 RMSE_h+W |
-|---|---|---|---|---|---|---|---|
-| n48_h6, ondulada (B-A1) | 31 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,249 (6,4 % del semiancho) |
-| n72_h12, ruidosa | 49 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,723 (12,5 %) |
-| n38_h24, pocos pares | 3 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** |
-| n60_h9, estacional | 40 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,185 (9,9 %) |
-| n48_h24, ondulada | 13 | **exacto** | **exacto** | **exacto** | 2,8·10⁻¹⁴ | **exacto** | **exacto** |
-| n72_h24, ruidosa | 37 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** |
-| n30_h3, historia insuficiente | — | no hay banda interna finita (`proyeccion_generada=False`, sin excepción) |||||
+| Escenario | n | A | A' | B1 `rmse`+`iteraciones` | B2 `desviacion_error`+`error_medio` | B4 `mae`+`estabilidad_error` | B3 RMSE_h+W | B5 texto `interpretacion` |
+|---|---|---|---|---|---|---|---|---|
+| n48_h6, ondulada (B-A1) | 31 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,249 (6,4 % del semiancho) | 6,3·10⁻⁴ (0,016 %) |
+| n72_h12, ruidosa | 49 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,723 (12,5 %) | 2,5·10⁻⁴ (0,004 %) |
+| n38_h24, pocos pares | 3 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | 7,3·10⁻⁴ (0,034 %) |
+| n60_h9, estacional | 40 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | aprox.: 0,185 (9,9 %) | 9,0·10⁻⁴ (0,048 %) |
+| n48_h24, ondulada | 13 | **exacto** | **exacto** | **exacto** | 2,8·10⁻¹⁴ | **exacto** | **exacto** | 5,6·10⁻⁴ (0,011 %) |
+| n72_h24, ruidosa | 37 | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | **exacto** | 6,4·10⁻⁴ (0,009 %) |
+| n30_h3, historia insuficiente | — | no hay banda interna finita (`proyeccion_generada=False`, sin excepción) |||||||
 
 **Caso B-A1:**
 - `exponencial_log_lineal_h6`, con 31 errores.
 - `rmse` = `1.9063084328995537` = `sqrt(mean(error_absoluto²))`.
 - `y_proj` = `121.58536382460937`.
 - IC95 interno = (`117.69742214273187`, `125.47330550648688`). A, A', B1, B2 y B4 lo reproducen bit a bit.
+
+**«Exacto» describe la banda, no la `sigma`.** A', B2 y B4 son identidades algebraicas exactas, pero reordenan la aritmética de coma flotante, así que la `sigma` puede diferir en el último dígito. La banda coincide bit a bit salvo B2 en n48_h24, con 2,8·10⁻¹⁴, unos 2·10⁻¹⁶ en relativo: un ULP. Por eso la prueba (03) exige para esas tres vías `rel_tol=1e-15`, declarado, y `==` solo para A y B1.
+
+**B5 depende del redondeo a 3 decimales.** El error de la banda está acotado por c(n)·5·10⁻⁴ y en los escenarios queda en 0,004–0,05 % del semiancho. Es una aproximación casi exacta en **todos** los horizontes.
 
 **B3 fuera de h=24 es una aproximación, no una reconstrucción.** Respecto a la banda interna, el error es del 6–13 % del semiancho y del 0,16–0,42 % del pronóstico. En h=24 es exacta.
 
@@ -64,6 +68,7 @@
 - **B1:** `metricas.rmse` **es** `sigma_h`, y está publicado en las 504 entradas modelo×horizonte junto con su n.
 - **B2:** sin `rmse`, `desviacion_error` (ddof=1) y `error_medio` dan `sigma` exacta, porque `sigma² = media² + desv²·(n−1)/n`.
 - **B4:** sin `rmse`, `desviacion_error` ni `error_medio`, el par `mae` + `estabilidad_error` también da `sigma` exacta, porque `sigma² = mae²·(1 + estab²·(n−1)/n)`. Retirar las métricas «de dispersión» y conservar el MAE no cierra nada.
+- **B5:** además de los números, el texto público `interpretacion` de cada entrada del comparativo escribe el RMSE con 3 decimales. Da la banda con un error del orden de 10⁻⁴ en todos los horizontes. Suprimir los agregados numéricos sin tocar ese texto dejaría la banda casi exacta.
 - **A':** quitar solo la clave `error_absoluto` de cada observación tampoco basta. `z_modificado`, con la mediana y el MAD publicados, devuelve el vector completo.
 - **B3:** el **RMSE_h protegido** que se persiste (tabla de horizontes, sesión, CSV, interfaz e informes) reproduce **exactamente** la banda del paso 24 en cualquier serie. En los demás horizontes da una aproximación cercana.
 

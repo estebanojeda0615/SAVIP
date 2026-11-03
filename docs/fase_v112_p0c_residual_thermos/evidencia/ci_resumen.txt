@@ -1,0 +1,10 @@
+CI fase0-pruebas, rama maintenance/v1.1.2-p0c-residual-ic95-thermos
+== run 41574968635 (12319df success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+== run 41577041743 (f8c8336 success intento 1)
+Resumen esenciales: 82 archivos; 812 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+(HEAD documental final: ver el mensaje de entrega)

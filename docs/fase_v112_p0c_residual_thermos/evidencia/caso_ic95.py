@@ -88,8 +88,12 @@ def banda(publico, sigma, n):
 
 
 def sin_calendario(publico):
-    """Los escenarios no aplican ajuste de calendario; si alguno lo hiciera, la fórmula sin factor no valdría."""
-    return not (publico.get("ajuste_calendario") or {}).get("ajuste_calendario_aplicado")
+    """El factor de calendario publicado (`ajuste_calendario.factores_por_paso`) vale 1 en todos los pasos (P0-F).
+
+    Si no fuera así, la fórmula `y ± c·sigma` sin factor no valdría y la reconstrucción se detiene.
+    """
+    factores = (publico.get("ajuste_calendario") or {}).get("factores_por_paso") or []
+    return bool(factores) and all(f == 1.0 for f in factores)
 
 
 def entrada_ganadora(publico, h):
@@ -109,7 +113,8 @@ def vias(publico, h):
     de registros. (`iteraciones` cuenta también predicciones no finitas; `errores_extremos.n`, también publicado, da el n
     finito. En los escenarios de esta carpeta coinciden.)
     """
-    met = entrada_ganadora(publico, h)["metricas"]
+    entrada = entrada_ganadora(publico, h)
+    met = entrada["metricas"]
     n = int(met["iteraciones"])
     extremos = met.get("errores_extremos") or {}
     obs = extremos.get("observaciones") or []
@@ -127,4 +132,13 @@ def vias(publico, h):
         # B4: estabilidad = std(|e|, ddof=1)/mean(|e|) y mae = mean(|e|)  =>  sigma² = mae²·(1 + estabilidad²·(n−1)/n)
         "B4 (mae+estabilidad_error)": (mae * math.sqrt(1 + estabilidad ** 2 * (n - 1) / n), n),
         "B3 (RMSE_h rectangular+W)": (float(fila["rmse"]), int(fila["W"])),
+        # B5: el texto público `interpretacion` de la misma entrada lleva «RMSE=x.xxx» (backtesting.py:409-413).
+        "B5 (texto interpretacion, 3 decimales)": (rmse_del_texto(entrada.get("interpretacion")), n),
     }
+
+
+def rmse_del_texto(texto):
+    import re
+
+    hallado = re.search(r"RMSE=([0-9]+(?:\.[0-9]+)?)", str(texto or ""))
+    return float(hallado.group(1)) if hallado else float("nan")
