@@ -1,0 +1,8 @@
+M0 base: vectores=504
+M1 sin observaciones (corrección parcial): vectores=0 -> la prueba RED pasaría a verde
+   ...pero vía B sigue exacta: True
+M2 lista de registros con 'Error' en otra ruta: vectores=['resultado.diagnostico_extra[*].Error']
+M3 columna 'Predicho' en backtesting.predicciones: vectores=['resultado.backtesting.predicciones<Predicho>']
+M4 clave 'error_absoluto' con secuencia numérica: vectores=['resultado.backtesting_comparativo.exponencial_log_lineal_h6.metricas.errores_extremos.error_absoluto']
+M5 DataFrame anidado con 'Observado': vectores=['resultado.anidado.tabla<Observado>']
+M6 un único registro (no es vector): vectores=[]  (esperado: vacío)

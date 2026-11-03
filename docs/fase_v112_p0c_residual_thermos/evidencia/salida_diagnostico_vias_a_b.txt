@@ -1,0 +1,64 @@
+== ondulada n=48 h=6 (caso B-A1)
+    proyeccion_generada=True modelo=exponencial_log_lineal y_proj=121.58536382460937  IC95 interno=(117.69742214273187, 125.47330550648688)  publicado=(None, None)
+    entrada exponencial_log_lineal_h6: iteraciones=31 rmse=1.9063084328995537 ajuste_calendario_aplicado=False
+    Vía A   lo=117.69742214273187 hi=125.47330550648688  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=31 sigma=1.9063084328995537
+    Vía B1  lo=117.69742214273187 hi=125.47330550648688  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=117.69742214273187 hi=125.47330550648688  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd0  lo=117.63548102703623 hi=125.53524662218251  exacto=False  |dif|=(6.194e-02, 6.194e-02)
+    Vía B3  lo=117.44803660419453 hi=125.72269104502422  exacto=False  |dif|=(2.494e-01, 2.494e-01)
+            n=W*=13 rmse_rectangular=1.9151024099696756
+== ruidosa n=72 h=12 (errores no triviales)
+    proyeccion_generada=True modelo=fourier_k1__exponencial_log_lineal y_proj=172.9869830617309  IC95 interno=(167.18760360160763, 178.7863625218542)  publicado=(None, None)
+    entrada fourier_k1__exponencial_log_lineal_h12: iteraciones=49 rmse=2.8858732696208613 ajuste_calendario_aplicado=False
+    Vía A   lo=167.18760360160763 hi=178.7863625218542  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=49 sigma=2.8858732696208613
+    Vía B1  lo=167.18760360160763 hi=178.7863625218542  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=167.18760360160763 hi=178.7863625218542  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd0  lo=167.12751906143515 hi=178.84644706202667  exacto=False  |dif|=(6.008e-02, 6.008e-02)
+    Vía B3  lo=167.91057276093304 hi=178.06339336252879  exacto=False  |dif|=(7.230e-01, 7.230e-01)
+            n=W*=37 rmse_rectangular=2.505393931437676
+== ondulada n=38 h=24 (pocos pares: 3 errores en el paso 24)
+    proyeccion_generada=True modelo=lineal y_proj=123.46203071495582  IC95 interno=(121.33543064928134, 125.5886307806303)  publicado=(None, None)
+    entrada lineal_h24: iteraciones=3 rmse=0.668228105575187 ajuste_calendario_aplicado=False
+    Vía A   lo=121.33543064928134 hi=125.5886307806303  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=3 sigma=0.668228105575187
+    Vía B1  lo=121.33543064928134 hi=125.5886307806303  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=121.33543064928134 hi=125.5886307806303  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd0  lo=120.89560001434478 hi=126.02846141556685  exacto=False  |dif|=(4.398e-01, 4.398e-01)
+    Vía B3  lo=121.33543064928134 hi=125.5886307806303  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=W*=3 rmse_rectangular=0.668228105575187
+== estacional n=60 h=9
+    proyeccion_generada=True modelo=fourier_k1__lineal y_proj=117.49898474245434  IC95 interno=(115.6303942642813, 119.36757522062737)  publicado=(None, None)
+    entrada fourier_k1__lineal_h9: iteraciones=40 rmse=0.9245525857844769 ajuste_calendario_aplicado=False
+    Vía A   lo=115.6303942642813 hi=119.36757522062737  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=40 sigma=0.9245525857844769
+    Vía B1  lo=115.6303942642813 hi=119.36757522062737  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=115.6303942642813 hi=119.36757522062737  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd0  lo=115.60670915714012 hi=119.39126032776856  exacto=False  |dif|=(2.369e-02, 2.369e-02)
+    Vía B3  lo=115.44533787424301 hi=119.55263161066567  exacto=False  |dif|=(1.851e-01, 1.851e-01)
+            n=W*=25 rmse_rectangular=0.9971393181574136
+== ondulada n=48 h=24 (H máximo: W* coincide con la muestra del intervalo)
+    proyeccion_generada=True modelo=exponencial_log_lineal y_proj=129.69670679595552  IC95 interno=(124.42269058034775, 134.97072301156328)  publicado=(None, None)
+    entrada exponencial_log_lineal_h24: iteraciones=13 rmse=2.4412575140036563 ajuste_calendario_aplicado=False
+    Vía A   lo=124.42269058034775 hi=134.97072301156328  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=13 sigma=2.4412575140036563
+    Vía B1  lo=124.42269058034775 hi=134.97072301156328  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=124.42269058034775 hi=134.9707230115633  exacto=False  |dif|=(0.000e+00, 2.842e-14)
+    B2 dd0  lo=124.26023334024629 hi=135.13318025166475  exacto=False  |dif|=(1.625e-01, 1.625e-01)
+    Vía B3  lo=124.42269058034775 hi=134.97072301156328  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=W*=13 rmse_rectangular=2.4412575140036563
+== ruidosa n=72 h=24 (H máximo)
+    proyeccion_generada=True modelo=fourier_k1__exponencial_log_lineal y_proj=182.30015509819188  IC95 interno=(175.30509403485252, 189.29521616153124)  publicado=(None, None)
+    entrada fourier_k1__exponencial_log_lineal_h24: iteraciones=37 rmse=3.45231817360623 ajuste_calendario_aplicado=False
+    Vía A   lo=175.30509403485252 hi=189.29521616153124  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=37 sigma=3.45231817360623
+    Vía B1  lo=175.30509403485252 hi=189.29521616153124  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd1  lo=175.30509403485252 hi=189.29521616153124  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+    B2 dd0  lo=175.21205100507626 hi=189.3882591913075  exacto=False  |dif|=(9.304e-02, 9.304e-02)
+    Vía B3  lo=175.30509403485252 hi=189.29521616153124  exacto=True  |dif|=(0.000e+00, 0.000e+00)
+            n=W*=37 rmse_rectangular=3.45231817360623
+== ruidosa n=30 h=3 (historia insuficiente)
+    proyeccion_generada=False modelo=None y_proj=nan  IC95 interno=(nan, nan)  publicado=(None, None)
+    entrada None_h3: iteraciones=None rmse=None ajuste_calendario_aplicado=False
+    Vía A  : sin observaciones con error_absoluto

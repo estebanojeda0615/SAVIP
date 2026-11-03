@@ -1,0 +1,18 @@
+sigma del IC95 (= rmse de exponencial_log_lineal_h6, n=31): 1.9063084328995537   rmse rectangular (W*=13): 1.9151024099696756
+ajuste_calendario: {'ajuste_calendario_aplicado': False, 'patron_detectado_en_serie': False, 'efecto_en_horizonte_solicitado': False, 'estado_calendario_visible': 'Patrón de cambio de año no identificado en la serie (diagnóstico)', 'hay_evidencia_calendario': False, 'transiciones_diciembre_enero': 3, 'salto_mediano_log': -6.594169110073547e-06, 'salto_mediano_pct': -0.000659414736858821, 'movimiento_mensual_tipico_pct': 1.2712008491124254, 'ratio_salto_movimiento': 0.0005187354236490412, 'consistencia_signo': 0.6666666666666666, 'criterio': 'El salto de cambio de año (-0.00%) no supera 1.5 veces el movimiento mensual típico (1.27%).', 'eneros_en_horizonte': 1, 'horizonte_cruza_cambio_anio': True, 'mensaje': 'No se identificó un patrón recurrente de cambio de año en la serie. El pronóstico es el del modelo seleccionado, sin tratamientos adicionales. El salto de cambio de año (-0.00%) no supera 1.5 veces el movimiento mensual típico (1.27%).'}
+
+[objeto] rutas con valor == sigma del IC95: 1
+    r.backtesting_comparativo.exponencial_log_lineal_h6.metricas.rmse
+[objeto] backtesting_comparativo: 504 entradas; con metricas.rmse: 504; con observaciones no vacías: 504; tamaños de observaciones: [13, 14, 15, 16, 17, 18]…[34, 35, 36]
+
+[sesión] contiene backtesting_comparativo: False; sigma del IC95 aparece: False; rmse rectangular aparece: True; 'error_absoluto' aparece: False
+
+[CSV] columnas de agregados: ['rmse_horizonte', 'mae_horizonte', 'iteraciones_backtesting_horizonte', 'mejora_mae_ajuste_calendario', 'mejora_rmse_ajuste_calendario']
+   rmse_horizonte (h=6): [1.915102409969676, 1.915102409969676]
+   mae_horizonte (h=6): [1.6743835841350114, 1.6743835841350114]
+   iteraciones_backtesting_horizonte (h=6): [13.0, 13.0]
+   mejora_mae_ajuste_calendario (h=6): [nan, nan]
+   mejora_rmse_ajuste_calendario (h=6): [nan, nan]
+
+[tabla_horizontes] lista de 24; claves fila: ['W', 'horizonte', 'mae', 'mase', 'rmse', 'sesgo', 'smape']
+   fila h=6: {'horizonte': 6, 'W': 13, 'rmse': 1.9151024099696756, 'mae': 1.6743835841350114, 'smape': 1.5312455504667275, 'mase': 1.2933507943296432, 'sesgo': 0.6703417333662003}

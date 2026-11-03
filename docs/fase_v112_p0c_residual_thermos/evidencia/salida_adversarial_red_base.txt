@@ -1,0 +1,26 @@
+E       AssertionError: Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 504 rutas; formas: ['resultado.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto']
+docs\fase_v112_p0c_residual_thermos\evidencia\adversarial_p0c_residual_ic95.py:128: AssertionError
+E       AssertionError: Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 504 rutas; formas: ['resultado.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto']
+docs\fase_v112_p0c_residual_thermos\evidencia\adversarial_p0c_residual_ic95.py:128: AssertionError
+E       AssertionError: Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 504 rutas; formas: ['resultado.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto']
+docs\fase_v112_p0c_residual_thermos\evidencia\adversarial_p0c_residual_ic95.py:128: AssertionError
+E       AssertionError: Vector de errores OOS por ventana publicado (vía A, reconstruye el IC95): 504 rutas; formas: ['resultado.backtesting_comparativo.<modelo_h>.metricas.errores_extremos.observaciones[*].error_absoluto']
+docs\fase_v112_p0c_residual_thermos\evidencia\adversarial_p0c_residual_ic95.py:128: AssertionError
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_comparativo_conserva_agregados[n38_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_comparativo_conserva_agregados[n48_h6]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_comparativo_conserva_agregados[n72_h12]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_comparativo_conserva_agregados[n72_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto[n38_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto[n48_h6]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto[n72_h12]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_del_comparativo_reconstruye_el_ic95_exacto[n72_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24[n38_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_via_b_el_rmse_h_persistido_reconstruye_el_ic95_exacto_en_h24[n72_h24]
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_historia_insuficiente_no_rompe_el_recorrido
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_el_recorrido_tolera_none_y_estructuras_faltantes
+PASSED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_entradas_sin_extremos_siguen_publicando_el_vector
+FAILED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_red_sin_vector_individual_de_errores_oos[n38_h24]
+FAILED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_red_sin_vector_individual_de_errores_oos[n48_h6]
+FAILED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_red_sin_vector_individual_de_errores_oos[n72_h12]
+FAILED docs/fase_v112_p0c_residual_thermos/evidencia/adversarial_p0c_residual_ic95.py::test_red_sin_vector_individual_de_errores_oos[n72_h24]
+4 failed, 13 passed in 25.75s
