@@ -1,0 +1,22 @@
+== _texto_evidencia_oos con tramo_evidencia_oos y TRAMO_OOS_* retirados en memoria
+MIN_ITERACIONES_WF_ESCENARIO = 3
+-1 -> Sin evidencia fuera de muestra disponible para este horizonte bajo el diseño vigente.
+0 -> Sin evidencia fuera de muestra disponible para este horizonte bajo el diseño vigente.
+1 -> Evidencia fuera de muestra disponible pero muy limitada (n=1).
+2 -> Evidencia fuera de muestra disponible pero muy limitada (n=2).
+3 -> Evidencia fuera de muestra disponible (n=3).
+10 -> Evidencia fuera de muestra disponible (n=10).
+50 -> Evidencia fuera de muestra disponible (n=50).
+None -> Sin evidencia fuera de muestra disponible para este horizonte bajo el diseño vigente.
+'x' -> Sin evidencia fuera de muestra disponible para este horizonte bajo el diseño vigente.
+
+== pruebas vigentes con el retiro simulado
+E       ImportError: cannot import name 'TRAMO_OOS_DISPONIBLE' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Users\Esteban\Desktop\SAVIP_V112_FASE2D_LOTE5\app_icociv\proyeccion\servicio_proyeccion.py)
+tests\test_cierre_semantico_ps01_ps05.py:181: ImportError
+PASSED tests/test_fase2c_contratos_vigentes.py::test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion
+PASSED tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[36]
+PASSED tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[37]
+PASSED tests/test_fase2c_contratos_vigentes.py::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo[41]
+PASSED tests/test_cierre_semantico_ps01_ps05.py::test_ps03_w_es_cero_exactamente_cuando_el_dato_no_existe
+FAILED tests/test_cierre_semantico_ps01_ps05.py::test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia
+1 failed, 5 passed in 9.88s

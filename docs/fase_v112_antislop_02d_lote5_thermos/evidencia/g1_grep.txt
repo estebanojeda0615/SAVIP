@@ -1,0 +1,35 @@
+git grep -n -w (sin docs) de tramo_evidencia_oos y TRAMO_OOS_*, en dfcaaa9:
+app_icociv/proyeccion/servicio_proyeccion.py:2042:TRAMO_OOS_SIN_EVIDENCIA = "sin_evidencia_oos"
+app_icociv/proyeccion/servicio_proyeccion.py:2043:TRAMO_OOS_MUY_LIMITADA = "evidencia_oos_muy_limitada"
+app_icociv/proyeccion/servicio_proyeccion.py:2044:TRAMO_OOS_DISPONIBLE = "evidencia_oos_disponible"
+app_icociv/proyeccion/servicio_proyeccion.py:2047:def tramo_evidencia_oos(ventanas: Any) -> str:
+app_icociv/proyeccion/servicio_proyeccion.py:2054:        return TRAMO_OOS_SIN_EVIDENCIA
+app_icociv/proyeccion/servicio_proyeccion.py:2056:        return TRAMO_OOS_MUY_LIMITADA
+app_icociv/proyeccion/servicio_proyeccion.py:2057:    return TRAMO_OOS_DISPONIBLE
+app_icociv/proyeccion/servicio_proyeccion.py:2061:    """Redacción única de los tres tramos. Ver `TRAMO_OOS_SIN_EVIDENCIA`."""
+tests/test_as007_contratos_r3_vigentes.py:14:No se importa r3 ni `tramo_evidencia_oos`, y no se recalcula el intervalo: si apareciera una columna de errores, el
+tests/test_cierre_semantico_ps01_ps05.py:182:        TRAMO_OOS_DISPONIBLE,
+tests/test_cierre_semantico_ps01_ps05.py:183:        TRAMO_OOS_MUY_LIMITADA,
+tests/test_cierre_semantico_ps01_ps05.py:184:        TRAMO_OOS_SIN_EVIDENCIA,
+tests/test_cierre_semantico_ps01_ps05.py:185:        tramo_evidencia_oos,
+tests/test_cierre_semantico_ps01_ps05.py:188:    assert tramo_evidencia_oos(0) == TRAMO_OOS_SIN_EVIDENCIA
+tests/test_cierre_semantico_ps01_ps05.py:189:    assert tramo_evidencia_oos(1) == TRAMO_OOS_MUY_LIMITADA
+tests/test_cierre_semantico_ps01_ps05.py:190:    assert tramo_evidencia_oos(2) == TRAMO_OOS_MUY_LIMITADA
+tests/test_cierre_semantico_ps01_ps05.py:191:    assert tramo_evidencia_oos(3) == TRAMO_OOS_DISPONIBLE
+tests/test_cierre_semantico_ps01_ps05.py:192:    assert tramo_evidencia_oos(50) == TRAMO_OOS_DISPONIBLE
+tests/test_cierre_semantico_ps01_ps05.py:195:        texto = tramo_evidencia_oos(w).lower()
+tests/test_fase2c_contratos_vigentes.py:28:    "tramo_evidencia_oos", "_backtesting_por_modelo_horizonte", "_tipo_uso_horizonte", "_estado_por_horizonte",
+tests/test_fase2c_contratos_vigentes.py:67:    (sobre `tramo_evidencia_oos`), test_fundamentacion_metodologica::test_sin_ventanas_suficientes_el_punto_sigue_pero_
+tests/test_fase2c_contratos_vigentes.py:117:    Sustituiría la parte de vocabulario de test_cierre_semantico_ps01_ps05::test_ps03_… (sobre `tramo_evidencia_oos`):
+tests/test_residuales_auditoria_independiente_r3.py:514:# `tramo_evidencia_oos`), para que r3 no dependa de la funcion candidata a retiro en el lote 2D-5.
+
+clave parecida (distinta) tramo_evidencia_oos_horizonte_solicitado:
+app_icociv/reportes/generador_reportes.py:381:        "tramo_evidencia_oos_horizonte_solicitado",
+tests/fixtures/fase0/golden/sesion_exportables.json:6753:    "tramo_evidencia_oos_horizonte_solicitado",
+tests/test_residuales_auditoria_independiente_r3.py:566:    assert traza.get("tramo_evidencia_oos_horizonte_solicitado") == MUY_LIMITADA
+
+usos dinamicos (getattr/patch/cadenas) con tramo/TRAMO:
+(ninguno)
+
+packaging, .spec, pruebas/, scripts/:
+(ninguno)

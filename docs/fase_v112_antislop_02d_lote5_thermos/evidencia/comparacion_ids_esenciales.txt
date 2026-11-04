@@ -1,0 +1,5 @@
+antes: 812 ids; PASS 812, FAIL 0, SKIP 0
+despues: 811 ids; PASS 811, FAIL 0, SKIP 0
+solo antes: 1; solo despues: 0; estado cambiado: 0
+   ('tests.test_cierre_semantico_ps01_ps05', 'test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia')
+DIFERENCIAS

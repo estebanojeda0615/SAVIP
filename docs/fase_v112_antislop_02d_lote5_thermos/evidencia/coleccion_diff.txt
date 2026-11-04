@@ -1,0 +1,22 @@
+pytest --collect-only -q tests
+base dfcaaa9:  1067 tests collected, 3 errors in 19.03s
+final cae9f04: 1066 tests collected, 3 errors in 18.48s
+ids solo en base: tests/test_cierre_semantico_ps01_ps05.py::test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia
+ids solo en final: 0
+errores base:
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+errores final:
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+
+--listar base:
+esenciales   82 entradas   812 pruebas  0 errores de recolección
+dane          0 entradas     0 pruebas
+historicas   28 entradas   242 pruebas  3 errores de recolección
+--listar final:
+esenciales   82 entradas   811 pruebas  0 errores de recolección
+dane          0 entradas     0 pruebas
+historicas   28 entradas   242 pruebas  3 errores de recolección

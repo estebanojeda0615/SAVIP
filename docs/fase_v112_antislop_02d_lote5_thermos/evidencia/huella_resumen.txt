@@ -1,0 +1,12 @@
+huella_semantica.py (Fase 2A), mismo equipo y venv:
+Comandos: python docs/fase_v112_antislop_02a_as003/evidencia/huella_semantica.py capturar <json> | comparar <a> <b>
+Base dfcaaa9 (dos capturas):
+capturados 20 casos de motor, economía y rechazos -> ../huella_base_1.json
+capturados 20 casos de motor, economía y rechazos -> ../huella_base_2.json
+casos de motor: 20 / 20; diferencias exactas: 0
+Final cae9f04 frente a base:
+capturados 20 casos de motor, economía y rechazos -> ../huella_final.json
+casos de motor: 20 / 20; diferencias exactas: 0
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_base_1.json
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_base_2.json
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *huella_final.json
