@@ -119,11 +119,11 @@ def test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion():
     tramo se llama validado ni certificado.
     """
     textos = {w: sp._texto_evidencia_oos(w) for w in (0, 1, MIN_ITERACIONES_WF_ESCENARIO - 1,
-                                                       MIN_ITERACIONES_WF_ESCENARIO, 50)}
+                                                       MIN_ITERACIONES_WF_ESCENARIO, 10, 50)}
     assert textos[0].startswith("Sin evidencia fuera de muestra")
     for w in (1, MIN_ITERACIONES_WF_ESCENARIO - 1):
         assert "muy limitada" in textos[w] and f"(n={w})" in textos[w]
-    for w in (MIN_ITERACIONES_WF_ESCENARIO, 50):
+    for w in (MIN_ITERACIONES_WF_ESCENARIO, 10, 50):
         assert textos[w] == f"Evidencia fuera de muestra disponible (n={w})."
     for w, texto in textos.items():
         assert not re.search(r"valid|certific", texto, re.IGNORECASE), (w, texto)

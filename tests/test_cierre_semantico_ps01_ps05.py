@@ -176,26 +176,10 @@ def test_ps03_w_es_cero_exactamente_cuando_el_dato_no_existe():
         )
 
 
-def test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia():
-    """W en {1,2} entrega con advertencia; W = 0 no es evaluable."""
-    from app_icociv.proyeccion.servicio_proyeccion import (
-        TRAMO_OOS_DISPONIBLE,
-        TRAMO_OOS_MUY_LIMITADA,
-        TRAMO_OOS_SIN_EVIDENCIA,
-        tramo_evidencia_oos,
-    )
-
-    assert tramo_evidencia_oos(0) == TRAMO_OOS_SIN_EVIDENCIA
-    assert tramo_evidencia_oos(1) == TRAMO_OOS_MUY_LIMITADA
-    assert tramo_evidencia_oos(2) == TRAMO_OOS_MUY_LIMITADA
-    assert tramo_evidencia_oos(3) == TRAMO_OOS_DISPONIBLE
-    assert tramo_evidencia_oos(50) == TRAMO_OOS_DISPONIBLE
-    # Y el tramo "disponible" no se llama "validado" en ninguna variante.
-    for w in (3, 10, 50):
-        texto = tramo_evidencia_oos(w).lower()
-        assert "valid" not in texto and "certific" not in texto, (
-            f"W={w} se publica como validado/certificado: {texto!r}"
-        )
+# Lote 2D-5: `test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia` se retiró con
+# `tramo_evidencia_oos`. Su contrato lo cubren test_fase2c_contratos_vigentes::
+# test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion (W = 0/1/2/3/10/50) y
+# ::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo (W* = 1/2/6).
 
 
 # ----------------------------------------------------------------- PS-04 -----
