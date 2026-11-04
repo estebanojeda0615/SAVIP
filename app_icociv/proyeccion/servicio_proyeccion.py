@@ -2035,10 +2035,10 @@ def _texto_evidencia_oos(ventanas: Any) -> str:
     HGRID, 17-08-2026 (V-CODEX-R3, residual 2). Los tramos comunican cuánta
     evidencia fuera de muestra reúne un horizonte. NINGUNO es un umbral de
     aceptación: los tres describen el mismo hecho -el tamaño de la muestra de
-    errores- y ninguno niega ni degrada nada. El corte 3 procede de
-    `MIN_ITERACIONES_WF_ESCENARIO` y se conserva SOLO como frontera descriptiva
-    entre «muy limitada» y «disponible»; convertirlo en requisito volvería a
-    reintroducir el piso que P0-G retiró.
+    errores- y ninguno niega ni degrada nada. El corte
+    (`MIN_ITERACIONES_WF_ESCENARIO`, hoy 3) se conserva SOLO como frontera
+    descriptiva entre «muy limitada» y «disponible»; convertirlo en requisito
+    reintroduciría el piso que P0-G retiró.
 
     Vocabulario PROHIBIDO en estos textos: «validado», «validado por datos»,
     «suficiente», «robusto», «certificado». Una ventana es una ventana.

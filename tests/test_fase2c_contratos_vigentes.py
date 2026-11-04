@@ -63,10 +63,10 @@ def _textos(objeto):
 def test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo(n):
     """P0-G/P0-C sobre la ruta vigente: pocas ventanas OOS no cancelan el punto; se advierten y no se publica intervalo.
 
-    Sustituiría: test_cierre_semantico_ps01_ps05::test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia
-    (sobre `tramo_evidencia_oos`), test_fundamentacion_metodologica::test_sin_ventanas_suficientes_el_punto_sigue_pero_
-    el_intervalo_no y test_presentacion_resultados::test_iteraciones_insuficientes_limitan_el_intervalo_no_el_horizonte
-    (ambas sobre `_clasificar_evidencia_horizonte`). La banda se sigue calculando como diagnóstico interno; lo que se
+    Sustituye (lote 2D-5) a test_cierre_semantico_ps01_ps05::test_ps03_la_escasez_de_evidencia_no_equivale_a_su_
+    inexistencia, retirada con `tramo_evidencia_oos`. Sustituiría a test_fundamentacion_metodologica::test_sin_ventanas_
+    suficientes_el_punto_sigue_pero_el_intervalo_no y test_presentacion_resultados::test_iteraciones_insuficientes_
+    limitan_el_intervalo_no_el_horizonte (ambas sobre `_clasificar_evidencia_horizonte`, pendientes). La banda se sigue calculando como diagnóstico interno; lo que se
     comprueba es que no se publica (`_retirar_intervalo_de_publicacion`). El umbral vigente de la advertencia es
     MIN_ITERACIONES_WF (6), no el de los tramos heredados (MIN_ITERACIONES_WF_ESCENARIO, 3): ver
     02_REGISTRO_HISTORICO_METODOLOGICO.md.
@@ -114,16 +114,17 @@ def test_banda_no_construible_no_cancela_el_punto():
 def test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion():
     """Redacción vigente del tamaño de la muestra OOS (`_texto_evidencia_oos`, alcanzable desde producción).
 
-    Sustituiría la parte de vocabulario de test_cierre_semantico_ps01_ps05::test_ps03_… (sobre `tramo_evidencia_oos`):
-    W = 0 es «sin evidencia», 1 ≤ W < MIN_ITERACIONES_WF_ESCENARIO es «muy limitada», el resto «disponible», y ningún
-    tramo se llama validado ni certificado.
+    Sustituye (lote 2D-5) a test_cierre_semantico_ps01_ps05::test_ps03_la_escasez_de_evidencia_no_equivale_a_su_
+    inexistencia, retirada con `tramo_evidencia_oos`: W = 0 es «sin evidencia», 1 ≤ W < MIN_ITERACIONES_WF_ESCENARIO es
+    «muy limitada», el resto «disponible», y ningún tramo se llama validado ni certificado. Los literales 2 y 3 fijan,
+    como fijaba la prueba retirada, que hoy la frontera descriptiva está en 3.
     """
-    textos = {w: sp._texto_evidencia_oos(w) for w in (0, 1, MIN_ITERACIONES_WF_ESCENARIO - 1,
+    textos = {w: sp._texto_evidencia_oos(w) for w in (0, 1, 2, 3, MIN_ITERACIONES_WF_ESCENARIO - 1,
                                                        MIN_ITERACIONES_WF_ESCENARIO, 10, 50)}
     assert textos[0].startswith("Sin evidencia fuera de muestra")
-    for w in (1, MIN_ITERACIONES_WF_ESCENARIO - 1):
+    for w in (1, 2, MIN_ITERACIONES_WF_ESCENARIO - 1):
         assert "muy limitada" in textos[w] and f"(n={w})" in textos[w]
-    for w in (MIN_ITERACIONES_WF_ESCENARIO, 10, 50):
+    for w in (3, MIN_ITERACIONES_WF_ESCENARIO, 10, 50):
         assert textos[w] == f"Evidencia fuera de muestra disponible (n={w})."
     for w, texto in textos.items():
         assert not re.search(r"valid|certific", texto, re.IGNORECASE), (w, texto)

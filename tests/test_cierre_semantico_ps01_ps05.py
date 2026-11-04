@@ -176,10 +176,8 @@ def test_ps03_w_es_cero_exactamente_cuando_el_dato_no_existe():
         )
 
 
-# Lote 2D-5: `test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia` se retiró con
-# `tramo_evidencia_oos`. Su contrato lo cubren test_fase2c_contratos_vigentes::
-# test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion (W = 0/1/2/3/10/50) y
-# ::test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo (W* = 1/2/6).
+# 2D-5: test_ps03_la_escasez_de_evidencia_no_equivale_a_su_inexistencia se retiró con tramo_evidencia_oos;
+# ver test_fase2c_contratos_vigentes::test_texto_evidencia_oos_tres_tramos_sin_vocabulario_de_validacion
 
 
 # ----------------------------------------------------------------- PS-04 -----
