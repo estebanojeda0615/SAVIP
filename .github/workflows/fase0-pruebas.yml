@@ -16,6 +16,7 @@ on:
       - maintenance/v1.1.2-as007-preparacion-2d5-thermos
       - maintenance/v1.1.2-fase2d-lote5-thermos
       - maintenance/v1.1.2-as028-preparacion-2d2-thermos
+      - maintenance/v1.1.2-fase2d-lote2-equivalencia-original-thermos
   workflow_dispatch:
 
 permissions:
