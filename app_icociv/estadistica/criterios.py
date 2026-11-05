@@ -565,7 +565,7 @@ CRITERIOS_ESTADISTICOS: tuple[CriterioEstadistico, ...] = (
     CriterioEstadistico(
         "C-SEL-001",
         "Seleccion del modelo por RMSE fuera de muestra global",
-        "app_icociv/proyeccion/servicio_proyeccion.py::seleccionar_modelo_por_rmse_oos_global",
+        "app_icociv/proyeccion/servicio_proyeccion.py::_seleccionar_modelo_rectangular",
         TIPO_BIBLIOGRAFICO,
         "m* = argmin RMSE_global(m) sobre la muestra comun de pares (objetivo, horizonte)",
         "RMSE: Hyndman y Koehler (2006); FPP3 5.8 (medidas dependientes de escala son "

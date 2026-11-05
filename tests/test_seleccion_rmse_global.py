@@ -30,168 +30,34 @@ Ejecucion:
 from __future__ import annotations
 
 import inspect
-import math
 import sys
 from pathlib import Path
-
-import numpy as np
-import pandas as pd
 
 RAIZ = Path(__file__).resolve().parents[1]
 if str(RAIZ) not in sys.path:
     sys.path.insert(0, str(RAIZ))
 
 from app_icociv.proyeccion import servicio_proyeccion as sp  # noqa: E402
-from app_icociv.proyeccion.servicio_proyeccion import (  # noqa: E402
-    seleccionar_modelo_por_rmse_oos_global,
-)
-
-
-def banco(errores_por_modelo: dict[str, dict[int, list[float]]]) -> dict[str, dict]:
-    """Banco sintetico: {modelo: {h: [errores por origen]}}.
-
-    Los objetivos ``t`` se numeran de forma que el par (t, h) sea comparable
-    entre modelos: mismo indice, mismo horizonte.
-    """
-    salida: dict[str, dict] = {}
-    for modelo, por_h in errores_por_modelo.items():
-        for h, errores in por_h.items():
-            salida[f"{modelo}_h{h}"] = {
-                "ejecutado": True,
-                "predicciones": pd.DataFrame({
-                    "t": [100 + i for i in range(len(errores))],
-                    "Error": list(errores),
-                    "Observado": [100.0] * len(errores),
-                    "Predicho": [100.0 - e for e in errores],
-                }),
-                "metricas": {"rmse": float(np.sqrt(np.mean(np.square(errores))))},
-            }
-    return salida
-
-
-def rmse_global(errores: list[float]) -> float:
-    return math.sqrt(sum(e ** 2 for e in errores) / len(errores))
 
 
 # ======================================================================
-# 1. La formula
+# Lote 2D-2: retiradas las 13 pruebas que ejercitaban el selector heredado `seleccionar_modelo_por_rmse_oos_global`
+# (eliminado) con los auxiliares `banco` y `rmse_global`. Sus propiedades las fija sobre el selector vigente
+# tests/test_fase1a_selector_rectangular.py: mínimo (p_minimo_sse), RMSE (p_rmse_coherente,
+# test_rmse_reportado_coincide_con_sse_exacto), pesos (p_pesos_uniformes_por_horizonte), muestra común
+# (p_solo_pares_comunes, test_sin_muestra_comun_o_banco_vacio_devuelve_none), no finitos
+# (test_un_error_no_finito_excluye_solo_a_ese_candidato), orden (p_invariante_al_orden_de_entrada), desempate
+# (p_empate_primer_candidato_del_banco), reproducibilidad (test_es_reproducible_y_no_muta_la_matriz) y un solo
+# modelo para la trayectoria (test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente).
 # ======================================================================
-def test_elige_el_minimo_rmse_global():
-    b = banco({
-        "a": {1: [1.0, 1.0], 2: [1.0, 1.0]},
-        "b": {1: [0.5, 0.5], 2: [0.5, 0.5]},
-    })
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1, 2)) == "b"
-
-
-def test_el_valor_es_la_raiz_del_error_cuadratico_medio():
-    """Se comprueba contra el calculo directo, no contra otra implementacion."""
-    errores_a = [1.0, 2.0, 3.0, 4.0]
-    errores_b = [2.5, 2.5, 2.5, 2.5]
-    b = banco({"a": {1: errores_a[:2], 2: errores_a[2:]},
-               "b": {1: errores_b[:2], 2: errores_b[2:]}})
-    # a: sqrt((1+4+9+16)/4) = 2.7386 ; b: 2.5  -> gana b
-    assert rmse_global(errores_a) > rmse_global(errores_b)
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1, 2)) == "b"
-
-
-def test_no_hay_peso_por_horizonte():
-    """El caso que separa a las dos reglas.
-
-    `corto` domina en h=1 y pierde en h=18; `largo` al reves. Con peso 1/h gana
-    `corto`; minimizando la perdida cuadratica total gana `largo`.
-    """
-    b = banco({
-        "corto": {1: [1.0] * 4, 18: [3.0] * 4},
-        "largo": {1: [1.3] * 4, 18: [2.0] * 4},
-    })
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1, 18)) == "largo"
-    # Y la regla retirada elegiria el otro, que es justo lo que se corrige: RMSE relativo al
-    # mejor de cada horizonte, promediado con peso 1/h (`_modelo_trayectoria_consistente`,
-    # retirada en la Fase 2B, AS-003; definicion en 1848275).
-    rmse = {"corto": {1: 1.0, 18: 3.0}, "largo": {1: 1.3, 18: 2.0}}
-    mejor = {h: min(rmse[m][h] for m in rmse) for h in (1, 18)}
-    puntaje = {m: sum(rmse[m][h] / mejor[h] / h for h in (1, 18)) / sum(1 / h for h in (1, 18)) for m in rmse}
-    assert min(puntaje, key=puntaje.get) == "corto"
-
-
-# ======================================================================
-# 2. La muestra comun
-# ======================================================================
-def test_solo_compara_pares_presentes_en_todos():
-    """Un modelo con menos observaciones no puede ganar por tener menos.
-
-    `parcial` solo falla -error grande- en el par que le falta a `completo`.
-    Si la comparacion no se restringiera a la interseccion, `parcial` ganaria
-    por omision.
-    """
-    b = banco({"completo": {1: [1.0, 1.0, 1.0]}, "parcial": {1: [0.9, 0.9]}})
-    # La interseccion son los dos primeros pares: parcial gana ahi, legitimamente.
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1,)) == "parcial"
-    # Con el tercer par a favor de completo, la interseccion sigue siendo de dos
-    # y el resultado no cambia: nadie puntua sobre observaciones que el otro no tiene.
-    b2 = banco({"completo": {1: [1.0, 1.0, 0.01]}, "parcial": {1: [0.9, 0.9]}})
-    assert seleccionar_modelo_por_rmse_oos_global(b2, (1,)) == "parcial"
-
-
-def test_sin_muestra_comun_no_se_elige():
-    """Sin observaciones comparables no se afirma nada: cae al camino previo."""
-    b = {
-        "a_h1": {"ejecutado": True, "metricas": {"rmse": 1.0},
-                 "predicciones": pd.DataFrame({"t": [1], "Error": [1.0]})},
-        "b_h1": {"ejecutado": True, "metricas": {"rmse": 1.0},
-                 "predicciones": pd.DataFrame({"t": [2], "Error": [1.0]})},
-    }
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1,)) is None
-
-
-def test_banco_vacio_devuelve_none():
-    assert seleccionar_modelo_por_rmse_oos_global({}, (1, 2)) is None
-
-
-def test_los_errores_no_finitos_no_participan():
-    b = banco({"a": {1: [1.0, 1.0]}, "b": {1: [0.5, float("nan")]}})
-    # El par no finito de `b` sale de la muestra comun; queda uno, y `b` gana ahi.
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1,)) == "b"
-
-
-# ======================================================================
-# 3. Invariancias y determinismo
-# ======================================================================
-def test_invariante_al_orden_de_los_horizontes():
-    b = banco({"a": {1: [1.0, 2.0], 6: [3.0, 1.0], 12: [2.0, 2.0]},
-               "b": {1: [1.5, 1.5], 6: [1.5, 1.5], 12: [1.5, 1.5]}})
-    referencia = seleccionar_modelo_por_rmse_oos_global(b, (1, 6, 12))
-    for orden in ((12, 6, 1), (6, 1, 12), (12, 1, 6)):
-        assert seleccionar_modelo_por_rmse_oos_global(b, orden) == referencia
-
-
-def test_invariante_al_orden_de_los_candidatos():
-    directo = banco({"a": {1: [1.0, 2.0]}, "b": {1: [1.5, 1.5]}})
-    invertido = {k: directo[k] for k in reversed(list(directo))}
-    assert (seleccionar_modelo_por_rmse_oos_global(directo, (1,))
-            == seleccionar_modelo_por_rmse_oos_global(invertido, (1,)))
-
-
-def test_el_empate_exacto_se_resuelve_por_orden_de_aparicion():
-    """Determinista y sin preferencia por identidad, complejidad ni metrica."""
-    b = banco({"primero": {1: [1.0, 1.0]}, "segundo": {1: [1.0, 1.0]}})
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1,)) == "primero"
-
-
-def test_es_reproducible():
-    b = banco({"a": {1: [1.0, 2.0], 3: [2.0, 1.0]}, "b": {1: [1.4, 1.4], 3: [1.4, 1.4]}})
-    resultados = {seleccionar_modelo_por_rmse_oos_global(b, (1, 3)) for _ in range(5)}
-    assert len(resultados) == 1
 
 
 # ======================================================================
 # 4. Lo que la regla NO consulta
 # ======================================================================
 def test_la_regla_no_consulta_umbrales_ni_identidad():
-    # `_modelo_consistente_desde_comparativo` salio de la tupla al retirarse en la Fase 2B (AS-003).
-    for funcion in (sp.seleccionar_modelo_por_rmse_oos_global,
-                    sp._errores_oos_por_par):
+    # Fase 2B y lote 2D-2: se inspecciona el selector que usa la ruta productiva; los heredados se retiraron.
+    for funcion in (sp._seleccionar_modelo_rectangular,):
         fuente = inspect.getsource(funcion)
         for prohibido in ("UMBRAL_", "TOLERANCIA_", "MIN_ERRORES", "COBERTURA_IC95",
                           "es_benchmark", "MODELOS_BENCHMARK", "estado"):
@@ -212,28 +78,6 @@ def test_la_regla_retirada_ya_no_se_invoca_en_la_ruta_productiva():
         f"no debe quedar ninguna llamada ({llamadas})"
     )
     assert not hasattr(sp, "_modelo_trayectoria_consistente")
-
-
-def test_un_solo_modelo_para_toda_la_trayectoria():
-    """La propiedad que la regla anterior introdujo y esta conserva."""
-    b = banco({"a": {1: [1.0], 3: [1.0], 18: [1.0]},
-               "b": {1: [2.0], 3: [2.0], 18: [2.0]}})
-    for horizontes in ((1,), (1, 3), (1, 3, 18)):
-        assert seleccionar_modelo_por_rmse_oos_global(b, horizontes) == "a"
-
-
-# ======================================================================
-# 5. Reproduccion desde los errores OOS
-# ======================================================================
-def test_el_resultado_se_reproduce_desde_los_errores():
-    """Quien audite debe poder recalcularlo con los errores publicados."""
-    errores = {"a": {1: [1.0, 2.0], 6: [3.0, 2.0]},
-               "b": {1: [2.0, 2.0], 6: [2.0, 2.0]}}
-    b = banco(errores)
-    planos = {m: [e for lista in por_h.values() for e in lista]
-              for m, por_h in errores.items()}
-    esperado = min(planos, key=lambda m: rmse_global(planos[m]))
-    assert seleccionar_modelo_por_rmse_oos_global(b, (1, 6)) == esperado
 
 
 def _ejecutar() -> int:

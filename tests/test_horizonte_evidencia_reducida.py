@@ -353,60 +353,6 @@ def test_trayectoria_no_depende_del_horizonte_solicitado() -> None:
         assert np.allclose(valores, referencia_valores), (horizonte, valores, referencia_valores)
 
 
-def test_modelo_agregado_minimiza_el_error_oos_global() -> None:
-    """Una serie con tendencia lineal clara se resuelve con un modelo de tendencia.
-
-    CIERRE H-9, 08-08-2026. Esta prueba exigía antes `drift` por su nombre, y lo
-    exigía porque la regla de selección ponderaba los horizontes por `1/h` y
-    drift domina el corto plazo. Retirada esa ponderación ---no tenía fuente---,
-    la selección minimiza el error cuadrático medio fuera de muestra global, y
-    sobre esta serie sintética gana `exponencial_log_lineal`: RMSE global 1,44
-    frente a 1,95 de drift.
-
-    El intercambio es real y conviene tenerlo escrito: **drift sigue siendo tres
-    veces mejor en h=1** (0,449 frente a 1,329). La regla vigente no optimiza
-    h=1; optimiza la pérdida cuadrática total observada, que es su definición.
-
-    Lo que la prueba fija ahora es la propiedad de la regla, no la identidad del
-    ganador: el modelo entregado es el de mínimo RMSE global sobre la muestra
-    común. Si alguien reintroduce un peso por horizonte, esta prueba lo detecta.
-    """
-    from app_icociv.proyeccion.servicio_proyeccion import (
-        _errores_oos_por_par,
-        seleccionar_modelo_por_rmse_oos_global,
-    )
-    from app_icociv.validacion.backtesting import ejecutar_backtesting_comparativo
-
-    valores = [100.0 + 0.45 * i + 1.8 * np.sin(i / 3.0) for i in range(61)]
-    serie = _serie(valores)
-    res = ejecutar_proyeccion(serie, *_objetivo(serie, 3), 2021)
-    entregado = str(res["resultado_horizonte_solicitado"].get("modelo_aplicado") or "")
-    assert entregado, res["resultado_horizonte_solicitado"]
-
-    horizontes = tuple(range(1, 25))
-    banco = ejecutar_backtesting_comparativo(
-        serie[["Periodo", "Indice"]], horizontes=horizontes, anio_base=2021)
-    esperado = seleccionar_modelo_por_rmse_oos_global(banco, horizontes)
-    assert esperado is not None
-
-    # El modelo entregado es el de mínimo RMSE global, recalculado aquí.
-    pares = _errores_oos_por_par(banco, horizontes)
-    comunes = set.intersection(*(set(d) for d in pares.values()))
-    globales = {
-        m: float(np.sqrt(sum(d[p] ** 2 for p in comunes) / len(comunes)))
-        for m, d in pares.items()
-    }
-    assert esperado == min(globales, key=globales.get), globales
-
-
-if __name__ == "__main__":
-    test_trayectoria_no_depende_del_horizonte_solicitado()
-    test_modelo_agregado_minimiza_el_error_oos_global()
-    test_banda_de_cautela_existe_en_todo_horizonte()
-    test_intervalo_amplio_en_horizonte_corto_no_bloquea_pero_degrada()
-    test_limites_distinguen_validado_y_escenario()
-    test_serie_corta_publica_su_cobertura_y_niega_solo_por_ventanas()
-    test_serie_larga_conserva_proyeccion_tecnica()
-    test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista()
-    test_la_rejilla_de_horizontes_no_tiene_tope_historico_ni_cascada()
-    print("Pruebas de evidencia reducida por horizonte OK")
+# `test_modelo_agregado_minimiza_el_error_oos_global` RETIRADA en el lote 2D-2: comparaba el modelo entregado con
+# el selector heredado eliminado (otra regla: todos los pares del backtesting comparativo). La regla vigente la
+# fija tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado.

@@ -201,81 +201,10 @@ def test_p0b_el_catalogo_sigue_gobernado_por_estimabilidad() -> None:
         assert literal not in cuerpo, f"P0-B reabierto: reaparece {literal}"
 
 
-#: Dos candidatos separados por UNA ULP en un solo error. `hypot(e)/sqrt(n)`
-#: devuelve el MISMO flotante para ambos -ese era el defecto que cerro P0-D-, de
-#: modo que el ganador lo decidia el orden de insercion. La suma exacta los
-#: distingue: gana `b`, en cualquier orden.
-_P0D_ULP_A = [1.236534220264296, 1.970026263557579, 0.7527746719239033]
-_P0D_ULP_B = [1.236534220264296, 1.970026263557579, 0.7527746719239032]
-
-
-def _p0d_banco(**por_modelo: dict[tuple[int, int], float]) -> dict:
-    """Banco de backtesting minimo con los errores dados, por modelo y horizonte."""
-    import pandas as pd
-    banco: dict[str, dict] = {}
-    for modelo, errores in por_modelo.items():
-        por_h: dict[int, list[tuple[int, float]]] = {}
-        for (objetivo, horizonte), error in errores.items():
-            por_h.setdefault(horizonte, []).append((objetivo, error))
-        for horizonte, filas in por_h.items():
-            banco[f"{modelo}_h{horizonte}"] = {
-                "ejecutado": True,
-                "predicciones": pd.DataFrame(
-                    {"t": [f[0] for f in filas], "Error": [f[1] for f in filas]}
-                ),
-            }
-    return banco
-
-
-def _p0d_lista(valores: list[float]) -> dict[tuple[int, int], float]:
-    return {(i, 1): v for i, v in enumerate(valores, start=1)}
-
-
-def test_p0d_la_regla_de_seleccion_no_cambia() -> None:
-    """C-SEL-001 sigue vigente, comprobado por COMPORTAMIENTO.
-
-    P0-C / C2, 15-08-2026. Este guardia hacia
-    `assert "comunes" in fuente and "rmse_global" in fuente`. `rmse_global` era el
-    nombre de una VARIABLE LOCAL del selector -`rmse_global = math.sqrt(
-    suma_cuadrados / len(comunes))`, linea 2239 del codigo anterior, citada en
-    `FHG_TANDA2_HALLAZGO_B_OVERFLOW_SELECTOR.md`- y lo retiro la propia
-    remediacion P0-D del 14-08-2026 al pasar a comparar la suma exacta de
-    cuadrados. El assert comprobaba que P0-D no se reabriera buscando el nombre
-    que P0-D elimino: pasaba con el codigo defectuoso y falla con el corregido.
-
-    Lo sustituyen cuatro propiedades del contrato, no de la implementacion. Las
-    cuatro fallarian si alguien volviera a la aritmetica redondeada, cambiara la
-    muestra, introdujera pesos o alterara el desempate.
-    """
-    selector = SP.seleccionar_modelo_por_rmse_oos_global
-
-    # 1. MUESTRA COMUN. `a` tiene cuatro pares y `b` solo dos. Sobre su propia
-    #    muestra `a` es mejor (MSE 4,5 frente a 6,25); sobre la interseccion es
-    #    peor (SSE 18 frente a 12,5). Debe ganar `b`: la comparacion se hace
-    #    sobre los mismos pares para todos.
-    ganador = selector(_p0d_banco(
-        a={(1, 1): 3.0, (2, 1): 3.0, (3, 1): 0.0, (4, 1): 0.0},
-        b={(1, 1): 2.5, (2, 1): 2.5},
-    ), (1,))
-    assert ganador == "b", (
-        "P0-D reabierto: el selector dejo de comparar sobre la muestra comun"
-    )
-
-    # 2. ORDEN CORRECTO CON SSE APENAS DISTINTO, y 3. INDEPENDENCIA DEL ORDEN DE
-    #    INSERCION. Con `hypot` los dos candidatos colapsaban al mismo flotante y
-    #    ganaba el primero del banco; aqui gana `b` en las dos direcciones.
-    for banco in (
-        _p0d_banco(a=_p0d_lista(_P0D_ULP_A), b=_p0d_lista(_P0D_ULP_B)),
-        _p0d_banco(b=_p0d_lista(_P0D_ULP_B), a=_p0d_lista(_P0D_ULP_A)),
-    ):
-        assert selector(banco, (1,)) == "b", (
-            "P0-D reabierto: el ganador vuelve a depender del redondeo o del orden"
-        )
-
-    # 4. DESEMPATE HISTORICO ANTE IGUALDAD EXACTA: gana el primero del banco.
-    iguales = [1.0, 2.0, 3.0]
-    assert selector(_p0d_banco(a=_p0d_lista(iguales), b=_p0d_lista(iguales)), (1,)) == "a"
-    assert selector(_p0d_banco(b=_p0d_lista(iguales), a=_p0d_lista(iguales)), (1,)) == "b"
+# Lote 2D-2: retirado `test_p0d_la_regla_de_seleccion_no_cambia` (y sus auxiliares _P0D_ULP_*, _p0d_banco,
+# _p0d_lista), que probaba el selector heredado ya eliminado. Sus cuatro propiedades (muestra común, una ULP,
+# orden de entrada, desempate) las fijan sobre el selector vigente tests/test_fase1a_selector_rectangular.py
+# y tests/test_nmin_adversarial.py::p0d_en_el_selector_vigente.
 
 
 # --- 12: determinismo -------------------------------------------------------

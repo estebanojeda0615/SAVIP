@@ -32,7 +32,6 @@ from app_icociv.estadistica.analisis_series import (
 from app_icociv.proyeccion.servicio_proyeccion import (
     _aplicar_salvaguarda_benchmarks,
     _clasificar_evidencia_horizonte,
-    seleccionar_modelo_por_rmse_oos_global,
 )
 
 RUTA_ANEXO = ROOT / "anex-ICOCIV-ene2026.xlsb"

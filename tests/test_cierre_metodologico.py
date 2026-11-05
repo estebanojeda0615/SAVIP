@@ -424,18 +424,9 @@ def test_la_seleccion_no_consulta_ningun_umbral():
 # tests/test_fase1a_selector_rectangular.py.
 
 
-def test_la_seleccion_elige_el_de_menor_error_oos():
-    import pandas as pd
-
-    def bt(errores):
-        return {"ejecutado": True,
-                "metricas": {"rmse": float(sum(e ** 2 for e in errores) / len(errores)) ** 0.5},
-                "predicciones": pd.DataFrame({"t": list(range(len(errores))),
-                                              "Error": list(errores)})}
-
-    banco = {"a_h1": bt([1.0, 1.0]), "b_h1": bt([2.0, 2.0]),
-             "a_h2": bt([1.0, 1.0]), "b_h2": bt([2.0, 2.0])}
-    assert sp.seleccionar_modelo_por_rmse_oos_global(banco, (1, 2)) == "a"
+# `test_la_seleccion_elige_el_de_menor_error_oos` RETIRADA en el lote 2D-2: llamaba al selector heredado eliminado.
+# El mínimo SSE sobre la muestra común lo prueba `p_minimo_sse` sobre el selector vigente en
+# tests/test_fase1a_selector_rectangular.py.
 
 
 # ======================================================================

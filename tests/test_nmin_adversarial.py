@@ -124,22 +124,11 @@ def test_naive_declara_un_minimo_inalcanzable() -> None:
 
 # --- 6, 7 y 8: invariantes que SI se sostienen ------------------------------
 
-def test_muestra_comun_intacta_desde_el_primer_origen() -> None:
-    import pandas as pd
-
-    activos = SP._catalogo_activo()
-    n = 40
-    periodos = [f"{2021 + i // 12}_{i % 12 + 1}" for i in range(n)]
-    _, y = _serie_tendencia(n, 5)
-    serie = pd.DataFrame({"Periodo": periodos, "Indice": y})
-    bt = BT.ejecutar_backtesting_comparativo(serie, modelos=activos, horizontes=(1, 4))
-    pares = SP._errores_oos_por_par(bt, (1, 4))
-    union: set = set()
-    comun: set | None = None
-    for s in pares.values():
-        union |= set(s)
-        comun = set(s) if comun is None else (comun & set(s))
-    assert comun and len(comun) == len(union), "la muestra comun ya no es la union"
+# Lote 2D-2: retirado `test_muestra_comun_intacta_desde_el_primer_origen`, que medía la muestra común con el
+# extractor heredado `_errores_oos_por_par` (eliminado). La muestra rectangular completa W*×24 de la ruta productiva
+# la fija test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado
+# (pares comunes = pares esperados = W*×24, 21 candidatos); los orígenes del rectángulo, test_metodologia_n0_12_h24.py::
+# test_c_rectangulo_n65_da_w_estrella_30_y_mismos_origenes_por_h.
 
 
 def test_anti_leakage_y_pares_por_horizonte() -> None:
