@@ -276,33 +276,10 @@ def test_h18_no_se_redacta_como_intervalos_aceptables() -> None:
     assert "backtesting e intervalos aceptables" not in linea_h18
 
 
-def test_el_modelo_entregado_es_el_de_minimo_error_oos_global() -> None:
-    """CIERRE H-9, 08-08-2026: la seleccion deja de ponderar por 1/h.
-
-    Esta prueba exigia `drift` por su nombre. Drift ganaba porque la regla
-    anterior daba mas peso a los horizontes cortos, donde domina. Retirada esa
-    ponderacion -sin fuente-, gana el de menor error cuadratico medio fuera de
-    muestra global. En esta serie sintetica es `exponencial_log_lineal`, con
-    RMSE global 1,44 frente a 1,95; drift sigue siendo tres veces mejor en h=1.
-
-    Se fija la propiedad de la regla, no la identidad del ganador.
-    """
-    from app_icociv.proyeccion.servicio_proyeccion import (
-        ejecutar_proyeccion,
-        seleccionar_modelo_por_rmse_oos_global,
-    )
-    from app_icociv.validacion.backtesting import ejecutar_backtesting_comparativo
-
-    valores = [100.0 + 0.45 * i + 1.8 * np.sin(i / 3.0) for i in range(61)]
-    serie = pd.DataFrame({"Periodo": _periodos(61), "Indice": valores})
-    resultado = ejecutar_proyeccion(serie, 2026, 4, 2021)
-    horizontes = tuple(range(1, 25))
-    esperado = seleccionar_modelo_por_rmse_oos_global(
-        ejecutar_backtesting_comparativo(serie, horizontes=horizontes, anio_base=2021),
-        horizontes,
-    )
-    assert esperado is not None
-    assert resultado["modelo_codigo"] == esperado, (resultado["modelo_codigo"], esperado)
+# AS-028: se retiró `test_el_modelo_entregado_es_el_de_minimo_error_oos_global` (presente hasta 56c75a6).
+# Comparaba el modelo entregado con el selector heredado `seleccionar_modelo_por_rmse_oos_global`, que ya no es
+# la regla productiva. La regla vigente (SSE exacta sobre W*×24, 21 candidatos) la cubre
+# tests/test_fase1a_selector_rectangular.py. Detalle en docs/fase_v112_antislop_as028_preparacion_2d2_thermos/03.
 
 
 def test_combo_no_cambia_con_rueda_y_periodo_iso() -> None:
@@ -981,7 +958,6 @@ def main() -> None:
     test_horizontes_se_evaluan_mes_a_mes_y_no_solo_atajos_ui()
     test_mensaje_no_recomendables_no_imprime_lista_vacia()
     test_h18_no_se_redacta_como_intervalos_aceptables()
-    test_el_modelo_entregado_es_el_de_minimo_error_oos_global()
     test_combo_no_cambia_con_rueda_y_periodo_iso()
     test_grafica_usa_periodos_reales()
     test_contenedor_ruta_tiene_scroll_y_tooltip_hover_combo()
