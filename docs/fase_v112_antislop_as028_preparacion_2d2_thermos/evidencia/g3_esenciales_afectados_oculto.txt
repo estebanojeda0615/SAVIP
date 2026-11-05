@@ -1,0 +1,115 @@
+[G3] par oculto en memoria: ('seleccionar_modelo_por_rmse_oos_global', '_errores_oos_por_par')
+..................................F..............F........F..F.......    [100%]
+=================================== ERRORS ====================================
+__________ ERROR collecting tests/test_remediacion_r2_h1_h2_h3_h7.py __________
+ImportError while importing test module 'C:\Pruebas SAVIP\A28\final\tests\test_remediacion_r2_h1_h2_h3_h7.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_remediacion_r2_h1_h2_h3_h7.py:32: in <module>
+    from app_icociv.proyeccion.servicio_proyeccion import (
+E   ImportError: cannot import name 'seleccionar_modelo_por_rmse_oos_global' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28\final\app_icociv\proyeccion\servicio_proyeccion.py)
+================================== FAILURES ===================================
+_ test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado _
+
+    def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado():
+        serie = gen.serie("tendencia_lineal_ruido")
+        anio, mes = gen.objetivo(serie, 11)
+        # Fase 2B (AS-003, opción B): estas tres se retiraron del módulo; se exige su AUSENCIA.
+        eliminados = ("_rmse_global_estable", "_modelo_consistente_desde_comparativo", "_modelo_trayectoria_consistente")
+        assert [n for n in eliminados if hasattr(sp, n)] == []
+        # Selectores y evaluadores heredados que siguen definidos: se espían y la ruta productiva no debe llamarlos.
+        retirados = ("seleccionar_modelo_por_rmse_oos_global", "determinar_horizonte_maximo_estadistico",
+                     "_evaluar_horizontes_proyeccion")
+>       espias = {n: patch.object(sp, n, wraps=getattr(sp, n)) for n in retirados}
+                                               ^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'seleccionar_modelo_por_rmse_oos_global'
+
+tests\test_fase1a_selector_rectangular.py:307: AttributeError
+__________________ test_p0d_la_regla_de_seleccion_no_cambia ___________________
+
+    def test_p0d_la_regla_de_seleccion_no_cambia() -> None:
+        """C-SEL-001 sigue vigente, comprobado por COMPORTAMIENTO.
+
+        P0-C / C2, 15-08-2026. Este guardia hacia
+        `assert "comunes" in fuente and "rmse_global" in fuente`. `rmse_global` era el
+        nombre de una VARIABLE LOCAL del selector -`rmse_global = math.sqrt(
+        suma_cuadrados / len(comunes))`, linea 2239 del codigo anterior, citada en
+        `FHG_TANDA2_HALLAZGO_B_OVERFLOW_SELECTOR.md`- y lo retiro la propia
+        remediacion P0-D del 14-08-2026 al pasar a comparar la suma exacta de
+        cuadrados. El assert comprobaba que P0-D no se reabriera buscando el nombre
+        que P0-D elimino: pasaba con el codigo defectuoso y falla con el corregido.
+
+        Lo sustituyen cuatro propiedades del contrato, no de la implementacion. Las
+        cuatro fallarian si alguien volviera a la aritmetica redondeada, cambiara la
+        muestra, introdujera pesos o alterara el desempate.
+        """
+>       selector = SP.seleccionar_modelo_por_rmse_oos_global
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'seleccionar_modelo_por_rmse_oos_global'
+
+tests\test_origen_inicial_backtesting.py:250: AttributeError
+______________ test_muestra_comun_intacta_desde_el_primer_origen ______________
+
+    def test_muestra_comun_intacta_desde_el_primer_origen() -> None:
+        import pandas as pd
+
+        activos = SP._catalogo_activo()
+        n = 40
+        periodos = [f"{2021 + i // 12}_{i % 12 + 1}" for i in range(n)]
+        _, y = _serie_tendencia(n, 5)
+        serie = pd.DataFrame({"Periodo": periodos, "Indice": y})
+        bt = BT.ejecutar_backtesting_comparativo(serie, modelos=activos, horizontes=(1, 4))
+>       pares = SP._errores_oos_por_par(bt, (1, 4))
+                ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute '_errores_oos_por_par'
+
+tests\test_nmin_adversarial.py:136: AttributeError
+__________________________ test_p0a_p0b_p0d_intactos __________________________
+
+    def test_p0a_p0b_p0d_intactos() -> None:
+        """P0-A, P0-B y P0-D siguen cerrados. P0-D, por comportamiento.
+
+        P0-C / C2, 15-08-2026. Misma correccion que en `test_integracion_fhg`: el
+        assert `"rmse_global" in fuente` comprobaba el nombre de una variable local
+        que la propia remediacion P0-D retiro, y PASA con la aritmetica defectuosa
+        restaurada. Se sustituye por el contrato conductual canonico de P0-D.
+        """
+        assert "seleccionar_modelo_por_evidencia(" not in inspect.getsource(SP)
+        assert SP.MODELOS_PARAMETRO_SIN_SUSTENTO == {"promedio_movil", "variacion_reciente"}
+        from tests.test_origen_inicial_backtesting import test_p0d_la_regla_de_seleccion_no_cambia
+>       test_p0d_la_regla_de_seleccion_no_cambia()
+
+tests\test_nmin_adversarial.py:183:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def test_p0d_la_regla_de_seleccion_no_cambia() -> None:
+        """C-SEL-001 sigue vigente, comprobado por COMPORTAMIENTO.
+
+        P0-C / C2, 15-08-2026. Este guardia hacia
+        `assert "comunes" in fuente and "rmse_global" in fuente`. `rmse_global` era el
+        nombre de una VARIABLE LOCAL del selector -`rmse_global = math.sqrt(
+        suma_cuadrados / len(comunes))`, linea 2239 del codigo anterior, citada en
+        `FHG_TANDA2_HALLAZGO_B_OVERFLOW_SELECTOR.md`- y lo retiro la propia
+        remediacion P0-D del 14-08-2026 al pasar a comparar la suma exacta de
+        cuadrados. El assert comprobaba que P0-D no se reabriera buscando el nombre
+        que P0-D elimino: pasaba con el codigo defectuoso y falla con el corregido.
+
+        Lo sustituyen cuatro propiedades del contrato, no de la implementacion. Las
+        cuatro fallarian si alguien volviera a la aritmetica redondeada, cambiara la
+        muestra, introdujera pesos o alterara el desempate.
+        """
+>       selector = SP.seleccionar_modelo_por_rmse_oos_global
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'seleccionar_modelo_por_rmse_oos_global'
+
+tests\test_origen_inicial_backtesting.py:250: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado
+FAILED tests/test_origen_inicial_backtesting.py::test_p0d_la_regla_de_seleccion_no_cambia
+FAILED tests/test_nmin_adversarial.py::test_muestra_comun_intacta_desde_el_primer_origen
+FAILED tests/test_nmin_adversarial.py::test_p0a_p0b_p0d_intactos - AttributeE...
+4 failed, 65 passed, 1 error in 50.25s
+codigo=1

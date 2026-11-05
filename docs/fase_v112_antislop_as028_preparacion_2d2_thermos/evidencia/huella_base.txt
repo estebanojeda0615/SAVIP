@@ -1,0 +1,2 @@
+capturados 20 casos de motor, economía y rechazos -> ../huella_base.json
+casos de motor: 20 / 20; diferencias exactas: 0

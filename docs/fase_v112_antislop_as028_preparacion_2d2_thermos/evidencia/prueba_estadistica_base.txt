@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Pruebas SAVIP\A28\base\pruebas\prueba_estadistica.py", line 27, in <module>
+    archivo_excel = resolver_archivo_excel()
+                    ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Pruebas SAVIP\A28\base\pruebas\prueba_estadistica.py", line 23, in resolver_archivo_excel
+    raise FileNotFoundError("Indique la ruta de un archivo .xlsx/.xlsb como argumento.")
+FileNotFoundError: Indique la ruta de un archivo .xlsx/.xlsb como argumento.
+codigo=1

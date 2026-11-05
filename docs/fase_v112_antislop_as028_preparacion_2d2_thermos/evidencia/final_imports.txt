@@ -1,0 +1,2 @@
+modulos 86 aplicacion OK, VentanaPrincipal OK, par presente: True
+codigo=0

@@ -1,0 +1,62 @@
+F...                                                                     [100%]
+================================== FAILURES ===================================
+______________ test_a_acciones_geometria_click_teclado_y_senales ______________
+
+    def test_a_acciones_geometria_click_teclado_y_senales():
+        load,abrir,guardar=Mock(),Mock(),Mock()
+        with patch.object(VentanaPrincipal,'seleccionar_archivo',lambda self:load()), patch.object(VentanaPrincipal,'abrir_sesion',lambda self:abrir()), patch.object(VentanaPrincipal,'guardar_sesion_actual',lambda self:guardar()):
+            v=VentanaPrincipal()
+            establecer_movimiento_reducido(True)
+            try:
+                actions=((v.boton_cargar,load),(v.boton_abrir_sesion,abrir),(v.boton_guardar_sesion,guardar))
+                original=[b.text() for b,_ in actions]
+                for theme in ('claro','oscuro'):
+                    v._aplicar_tema(theme,persistir=False)
+                    for size in SIZES:
+                        v.resize(*size)
+                        for _ in range(3):
+                            v.navegacion.establecer_contraccion(True)
+                            settle(v)
+                            for b,method in actions:
+                                b.setEnabled(True)  # Precondición de sesión disponible; acción instrumentada.
+                                assert b.isVisible() and b.toolTip() and b.accessibleName()
+                                assert b.text() or not b.icon().isNull()
+                                rect=b.geometry()
+                                point=b.mapTo(v.navegacion,QPoint())
+                                assert point.x()>=0 and point.x()+rect.width()<=v.navegacion.width(), measure(b,v.navegacion)
+                                assert b.width()>=32 and b.contentsRect().width()>=b.iconSize().width()
+                                old=method.call_count
+                                QTest.mouseClick(b,Qt.MouseButton.LeftButton)
+                                assert method.call_count==old+1, (b.accessibleName(),b.isEnabled(),b.isVisible(),method.call_count,old)
+                                b.setFocus()
+                                app.processEvents()
+                                assert b.hasFocus()
+                                QTest.keyClick(b,Qt.Key.Key_Space)
+                                assert method.call_count==old+2
+                                b.setEnabled(False)
+                                QTest.mouseClick(b,Qt.MouseButton.LeftButton)
+                                assert method.call_count==old+2
+                                b.setEnabled(True)
+                            nav_spy=QSignalSpy(v.navegacion.seleccion_cambiada)
+                            QTest.mouseClick(v.navegacion.botones[1],Qt.MouseButton.LeftButton)
+                            assert nav_spy.count()==1 and v.tabs_principales.currentIndex()==1
+                            toggle_spy=QSignalSpy(v.navegacion.contraccion_cambiada)
+                            QTest.mouseClick(v.navegacion.boton_contraer,Qt.MouseButton.LeftButton)
+                            app.processEvents()
+>                           assert toggle_spy.count()==1 and not v.navegacion.esta_contraida()
+E                           assert (2 == 1)
+E                            +  where 2 = <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0>()
+E                            +    where <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0> = <PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0>.count
+
+tests\test_interaccion_fase_3c_a.py:140: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_interaccion_fase_3c_a.py::test_a_acciones_geometria_click_teclado_y_senales - assert (2 == 1)
+ +  where 2 = <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0>()
+ +    where <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0> = <PySide6.QtTest.QSignalSpy object at 0x000001CDAB126EC0>.count
+1 failed, 3 passed in 9.23s
+18 passed, 1 deselected in 122.62s (0:02:02)
+
+Resumen esenciales: 82 archivos; 811 pruebas, 1 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): tests/test_interaccion_fase_3c_a.py::test_a_acciones_geometria_click_teclado_y_senales
+Archivos con fallo: ninguno
+##[group]Run actions/upload-artifact@v4

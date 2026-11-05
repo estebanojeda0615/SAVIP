@@ -1,0 +1,7 @@
+script_L296 (61 obs, anio_base 2021)     productivo=drift                        heredado=drift                        IGUAL
+tendencia_lineal_ruido                   productivo=fourier_k1__exponencial_log_lineal heredado=exponencial_log_lineal       DISTINTO
+estacional                               productivo=fourier_k1__exponencial_log_lineal heredado=exponencial_log_lineal       DISTINTO
+exponencial                              productivo=exponencial_log_lineal       heredado=exponencial_log_lineal       IGUAL
+paseo_aleatorio                          productivo=seasonal_naive               heredado=naive                        DISTINTO
+lineal_exacta_empate                     productivo=lineal                       heredado=holt_lineal                  DISTINTO
+casos=6 distintos=4

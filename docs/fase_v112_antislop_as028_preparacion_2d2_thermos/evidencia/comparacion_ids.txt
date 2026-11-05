@@ -1,0 +1,4 @@
+antes: 811 ids; PASS 811, FAIL 0, SKIP 0
+después: 811 ids; PASS 811, FAIL 0, SKIP 0
+solo antes: 0; solo después: 0; estado cambiado: 0
+CONJUNTO IDÉNTICO

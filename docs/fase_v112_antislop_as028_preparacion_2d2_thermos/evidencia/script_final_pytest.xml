@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="8" skipped="0" tests="29" time="126.103" timestamp="2026-11-04T19:46:11.421927-05:00" hostname="LAPTOP-94MT9O28"><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_18_se_permite_como_escenario" time="22.433" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_25_estable_se_permite_si_hay_evidencia" time="0.010"><failure message="ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.">def test_horizonte_25_estable_se_permite_si_hay_evidencia() -&gt; None:
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+
+&gt;       resultado = ejecutar_proyeccion(_serie_estable(120), 2033, 1, 2021)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:150:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app_icociv\proyeccion\servicio_proyeccion.py:572: in ejecutar_proyeccion
+    resultado = _ejecutar_proyeccion_base(
+app_icociv\proyeccion\servicio_proyeccion.py:1100: in _ejecutar_proyeccion_base
+    horizonte_solicitado = validar_horizonte_solicitado(t_solicitado - t_ultimo)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+valor = 25, maximo = 24
+
+    def validar_horizonte_solicitado(valor: Any, maximo: int = HORIZONTE_MAXIMO_OPERATIVO) -&gt; int:
+        """Válida la entrada manual sin aceptar decimales, vacíos o valores absurdos."""
+        if isinstance(valor, bool) or valor is None or str(valor).strip() == "":
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        try:
+            numero = float(valor)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO) from exc
+        if not np.isfinite(numero) or numero != int(numero) or numero &lt;= 0:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        if numero &gt; int(maximo):
+&gt;           raise ValueError(f"{MENSAJE_HORIZONTE_FUERA_DE_ALCANCE} {EXPLICACION_HORIZONTE_FUERA_DE_ALCANCE}")
+E           ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.
+
+app_icociv\proyeccion\servicio_proyeccion.py:560: ValueError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_25_erratico_no_se_fuerza" time="0.010"><failure message="ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.">def test_horizonte_25_erratico_no_se_fuerza() -&gt; None:
+        """El horizonte pedido nunca se concede por encima del maximo admisible.
+
+        CIERRE 08-08-2026: una serie erratica ya no se bloquea por la amplitud de su
+        intervalo -ese corte no tenia fuente-, de modo que la proyeccion puede
+        generarse. Lo que esta prueba vigila sigue en pie y es lo importante: que
+        h=25 no se conceda solo porque se pidio. Si se entrega, debe ser porque el
+        maximo admisible lo cubre, y el horizonte entregado nunca puede superarlo.
+        """
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+
+&gt;       resultado = ejecutar_proyeccion(_serie_erratica(72), 2029, 1, 2021)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:168:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app_icociv\proyeccion\servicio_proyeccion.py:572: in ejecutar_proyeccion
+    resultado = _ejecutar_proyeccion_base(
+app_icociv\proyeccion\servicio_proyeccion.py:1100: in _ejecutar_proyeccion_base
+    horizonte_solicitado = validar_horizonte_solicitado(t_solicitado - t_ultimo)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+valor = 25, maximo = 24
+
+    def validar_horizonte_solicitado(valor: Any, maximo: int = HORIZONTE_MAXIMO_OPERATIVO) -&gt; int:
+        """Válida la entrada manual sin aceptar decimales, vacíos o valores absurdos."""
+        if isinstance(valor, bool) or valor is None or str(valor).strip() == "":
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        try:
+            numero = float(valor)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO) from exc
+        if not np.isfinite(numero) or numero != int(numero) or numero &lt;= 0:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        if numero &gt; int(maximo):
+&gt;           raise ValueError(f"{MENSAJE_HORIZONTE_FUERA_DE_ALCANCE} {EXPLICACION_HORIZONTE_FUERA_DE_ALCANCE}")
+E           ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.
+
+app_icociv\proyeccion\servicio_proyeccion.py:560: ValueError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_umbral_h12_31_es_alta_incertidumbre_no_bloqueo" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_umbral_h18_535_no_recomienda" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_maximo_no_es_18_si_h18_no_cumple" time="0.000" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizontes_se_evaluan_mes_a_mes_y_no_solo_atajos_ui" time="0.000" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_mensaje_no_recomendables_no_imprime_lista_vacia" time="0.000" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_h18_no_se_redacta_como_intervalos_aceptables" time="0.060"><failure message="AssertionError: assert 'Horizonte máximo recomendado: 12' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP:  meses\nPrimer origen del backtesting (N0): \nModelo...OS del segundo modelo: .\nConsistencia metodológica: firma de serie=No disponible; versión de criterios=No disponible.'">def test_h18_no_se_redacta_como_intervalos_aceptables() -&gt; None:
+        from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+        from app_icociv.reportes.generador_reportes import _lineas_horizontes, _lineas_determinacion_horizonte
+
+        # El servicio evalua horizontes mes a mes; la conciliacion exige consecutividad.
+        evaluaciones = [_evaluacion_horizonte(h) for h in range(1, 13)]
+        evaluaciones.append(
+            _evaluacion_horizonte(18, tecnico=False, escenario=False, rmse=5.8823, mape=3.8063, ic95=0.5350)
+        )
+        info = determinar_horizonte_maximo_estadistico(None, None, None, evaluaciones, None, horizonte_solicitado=12)
+        resultado = {"horizonte_info": info, "horizonte_solicitado": 12, "model_name": "Drift", "horizonte_permitido": 12}
+        lineas = "\n".join(_lineas_horizontes(resultado) + _lineas_determinacion_horizonte(resultado))
+&gt;       assert "Horizonte máximo recomendado: 12" in lineas
+E       AssertionError: assert 'Horizonte máximo recomendado: 12' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP:  meses\nPrimer origen del backtesting (N0): \nModelo...OS del segundo modelo: .\nConsistencia metodológica: firma de serie=No disponible; versión de criterios=No disponible.'
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:269: AssertionError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_combo_no_cambia_con_rueda_y_periodo_iso" time="1.212" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_grafica_usa_periodos_reales" time="2.686" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_contenedor_ruta_tiene_scroll_y_tooltip_hover_combo" time="0.215" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_el_catalogo_se_define_por_estimabilidad_y_no_por_longitud" time="0.002" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_no_se_aplican_ensambles_de_modelos" time="18.671" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_mase_auxiliar_y_primer_periodo_proyectado" time="8.363" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_graficas_reporte_y_fundamento_estadistico" time="12.792" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_modelos_tradicionales_y_no_ejecutados_quedan_trazados" time="9.015" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_parametros_drift_receta_y_csv_reproducible" time="0.010"><failure message="ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.">def test_parametros_drift_receta_y_csv_reproducible() -&gt; None:
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+        from app_icociv.reportes.generador_reportes import (
+            _lineas_parametros_reproducibles,
+            _lineas_receta_reproduccion,
+            construir_dataframe_reproducibilidad,
+            generar_csv_reproducibilidad,
+        )
+
+        # CIERRE H-9, 08-08-2026: esta serie ya no selecciona `drift` sino `lineal`.
+        # Antes lo hacia porque la seleccion ponderaba los horizontes por 1/h, donde
+        # drift domina; ahora gana el de menor error cuadratico medio OOS global.
+        # Lo que la prueba vigila -que los parametros publicados permitan reproducir
+        # el pronostico- no depende de que modelo gane, y asi se comprueba.
+        serie = _serie_estable(120)
+&gt;       resultado = ejecutar_proyeccion(serie, 2033, 1, 2021)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:462:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+app_icociv\proyeccion\servicio_proyeccion.py:572: in ejecutar_proyeccion
+    resultado = _ejecutar_proyeccion_base(
+app_icociv\proyeccion\servicio_proyeccion.py:1100: in _ejecutar_proyeccion_base
+    horizonte_solicitado = validar_horizonte_solicitado(t_solicitado - t_ultimo)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+valor = 25, maximo = 24
+
+    def validar_horizonte_solicitado(valor: Any, maximo: int = HORIZONTE_MAXIMO_OPERATIVO) -&gt; int:
+        """Válida la entrada manual sin aceptar decimales, vacíos o valores absurdos."""
+        if isinstance(valor, bool) or valor is None or str(valor).strip() == "":
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        try:
+            numero = float(valor)
+        except (TypeError, ValueError) as exc:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO) from exc
+        if not np.isfinite(numero) or numero != int(numero) or numero &lt;= 0:
+            raise ValueError(MENSAJE_HORIZONTE_INVALIDO)
+        if numero &gt; int(maximo):
+&gt;           raise ValueError(f"{MENSAJE_HORIZONTE_FUERA_DE_ALCANCE} {EXPLICACION_HORIZONTE_FUERA_DE_ALCANCE}")
+E           ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.
+
+app_icociv\proyeccion\servicio_proyeccion.py:560: ValueError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_pdf_y_docx_contienen_horizontes_con_escenario" time="10.522"><failure message="AssertionError: assert 'Horizonte estadístico admisible' in '\nInforme técnico de proyección de índices\nSAVIP — Sistema de Análisis de Variaciones de Precios\n\n\nContenido\nAct... C. M., &amp; Tsai, C. L. (1989). Regression and time series model selection in small samples. Biometrika, 76(2), 297-307.'">def test_pdf_y_docx_contienen_horizontes_con_escenario() -&gt; None:
+        from app_icociv.reportes.generador_reportes import generar_reporte_pdf, generar_reporte_proyeccion
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+
+        serie = _serie_estable(96)
+        resultado = ejecutar_proyeccion(serie, 2030, 6, 2021)
+        fila = pd.DataFrame({"Codigo": ["TEST"], "Descripcion": ["Serie estable"]})
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta_pdf = Path(tmp) / "informe.pdf"
+            ruta_docx = Path(tmp) / "informe.docx"
+            generar_reporte_pdf(ruta_pdf, "Prueba", "fuente.xlsx", {}, {"horizonte": 18}, [], "T_16", fila, serie, resultado, [])
+            generar_reporte_proyeccion(
+                ruta_docx,
+                "Prueba",
+                "fuente.xlsx",
+                {},
+                {"horizonte": 18},
+                [],
+                "T_16",
+                fila,
+                serie,
+                resultado,
+                [],
+            )
+            assert ruta_pdf.exists() and ruta_pdf.stat().st_size &gt; 0
+            assert ruta_docx.exists() and ruta_docx.stat().st_size &gt; 0
+            try:
+                from docx import Document
+
+                texto = "\n".join(p.text for p in Document(str(ruta_docx)).paragraphs)
+                # Títulos del informe rediseñado (27-jul-2026). El contenido
+                # metodológico es el mismo; cambiaron los encabezados.
+                assert "Fundamento estadístico del análisis" in texto
+&gt;               assert "Horizonte estadístico admisible" in texto
+E               AssertionError: assert 'Horizonte estadístico admisible' in '\nInforme técnico de proyección de índices\nSAVIP — Sistema de Análisis de Variaciones de Precios\n\n\nContenido\nAct... C. M., &amp; Tsai, C. L. (1989). Regression and time series model selection in small samples. Biometrika, 76(2), 297-307.'
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:569: AssertionError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_pdf_y_docx_sin_proyeccion" time="0.678" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_dinamico_con_serie_drift" time="9.829"><failure message="AssertionError: assert 'Horizonte máximo permitido como escenario:' in 'Estado general: Calculable con advertencias\nEstado de datos: Datos aptos con advertencias\nEstado de modelado: Model... al nivel seleccionado.\nAdvertencia factibilidad global: Los residuos muestran un patron temporal evidente en la ACF.'">def test_horizonte_dinamico_con_serie_drift() -&gt; None:
+        """Caso 7777777 con la serie que selecciona Drift (fixture serie_drift.csv)."""
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+        from app_icociv.reportes.generador_reportes import _lineas_factibilidad, _lineas_horizontes
+
+        resultado = ejecutar_proyeccion(_serie_777_drift(), 2027, 1, 2021)
+        assert resultado["horizonte_solicitado"] == 12
+        assert resultado["proyeccion_generada"] is True
+        assert resultado["horizonte_permitido"] == 12
+
+        lineas_factibilidad = "\n".join(_lineas_factibilidad(resultado["factibilidad"], resultado))
+        assert "No se permite proyección porque el backtesting muestra errores extremos recurrentes" not in lineas_factibilidad
+&gt;       assert "Horizonte máximo permitido como escenario:" in lineas_factibilidad
+E       AssertionError: assert 'Horizonte máximo permitido como escenario:' in 'Estado general: Calculable con advertencias\nEstado de datos: Datos aptos con advertencias\nEstado de modelado: Model... al nivel seleccionado.\nAdvertencia factibilidad global: Los residuos muestran un patron temporal evidente en la ACF.'
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:619: AssertionError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_horizonte_dinamico_con_serie_holt" time="9.919"><failure message="AssertionError: assert ('12 meses' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP: 24 meses\nPrimer origen del backtesting (N0): 12\nMo...esgo_h=-0.1362\nh=24 meses | W_h=38 | RMSE_h=2.7356 | MAE_h=2.4331 | sMAPE_h=1.7578% | MASE_h=1.6694 | sesgo_h=-0.1943' and 'permitido=Si' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP: 24 meses\nPrimer origen del backtesting (N0): 12\nMo...esgo_h=-0.1362\nh=24 meses | W_h=38 | RMSE_h=2.7356 | MAE_h=2.4331 | sMAPE_h=1.7578% | MASE_h=1.6694 | sesgo_h=-0.1943')">def test_horizonte_dinamico_con_serie_holt() -&gt; None:
+        """Caso 7777777 con la serie que recorre la trayectoria de Holt.
+
+        Es el escenario que antes solo aparecia cuando faltaba el CSV residual. Se
+        fija como prueba propia para que las dos trayectorias queden cubiertas
+        siempre y no dependan de que un archivo exista o no (H-13).
+
+        AUDITORIA 09-08-2026 (C-01): esta prueba exigia por su NOMBRE el modelo
+        `Holt lineal`. Al pasar los coeficientes de suavizamiento de fijos a
+        estimados por minimizacion del SSE (FPP3 8.1-8.2), la misma serie pasa a
+        seleccionar la variante amortiguada. Su fallo fue la demostracion de que la
+        parametrizacion fija cambiaba el modelo entregado.
+
+        Se conserva lo que la prueba verificaba de fondo -que este fixture recorre
+        la rama de Holt, distinta de la del fixture hermano- y se sustituye la
+        identidad exacta del ganador por la propiedad. Es el mismo criterio que ya
+        se aplico al fixture `serie_drift.csv` en el cierre H-9: cual sea el modelo
+        depende de la regla y de la parametrizacion, y ambas pueden cambiar con
+        fuente; lo que no puede cambiar es que las dos trayectorias esten cubiertas.
+
+        CIERRE F/H/G, 13-08-2026. Quedaban dos asserts que seguian fijando el
+        ganador por su NOMBRE -`model_name.startswith("Holt")` y `modelo_final=Holt`
+        en la tabla-. La integracion vuelve a cambiar la evidencia disponible
+        -rejilla derivada de la aritmetica de ventanas y retiro del tratamiento
+        calendario- y con ella el modelo seleccionado. Fijar la identidad del
+        ganador convierte un resultado empirico en contrato (REQ 31), y ademas
+        contradice lo que esta misma docstring ya declaraba. Se retiran.
+
+        La cobertura de la rama de Holt **no se pierde**: pasa a obtenerse por
+        construccion en `test_la_rama_holt_se_recorre_por_construccion`, forzando el
+        conjunto de candidatos, que es determinista y no depende de quien gane.
+        """
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+        from app_icociv.reportes.generador_reportes import _lineas_horizontes
+
+        resultado = ejecutar_proyeccion(_serie_777_holt(), 2027, 1, 2021)
+        assert resultado["horizonte_solicitado"] == 12
+        assert resultado["proyeccion_generada"] is True
+        assert resultado["horizonte_permitido"] == 12
+
+        tabla_horizontes = chr(10).join(_lineas_horizontes(resultado))
+&gt;       assert "12 meses" in tabla_horizontes and "permitido=Si" in tabla_horizontes
+E       AssertionError: assert ('12 meses' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP: 24 meses\nPrimer origen del backtesting (N0): 12\nMo...esgo_h=-0.1362\nh=24 meses | W_h=38 | RMSE_h=2.7356 | MAE_h=2.4331 | sMAPE_h=1.7578% | MASE_h=1.6694 | sesgo_h=-0.1943' and 'permitido=Si' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP: 24 meses\nPrimer origen del backtesting (N0): 12\nMo...esgo_h=-0.1362\nh=24 meses | W_h=38 | RMSE_h=2.7356 | MAE_h=2.4331 | sMAPE_h=1.7578% | MASE_h=1.6694 | sesgo_h=-0.1943')
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:685: AssertionError</failure></testcase><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_la_rama_holt_se_recorre_por_construccion" time="0.106" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_el_limite_60_es_operativo_de_entrada_y_no_techo_estadistico" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_las_dos_series_del_caso_777_son_distintas_y_dan_trayectorias_distintas" time="11.772" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_ninguna_prueba_depende_de_reportes_generados" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_intervalos_con_sesgo_son_simetricos_y_mas_anchos" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_mase_mayor_uno_no_redacta_inferior_si_es_auxiliar" time="0.001" /><testcase classname="pruebas.prueba_horizonte_dinamico_ui_reportes" name="test_docx_777_separa_advertencias_globales_y_horizonte" time="6.692"><failure message="AssertionError: &#10;  Informe técnico de proyección de índices&#10;  SAVIP — Sistema de Análisis de Variaciones de Precios&#10;  &#10;  &#10;  Contenido&#10;  Actualice el campo (F9) para generar el índice.&#10;  &#10;  1. Resumen ejecutivo&#10;  Para la serie «A16. Índice por agrupaciones de subclases» se solicitó una proyección de 12 meses a partir de enero de 2026, último periodo con dato observado (índice 138,3052).&#10;  El modelo seleccionado es Lineal (OLS): el ca&#10;assert 'se permite' in '\ninforme técnico de proyección de índices\nsavip — sistema de análisis de variaciones de precios\n\n\ncontenido\nact...e solicitado\t12 meses\nperiodo analizado\t2020-01 a 2026-01\nparámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996'&#10; +  where '\ninforme técnico de proyección de índices\nsavip — sistema de análisis de variaciones de precios\n\n\ncontenido\nact...e solicitado\t12 meses\nperiodo analizado\t2020-01 a 2026-01\nparámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996' = &lt;built-in method lower of str object at 0x000001F816E35D00&gt;()&#10; +    where &lt;built-in method lower of str object at 0x000001F816E35D00&gt; = '\nInforme técnico de proyección de índices\nSAVIP — Sistema de Análisis de Variaciones de Precios\n\n\nContenido\nAct...e solicitado\t12 meses\nPeriodo analizado\t2020-01 a 2026-01\nParámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996'.lower">def test_docx_777_separa_advertencias_globales_y_horizonte() -&gt; None:
+        from docx import Document
+        from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
+        from app_icociv.reportes.generador_reportes import generar_reporte_proyeccion
+
+        serie = _serie_777_drift()
+        resultado = ejecutar_proyeccion(serie, 2027, 1, 2021)
+        fila = pd.DataFrame({"Caso": ["7777777"], "Descripcion": ["Caso con h=12 permitido y h=18 no recomendable"]})
+        with tempfile.TemporaryDirectory() as tmp:
+            ruta_docx = Path(tmp) / "7777777_corregido.docx"
+            generar_reporte_proyeccion(
+                ruta_docx,
+                "Prueba",
+                "7777777.csv",
+                {},
+                {"horizonte": 12},
+                [],
+                "T_16",
+                fila,
+                serie,
+                resultado,
+                [],
+            )
+            texto = "\n".join(
+                [p.text for p in Document(str(ruta_docx)).paragraphs]
+                + ["\t".join(cell.text for cell in row.cells) for table in Document(str(ruta_docx)).tables for row in table.rows]
+            )
+        assert "No se permite proyección porque el backtesting muestra errores extremos recurrentes" not in texto
+        # El informe rediseñado separa la clasificacion (columna de la tabla de
+        # horizontes) del motivo (viñeta por clasificacion). Ambos deben estar.
+        filas_h18 = [linea for linea in texto.splitlines() if linea.startswith("18" + chr(9))]
+        assert filas_h18, "Falta la fila h=18 en la evaluacion por horizonte."
+        # CIERRE 08-08-2026: h=18 conserva una etiqueta que nombra el TRAMO de
+        # horizonte y pierde la de «alta incertidumbre», que era el veto de V-12 y
+        # de los cortes de amplitud. La fila sigue publicandose con sus metricas.
+        assert "alta incertidumbre" not in filas_h18[0].lower(), filas_h18[0]
+        # P0-G, 13-08-2026. Antes se exigia que la clasificacion de h=18 fuera
+        # «Escenario estadistico extendido» o «Proyeccion extendida»: otro conjunto
+        # cerrado de peldanos. Retirada la escalera, la clasificacion es descriptiva.
+        # Lo sustantivo -y lo que el comentario de arriba ya declaraba- es que la fila
+        # se siga PUBLICANDO con sus metricas y sin la etiqueta del veto retirado.
+        celdas = filas_h18[0].split(chr(9))
+        assert len(celdas) &gt;= 5, filas_h18[0]
+        assert celdas[-1].strip(), filas_h18[0]
+        numeros = [c for c in celdas[1:-1] if any(ch.isdigit() for ch in c)]
+        assert len(numeros) &gt;= 3, filas_h18[0]
+        for retirada in ("alta incertidumbre", "no recomendable", "no se permite"):
+            assert retirada not in filas_h18[0].lower(), (retirada, filas_h18[0])
+        # P0-G: la frase «El horizonte h=12 se permite como ...» solo se emitia en la
+        # rama de `_estado_por_horizonte` correspondiente a dos peldanos de la
+        # escalera. Retirada esta, la redaccion es otra. Lo que la prueba promete por
+        # su nombre -y lo que se conserva- es que el informe SEPARE lo global de lo
+        # que es propio de cada horizonte, y que declare el permiso del solicitado.
+        filas_h12 = [linea for linea in texto.splitlines() if linea.startswith("12" + chr(9))]
+        assert filas_h12, "Falta la fila h=12 en la evaluacion por horizonte."
+        assert filas_h12[0] != filas_h18[0]
+        assert int(resultado["horizonte_permitido"]) == 12, resultado["horizonte_permitido"]
+&gt;       assert "se permite" in texto.lower(), texto[:400]
+E       AssertionError:
+E         Informe técnico de proyección de índices
+E         SAVIP — Sistema de Análisis de Variaciones de Precios
+E
+E
+E         Contenido
+E         Actualice el campo (F9) para generar el índice.
+E
+E         1. Resumen ejecutivo
+E         Para la serie «A16. Índice por agrupaciones de subclases» se solicitó una proyección de 12 meses a partir de enero de 2026, último periodo con dato observado (índice 138,3052).
+E         El modelo seleccionado es Lineal (OLS): el ca
+E       assert 'se permite' in '\ninforme técnico de proyección de índices\nsavip — sistema de análisis de variaciones de precios\n\n\ncontenido\nact...e solicitado\t12 meses\nperiodo analizado\t2020-01 a 2026-01\nparámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996'
+E        +  where '\ninforme técnico de proyección de índices\nsavip — sistema de análisis de variaciones de precios\n\n\ncontenido\nact...e solicitado\t12 meses\nperiodo analizado\t2020-01 a 2026-01\nparámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996' = &lt;built-in method lower of str object at 0x000001F816E35D00&gt;()
+E        +    where &lt;built-in method lower of str object at 0x000001F816E35D00&gt; = '\nInforme técnico de proyección de índices\nSAVIP — Sistema de Análisis de Variaciones de Precios\n\n\nContenido\nAct...e solicitado\t12 meses\nPeriodo analizado\t2020-01 a 2026-01\nParámetros del modelo\tbeta_0 = 99,5793, beta_1 = 0,4996'.lower
+
+pruebas\prueba_horizonte_dinamico_ui_reportes.py:940: AssertionError</failure></testcase></testsuite></testsuites>

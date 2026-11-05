@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Pruebas SAVIP\A28\base\pruebas\prueba_horizonte_dinamico_ui_reportes.py", line 1009, in <module>
+    main()
+  File "C:\Pruebas SAVIP\A28\base\pruebas\prueba_horizonte_dinamico_ui_reportes.py", line 976, in main
+    test_horizonte_25_estable_se_permite_si_hay_evidencia()
+  File "C:\Pruebas SAVIP\A28\base\pruebas\prueba_horizonte_dinamico_ui_reportes.py", line 150, in test_horizonte_25_estable_se_permite_si_hay_evidencia
+    resultado = ejecutar_proyeccion(_serie_estable(120), 2033, 1, 2021)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Pruebas SAVIP\A28\base\app_icociv\proyeccion\servicio_proyeccion.py", line 572, in ejecutar_proyeccion
+    resultado = _ejecutar_proyeccion_base(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Pruebas SAVIP\A28\base\app_icociv\proyeccion\servicio_proyeccion.py", line 1100, in _ejecutar_proyeccion_base
+    horizonte_solicitado = validar_horizonte_solicitado(t_solicitado - t_ultimo)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Pruebas SAVIP\A28\base\app_icociv\proyeccion\servicio_proyeccion.py", line 560, in validar_horizonte_solicitado
+    raise ValueError(f"{MENSAJE_HORIZONTE_FUERA_DE_ALCANCE} {EXPLICACION_HORIZONTE_FUERA_DE_ALCANCE}")
+ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es de 24 meses.
+codigo=1 duracion=22s

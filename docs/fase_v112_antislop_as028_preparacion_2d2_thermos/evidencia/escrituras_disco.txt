@@ -1,0 +1,2 @@
+base: 0 archivos nuevos o borrados fuera de resultados/ tras ejecutar el script (pytest y directo) y prueba_estadistica
+final: 0 archivos nuevos o borrados fuera de resultados/ tras ejecutar el script (pytest y directo) y prueba_estadistica
