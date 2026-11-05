@@ -276,10 +276,9 @@ def test_h18_no_se_redacta_como_intervalos_aceptables() -> None:
     assert "backtesting e intervalos aceptables" not in linea_h18
 
 
-# AS-028: se retiró `test_el_modelo_entregado_es_el_de_minimo_error_oos_global` (presente hasta 56c75a6).
-# Comparaba el modelo entregado con el selector heredado `seleccionar_modelo_por_rmse_oos_global`, que ya no es
-# la regla productiva. La regla vigente (SSE exacta sobre W*×24, 21 candidatos) la cubre
-# tests/test_fase1a_selector_rectangular.py. Detalle en docs/fase_v112_antislop_as028_preparacion_2d2_thermos/03.
+# AS-028: retirado test_el_modelo_entregado_es_el_de_minimo_error_oos_global (hasta 56c75a6), atado al selector
+# heredado de C-SEL-001. Cubre la regla vigente tests/test_fase1a_selector_rectangular.py; ver
+# docs/fase_v112_antislop_as028_preparacion_2d2_thermos/03_CAMBIOS_Y_MIGRACIONES.md.
 
 
 def test_combo_no_cambia_con_rueda_y_periodo_iso() -> None:
