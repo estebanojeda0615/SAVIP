@@ -1,0 +1,25 @@
+{
+ "tag_name": "v1.1.2-rc.1",
+ "target_commitish": "66725293f304426ae6edf144b8f4dadbcbeefe10",
+ "prerelease": true,
+ "draft": false,
+ "created_at": "2026-10-25T17:34:39Z",
+ "published_at": "2026-10-25T17:34:51Z",
+ "html_url": "https://github.com/estebanojeda0615/SAVIP/releases/tag/v1.1.2-rc.1",
+ "assets": [
+  {
+   "name": "SAVIP_1.1.2_Portatil_Windows_x64.zip",
+   "size": 131810202,
+   "digest": "sha256:cee5897f82753d5ca1b6650023da81384bc1bfb50b5a5468ddbb26e5e7a94600",
+   "created_at": "2026-10-25T17:34:51Z",
+   "browser_download_url": "https://github.com/estebanojeda0615/SAVIP/releases/download/v1.1.2-rc.1/SAVIP_1.1.2_Portatil_Windows_x64.zip"
+  },
+  {
+   "name": "SAVIP_1.1.2_Portatil_Windows_x64.zip.sha256",
+   "size": 104,
+   "digest": "sha256:bc4359285b1a977817e25fcb1b39b380b808d7cf365c4e0f26e97ff7e55df879",
+   "created_at": "2026-10-25T17:35:00Z",
+   "browser_download_url": "https://github.com/estebanojeda0615/SAVIP/releases/download/v1.1.2-rc.1/SAVIP_1.1.2_Portatil_Windows_x64.zip.sha256"
+  }
+ ]
+}

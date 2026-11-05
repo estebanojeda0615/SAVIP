@@ -1,0 +1,15 @@
+1e0	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.1257bd9fa947bp+7
+1e50	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.254d2ad0b6b24p+173
+1e100	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e140	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e145	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e148	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e150	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e151	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e152	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e153	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e154	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.993a7352df073p+518
+1e155	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.ff89102796caap+521
+1e160	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.86454223343a1p+538
+1e200	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.666829c1c93a1p+671
+1e300	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.99a790c89f3eep+1003

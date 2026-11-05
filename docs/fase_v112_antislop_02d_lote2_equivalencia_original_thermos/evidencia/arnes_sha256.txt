@@ -1,0 +1,6 @@
+86b7ea6560d0fa37a7d04f4f1fbd1693e9e2e27b1d8a0cc556524e137842a7ba *./tests/__init__.py
+118769a569f20e91126554606c3240bc6b21a83ce1d3394b1f8878eeaa0c22bf *./tests/fixtures/fase0/captura.py
+e734c377484f0b9cc65ac10dc8eee33956f647457b803dca11bd625b036657ad *./tests/fixtures/fase0/captura_gui.py
+4a1a47148d7148311194389cf910db16f564cbd5c750daf312c1bb743a59a4e0 *./tests/fixtures/fase0/generadores.py
+aa9fcfa08a80c374a19b87e246cfb40d609f0c87be1909b05761732d38c2792a *./tests/fixtures/horizonte_dinamico/serie_drift.csv
+9e948ca9f6c5ae1c7090c16baa7a12a3852c8985d17bedc97b2a36e7049abe1c *./tests/fixtures/horizonte_dinamico/serie_holt.csv

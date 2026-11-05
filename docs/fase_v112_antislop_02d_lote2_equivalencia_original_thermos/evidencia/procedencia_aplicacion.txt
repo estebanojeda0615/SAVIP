@@ -1,0 +1,3 @@
+6672529 aplicacion.py IGUAL co_filename= aplicacion.py
+dfdb3e0 aplicacion.py IGUAL co_filename= aplicacion.py
+5478958 aplicacion.py IGUAL co_filename= aplicacion.py

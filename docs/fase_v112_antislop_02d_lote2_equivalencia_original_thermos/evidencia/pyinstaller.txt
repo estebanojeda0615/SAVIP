@@ -1,0 +1,3 @@
+cookie_pyver=312 pylib=python312.dll
+pyz_pyc_magic=cb0d0d0a interprete_actual=cb0d0d0a
+modulos_pyz=2433 app_icociv=87

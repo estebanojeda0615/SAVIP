@@ -1,0 +1,11 @@
+raiz=C:\Pruebas SAVIP\L2\fuentes\5478958
+golden=C:\Pruebas SAVIP\L2\fuentes\5478958\tests\fixtures\fase0\golden
+tolerancia: rel_tol=0 abs_tol=0 (exacta)
+motor.tendencia_lineal_ruido: 0 diferencias
+motor.estacional: 0 diferencias
+motor.exponencial: 0 diferencias
+motor.paseo_aleatorio: 0 diferencias
+motor.lineal_exacta_empate: 0 diferencias
+economico: 0 diferencias
+rechazos: 0 diferencias
+TOTAL diferencias exactas: 0

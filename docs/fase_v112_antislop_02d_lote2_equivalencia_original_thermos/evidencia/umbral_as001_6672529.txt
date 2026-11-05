@@ -1,0 +1,15 @@
+1e0	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.1257bd9fa947bp+7
+1e50	RESULTADO	generada=True	modelo=fourier_k1__exponencial_log_lineal	y_proj=0x1.254d2ad0b6b24p+173
+1e100	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e140	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e145	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e148	RESULTADO	generada=False	modelo=None	y_proj=nan
+1e150	EXCEPCION	OverflowError: integer division result too large for a float
+1e151	EXCEPCION	OverflowError: integer division result too large for a float
+1e152	EXCEPCION	OverflowError: integer division result too large for a float
+1e153	EXCEPCION	OverflowError: integer division result too large for a float
+1e154	EXCEPCION	OverflowError: integer division result too large for a float
+1e155	EXCEPCION	OverflowError: integer division result too large for a float
+1e160	EXCEPCION	OverflowError: integer division result too large for a float
+1e200	EXCEPCION	OverflowError: integer division result too large for a float
+1e300	EXCEPCION	OverflowError: integer division result too large for a float

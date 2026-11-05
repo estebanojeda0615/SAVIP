@@ -1,0 +1,18 @@
+economico_empalme: casos=1 diferencias=0
+fixtures_horizonte_dinamico: casos=6 diferencias=0
+gui_sesion_exportables: casos=1 diferencias=9
+    gui_sesion_exportables.ok.docx_sesion.tablas[18][2][1]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.docx_sesion.tablas[34][2][1]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.informe_proyeccion.docx.tablas[0][6][1]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.informe_proyeccion.docx.tablas[5][2][1]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.informe_proyeccion.pdf.texto[0]: 'SAVIP — Sistema de Análisis de Variaciones de Precios · versión 1.1.2 · SAVIP-INF-<FECHA-HORA>' != 'SAVIP — Sistema de Análisis de Variaciones de Precios · versión 1.1.1 · SAVIP-INF-<FECHA-HORA>'
+    gui_sesion_exportables.ok.informe_proyeccion.pdf.texto[17]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.informe_proyeccion.pdf.texto[199]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.pdf_sesion.texto[934]: '1.1.2' != '1.1.1'
+    gui_sesion_exportables.ok.pdf_sesion.texto[1815]: '1.1.2' != '1.1.1'
+motor: casos=35 diferencias=0
+rechazos: casos=1 diferencias=0
+series_extra: casos=22 diferencias=0
+hash A: 5d74b12836db344ebeb262e1f0d1bd911b8a277e11855c7f609c33a78bb6a90a
+hash B: 0943387eae7e6789680c263becd8d245c56fe52301ce746e1831fef2896fc713
+DISTINTOS

@@ -1,0 +1,14 @@
+m	struct	233	289	1
+m	pyimod01_archive	2778	4826	1
+m	pyimod02_importers	13580	32114	1
+m	pyimod03_ctypes	2722	6130	1
+m	pyimod04_pywin32	917	1614	1
+s	pyiboot01_bootstrap	1110	1921	1
+s	pyi_rth_inspect	1432	2700	1
+s	pyi_rth_pkgutil	949	1509	1
+s	pyi_rth_multiprocessing	1316	2303	1
+s	pyi_rth_mplconfig	512	728	1
+s	pyi_rth_pyside6	1030	2088	1
+s	aplicacion	1503	2641	1
+o	pyi-contents-directory _internal	0	0	0
+z	PYZ.pyz	21999593	21999593	0
