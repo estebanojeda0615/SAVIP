@@ -184,7 +184,7 @@ def test_ventana_expansiva_conservada() -> None:
     )
 
 
-# --- 9, 10 y 11: P0-A, P0-B y P0-D no reabren -------------------------------
+# --- 9 y 10: P0-A y P0-B no reabren (P0-D, 11, ver la lápida) --------------
 
 def test_p0a_el_selector_de_respaldo_sigue_retirado() -> None:
     fuente = inspect.getsource(SP)
@@ -202,7 +202,7 @@ def test_p0b_el_catalogo_sigue_gobernado_por_estimabilidad() -> None:
 
 
 # Lote 2D-2: retirado `test_p0d_la_regla_de_seleccion_no_cambia` (y sus auxiliares _P0D_ULP_*, _p0d_banco,
-# _p0d_lista), que probaba el selector heredado ya eliminado. Sus cuatro propiedades (muestra común, una ULP,
+# _p0d_lista), que probaba el selector heredado ya eliminado. Sus cuatro propiedades (muestra común, SSE exacto,
 # orden de entrada, desempate) las fijan sobre el selector vigente tests/test_fase1a_selector_rectangular.py
 # y tests/test_nmin_adversarial.py::p0d_en_el_selector_vigente.
 

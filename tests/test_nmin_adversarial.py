@@ -122,7 +122,7 @@ def test_naive_declara_un_minimo_inalcanzable() -> None:
         pass
 
 
-# --- 6, 7 y 8: invariantes que SI se sostienen ------------------------------
+# --- 7 y 8: invariantes que SI se sostienen (el 6 se retiró en el lote 2D-2) ---
 
 # Lote 2D-2: retirado `test_muestra_comun_intacta_desde_el_primer_origen`, que medía la muestra común con el
 # extractor heredado `_errores_oos_por_par` (eliminado). La muestra rectangular completa W*×24 de la ruta productiva
@@ -159,24 +159,15 @@ def test_no_reaparecen_18_ni_060() -> None:
 
 
 def p0d_en_el_selector_vigente() -> None:
-    """P0-D sobre el selector que usa la ruta productiva (`_seleccionar_modelo_rectangular`).
-
-    En coma flotante 1e16 + 1 == 1e16 + 0,81: solo la suma exacta distingue a `b` (SSE menor por 0,19), y debe
-    ganar en los dos órdenes de entrada. Ante igualdad exacta gana el primero del banco. El contrato completo
-    (muestra común, pesos, mutantes) está en tests/test_fase1a_selector_rectangular.py.
-    """
-    pares = [(12, 1), (12, 2)]
-    a, b = [1e8, 1.0], [1e8, 0.9]
-
-    def matriz(**errores: list[float]) -> dict:
-        datos = {m: {p: (e, 100.0, 100.0 - e, 1.0) for p, e in zip(pares, v)} for m, v in errores.items()}
-        return {"datos": datos, "w_estrella": 1, "horizontes": (1, 2)}
-
-    for orden in (("a", "b"), ("b", "a")):
-        assert SP._seleccionar_modelo_rectangular(matriz(a=a, b=b), orden)["modelo"] == "b", orden
-    iguales = [1.0, 2.0]
-    for orden in (("a", "b"), ("b", "a")):
-        assert SP._seleccionar_modelo_rectangular(matriz(a=iguales, b=iguales), orden)["modelo"] == orden[0]
+    """P0-D sobre el selector que usa la ruta productiva, con las propiedades canónicas de Fase 1A."""
+    from tests.test_fase1a_selector_rectangular import (
+        SELECTOR,
+        p_empate_primer_candidato_del_banco,
+        p_invariante_al_orden_de_entrada,
+        p_sse_exacto_decide_una_ulp,
+    )
+    for propiedad in (p_sse_exacto_decide_una_ulp, p_invariante_al_orden_de_entrada, p_empate_primer_candidato_del_banco):
+        assert propiedad(SELECTOR), propiedad.__name__
 
 
 def test_p0a_p0b_p0d_intactos() -> None:

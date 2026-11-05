@@ -1,4 +1,4 @@
-"""P0-D: el ganador no puede depender del redondeo del RMSE (D1-D12).
+"""P0-D: el ganador no puede depender del redondeo del RMSE (D4, D11-D13 tras el lote 2D-2).
 
 La revision independiente reabrio P0-D porque
 
@@ -46,15 +46,10 @@ from app_icociv.proyeccion.servicio_proyeccion import (  # noqa: E402
     _sse_exacto,
 )
 
-# ==============================
 # Lote 2D-2: retiradas D1-D3 y D5-D10, que ejercitaban el selector heredado `seleccionar_modelo_por_rmse_oos_global`
-# (eliminado) y sus auxiliares de banco. Sus propiedades las fija sobre el selector vigente
-# tests/test_fase1a_selector_rectangular.py: una ULP (p_sse_exacto_decide_una_ulp), orden de entrada
-# (p_invariante_al_orden_de_entrada), desempate (p_empate_primer_candidato_del_banco), mínimo (p_minimo_sse),
-# errores enormes (test_as001_*), no finitos (test_un_error_no_finito_excluye_solo_a_ese_candidato), sin muestra
-# común (test_sin_muestra_comun_o_banco_vacio_devuelve_none) e intersección (p_solo_pares_comunes).
-# D11 y D12 se conservan sobre el selector vigente; D4 y D13 prueban `_sse_exacto`, que sigue vigente.
-# ==============================
+# (eliminado). Sus propiedades las fija sobre el selector vigente tests/test_fase1a_selector_rectangular.py; detalle en
+# docs/fase_v112_antislop_02d_lote2_equivalencia_original_thermos/03_G2_MATRIZ_PRUEBAS_Y_CRITERIO_CSEL001.md.
+# Quedan D4 y D13 sobre `_sse_exacto` y D11-D12 sobre el selector vigente.
 
 
 def test_d4_permutar_la_muestra_comun_no_cambia_nada() -> None:

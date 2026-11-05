@@ -356,3 +356,15 @@ def test_trayectoria_no_depende_del_horizonte_solicitado() -> None:
 # `test_modelo_agregado_minimiza_el_error_oos_global` RETIRADA en el lote 2D-2: comparaba el modelo entregado con
 # el selector heredado eliminado (otra regla: todos los pares del backtesting comparativo). La regla vigente la
 # fija tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado.
+
+
+if __name__ == "__main__":
+    test_trayectoria_no_depende_del_horizonte_solicitado()
+    test_banda_de_cautela_existe_en_todo_horizonte()
+    test_intervalo_amplio_en_horizonte_corto_no_bloquea_pero_degrada()
+    test_limites_distinguen_validado_y_escenario()
+    test_serie_corta_publica_su_cobertura_y_niega_solo_por_ventanas()
+    test_serie_larga_conserva_proyeccion_tecnica()
+    test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista()
+    test_la_rejilla_de_horizontes_no_tiene_tope_historico_ni_cascada()
+    print("Pruebas de evidencia reducida por horizonte OK")

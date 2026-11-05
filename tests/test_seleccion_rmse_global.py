@@ -40,16 +40,10 @@ if str(RAIZ) not in sys.path:
 from app_icociv.proyeccion import servicio_proyeccion as sp  # noqa: E402
 
 
-# ======================================================================
 # Lote 2D-2: retiradas las 13 pruebas que ejercitaban el selector heredado `seleccionar_modelo_por_rmse_oos_global`
-# (eliminado) con los auxiliares `banco` y `rmse_global`. Sus propiedades las fija sobre el selector vigente
-# tests/test_fase1a_selector_rectangular.py: mínimo (p_minimo_sse), RMSE (p_rmse_coherente,
-# test_rmse_reportado_coincide_con_sse_exacto), pesos (p_pesos_uniformes_por_horizonte), muestra común
-# (p_solo_pares_comunes, test_sin_muestra_comun_o_banco_vacio_devuelve_none), no finitos
-# (test_un_error_no_finito_excluye_solo_a_ese_candidato), orden (p_invariante_al_orden_de_entrada), desempate
-# (p_empate_primer_candidato_del_banco), reproducibilidad (test_es_reproducible_y_no_muta_la_matriz) y un solo
-# modelo para la trayectoria (test_as001_ruta_productiva_con_21_candidatos_y_uno_divergente).
-# ======================================================================
+# (eliminado). Sus propiedades las fija sobre el selector vigente tests/test_fase1a_selector_rectangular.py; la
+# correspondencia caso a caso está en docs/fase_v112_antislop_02d_lote2_equivalencia_original_thermos/
+# 03_G2_MATRIZ_PRUEBAS_Y_CRITERIO_CSEL001.md.
 
 
 # ======================================================================
@@ -57,11 +51,10 @@ from app_icociv.proyeccion import servicio_proyeccion as sp  # noqa: E402
 # ======================================================================
 def test_la_regla_no_consulta_umbrales_ni_identidad():
     # Fase 2B y lote 2D-2: se inspecciona el selector que usa la ruta productiva; los heredados se retiraron.
-    for funcion in (sp._seleccionar_modelo_rectangular,):
-        fuente = inspect.getsource(funcion)
-        for prohibido in ("UMBRAL_", "TOLERANCIA_", "MIN_ERRORES", "COBERTURA_IC95",
-                          "es_benchmark", "MODELOS_BENCHMARK", "estado"):
-            assert prohibido not in fuente, (funcion.__name__, prohibido)
+    fuente = inspect.getsource(sp._seleccionar_modelo_rectangular)
+    for prohibido in ("UMBRAL_", "TOLERANCIA_", "MIN_ERRORES", "COBERTURA_IC95",
+                      "es_benchmark", "MODELOS_BENCHMARK", "estado"):
+        assert prohibido not in fuente, prohibido
 
 
 # `test_no_queda_el_peso_1_h_en_la_ruta_de_seleccion` RETIRADA en la Fase 2B (AS-003): inspeccionaba
