@@ -411,7 +411,8 @@ def test_la_salvaguarda_no_sustituye_el_modelo():
 # H-9  La regla de seleccion es desempeno OOS, y solo eso
 # ======================================================================
 def test_la_seleccion_no_consulta_ningun_umbral():
-    fuente = inspect.getsource(sp.seleccionar_modelo_por_rmse_oos_global)
+    # Lote 2D-2: se inspecciona el selector que usa la ruta productiva; el heredado se retiró.
+    fuente = inspect.getsource(sp._seleccionar_modelo_rectangular)
     for prohibido in ("UMBRAL_", "TOLERANCIA_", "es_benchmark", "MIN_ERRORES"):
         assert prohibido not in fuente, prohibido
     assert "rmse" in fuente.lower()

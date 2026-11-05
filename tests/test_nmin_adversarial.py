@@ -169,18 +169,32 @@ def test_no_reaparecen_18_ni_060() -> None:
         assert "MIN_OBS_WF_INICIAL" not in fuente
 
 
-def test_p0a_p0b_p0d_intactos() -> None:
-    """P0-A, P0-B y P0-D siguen cerrados. P0-D, por comportamiento.
+def p0d_en_el_selector_vigente() -> None:
+    """P0-D sobre el selector que usa la ruta productiva (`_seleccionar_modelo_rectangular`).
 
-    P0-C / C2, 15-08-2026. Misma correccion que en `test_integracion_fhg`: el
-    assert `"rmse_global" in fuente` comprobaba el nombre de una variable local
-    que la propia remediacion P0-D retiro, y PASA con la aritmetica defectuosa
-    restaurada. Se sustituye por el contrato conductual canonico de P0-D.
+    En coma flotante 1e16 + 1 == 1e16 + 0,81: solo la suma exacta distingue a `b` (SSE menor por 0,19), y debe
+    ganar en los dos órdenes de entrada. Ante igualdad exacta gana el primero del banco. El contrato completo
+    (muestra común, pesos, mutantes) está en tests/test_fase1a_selector_rectangular.py.
     """
+    pares = [(12, 1), (12, 2)]
+    a, b = [1e8, 1.0], [1e8, 0.9]
+
+    def matriz(**errores: list[float]) -> dict:
+        datos = {m: {p: (e, 100.0, 100.0 - e, 1.0) for p, e in zip(pares, v)} for m, v in errores.items()}
+        return {"datos": datos, "w_estrella": 1, "horizontes": (1, 2)}
+
+    for orden in (("a", "b"), ("b", "a")):
+        assert SP._seleccionar_modelo_rectangular(matriz(a=a, b=b), orden)["modelo"] == "b", orden
+    iguales = [1.0, 2.0]
+    for orden in (("a", "b"), ("b", "a")):
+        assert SP._seleccionar_modelo_rectangular(matriz(a=iguales, b=iguales), orden)["modelo"] == orden[0]
+
+
+def test_p0a_p0b_p0d_intactos() -> None:
+    """P0-A, P0-B y P0-D siguen cerrados. P0-D, por comportamiento sobre el selector vigente."""
     assert "seleccionar_modelo_por_evidencia(" not in inspect.getsource(SP)
     assert SP.MODELOS_PARAMETRO_SIN_SUSTENTO == {"promedio_movil", "variacion_reciente"}
-    from tests.test_origen_inicial_backtesting import test_p0d_la_regla_de_seleccion_no_cambia
-    test_p0d_la_regla_de_seleccion_no_cambia()
+    p0d_en_el_selector_vigente()
 
 
 def _ejecutar() -> int:

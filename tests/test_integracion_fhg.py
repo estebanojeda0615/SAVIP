@@ -254,16 +254,14 @@ def test_p0abd_intactos() -> None:
     ese assert PASA con la aritmetica defectuosa restaurada -es una cadena, no
     una propiedad-, de modo que no protegia nada.
 
-    Se sustituye por el contrato: muestra comun, orden correcto con SSE apenas
-    distinto, independencia del orden de insercion y desempate historico. La
-    definicion canonica vive en `test_origen_inicial_backtesting`, que es la
-    suite de P0-D; aqui se invoca para no duplicarla ni dejar que las dos
-    versiones diverjan.
+    Se sustituye por el contrato sobre el selector vigente. La comprobación vive
+    en `tests/test_nmin_adversarial.py::p0d_en_el_selector_vigente`; aquí se
+    invoca para no duplicarla.
     """
     assert "seleccionar_modelo_por_evidencia(" not in inspect.getsource(SP)
     assert SP.MODELOS_PARAMETRO_SIN_SUSTENTO == {"promedio_movil", "variacion_reciente"}
-    from tests.test_origen_inicial_backtesting import test_p0d_la_regla_de_seleccion_no_cambia
-    test_p0d_la_regla_de_seleccion_no_cambia()
+    from tests.test_nmin_adversarial import p0d_en_el_selector_vigente
+    p0d_en_el_selector_vigente()
 
 
 def _ejecutar() -> int:
