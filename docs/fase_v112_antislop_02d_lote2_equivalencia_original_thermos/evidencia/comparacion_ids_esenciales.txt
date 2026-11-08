@@ -1,0 +1,6 @@
+antes: 811 ids; PASS 811, FAIL 0, SKIP 0
+después: 809 ids; PASS 809, FAIL 0, SKIP 0
+solo antes: 2; solo después: 0; estado cambiado: 0
+   ('tests.test_nmin_adversarial', 'test_muestra_comun_intacta_desde_el_primer_origen')
+   ('tests.test_origen_inicial_backtesting', 'test_p0d_la_regla_de_seleccion_no_cambia')
+DIFERENCIAS

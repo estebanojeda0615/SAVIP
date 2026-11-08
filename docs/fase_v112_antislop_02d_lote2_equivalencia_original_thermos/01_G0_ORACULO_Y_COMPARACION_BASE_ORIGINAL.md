@@ -1,6 +1,8 @@
 # 01 · G0: oráculo y comparación con la base original (antes de cualquier cambio)
 
-> **NO-GO previo: discrepancia anterior a 2D-2.**
+> Comparación **antes de cualquier cambio**. Su resultado (una diferencia, AS-001) dio lugar al NO-GO previo de `02426ef`.
+> El propietario aceptó AS-001 como única excepción preexistente (05-11-2026, 22:40 UTC). Los resultados después del
+> cambio están en 05.
 
 ## 1. Oráculo
 

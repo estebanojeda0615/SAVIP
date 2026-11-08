@@ -1,0 +1,6 @@
+raiz=C:\Pruebas SAVIP\L2\g1\base
+escenarios=42 (35 motor + 6 fixtures + recorrido GUI con informe y exportables)
+llamadas seleccionar_modelo_por_rmse_oos_global: 0
+llamadas _errores_oos_por_par: 0
+llamadas _seleccionar_modelo_rectangular (vigente): 44
+codigo=0

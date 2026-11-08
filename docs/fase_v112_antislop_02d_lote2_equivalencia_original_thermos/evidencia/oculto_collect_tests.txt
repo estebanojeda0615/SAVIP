@@ -1,0 +1,11 @@
+tests/test_proyecciones_fase_3.py::test_serializacion_exacta_sin_codigo_ejecutable
+tests/test_rutas_empaquetado.py::test_recursos_internos_existen_desde_codigo_fuente
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+ERROR tests/test_p0d_rmse_orden_exacto.py
+ERROR tests/test_remediacion_r2_h1_h2_h3_h7.py
+ERROR tests/test_rmse_global_estable.py
+ERROR tests/test_seleccion_rmse_global.py
+1025 tests collected, 7 errors in 38.74s
+codigo=2

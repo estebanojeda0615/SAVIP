@@ -1,0 +1,8 @@
+base: 241 Counter({'PASS': 191, 'FAIL': 47, 'ERROR': 3})
+final: 213 Counter({'PASS': 163, 'FAIL': 47, 'ERROR': 3})
+ids solo base: 28 | solo final: 0
+estado cambiado: []
+PASS en base y no PASS en final: []
+retirados con estado base: Counter({'PASS': 28})
+no-PASS final por archivo: Counter({'historicas__test_fase_4g_b_consulta_exportacion.xml': 9, 'historicas__test_p0g_desacople_punto_intervalo.xml': 6, 'historicas__test_visual_fase_3c_b.xml': 5, 'historicas__test_horizonte_evidencia_reducida.xml': 3, 'historicas__test_publicacion_horizonte.xml': 3, 'historicas__test_informes_rediseno.xml': 2, 'historicas__test_informes_serie_bloqueada.xml': 2, 'historicas__test_integracion_fhg.xml': 2, 'historicas__test_p0g_ui_csv_estado_metodologico.xml': 2, 'historicas__test_proyecciones_fase_3b.xml': 2, 'historicas__test_salvaguarda_benchmarks.xml': 2, 'historicas__test_variacion_indice_empalme.xml': 2, 'historicas__test_equivalencia_presupuestal_fase_4e_b.xml': 1, 'historicas__test_p0c_objeto_publico_sin_intervalo.xml': 1, 'historicas__test_p0c_regresion_negativa_c2.xml': 1, 'historicas__test_ajuste_salto_anual.xml': 1, 'historicas__test_cierre_metodologico.xml': 1, 'historicas__test_dependencia_statsmodels.xml': 1, 'historicas__test_empalme_fase_4a.xml': 1, 'historicas__test_fase_4i_e_tema_rendimiento.xml': 1, 'historicas__test_numericos_icociv.xml': 1, 'historicas__test_slider_comparacion_historica_fase_4d.xml': 1})
+entradas del archivo con tiempo agotado: []

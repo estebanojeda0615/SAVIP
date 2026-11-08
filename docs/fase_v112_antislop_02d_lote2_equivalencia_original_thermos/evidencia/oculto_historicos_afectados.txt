@@ -1,0 +1,9 @@
+FAILED tests/test_cierre_metodologico.py::test_la_seleccion_no_consulta_ningun_umbral
+FAILED tests/test_cierre_metodologico.py::test_la_seleccion_elige_el_de_menor_error_oos
+FAILED tests/test_cierre_metodologico.py::test_no_hay_modelo_por_horizonte - ...
+FAILED tests/test_horizonte_evidencia_reducida.py::test_serie_corta_publica_su_cobertura_y_niega_solo_por_ventanas
+FAILED tests/test_horizonte_evidencia_reducida.py::test_la_rejilla_de_horizontes_no_tiene_tope_historico_ni_cascada
+FAILED tests/test_horizonte_evidencia_reducida.py::test_serie_erratica_se_entrega_con_su_incertidumbre_a_la_vista
+FAILED tests/test_horizonte_evidencia_reducida.py::test_modelo_agregado_minimiza_el_error_oos_global
+7 failed, 25 passed, 3 errors in 136.05s (0:02:16)
+codigo=1

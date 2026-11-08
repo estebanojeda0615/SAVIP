@@ -1,0 +1,3 @@
+selector vigente: PASA
+mutante suma_flotante: DETECTADO
+mutante ultimo_en_empate: DETECTADO

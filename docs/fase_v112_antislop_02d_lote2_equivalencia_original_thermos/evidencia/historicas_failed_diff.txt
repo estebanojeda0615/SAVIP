@@ -1,0 +1,1 @@
+diff de líneas FAILED/ERROR base→final (vacío = idénticas): 0 líneas

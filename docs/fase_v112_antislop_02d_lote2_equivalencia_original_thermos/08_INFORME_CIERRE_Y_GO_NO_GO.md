@@ -1,76 +1,116 @@
-# 08 · NO-GO previo: discrepancia anterior a 2D-2
+# 08 · Informe de cierre del lote 2D-2 y GO/NO-GO
 
-## Dictamen: **NO-GO** (G0). El lote 2D-2 no se ejecutó.
+## 1. Dictamen: **APTO CON RESERVAS no críticas**
 
-**La base original sí quedó verificada.**
-- La V1.1.2 empaquetada se identificó y autenticó: ZIP con su SHA-256, bytecode de los 87 módulos `app_icociv` idéntico a la fuente `6672529`, y librerías numéricas idénticas.
-- La V1.1.1 (`dfdb3e0`) produce los mismos resultados que la V1.1.2 en todo lo comparado. Solo difiere la etiqueta de versión.
+**Qué se retiró.** De `servicio_proyeccion.py` salen `seleccionar_modelo_por_rmse_oos_global` y `_errores_oos_por_par`: 107 líneas de definición y 4 separadores. **Nada más cambia en producción**, salvo el localizador interno, no publicado, de la ficha C-SEL-001.
 
-**Por qué es NO-GO.** El oráculo exacto encontró **una diferencia funcional preexistente** entre la V1.1.2 original y la rama Anti-Slop actual (`5478958`).
-- **Dónde aparece:** solo con series de magnitud extrema, índices del orden de 1e150 o más.
-- **Qué ocurre:**
-  - la original lanza `OverflowError`;
-  - Anti-Slop devuelve «no calculable» (de 1e150 a 1e153) o **genera una proyección** (desde 1e154).
-- **Origen:** la corrección AS-001 de la Fase 1B (commit `8159d52`).
-- **Por qué impide seguir:** tu condición fue que cualquier diferencia numérica o funcional detuviera el lote. El prompt (§2) añade que una diferencia, aunque sea previa a 2D-2, impide declarar la equivalencia hasta que tú decidas.
+**Equivalencia con la V1.1.2 original empaquetada.** Es exacta en todos los escenarios comparados en los que la original completa el cálculo. La única diferencia es la **excepción AS-001**, preexistente y aceptada por el propietario el 05-11-2026; el lote no la amplía ni la cambia.
 
-Por eso **no se tocó producción**. No se ejecutaron G1–G5, no se retiró ninguna función y no se pasó Thermos, porque no hay diff de código que revisar.
+**Equivalencia con la rama Anti-Slop anterior:** total, 66 de 66 escenarios.
 
-## 1. Versión original comparada
+**Pruebas y Thermos**
+- 809/809 esenciales, sin cambios de estado.
+- Golden 29/29 y exacto con tolerancia cero.
+- AS-001 16/16.
+- Huella con SHA idéntico.
+- Dos pasadas de Thermos, sin hallazgos críticos, altos ni medios abiertos.
+
+**Reservas no críticas**
+1. El EXE original no se ejecutó, porque es una aplicación gráfica. Se demostró que contiene exactamente la fuente `6672529` (bytecode 87/87 y binarios numéricos idénticos), y lo que se ejecutó fue esa fuente. Por tanto, en sentido estricto se trata de «equivalencia con la fuente demostrada de la V1.1.2 empaquetada».
+2. Queda una deuda menor que introduce el lote, D-2D2-1 (§4), que no afecta a resultados ni a ids.
+3. La igualdad se ha comprobado en 66 escenarios representativos. No es una demostración universal.
+
+## 2. Versión original comparada
 
 | Dato | Valor |
 |---|---|
-| Fuente | `66725293f304426ae6edf144b8f4dadbcbeefe10` (tag `v1.1.2-rc.1`, `develop/v1.1.2`) |
-| ZIP | `cee5897f82753d5ca1b6650023da81384bc1bfb50b5a5468ddbb26e5e7a94600`. Verificado antes de extraer y no modificado |
-| EXE | `fa5d6676…de6ca`. **No se ejecutó**: es una aplicación gráfica sin línea de comandos. Su contenido se demostró igual a la fuente 6672529 por bytecode (87/87 módulos y `aplicacion`) y por binarios nativos (228/228 `.pyd` y las DLL BLAS). Lo que se ejecutó fue esa fuente, con los mismos paquetes |
-| V1.1.1 | `dfdb3e0` (`main`, VERSION 1.1.1), sin tag ni release. Se ejecutó su fuente |
+| V1.1.2 original | Fuente `66725293f304426ae6edf144b8f4dadbcbeefe10` (tag `v1.1.2-rc.1`, objeto `08f364b`). ZIP `cee5897f82753d5ca1b6650023da81384bc1bfb50b5a5468ddbb26e5e7a94600`, verificado antes de extraer. EXE `fa5d66761817549d5af076204230c9c4b04202ded412134d86ce9fa9dcdde6ca`, no ejecutado (bytecode y binarios idénticos a la fuente, 00) |
+| V1.1.1 | `dfdb3e046126093e23b045147f789fbc52961a73` (`main`, VERSION 1.1.1). Sin tag, release ni artefacto. Se ejecutó su fuente |
+| Anti-Slop anterior | `54789587d0fa7714b4dc464ec48ca8f2ce254611` |
+| Lote 2D-2 final | `49106f95bacd96699c5233101490586738f5f32d` (último commit de código) |
 
-## 2. Comparaciones (antes de cualquier cambio)
+## 3. Las cuatro comparaciones (66 escenarios)
 
-| Comparación | Escenarios | Resultado | Hashes y evidencia | Limitaciones |
-|---|---|---|---|---|
-| **B. V1.1.2 original ↔ Anti-Slop anterior `5478958`** | 66 filas: 35 de motor, 22 de series extra, 6 de fixtures, rechazos, economía y empalme, y el recorrido GUI con sesión y exportables | **65 iguales y 1 DIFERENTE** (`extremo_finito_x1e150\|h11`). Además, 0 diferencias exactas frente a los Golden Masters de 6672529 | `evidencia/cmp_6672529_5478958.txt`, `tabla_comparador_G0.csv`, `sha256_capturas.txt` y `golden_exacto_*.txt` | Fuente del paquete, no ejecución del EXE. Igualdad comprobada en N escenarios, no universal |
-| **A. V1.1.2 original ↔ lote 2D-2 final** | — | **NO VERIFICADO**: el lote no se ejecutó | — | — |
-| **C. Anti-Slop anterior ↔ lote 2D-2 final** | — | **NO VERIFICADO**: el lote no se ejecutó | — | — |
-| **D. V1.1.1 ↔ V1.1.2 original** | Las mismas 66 filas | **Idénticas** en motor, series (también en el extremo, donde ambas lanzan `OverflowError`), fixtures, rechazos, economía y empalme. En la GUI solo cambia la etiqueta de versión, en 9 lugares | `evidencia/cmp_6672529_dfdb3e0.txt` | La 1.1.1 no tiene artefacto empaquetado que verificar |
+| Comparación | Resultado | Hash de datos | Limitaciones |
+|---|---|---|---|
+| **A. V1.1.2 original ↔ final** | **65/66 idénticos.** El distinto es `extremo_finito_x1e150\|h11`, AS-001: la original lanza `OverflowError` y el final da «no calculable», exactamente como 5478958 | `5d74b128…` frente a `766a34b8…` | Fuente del EXE, no el EXE ejecutado |
+| **B. V1.1.2 original ↔ anterior** | 65/66: el mismo caso | `5d74b128…` frente a `766a34b8…` | Ídem |
+| **C. Anterior ↔ final** | **66/66 idénticos** | `766a34b8…` en los dos | — |
+| **D. V1.1.1 ↔ V1.1.2** | Idénticas en estadística, proyección, economía y empalme (también en el caso extremo). En la GUI solo cambia la etiqueta de versión | `0943387e…` frente a `5d74b128…` | Sin artefacto de la 1.1.1 |
 
-**Determinismo:** 5478958 y dfdb3e0 dan capturas idénticas dos veces. En 6672529, una de las dos capturas parte de forma distinta una línea del PDF de sesión: el texto unido es idéntico y el corte depende de la anchura de un identificador aleatorio (01 §2).
+**Excepción AS-001, anterior a este lote.**
+- Commit `8159d52` (Fase 1B).
+- Solo actúa cuando `float(sse)` desborda: en el barrido, a partir de series de 10^150.
+- No modifica los resultados ordinarios. Lo demuestran el barrido de 10^0 a 10^148, idéntico bit a bit, los 65 escenarios ordinarios idénticos y los golden con 0 diferencias exactas en las tres versiones (01 §4 y 05).
 
-## 3. Diagnóstico de la discrepancia
+## 4. Cambios reales en producción
 
-| Aspecto | Hecho |
+| Archivo | Cambio |
 |---|---|
-| Cambio | `_seleccionar_modelo_rectangular`: de `math.sqrt(float(sse) / n)` a `_rmse_desde_sse(sse, n)`. Esa función devuelve exactamente la misma expresión y solo, cuando `float(sse)` desborda, calcula la raíz con `Decimal` |
-| Origen | Fase 1B, AS-001, commit `8159d52` (26-10-2026), autorizada en su momento como corrección del aborto por desbordamiento |
-| Rango ordinario | Bit a bit idéntico, por construcción del código (la rama `try`) y por medición (65 escenarios y el barrido de 10^0 a 10^148) |
-| Dominio diferente | Cuando el SSE exacto supera el máximo de `float`. En el barrido, a partir de una serie de 10^150. La original aborta el análisis con un error en pantalla; Anti-Slop responde «no calculable» o, desde 10^154, entrega una proyección |
-| ¿Lo produce 2D-2? | **No.** 2D-2 retiraría `seleccionar_modelo_por_rmse_oos_global` y `_errores_oos_por_par`, que no intervienen en ese cálculo. La discrepancia ya existe en `5478958` |
-| ¿Se corrigió algo aquí? | **No.** No se modificó el motor ni se revirtió AS-001 |
+| `app_icociv/proyeccion/servicio_proyeccion.py` | −111 líneas: las dos definiciones y sus separadores. **No cambian** `_seleccionar_modelo_rectangular`, `_matriz_rectangular_12_24`, `_sse_exacto`, `_rmse_desde_sse` ni `_ejecutar_proyeccion_base` |
+| `app_icociv/estadistica/criterios.py` | C-SEL-001, campo `ubicacion`: `…::seleccionar_modelo_por_rmse_oos_global` → `…::_seleccionar_modelo_rectangular`. Es un metadato no publicado (03 §3) |
 
-## 4. Decisión que necesito
+**El selector vigente no cambió**: los espías hicieron 44 llamadas en la base y la huella y el oráculo dan 0 diferencias.
 
-1. **Aceptar AS-001 como excepción preexistente documentada** y autorizar la continuación de 2D-2 (G1–G5).
-   - La equivalencia con la V1.1.2 original se declararía «exacta en todos los escenarios comparados, salvo el dominio de desbordamiento de AS-001 (series de magnitud ≥ ~1e150), donde la original aborta».
-   - Es mi recomendación: el dominio es inalcanzable con índices reales y AS-001 ya fue autorizada.
-2. **Exigir equivalencia estricta también en ese dominio.**
-   - Haría falta revertir AS-001 en producción. Es un cambio funcional fuera de Anti-Slop y de 2D-2, y necesitaría una autorización propia y su propio lote.
-   - El efecto sería volver a lanzar `OverflowError` con series extremas.
-   - No lo hago sin tu orden.
-3. **Mantener el NO-GO** y no continuar con 2D-2.
+**Deuda registrada, no resuelta en el lote**
+- **D-2D2-1.** Las guardias de umbrales `test_cierre_metodologico::test_la_seleccion_no_consulta_ningun_umbral` y `test_seleccion_rmse_global::test_la_regla_no_consulta_umbrales_ni_identidad` inspeccionan ahora la misma función, y la primera queda contenida en la segunda. Propuesta: fusionarlas en un lote de saneamiento de pruebas.
+- **Inspecciones de fuente (M2 de Thermos).** D11, D12 y las dos guardias buscan cadenas en el código, como ya hacían en la base. Las garantías reales son las propiedades y los mutantes de Fase 1A.
+- **Preexistentes, no tocados:**
+  - imports sin uso en `servicio_proyeccion` (`UMBRAL_RRMSE_PEOR_BENCHMARK`, `TOLERANCIA_RRMSE_BENCHMARK`, `aplicar_ajuste_calendario`, `eneros_en_horizonte`, `calcular_metricas`);
+  - variables muertas `comparacion_benchmarks` y `sesgo`;
+  - el docstring de `_puntaje_rmse_ponderado`;
+  - `struct` y `math` sin uso en pruebas;
+  - fichas de criterios con rutas sin `::` (AS-024);
+  - listas del CI y de `.gitignore` que crecen con cada fase.
 
-## 5. Estado de Git
+## 5. Pruebas
 
-- **Rama:** `maintenance/v1.1.2-fase2d-lote2-equivalencia-original-thermos`, creada desde `54789587d0fa7714b4dc464ec48ca8f2ce254611`.
-- **Commits:**
-  - `be46ca9`: +1 línea del filtro del CI y +1 excepción en `.gitignore`;
-  - el commit de esta carpeta de documentación.
-- **Sin cambios** en `app_icociv/`, `tests/`, `scripts/` ni `pruebas/`.
-- No se modificaron `main`, `develop/v1.1.2`, el tag ni la release `v1.1.2-rc.1`, el ZIP publicado ni las ramas anteriores.
+| Concepto | Resultado |
+|---|---|
+| Esenciales | 811 → **809**. Bajas: los 2 ids autorizados. Altas: 0. **0 cambios de estado**. 0 fallos en la 1.ª ejecución y sin intermitentes en local |
+| Golden / AS-001 | **29/29**, `tests/fixtures/**` sin cambios / **16/16** |
+| Huella | 20/20 con 0 diferencias; SHA-256 `d6be699b…0191` idéntico |
+| Oráculo ampliado | 66 escenarios: motor 35, series extra 22, fixtures 6, rechazos, economía y empalme, GUI con sesión y exportables (05) |
+| Históricas | JUnit 241 → **213**: 28 retiradas, todas PASS en la base y cada una con su sustituto vigente. 47 FAIL y 3 ERROR, iguales en base y final, **0 cambios de estado** (06 §3) |
+| Recolección | 1 066 → 1 036, con los **mismos 3 errores** (tratamiento consciente de pruebas, no corrección funcional) |
+| Script histórico `pruebas/prueba_horizonte…` | 21/8, con los mismos ids y estados |
+| `ejemplo_uso` y `prueba_estadistica` | Misma salida que en la base (errores preexistentes; sin anexo DANE, no comparables con datos reales) |
+| imports, `VentanaPrincipal`, `pip check` y `compileall` | OK |
+| CI | Ver §7 |
+
+## 6. Thermos
+
+Dos pasadas reales, cada una con los dos agentes: `thermo-nuclear-reviewer` y `thermo-nuclear-code-quality-reviewer`. Detalle en 07.
+
+- **1.ª pasada:**
+  - corrección, sin hallazgos críticos, altos ni medios;
+  - calidad, «APROBADO CON OBSERVACIONES», con 3 medios y varios bajos.
+- **Correcciones** en `49106f95`, solo en pruebas.
+- **2.ª pasada, sobre el último commit de código:**
+  - corrección, sin hallazgos nuevos;
+  - calidad, **«APROBADO»**.
+
+Thermos solo revisa diffs y no sustituye la prueba contra la original.
+
+## 7. Git y CI
+
+- **Rama:** https://github.com/estebanojeda0615/SAVIP/tree/maintenance/v1.1.2-fase2d-lote2-equivalencia-original-thermos, creada desde `54789587d0fa7714b4dc464ec48ca8f2ce254611`.
+- **Comparación:** https://github.com/estebanojeda0615/SAVIP/compare/54789587d0fa7714b4dc464ec48ca8f2ce254611...maintenance/v1.1.2-fase2d-lote2-equivalencia-original-thermos
+- **Commits:** `be46ca9` (CI), `02426ef` (G0 preliminar), `a3cd8e6` (preparatorio), `55ba564` (retiro atómico), `49106f9` (correcciones de Thermos) y el HEAD documental (04 §1).
+- **CI del último commit de código** (`49106f95`): run [42426437658](https://github.com/estebanojeda0615/SAVIP/actions/runs/42426437658), **success**, 809/809, 0 fallos en la 1.ª ejecución, sin intermitentes, 1.er intento.
+- **CI del informe preliminar** (`02426ef`, código = 5478958): run 42108454515, **failure** por la intermitente GUI conocida `test_interaccion_fase_3c_a::test_a`, que falló también en el reintento; no se relanzó (06 §5).
+- **CI del HEAD documental:** ver el mensaje de entrega.
+- **Sin cambios** en `main` (`dfdb3e0`), `develop/v1.1.2` (`6672529`), el tag y la release `v1.1.2-rc.1` (`08f364b`), el ZIP publicado, la rama AS-028 (`5478958`) ni las ramas anteriores.
 - No hubo merge, PR, tag, release, EXE, ZIP ni cambio de versión.
-- El ZIP y el EXE originales **no** se suben al repositorio. Solo constan sus SHA-256.
+- El ZIP y el EXE originales no se subieron.
 
-## 6. Pendientes, sin iniciar
+## 8. Pendientes (no iniciados)
 
-- **Lotes:** 2D-2 (bloqueado por esta decisión), 2D-1, 2D-3 y 2D-6.
-- **Otros pendientes:** AS-004; AS-007; AS-028 para 2D-1.
-- **P0-C:** el residual del IC95 es preexistente y su corrección sigue cancelada.
+- **Lotes sin abrir:** **2D-1** (`determinar_horizonte_maximo_estadistico`; además, AS-028 para 2D-1 sigue abierto en el script histórico), **2D-3** (`_clasificar_evidencia_horizonte`) y **2D-6**.
+- **AS-004:** funciones `_lineas_*` de `generador_reportes`.
+- **AS-007:** r3, bghc, los `test_p0c_*` y los 3 errores de recolección.
+- **AS-024:** fichas de criterios.
+- **P0-C:** el residual del IC95 es preexistente y su corrección **sigue cancelada**.
+- **Intermitente GUI** `test_interaccion_fase_3c_a::test_a`: preexistente (06 §5).
+
+**No se inició ningún otro lote.**
