@@ -78,4 +78,26 @@ Los 47 FAIL son preexistentes y se reparten en 22 archivos (detalle por archivo 
 | [41954109682](https://github.com/estebanojeda0615/SAVIP/actions/runs/41954109682) | `5478958`, la base | success; 811/811; 0 fallos en la 1.ª ejecución |
 | [42108454515](https://github.com/estebanojeda0615/SAVIP/actions/runs/42108454515) | `02426ef`, el informe preliminar de G0 (código = `5478958`) | **failure**: `test_interaccion_fase_3c_a::test_a_acciones_geometria_click_teclado_y_senales` falló en la 1.ª ejecución y también en el reintento (`QSignalSpy.count() == 2` frente a 1, `:140`). Es la intermitente GUI conocida (AS-028). El código evaluado era idéntico al de 5478958, y en local el archivo pasó 4/4 tres veces. No se relanzó |
 | [42426437658](https://github.com/estebanojeda0615/SAVIP/actions/runs/42426437658) | `49106f95`, el último commit de código | **success**; **809/809**; **0 fallos en la 1.ª ejecución**; intermitentes: ninguna; 1.er intento del run |
-| — | HEAD documental | Ver el mensaje de entrega |
+| [42502142744](https://github.com/estebanojeda0615/SAVIP/actions/runs/42502142744) intento 1 | `d7cc472`, HEAD documental | **failure**: 3c_a falló en la 1.ª ejecución y en el reintento |
+| [42502142744](https://github.com/estebanojeda0615/SAVIP/actions/runs/42502142744) intento 2 | `d7cc472` (único relanzamiento autorizado) | **success**: 809/809, 0 fallos en la 1.ª ejecución, sin intermitentes |
+| — | Commit de registro posterior | Lleva `[skip ci]` y solo cambia `docs/`, así que no tiene CI propio |
+
+### Registro completo de `test_interaccion_fase_3c_a::test_a_acciones_geometria_click_teclado_y_senales` en CI
+
+El runner esencial reintenta una sola vez, dentro del mismo run, los ids que fallan. En todos los fallos la aserción es la misma: `assert (2 == 1)` sobre `QSignalSpy.count()` en `tests/test_interaccion_fase_3c_a.py:140`.
+
+| Fase | Run · intento | Commit (código evaluado) | 1.ª ejecución | Reintento del runner | Conclusión del run |
+|---|---|---|---|---|---|
+| AS-028 | 41948898532 · 1 | `5acb09f` | **FALLÓ** | pasó | success, contada como intermitente |
+| AS-028 | 41954109682 · 1 | `5478958` | pasó | — | success |
+| 2D-2 | 42108454515 · 1 | `02426ef` (código = 5478958) | **FALLÓ** | **FALLÓ** | **failure**. No se relanzó |
+| 2D-2 | 42426437658 · 1 | `49106f95` (último commit de código) | pasó | — | success |
+| 2D-2 | 42502142744 · 1 | `d7cc472` (HEAD documental; código = 49106f95) | **FALLÓ** | **FALLÓ** | **failure** |
+| 2D-2 | **42502142744 · 2** (único relanzamiento autorizado por el propietario el 09-11-2026 a las 03:55 UTC, sin cambios de código ni de pruebas) | `d7cc472` | pasó | — | **success**: 809/809 y 0 fallos en la 1.ª ejecución |
+
+**Estado: intermitencia pendiente, NO resuelta.**
+- El verde del intento 2 no la corrige ni la explica.
+- Falló en 3 de 6 ejecuciones de CI, y en 2 de ellas falló también el reintento.
+- En local pasa siempre (3/3 y 3/3 en las comprobaciones de esta fase).
+- No se tocaron la prueba, sus señales ni sus expectativas, ni la interfaz.
+- Queda propuesta una auditoría independiente de esa prueba GUI, no ejecutada (08 §8).

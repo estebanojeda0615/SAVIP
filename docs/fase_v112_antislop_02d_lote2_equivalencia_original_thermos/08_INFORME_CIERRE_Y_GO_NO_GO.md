@@ -99,7 +99,11 @@ Thermos solo revisa diffs y no sustituye la prueba contra la original.
 - **Commits:** `be46ca9` (CI), `02426ef` (G0 preliminar), `a3cd8e6` (preparatorio), `55ba564` (retiro atómico), `49106f9` (correcciones de Thermos) y el HEAD documental (04 §1).
 - **CI del último commit de código** (`49106f95`): run [42426437658](https://github.com/estebanojeda0615/SAVIP/actions/runs/42426437658), **success**, 809/809, 0 fallos en la 1.ª ejecución, sin intermitentes, 1.er intento.
 - **CI del informe preliminar** (`02426ef`, código = 5478958): run 42108454515, **failure** por la intermitente GUI conocida `test_interaccion_fase_3c_a::test_a`, que falló también en el reintento; no se relanzó (06 §5).
-- **CI del HEAD documental:** ver el mensaje de entrega.
+- **CI del HEAD documental** (`d7cc472`, run 42502142744):
+  - **intento 1: failure**. 3c_a falló en la 1.ª ejecución y en el reintento;
+  - **intento 2: success** (809/809, 0 fallos en la 1.ª ejecución). Es el único relanzamiento, autorizado por el propietario el 09-11-2026, sin cambios de código ni de pruebas.
+  - Registro completo de todas las ejecuciones de 3c_a en 06 §5. **La intermitencia sigue pendiente y no está resuelta.**
+- El **commit de registro** posterior lleva `[skip ci]` y solo cambia `docs/` (06 y 08), por lo que no tiene CI propio.
 - **Sin cambios** en `main` (`dfdb3e0`), `develop/v1.1.2` (`6672529`), el tag y la release `v1.1.2-rc.1` (`08f364b`), el ZIP publicado, la rama AS-028 (`5478958`) ni las ramas anteriores.
 - No hubo merge, PR, tag, release, EXE, ZIP ni cambio de versión.
 - El ZIP y el EXE originales no se subieron.
@@ -111,6 +115,11 @@ Thermos solo revisa diffs y no sustituye la prueba contra la original.
 - **AS-007:** r3, bghc, los `test_p0c_*` y los 3 errores de recolección.
 - **AS-024:** fichas de criterios.
 - **P0-C:** el residual del IC95 es preexistente y su corrección **sigue cancelada**.
-- **Intermitente GUI** `test_interaccion_fase_3c_a::test_a`: preexistente (06 §5).
+- **Intermitente GUI** `test_interaccion_fase_3c_a::test_a`: preexistente y **no resuelta**. Falló en 3 de 6 ejecuciones de CI, y en 2 de ellas también en el reintento (06 §5). En local siempre pasa.
+  - **Propuesta, no ejecutada:** auditoría independiente de esa prueba GUI, en una fase propia autorizada. Cubriría:
+    - reproducir el `count() == 2` en un runner Windows con varias repeticiones (`pytest --count`/bucle) y registro de eventos;
+    - identificar la causa (doble emisión de la señal, foco o geometría del runner, temporizadores Qt);
+    - decidir con el propietario un tratamiento que no cambie expectativas para forzar el verde.
+  - No afecta a la metodología, los análisis ni los resultados de SAVIP.
 
 **No se inició ningún otro lote.**
