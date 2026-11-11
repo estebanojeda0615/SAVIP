@@ -18,6 +18,7 @@ on:
       - maintenance/v1.1.2-as028-preparacion-2d2-thermos
       - maintenance/v1.1.2-fase2d-lote2-equivalencia-original-thermos
       - maintenance/v1.1.2-auditoria-gui-3ca-thermos
+      - maintenance/v1.1.2-as028-preparacion-2d1-as004-thermos
   workflow_dispatch:
 
 permissions:
