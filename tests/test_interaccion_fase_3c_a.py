@@ -39,13 +39,13 @@ def settle(v):
     app.processEvents()
     QTest.qWait(20)
 
-def sin_ajuste_de_ancho_pendiente(v, limite_s=1.0):
+def esperar_ajuste_de_ancho(v):
     """Espera a que se aplique el ajuste de ancho diferido de la ventana (QTimer de un disparo tras cada resize).
 
     Ese ajuste puede contraer o expandir la navegación y emitir `contraccion_cambiada`. Si vence dentro de la ventana
     de un QSignalSpy, el spy recoge una emisión que no causó la interacción observada (auditoría GUI 3c_a). Espera por
-    condición, con límite, y falla si el ajuste no llega a aplicarse."""
-    fin = time.monotonic() + limite_s
+    condición (PySide6 no expone QTest.qWaitFor), como máximo 1 s, y falla si el ajuste no llega a aplicarse."""
+    fin = time.monotonic() + 1.0
     while v._temporizador_ancho.isActive() and time.monotonic() < fin:
         QTest.qWait(5)
     assert not v._temporizador_ancho.isActive(), 'el ajuste de ancho sigue pendiente'
@@ -146,7 +146,7 @@ def test_a_acciones_geometria_click_teclado_y_senales():
                         nav_spy=QSignalSpy(v.navegacion.seleccion_cambiada)
                         QTest.mouseClick(v.navegacion.botones[1],Qt.MouseButton.LeftButton)
                         assert nav_spy.count()==1 and v.tabs_principales.currentIndex()==1
-                        sin_ajuste_de_ancho_pendiente(v)
+                        esperar_ajuste_de_ancho(v)
                         toggle_spy=QSignalSpy(v.navegacion.contraccion_cambiada)
                         QTest.mouseClick(v.navegacion.boton_contraer,Qt.MouseButton.LeftButton)
                         app.processEvents()
