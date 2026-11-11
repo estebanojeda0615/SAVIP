@@ -1,0 +1,6 @@
+control: sin espera                    clicked=1 spy=1 args=[[False]] contraida_final=False modo_compacto=False
+control: qWait(100) antes del spy      clicked=1 spy=1 args=[[False]] contraida_final=False modo_compacto=True
+mecanismo: bloqueo 100 ms sin eventos  clicked=1 spy=2 args=[[False], [True]] contraida_final=True modo_compacto=True
+mecanismo: bloqueo 100 ms (repetición) clicked=1 spy=2 args=[[False], [True]] contraida_final=True modo_compacto=True
+parche: bloqueo 100 ms + espera del parche clicked=1 spy=1 args=[[False]] contraida_final=False modo_compacto=True
+parche: bloqueo 100 ms + espera (repetición) clicked=1 spy=1 args=[[False]] contraida_final=False modo_compacto=True

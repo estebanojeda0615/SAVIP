@@ -1,0 +1,12 @@
+base	ninguno	codigo=0
+base	doble_emision	codigo=1	E                           assert (2 == 1)
+base	sin_emision	codigo=1	E                           assert (0 == 1)
+base	estado_erroneo	codigo=1	E                           assert (1 == 1 and not True)
+base	navegacion_rota	codigo=1	E                           assert (0 == 1)
+base	boton_inoperable	codigo=1	E                           assert (0 == 1)
+parche	ninguno	codigo=0
+parche	doble_emision	codigo=1	E                           assert (2 == 1)
+parche	sin_emision	codigo=1	E                           assert (0 == 1)
+parche	estado_erroneo	codigo=1	E                           assert (1 == 1 and not True)
+parche	navegacion_rota	codigo=1	E                           assert (0 == 1)
+parche	boton_inoperable	codigo=1	E                           assert (0 == 1)

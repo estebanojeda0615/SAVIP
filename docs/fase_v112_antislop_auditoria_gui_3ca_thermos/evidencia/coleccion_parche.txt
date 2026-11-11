@@ -1,0 +1,4 @@
+ERROR tests/test_equivalencia_presupuestal_fase_4e_b.py
+ERROR tests/test_p0c_objeto_publico_sin_intervalo.py
+ERROR tests/test_p0c_regresion_negativa_c2.py
+1036 tests collected, 3 errors in 17.23s

@@ -1,0 +1,5 @@
+>                           assert toggle_spy.count()==1 and not v.navegacion.esta_contraida()
+E                           assert (2 == 1)
+E                            +  where 2 = <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680>()
+E                            +    where <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680> = <PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680>.count
+tests\test_interaccion_fase_3c_a.py:140: AssertionError

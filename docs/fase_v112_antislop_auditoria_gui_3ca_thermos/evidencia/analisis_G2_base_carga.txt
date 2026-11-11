@@ -1,0 +1,55 @@
+campanas/G2_nodo_traza_carga16/traza_01.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_02.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_03.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_04.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_05.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_06.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_07.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_08.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_09.jsonl: resultado=['passed'] ventanas_toggle=0 anomalas=0 temporizador_dentro=0 origenes={}
+campanas/G2_nodo_traza_carga16/traza_10.jsonl: resultado=['failed'] ventanas_toggle=10 anomalas=1 temporizador_dentro=1 origenes={'clic': 10, 'temporizador': 1}
+    {'t_spy_ms': 8641.0, 'desde_resize_ms': 62.0, 'clicked': 1, 'emisiones': [(False, 'clic'), (True, 'temporizador')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1100, 78.0, True, True)]}
+campanas/G2_nodo_traza_carga16/traza_11.jsonl: resultado=['failed'] ventanas_toggle=10 anomalas=1 temporizador_dentro=1 origenes={'clic': 10, 'temporizador': 1}
+    {'t_spy_ms': 7859.0, 'desde_resize_ms': 63.0, 'clicked': 1, 'emisiones': [(False, 'clic'), (True, 'temporizador')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1100, 79.0, True, True)]}
+campanas/G2_nodo_traza_carga16/traza_12.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 7406.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 63.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_13.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=0 origenes={'clic': 18}
+campanas/G2_nodo_traza_carga16/traza_14.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=0 origenes={'clic': 18}
+campanas/G2_nodo_traza_carga16/traza_15.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=3 origenes={'clic': 18}
+    {'t_spy_ms': 7656.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+    {'t_spy_ms': 8640.0, 'desde_resize_ms': 62.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+    {'t_spy_ms': 8843.0, 'desde_resize_ms': 62.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 78.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_16.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=0 origenes={'clic': 18}
+campanas/G2_nodo_traza_carga16/traza_17.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=2 origenes={'clic': 18}
+    {'t_spy_ms': 7047.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 63.0, False, False)]}
+    {'t_spy_ms': 7219.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 63.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_18.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=2 origenes={'clic': 18}
+    {'t_spy_ms': 7063.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 62.0, False, False)]}
+    {'t_spy_ms': 7985.0, 'desde_resize_ms': 63.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 78.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_19.jsonl: resultado=['failed'] ventanas_toggle=10 anomalas=1 temporizador_dentro=2 origenes={'clic': 10, 'temporizador': 1}
+    {'t_spy_ms': 7235.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic'), (True, 'temporizador')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1100, 78.0, True, True)]}
+    {'t_spy_ms': 6563.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_20.jsonl: resultado=['failed'] ventanas_toggle=10 anomalas=1 temporizador_dentro=2 origenes={'clic': 10, 'temporizador': 1}
+    {'t_spy_ms': 7453.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic'), (True, 'temporizador')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1100, 63.0, True, True)]}
+    {'t_spy_ms': 6813.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_21.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 6985.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 78.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_22.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 8078.0, 'desde_resize_ms': 63.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 78.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_23.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 6984.0, 'desde_resize_ms': 46.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_24.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 7563.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_25.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=2 origenes={'clic': 18}
+    {'t_spy_ms': 7844.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 62.0, False, False)]}
+    {'t_spy_ms': 8016.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_26.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=0 origenes={'clic': 18}
+campanas/G2_nodo_traza_carga16/traza_27.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=1 origenes={'clic': 18}
+    {'t_spy_ms': 6469.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_28.jsonl: resultado=['failed'] ventanas_toggle=10 anomalas=1 temporizador_dentro=1 origenes={'clic': 10, 'temporizador': 1}
+    {'t_spy_ms': 7156.0, 'desde_resize_ms': 63.0, 'clicked': 1, 'emisiones': [(False, 'clic'), (True, 'temporizador')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1100, 78.0, True, True)]}
+campanas/G2_nodo_traza_carga16/traza_29.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=3 origenes={'clic': 18}
+    {'t_spy_ms': 6750.0, 'desde_resize_ms': 46.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 78.0, False, False)]}
+    {'t_spy_ms': 7438.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1366, 63.0, False, False)]}
+    {'t_spy_ms': 7610.0, 'desde_resize_ms': 47.0, 'clicked': 1, 'emisiones': [(False, 'clic')], 'resize_en_ventana': [], 'temporizador_en_ventana': [(1920, 62.0, False, False)]}
+campanas/G2_nodo_traza_carga16/traza_30.jsonl: resultado=['passed'] ventanas_toggle=18 anomalas=0 temporizador_dentro=0 origenes={'clic': 18}

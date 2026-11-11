@@ -1,0 +1,60 @@
+{"tipo": "resultado", "nodo": "tests/test_interaccion_fase_3c_a.py::test_a_acciones_geometria_click_teclado_y_senales", "resultado": "failed", "error": "assert (2 == 1)\n +  where 2 = <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680>()\n +    where <built-in method count of PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680> = <PySide6.QtTest.QSignalSpy object at 0x000001CA04E26680>.count"}
+{"tipo": "traza", "t_ms": 6469.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": null, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6500.0, "evento": "resizeEvent", "tam": [1100, 700]}
+{"tipo": "traza", "t_ms": 6578.0, "evento": "_temporizador_ancho.timeout", "desde_resize_ms": 78.0, "ancho": 1100, "modo_compacto_tras_ajuste": true, "contraida_tras_ajuste": true}
+{"tipo": "traza", "t_ms": 6594.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 94.0}
+{"tipo": "traza", "t_ms": 6609.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 109.0}
+{"tipo": "traza", "t_ms": 6625.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 125.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6625.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6641.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 141.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6688.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 188.0}
+{"tipo": "traza", "t_ms": 6688.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 188.0}
+{"tipo": "traza", "t_ms": 6688.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 188.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6703.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6703.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 203.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6750.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 250.0}
+{"tipo": "traza", "t_ms": 6750.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 250.0}
+{"tipo": "traza", "t_ms": 6750.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 250.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6766.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6766.0, "evento": "resizeEvent", "tam": [1366, 768]}
+{"tipo": "traza", "t_ms": 6766.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 0.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6813.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 47.0}
+{"tipo": "traza", "t_ms": 6813.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 47.0}
+{"tipo": "traza", "t_ms": 6813.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 47.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6828.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6828.0, "evento": "_temporizador_ancho.timeout", "desde_resize_ms": 62.0, "ancho": 1366, "modo_compacto_tras_ajuste": false, "contraida_tras_ajuste": false}
+{"tipo": "traza", "t_ms": 6828.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 62.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6875.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 109.0}
+{"tipo": "traza", "t_ms": 6875.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 109.0}
+{"tipo": "traza", "t_ms": 6875.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 109.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6875.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6891.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 125.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6938.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 172.0}
+{"tipo": "traza", "t_ms": 6938.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 172.0}
+{"tipo": "traza", "t_ms": 6953.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 187.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 6953.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 6953.0, "evento": "resizeEvent", "tam": [1920, 1080]}
+{"tipo": "traza", "t_ms": 6969.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 16.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7016.0, "evento": "_temporizador_ancho.timeout", "desde_resize_ms": 63.0, "ancho": 1920, "modo_compacto_tras_ajuste": false, "contraida_tras_ajuste": true}
+{"tipo": "traza", "t_ms": 7016.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 63.0}
+{"tipo": "traza", "t_ms": 7016.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 63.0}
+{"tipo": "traza", "t_ms": 7016.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 63.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7016.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 7047.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 94.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7078.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 125.0}
+{"tipo": "traza", "t_ms": 7078.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 125.0}
+{"tipo": "traza", "t_ms": 7078.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 125.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7078.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 7109.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 156.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7141.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 188.0}
+{"tipo": "traza", "t_ms": 7141.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 188.0}
+{"tipo": "traza", "t_ms": 7141.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 188.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7156.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 7406.0, "evento": "resizeEvent", "tam": [1100, 700]}
+{"tipo": "traza", "t_ms": 7406.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 0.0, "origen": ["test_interaccion_fase_3c_a.py:112:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7453.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance seleccion_cambiada(int) at 0x000001CA04248850>", "desde_resize_ms": 47.0}
+{"tipo": "traza", "t_ms": 7453.0, "evento": "QSignalSpy_creado", "senal": "<PySide6.QtCore.SignalInstance contraccion_cambiada(bool) at 0x000001CA04248870>", "desde_resize_ms": 47.0}
+{"tipo": "traza", "t_ms": 7453.0, "evento": "contraccion_cambiada", "arg": false, "desde_resize_ms": 47.0, "origen": ["test_interaccion_fase_3c_a.py:138:test_a_acciones_geometria_click_teclado_y_senales", "navegacion.py:231:alternar_contraccion", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7453.0, "evento": "boton_contraer.clicked"}
+{"tipo": "traza", "t_ms": 7469.0, "evento": "contraccion_cambiada", "arg": true, "desde_resize_ms": 63.0, "origen": ["test_interaccion_fase_3c_a.py:139:test_a_acciones_geometria_click_teclado_y_senales", "ventana_principal.py:3016:_adaptar_ancho", "navegacion.py:275:establecer_contraccion"]}
+{"tipo": "traza", "t_ms": 7469.0, "evento": "_temporizador_ancho.timeout", "desde_resize_ms": 63.0, "ancho": 1100, "modo_compacto_tras_ajuste": true, "contraida_tras_ajuste": true}

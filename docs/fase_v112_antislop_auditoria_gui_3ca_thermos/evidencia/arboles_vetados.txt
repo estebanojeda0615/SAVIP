@@ -1,0 +1,14 @@
+app_icociv f4f0a0c752e9bb37b0e9fd2b79b4afd9c9ac906a
+aplicacion.py 4e97d63adafdbf4e9a465cb2f1667bd99719aee1
+VERSION 45a1b3f44523206e2b1e6a7ca0e279026c3a2b55
+requirements.txt 87e1c5afd0a64bb82aac0d91804b2f2b699f3ea5
+requirements-test.txt 46f141039dd64f8f0b05f236d477d10c7dec9ad6
+packaging 06d19ddaa4e84e4be1965a5c125508546e185943
+tests/fixtures a4218d636f2f507e6b346aa1dff7f02229efbc85
+scripts/pruebas_fase0.py de42054dacda12f0ed33f8fdd1161a7e0f399a47
+tests/test_interaccion_fase_3c_a.py c545cd745992c4b5a283720d002e819d39633564
+.github/workflows/fase0-pruebas.yml 7bb0c30d9477f39f5da81cb01ef2e27fdbb1f444
+--- frente a 49106f9 (último código lote 2D-2):
+(vacío = sin cambios de código)
+--- frente a la V1.1.2 original 6672529, app_icociv:
+ 4 files changed, 31 insertions(+), 801 deletions(-)
