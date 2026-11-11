@@ -204,9 +204,14 @@ def test_umbral_h18_535_no_recomienda() -> None:
     assert _evaluar_intervalos_prediccion(tabla_no, horizonte=18)["critico"] is True
 
 
-# AS-028 (2D-1): retirados test_horizonte_maximo_no_es_18_si_h18_no_cumple, test_mensaje_no_recomendables_no_imprime_
-# lista_vacia y test_h18_no_se_redacta_como_intervalos_aceptables (hasta 102f194). _evaluacion_horizonte se conserva.
-# Ejercían determinar_horizonte_maximo_estadistico, que ninguna ruta productiva invoca, y el texto previo a 12/24; ver
+# AS-028 (2D-1): retirados (hasta 102f194) porque solo ejercían determinar_horizonte_maximo_estadistico, que ninguna
+# ruta productiva invoca, y la redacción de informes anterior a la metodología N0=12/H=24:
+#   test_horizonte_maximo_no_es_18_si_h18_no_cumple
+#   test_mensaje_no_recomendables_no_imprime_lista_vacia
+#   test_h18_no_se_redacta_como_intervalos_aceptables
+# Contrato vigente: tests/test_metodologia_n0_12_h24.py::test_b_h_operativo_max_es_24 y
+# ::test_efg_horizonte_solicitado_no_cambia_modelo_ni_trayectoria. _evaluacion_horizonte queda sin uso y se conserva
+# (la baja autorizada cubre solo las tres pruebas). Ver
 # docs/fase_v112_antislop_as028_preparacion_2d1_as004_thermos/02_AS028_TRES_DEPENDENCIAS_2D1.md.
 
 
