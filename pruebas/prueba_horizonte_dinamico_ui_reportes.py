@@ -80,49 +80,6 @@ def _serie_777_holt() -> pd.DataFrame:
     return _serie_fixture("serie_holt.csv")
 
 
-def _evaluacion_horizonte(
-    horizonte: int,
-    *,
-    tecnico: bool = True,
-    escenario: bool = True,
-    rmse: float = 1.0,
-    mae: float = 0.8,
-    mape: float = 1.0,
-    ic95: float = 0.10,
-    estado: str = "Proyección extendida con cautela",
-    decision: str | None = None,
-) -> dict:
-    permitido = bool(tecnico or escenario)
-    no_recomendable = not permitido
-    return {
-        "horizonte": horizonte,
-        "permitido": permitido,
-        "permitido_para_proyeccion_tecnica": tecnico,
-        "permitido_como_escenario": escenario,
-        "no_recomendable": no_recomendable,
-        "decision": decision or ("Permitido para proyección técnica" if tecnico else ("Permitido solo como escenario de alta incertidumbre" if escenario else "No recomendable")),
-        "estado": estado if permitido else "No recomendable para el horizonte solicitado",
-        "tipo_uso": "Proyección extendida con cautela" if horizonte <= 12 else "Escenario estadístico extendido",
-        "modelo": {"nombre_visible": "Drift"},
-        "backtesting": {
-            "metricas": {
-                "rmse": rmse,
-                "mae": mae,
-                "mape": mape,
-                "smape": mape,
-                "sesgo_medio": 0.1,
-                "porcentaje_errores_extremos": 0.0,
-                "estabilidad_error": 0.2,
-            }
-        },
-        "evaluacion_intervalos": {
-            "ancho_relativo_80_maximo": ic95 / 2.0,
-            "ancho_relativo_95_maximo": ic95,
-        },
-        "mensaje_horizonte": "backtesting e intervalos aceptables" if permitido else "IC95 relativo excesivo para el horizonte.",
-    }
-
-
 def test_horizonte_18_se_permite_como_escenario() -> None:
     from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
 
@@ -204,33 +161,10 @@ def test_umbral_h18_535_no_recomienda() -> None:
     assert _evaluar_intervalos_prediccion(tabla_no, horizonte=18)["critico"] is True
 
 
-def test_horizonte_maximo_no_es_18_si_h18_no_cumple() -> None:
-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
-
-    # El servicio evalua horizontes mes a mes; la conciliacion exige consecutividad.
-    evaluaciones = [
-        _evaluacion_horizonte(h, rmse=0.8 + 0.19 * h, mape=0.6 + 0.12 * h, ic95=0.05 + 0.01 * h)
-        for h in range(1, 13)
-    ]
-    evaluaciones.append(
-        _evaluacion_horizonte(
-            18,
-            tecnico=False,
-            escenario=False,
-            rmse=5.8823,
-            mae=5.1511,
-            mape=3.8063,
-            ic95=0.5350,
-            decision="No recomendable",
-        )
-    )
-    info = determinar_horizonte_maximo_estadistico(None, None, None, evaluaciones, None, horizonte_solicitado=12)
-    assert info["horizonte_maximo_recomendado"] == 12
-    # Ningun horizonte quedo clasificado como escenario puro en este caso.
-    assert info["horizonte_maximo_permitido_como_escenario"] == 0
-    assert info["horizontes_no_recomendables"] == [18]
-    assert "h=18" in info["mensaje_ui"]
-    assert info["tipo_uso_recomendado"] == "Proyección extendida con cautela"
+# AS-028 (2D-1): retirados test_horizonte_maximo_no_es_18_si_h18_no_cumple, test_mensaje_no_recomendables_no_imprime_
+# lista_vacia y test_h18_no_se_redacta_como_intervalos_aceptables, con su auxiliar _evaluacion_horizonte (hasta 102f194).
+# Ejercían determinar_horizonte_maximo_estadistico, que ninguna ruta productiva invoca, y el texto previo a 12/24; ver
+# docs/fase_v112_antislop_as028_preparacion_2d1_as004_thermos/02_AS028_TRES_DEPENDENCIAS_2D1.md.
 
 
 def test_horizontes_se_evaluan_mes_a_mes_y_no_solo_atajos_ui() -> None:
@@ -241,39 +175,6 @@ def test_horizontes_se_evaluan_mes_a_mes_y_no_solo_atajos_ui() -> None:
     assert 12 in horizontes
     assert 18 in horizontes
     assert set(horizontes) != {1, 3, 6, 12, 18}
-
-
-def test_mensaje_no_recomendables_no_imprime_lista_vacia() -> None:
-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
-
-    evaluaciones = [_evaluacion_horizonte(h, estado="Alta confiabilidad relativa") for h in range(1, 7)]
-    info = determinar_horizonte_maximo_estadistico(None, None, None, evaluaciones, None, horizonte_solicitado=6)
-    assert info["horizontes_no_recomendables"] == []
-    assert "[]" not in info["mensaje_ui"]
-    assert "No se identificaron horizontes no recomendables" in info["mensaje_no_recomendables"]
-    assert info["primer_horizonte_no_viable"] == 0
-
-
-def test_h18_no_se_redacta_como_intervalos_aceptables() -> None:
-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
-    from app_icociv.reportes.generador_reportes import _lineas_horizontes, _lineas_determinacion_horizonte
-
-    # El servicio evalua horizontes mes a mes; la conciliacion exige consecutividad.
-    evaluaciones = [_evaluacion_horizonte(h) for h in range(1, 13)]
-    evaluaciones.append(
-        _evaluacion_horizonte(18, tecnico=False, escenario=False, rmse=5.8823, mape=3.8063, ic95=0.5350)
-    )
-    info = determinar_horizonte_maximo_estadistico(None, None, None, evaluaciones, None, horizonte_solicitado=12)
-    resultado = {"horizonte_info": info, "horizonte_solicitado": 12, "model_name": "Drift", "horizonte_permitido": 12}
-    lineas = "\n".join(_lineas_horizontes(resultado) + _lineas_determinacion_horizonte(resultado))
-    assert "Horizonte máximo recomendado: 12" in lineas
-    assert "h=18 no recomendable" in lineas
-    assert "18 meses" in lineas
-    linea_h18 = next(linea for linea in lineas.splitlines() if linea.startswith("18 meses |"))
-    assert "permitido=No" in linea_h18
-    assert "técnico=No" in linea_h18
-    assert "escenario=No" in linea_h18
-    assert "backtesting e intervalos aceptables" not in linea_h18
 
 
 # AS-028: retirado test_el_modelo_entregado_es_el_de_minimo_error_oos_global (hasta 56c75a6), atado al selector
@@ -953,10 +854,7 @@ def main() -> None:
     test_horizonte_25_erratico_no_se_fuerza()
     test_umbral_h12_31_es_alta_incertidumbre_no_bloqueo()
     test_umbral_h18_535_no_recomienda()
-    test_horizonte_maximo_no_es_18_si_h18_no_cumple()
     test_horizontes_se_evaluan_mes_a_mes_y_no_solo_atajos_ui()
-    test_mensaje_no_recomendables_no_imprime_lista_vacia()
-    test_h18_no_se_redacta_como_intervalos_aceptables()
     test_combo_no_cambia_con_rueda_y_periodo_iso()
     test_grafica_usa_periodos_reales()
     test_contenedor_ruta_tiene_scroll_y_tooltip_hover_combo()
