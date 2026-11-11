@@ -80,6 +80,49 @@ def _serie_777_holt() -> pd.DataFrame:
     return _serie_fixture("serie_holt.csv")
 
 
+def _evaluacion_horizonte(
+    horizonte: int,
+    *,
+    tecnico: bool = True,
+    escenario: bool = True,
+    rmse: float = 1.0,
+    mae: float = 0.8,
+    mape: float = 1.0,
+    ic95: float = 0.10,
+    estado: str = "Proyección extendida con cautela",
+    decision: str | None = None,
+) -> dict:
+    permitido = bool(tecnico or escenario)
+    no_recomendable = not permitido
+    return {
+        "horizonte": horizonte,
+        "permitido": permitido,
+        "permitido_para_proyeccion_tecnica": tecnico,
+        "permitido_como_escenario": escenario,
+        "no_recomendable": no_recomendable,
+        "decision": decision or ("Permitido para proyección técnica" if tecnico else ("Permitido solo como escenario de alta incertidumbre" if escenario else "No recomendable")),
+        "estado": estado if permitido else "No recomendable para el horizonte solicitado",
+        "tipo_uso": "Proyección extendida con cautela" if horizonte <= 12 else "Escenario estadístico extendido",
+        "modelo": {"nombre_visible": "Drift"},
+        "backtesting": {
+            "metricas": {
+                "rmse": rmse,
+                "mae": mae,
+                "mape": mape,
+                "smape": mape,
+                "sesgo_medio": 0.1,
+                "porcentaje_errores_extremos": 0.0,
+                "estabilidad_error": 0.2,
+            }
+        },
+        "evaluacion_intervalos": {
+            "ancho_relativo_80_maximo": ic95 / 2.0,
+            "ancho_relativo_95_maximo": ic95,
+        },
+        "mensaje_horizonte": "backtesting e intervalos aceptables" if permitido else "IC95 relativo excesivo para el horizonte.",
+    }
+
+
 def test_horizonte_18_se_permite_como_escenario() -> None:
     from app_icociv.proyeccion.servicio_proyeccion import ejecutar_proyeccion
 
@@ -162,7 +205,7 @@ def test_umbral_h18_535_no_recomienda() -> None:
 
 
 # AS-028 (2D-1): retirados test_horizonte_maximo_no_es_18_si_h18_no_cumple, test_mensaje_no_recomendables_no_imprime_
-# lista_vacia y test_h18_no_se_redacta_como_intervalos_aceptables, con su auxiliar _evaluacion_horizonte (hasta 102f194).
+# lista_vacia y test_h18_no_se_redacta_como_intervalos_aceptables (hasta 102f194). _evaluacion_horizonte se conserva.
 # Ejercían determinar_horizonte_maximo_estadistico, que ninguna ruta productiva invoca, y el texto previo a 12/24; ver
 # docs/fase_v112_antislop_as028_preparacion_2d1_as004_thermos/02_AS028_TRES_DEPENDENCIAS_2D1.md.
 
