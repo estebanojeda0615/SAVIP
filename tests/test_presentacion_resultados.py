@@ -507,79 +507,16 @@ def _evaluacion_horizonte_ui(
     }
 
 
-def test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado() -> None:
-    """H-4 residual, 18-08-2026 (reauditoria dirigida V-CODEX-R2 residual).
-    Renombrada y reescrita: el nombre y la ultima asercion original
-    describian una tercera salida "permitir como escenario" que el
-    evaluador real nunca produce (`permitido_como_escenario ==
-    permitido_para_proyeccion_tecnica` siempre) y que se retiro tambien de
-    `determinar_horizonte_maximo_estadistico`. Con datos sinteticos que
-    fuerzan `permitido_como_escenario=True, permitido_para_proyeccion_
-    tecnica=False` -combinacion que ya no ocurre con datos reales, pero que
-    esta funcion sigue aceptando como entrada-, la accion resultante es
-    ahora "permitir con cautela": una etiqueta generica y honesta, no la
-    etiqueta de estado retirada."""
-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
-
-    evaluaciones = [
-        _evaluacion_horizonte_ui(h)
-        if h <= 12
-        else _evaluacion_horizonte_ui(h, tecnico=False, escenario=True)
-        for h in range(1, 19)
-    ]
-    info = determinar_horizonte_maximo_estadistico(
-        None, None, None, evaluaciones, None, horizonte_solicitado=18
-    )
-
-    assert info["horizonte_maximo_recomendado"] == 12
-    assert info["horizonte_maximo_permitido_como_escenario"] == 18
-    assert info["horizonte_finalmente_permitido"] == 18
-    assert info["accion"] == "permitir con cautela"
-    assert info["primer_horizonte_no_viable"] == 0
-
-    sin_h18 = determinar_horizonte_maximo_estadistico(
-        None, None, None, evaluaciones[:12], None, horizonte_solicitado=18
-    )
-    assert sin_h18["horizonte_maximo_recomendado"] == 12
-    assert sin_h18["horizonte_maximo_permitido_como_escenario"] == 0
-    assert sin_h18["horizonte_maximo_admisible"] == 12
-    assert 18 in sin_h18["horizontes_no_evaluados"]
-    assert sin_h18["accion"] == "restringir"
-    assert sin_h18["horizonte_finalmente_permitido"] == 12
-
-
-def test_horizonte_no_salta_un_corte_no_viable() -> None:
-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
-
-    evaluaciones = [
-        _evaluacion_horizonte_ui(1),
-        _evaluacion_horizonte_ui(2, tecnico=False, escenario=False, no_recomendable=True),
-        _evaluacion_horizonte_ui(3),
-        _evaluacion_horizonte_ui(4),
-    ]
-    info = determinar_horizonte_maximo_estadistico(
-        None, None, None, evaluaciones, None, horizonte_solicitado=12
-    )
-
-    # P0-H, 16-08-2026 (V-CODEX-3). Antes se exigia que un corte no viable en
-    # h=2 restringiera todo a h=1: el prefijo consecutivo. La auditoria
-    # independiente lo marco como regla decisoria CRITICA sin fuente. Ninguna
-    # referencia exige que los horizontes validos formen un prefijo continuo:
-    # FPP3 5.10 publica UNA TABLA POR HORIZONTE y cada h tiene su propia muestra
-    # de errores, de modo que el desempeno en h=2 no es evidencia sobre h=3.
-    #
-    # El contrato nuevo: cada horizonte se juzga con su evidencia propia. Lo que
-    # NO cambia es que el hueco se siga informando -`primer_horizonte_no_viable`
-    # lo localiza- ni que h=2 siga marcado como no permitido.
-    assert info["horizonte_maximo_recomendado"] == 4
-    assert info["horizonte_maximo_admisible"] == 4
-    assert info["primer_horizonte_no_viable"] == 2, "el hueco debe seguir informandose"
-    assert info["horizonte_finalmente_permitido"] == 4
-    assert info["accion"] != "bloquear"
-    # Y el horizonte no viable no se convierte en permitido por el cambio.
-    estados = {int(e["horizonte"]): e for e in evaluaciones}
-    assert estados[2].get("permitido_para_proyeccion_tecnica") is False
-    assert estados[2].get("permitido_como_escenario") is False
+# Lote 2D-1 (Anti-Slop): retirados (hasta 8e5a62b) dos tests que solo ejercían
+# determinar_horizonte_maximo_estadistico, función sin uso productivo que se retira en este lote, con
+# evaluaciones sintéticas (técnico/escenario/no viable):
+#   test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
+#   test_horizonte_no_salta_un_corte_no_viable
+# Bajo N0=12/H=24 no hay clasificación ni veto por horizonte. Contrato vigente: tests/test_metodologia_n0_12_h24.py::
+# test_efg_horizonte_solicitado_no_cambia_modelo_ni_trayectoria; tests/test_resultado_horizonte_solicitado.py::
+# test_restriccion_no_hace_pasar_h12_como_resultado_de_h18. _evaluacion_horizonte_ui queda sin uso y se conserva
+# (fuera de la autorización). Ver
+# docs/fase_v112_antislop_02d_lote1_equivalencia_original_thermos/02_MATRIZ_DE_BAJAS_Y_CONTRATOS_VIGENTES.md.
 
 
 def test_iteraciones_insuficientes_limitan_el_intervalo_no_el_horizonte() -> None:

@@ -470,7 +470,9 @@ def test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos():
         {"horizonte": 3, "permitido_para_proyeccion_tecnica": True, "permitido_como_escenario": True},
         {"horizonte": 4, "permitido_para_proyeccion_tecnica": True, "permitido_como_escenario": True},
     ]
-    assert sp._mayor_horizonte_con(estado, "permitido_para_proyeccion_tecnica") == 4
+    # Lote 2D-1: se retira la aserción sobre `sp._mayor_horizonte_con` (hasta 8e5a62b devolvía 4 con este
+    # estado), porque la función se elimina con determinar_horizonte_maximo_estadistico. Se conserva la del otro
+    # máximo, cuyo auxiliar sigue vivo hasta 2D-3.
     assert sp._mayor_horizonte_permitido(estado) == 4
 
     # Retirar el prefijo NO puede convertir el horizonte fallido en permitido:
