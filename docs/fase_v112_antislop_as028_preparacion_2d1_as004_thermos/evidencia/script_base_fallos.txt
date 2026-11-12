@@ -1,0 +1,8 @@
+test_horizonte_25_estable_se_permite_si_hay_evidencia | ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es | pruebas\prueba_horizonte_dinamico_ui_reportes.py:150:
+test_horizonte_25_erratico_no_se_fuerza | ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es | pruebas\prueba_horizonte_dinamico_ui_reportes.py:168:
+test_h18_no_se_redacta_como_intervalos_aceptables | AssertionError: assert 'Horizonte máximo recomendado: 12' in 'Horizonte solicitado: 12\nAlcance máximo de proy | pruebas\prueba_horizonte_dinamico_ui_reportes.py:269: AssertionError
+test_parametros_drift_receta_y_csv_reproducible | ValueError: El horizonte solicitado debe estar entre 1 y 24 meses. El alcance máximo de proyección de SAVIP es | pruebas\prueba_horizonte_dinamico_ui_reportes.py:462:
+test_pdf_y_docx_contienen_horizontes_con_escenario | AssertionError: assert 'Horizonte estadístico admisible' in '\nInforme técnico de proyección de índices\nSAVIP | pruebas\prueba_horizonte_dinamico_ui_reportes.py:569: AssertionError
+test_horizonte_dinamico_con_serie_drift | AssertionError: assert 'Horizonte máximo permitido como escenario:' in 'Estado general: Calculable con adverte | pruebas\prueba_horizonte_dinamico_ui_reportes.py:619: AssertionError
+test_horizonte_dinamico_con_serie_holt | AssertionError: assert ('12 meses' in 'Horizonte solicitado: 12\nAlcance máximo de proyección de SAVIP: 24 mes | pruebas\prueba_horizonte_dinamico_ui_reportes.py:685: AssertionError
+test_docx_777_separa_advertencias_globales_y_horizonte | AssertionError:  | pruebas\prueba_horizonte_dinamico_ui_reportes.py:940: AssertionError

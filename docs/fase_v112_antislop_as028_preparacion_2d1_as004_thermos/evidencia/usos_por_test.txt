@@ -1,0 +1,35 @@
+== pruebas/prueba_horizonte_dinamico_ui_reportes.py  tests=29  afectados=5
+   test_horizonte_maximo_no_es_18_si_h18_no_cumple L207-233: ['determinar_horizonte_maximo_estadistico']
+   test_mensaje_no_recomendables_no_imprime_lista_vacia L246-254: ['determinar_horizonte_maximo_estadistico']
+   test_h18_no_se_redacta_como_intervalos_aceptables L257-276: ['_lineas_determinacion_horizonte', '_lineas_horizontes', 'determinar_horizonte_maximo_estadistico']
+   test_horizonte_dinamico_con_serie_drift L607-641: ['_lineas_factibilidad', '_lineas_horizontes']
+   test_horizonte_dinamico_con_serie_holt L644-692: ['_lineas_horizontes']
+== tests/test_cierre_metodologico.py  tests=22  afectados=1
+   test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos L444-488: ['_mayor_horizonte_con', '_mayor_horizonte_permitido']
+== tests/test_fase1a_selector_rectangular.py  tests=18  afectados=1
+   test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado L298-323: ['cadena:determinar_horizonte_maximo_estadistico']
+== tests/test_fase2c_contratos_vigentes.py  tests=5  afectados=2
+   nivel de módulo L27:['cadena:_evidencia_horizonte', 'cadena:_item_horizonte_global', 'cadena:_mayor_horizonte_con', 'cadena:_mayor_horizonte_permitido', 'cadena:_serializar_evaluaciones_horizonte', 'cadena:_tipo_uso_horizonte', 'cadena:_ultimo_horizonte_por_clasificacion', 'cadena:determinar_horizonte_maximo_estadistico']
+   test_escasez_de_ventanas_entrega_el_punto_con_advertencia_y_sin_intervalo L63-91: ['cadena:_evidencia_horizonte']
+   test_banda_no_construible_no_cancela_el_punto L94-113: ['cadena:_evidencia_horizonte']
+== tests/test_fundamentacion_metodologica.py  tests=23  afectados=0
+== tests/test_p0c_objeto_publico_sin_intervalo.py  tests=0  afectados=0
+== tests/test_p0c_regresion_negativa_c2.py  tests=0  afectados=0
+== tests/test_p0g_desacople_punto_intervalo.py  tests=10  afectados=0
+== tests/test_pool_calendario_fourier_seasonal.py  tests=12  afectados=1
+   test_casoJ_ids_internos_no_visibles_en_ui_ni_reportes L254-293: ['_lineas_determinacion_horizonte', '_lineas_horizontes']
+== tests/test_presentacion_resultados.py  tests=13  afectados=2
+   test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado L510-548: ['cadena:determinar_horizonte_maximo_estadistico', 'determinar_horizonte_maximo_estadistico']
+   test_horizonte_no_salta_un_corte_no_viable L551-582: ['determinar_horizonte_maximo_estadistico']
+== tests/test_regresiones_auditoria_independiente_bghc.py  tests=0  afectados=0
+== tests/test_remediacion_r2_h1_h2_h3_h7.py  tests=9  afectados=0
+== tests/test_resultado_horizonte_solicitado.py  tests=15  afectados=6
+   nivel de módulo L10:['determinar_horizonte_maximo_estadistico']
+   nivel de módulo L18:['_lineas_determinacion_horizonte']
+   test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla L240-261: ['determinar_horizonte_maximo_estadistico']
+   test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta L264-284: ['determinar_horizonte_maximo_estadistico']
+   test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada L287-329: ['cadena:_lineas_determinacion_horizonte', 'cadena:determinar_horizonte_maximo_estadistico', 'determinar_horizonte_maximo_estadistico']
+   test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico L365-381: ['determinar_horizonte_maximo_estadistico']
+   test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito L384-405: ['determinar_horizonte_maximo_estadistico']
+   test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola L408-440: ['determinar_horizonte_maximo_estadistico']
+== tests/test_vocabulario_vc.py  tests=18  afectados=0

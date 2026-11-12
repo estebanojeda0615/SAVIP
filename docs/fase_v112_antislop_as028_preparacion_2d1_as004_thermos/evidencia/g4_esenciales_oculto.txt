@@ -1,0 +1,367 @@
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...........                                                              [100%]
+11 passed in 57.43s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 0.25s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+............                                                             [100%]
+12 passed in 63.85s (0:01:03)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..................................F                                      [100%]
+================================== FAILURES ===================================
+_ test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado _
+
+    def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado():
+        serie = gen.serie("tendencia_lineal_ruido")
+        anio, mes = gen.objetivo(serie, 11)
+        # Fase 2B (AS-003, opción B) y lote 2D-2: retirados del módulo; se exige su AUSENCIA.
+        eliminados = ("_rmse_global_estable", "_modelo_consistente_desde_comparativo", "_modelo_trayectoria_consistente",
+                      "seleccionar_modelo_por_rmse_oos_global", "_errores_oos_por_par")
+        assert [n for n in eliminados if hasattr(sp, n)] == []
+        # Evaluadores heredados que siguen definidos: se espían y la ruta productiva no debe llamarlos.
+        retirados = ("determinar_horizonte_maximo_estadistico", "_evaluar_horizontes_proyeccion")
+>       espias = {n: patch.object(sp, n, wraps=getattr(sp, n)) for n in retirados}
+                                               ^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'determinar_horizonte_maximo_estadistico'
+
+tests\test_fase1a_selector_rectangular.py:307: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado
+1 failed, 34 passed in 23.62s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+F                                                                        [100%]
+================================== FAILURES ===================================
+_ test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado _
+
+    def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado():
+        serie = gen.serie("tendencia_lineal_ruido")
+        anio, mes = gen.objetivo(serie, 11)
+        # Fase 2B (AS-003, opción B) y lote 2D-2: retirados del módulo; se exige su AUSENCIA.
+        eliminados = ("_rmse_global_estable", "_modelo_consistente_desde_comparativo", "_modelo_trayectoria_consistente",
+                      "seleccionar_modelo_por_rmse_oos_global", "_errores_oos_por_par")
+        assert [n for n in eliminados if hasattr(sp, n)] == []
+        # Evaluadores heredados que siguen definidos: se espían y la ruta productiva no debe llamarlos.
+        retirados = ("determinar_horizonte_maximo_estadistico", "_evaluar_horizontes_proyeccion")
+>       espias = {n: patch.object(sp, n, wraps=getattr(sp, n)) for n in retirados}
+                                               ^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'determinar_horizonte_maximo_estadistico'
+
+tests\test_fase1a_selector_rectangular.py:307: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado
+1 failed in 0.53s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 29.10s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 8.14s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 40.11s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 0.73s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+........                                                                 [100%]
+8 passed in 0.12s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.............                                                            [100%]
+13 passed in 12.50s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...............                                                          [100%]
+15 passed in 0.07s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...............                                                          [100%]
+15 passed in 9.72s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 0.10s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...........                                                              [100%]
+11 passed in 0.28s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...................                                                      [100%]
+19 passed in 0.08s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...................                                                      [100%]
+19 passed in 0.08s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+........................                                                 [100%]
+24 passed in 0.12s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.................                                                        [100%]
+17 passed in 0.08s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 57.12s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...................                                                      [100%]
+19 passed in 0.19s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 1.04s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 0.99s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+............                                                             [100%]
+12 passed in 0.07s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.                                                                        [100%]
+1 passed in 34.31s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..                                                                       [100%]
+2 passed in 82.48s (0:01:22)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..                                                                       [100%]
+2 passed in 46.82s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..                                                                       [100%]
+2 passed in 41.05s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..                                                                       [100%]
+2 passed in 49.30s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......................                                                  [100%]
+23 passed in 0.11s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 11.32s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 4.60s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.                                                                        [100%]
+1 passed in 0.98s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 7.84s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.................                                                        [100%]
+17 passed in 0.25s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....................                                                     [100%]
+20 passed in 0.16s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...........                                                              [100%]
+11 passed in 7.14s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...............                                                          [100%]
+15 passed in 0.21s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 0.52s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 38.45s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..............                                                           [100%]
+14 passed in 0.07s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 0.52s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+................                                                         [100%]
+16 passed in 2.90s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+............                                                             [100%]
+12 passed in 66.90s (0:01:06)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 14.62s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........FF..                                                            [100%]
+================================== FAILURES ===================================
+______ test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado _______
+
+    def test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado() -> None:
+        """H-4 residual, 18-08-2026 (reauditoria dirigida V-CODEX-R2 residual).
+        Renombrada y reescrita: el nombre y la ultima asercion original
+        describian una tercera salida "permitir como escenario" que el
+        evaluador real nunca produce (`permitido_como_escenario ==
+        permitido_para_proyeccion_tecnica` siempre) y que se retiro tambien de
+        `determinar_horizonte_maximo_estadistico`. Con datos sinteticos que
+        fuerzan `permitido_como_escenario=True, permitido_para_proyeccion_
+        tecnica=False` -combinacion que ya no ocurre con datos reales, pero que
+        esta funcion sigue aceptando como entrada-, la accion resultante es
+        ahora "permitir con cautela": una etiqueta generica y honesta, no la
+        etiqueta de estado retirada."""
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28D1\final\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:522: ImportError
+_________________ test_horizonte_no_salta_un_corte_no_viable __________________
+
+    def test_horizonte_no_salta_un_corte_no_viable() -> None:
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28D1\final\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:552: ImportError
+=========================== short test summary info ===========================
+FAILED tests/test_presentacion_resultados.py::test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
+FAILED tests/test_presentacion_resultados.py::test_horizonte_no_salta_un_corte_no_viable
+2 failed, 11 passed in 14.39s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+FF                                                                       [100%]
+================================== FAILURES ===================================
+______ test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado _______
+
+    def test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado() -> None:
+        """H-4 residual, 18-08-2026 (reauditoria dirigida V-CODEX-R2 residual).
+        Renombrada y reescrita: el nombre y la ultima asercion original
+        describian una tercera salida "permitir como escenario" que el
+        evaluador real nunca produce (`permitido_como_escenario ==
+        permitido_para_proyeccion_tecnica` siempre) y que se retiro tambien de
+        `determinar_horizonte_maximo_estadistico`. Con datos sinteticos que
+        fuerzan `permitido_como_escenario=True, permitido_para_proyeccion_
+        tecnica=False` -combinacion que ya no ocurre con datos reales, pero que
+        esta funcion sigue aceptando como entrada-, la accion resultante es
+        ahora "permitir con cautela": una etiqueta generica y honesta, no la
+        etiqueta de estado retirada."""
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28D1\final\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:522: ImportError
+_________________ test_horizonte_no_salta_un_corte_no_viable __________________
+
+    def test_horizonte_no_salta_un_corte_no_viable() -> None:
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28D1\final\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:552: ImportError
+=========================== short test summary info ===========================
+FAILED tests/test_presentacion_resultados.py::test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
+FAILED tests/test_presentacion_resultados.py::test_horizonte_no_salta_un_corte_no_viable
+2 failed in 0.43s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed, 1 deselected in 6.75s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 81.36s (0:01:21)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..                                                                       [100%]
+2 passed, 1 deselected in 2.01s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........                                                                [100%]
+9 passed in 0.56s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+
+=================================== ERRORS ====================================
+________ ERROR collecting tests/test_resultado_horizonte_solicitado.py ________
+ImportError while importing test module 'C:\Pruebas SAVIP\A28D1\final\tests\test_resultado_horizonte_solicitado.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_resultado_horizonte_solicitado.py:10: in <module>
+    from app_icociv.proyeccion.servicio_proyeccion import (
+E   ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\A28D1\final\app_icociv\proyeccion\servicio_proyeccion.py)
+=========================== short test summary info ===========================
+ERROR tests/test_resultado_horizonte_solicitado.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.37s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 0.08s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed in 16.61s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 2.99s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 2.65s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...............                                                          [100%]
+15 passed in 0.07s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..........................................................               [100%]
+58 passed in 18.52s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.............                                                            [100%]
+13 passed in 0.14s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+............                                                             [100%]
+12 passed in 0.21s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..................                                                       [100%]
+18 passed in 0.08s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...                                                                      [100%]
+3 passed in 13.91s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+........                                                                 [100%]
+8 passed in 24.44s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 39.51s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 117.22s (0:01:57)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 10.15s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 11.95s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+........                                                                 [100%]
+8 passed, 1 deselected in 364.36s (0:06:04)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+....                                                                     [100%]
+4 passed in 6.09s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 17.31s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 15.66s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 13.52s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed in 10.20s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.                                                                        [100%]
+1 passed in 9.46s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed in 83.59s (0:01:23)
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed in 48.26s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.                                                                        [100%]
+1 passed, 1 deselected in 1.62s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+........                                                                 [100%]
+8 passed in 8.13s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+......                                                                   [100%]
+6 passed in 35.62s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..........                                                               [100%]
+10 passed in 35.71s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.......                                                                  [100%]
+7 passed in 46.57s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+...........                                                              [100%]
+11 passed in 44.17s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.....                                                                    [100%]
+5 passed in 22.75s
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+..................                                                       [100%]
+18 passed, 1 deselected in 110.90s (0:01:50)
+
+Resumen esenciales: 82 archivos; 795 pruebas, 3 fallos en la primera ejecución, 1 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: tests/test_fase1a_selector_rectangular.py (1); tests/test_presentacion_resultados.py (1); tests/test_resultado_horizonte_solicitado.py (2)
+codigo=1 duracion=2164s

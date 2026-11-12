@@ -1,0 +1,11 @@
+economico_empalme: casos=1 diferencias=0
+fixtures_horizonte_dinamico: casos=6 diferencias=0
+gui_sesion_exportables: casos=1 diferencias=2
+    gui_sesion_exportables.ok.pdf_sesion.texto[122]: 'Análisis activo: <ID1>. Proyecciones visibles guardadas: 2. Registros' != 'Análisis activo: <ID1>. Proyecciones visibles guardadas: 2.'
+    gui_sesion_exportables.ok.pdf_sesion.texto[123]: 'calculados: 3.' != 'Registros calculados: 3.'
+motor: casos=35 diferencias=0
+rechazos: casos=1 diferencias=0
+series_extra: casos=22 diferencias=0
+hash A: a6466123cc701d8d86b7747b35151b30ab4248883fd4a0d7c52a90c6fbc28949
+hash B: 5d74b12836db344ebeb262e1f0d1bd911b8a277e11855c7f609c33a78bb6a90a
+DISTINTOS

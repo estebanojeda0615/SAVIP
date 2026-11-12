@@ -1,0 +1,3 @@
+base vs final: 29 casos; diferencias []
+Counter({'resultado_horizonte_solicitado.razon_principal': 28, 'horizonte_info.mensaje_ui': 1})
+0 llamadas

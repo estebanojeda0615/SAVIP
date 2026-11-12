@@ -1,0 +1,4 @@
+Resumen esenciales: 82 archivos; 809 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno
+FIN rc=0

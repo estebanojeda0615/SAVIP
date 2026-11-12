@@ -1,0 +1,2 @@
+PASSED tests/test_cierre_metodologico.py::test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos
+1 passed in 1.55s

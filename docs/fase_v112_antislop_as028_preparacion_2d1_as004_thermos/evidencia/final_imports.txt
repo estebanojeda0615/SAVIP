@@ -1,0 +1,2 @@
+modulos 86 aplicacion OK, VentanaPrincipal OK, 2D-1 presente: True
+codigo=0

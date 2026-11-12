@@ -1,0 +1,292 @@
+{
+ "sha256_script_fuente": "5b6e0bc4768b5e2b5fe648d0224d0bd639a7d670248932acfd4855a65be23c05",
+ "test_horizonte_maximo_no_es_18_si_h18_no_cumple": {
+  "entrada_del_test": [
+   [
+    "info[\"horizonte_maximo_recomendado\"] == 12",
+    true
+   ],
+   [
+    "info[\"horizonte_maximo_permitido_como_escenario\"] == 0",
+    true
+   ],
+   [
+    "info[\"horizontes_no_recomendables\"] == [18]",
+    true
+   ],
+   [
+    "\"h=18\" in info[\"mensaje_ui\"]",
+    true
+   ],
+   [
+    "info[\"tipo_uso_recomendado\"] == \"Proyección extendida con cautela\"",
+    true
+   ]
+  ],
+  "productivo_h12": [
+   [
+    "info[\"horizonte_maximo_recomendado\"] == 12",
+    "KeyError: 'horizonte_maximo_recomendado'"
+   ],
+   [
+    "info[\"horizonte_maximo_permitido_como_escenario\"] == 0",
+    "KeyError: 'horizonte_maximo_permitido_como_escenario'"
+   ],
+   [
+    "info[\"horizontes_no_recomendables\"] == [18]",
+    "KeyError: 'horizontes_no_recomendables'"
+   ],
+   [
+    "\"h=18\" in info[\"mensaje_ui\"]",
+    "KeyError: 'mensaje_ui'"
+   ],
+   [
+    "info[\"tipo_uso_recomendado\"] == \"Proyección extendida con cautela\"",
+    "KeyError: 'tipo_uso_recomendado'"
+   ]
+  ],
+  "productivo_h18": [
+   [
+    "info[\"horizonte_maximo_recomendado\"] == 12",
+    "KeyError: 'horizonte_maximo_recomendado'"
+   ],
+   [
+    "info[\"horizonte_maximo_permitido_como_escenario\"] == 0",
+    "KeyError: 'horizonte_maximo_permitido_como_escenario'"
+   ],
+   [
+    "info[\"horizontes_no_recomendables\"] == [18]",
+    "KeyError: 'horizontes_no_recomendables'"
+   ],
+   [
+    "\"h=18\" in info[\"mensaje_ui\"]",
+    "KeyError: 'mensaje_ui'"
+   ],
+   [
+    "info[\"tipo_uso_recomendado\"] == \"Proyección extendida con cautela\"",
+    "KeyError: 'tipo_uso_recomendado'"
+   ]
+  ]
+ },
+ "test_mensaje_no_recomendables_no_imprime_lista_vacia": {
+  "entrada_del_test": [
+   [
+    "info[\"horizontes_no_recomendables\"] == []",
+    true
+   ],
+   [
+    "\"[]\" not in info[\"mensaje_ui\"]",
+    true
+   ],
+   [
+    "\"No se identificaron horizontes no recomendables\" in info[\"mensaje_no_recomendables\"]",
+    true
+   ],
+   [
+    "info[\"primer_horizonte_no_viable\"] == 0",
+    true
+   ]
+  ],
+  "productivo_h12": [
+   [
+    "info[\"horizontes_no_recomendables\"] == []",
+    "KeyError: 'horizontes_no_recomendables'"
+   ],
+   [
+    "\"[]\" not in info[\"mensaje_ui\"]",
+    "KeyError: 'mensaje_ui'"
+   ],
+   [
+    "\"No se identificaron horizontes no recomendables\" in info[\"mensaje_no_recomendables\"]",
+    "KeyError: 'mensaje_no_recomendables'"
+   ],
+   [
+    "info[\"primer_horizonte_no_viable\"] == 0",
+    "KeyError: 'primer_horizonte_no_viable'"
+   ]
+  ],
+  "productivo_h18": [
+   [
+    "info[\"horizontes_no_recomendables\"] == []",
+    "KeyError: 'horizontes_no_recomendables'"
+   ],
+   [
+    "\"[]\" not in info[\"mensaje_ui\"]",
+    "KeyError: 'mensaje_ui'"
+   ],
+   [
+    "\"No se identificaron horizontes no recomendables\" in info[\"mensaje_no_recomendables\"]",
+    "KeyError: 'mensaje_no_recomendables'"
+   ],
+   [
+    "info[\"primer_horizonte_no_viable\"] == 0",
+    "KeyError: 'primer_horizonte_no_viable'"
+   ]
+  ]
+ },
+ "test_h18_no_se_redacta_como_intervalos_aceptables": {
+  "entrada_del_test": [
+   [
+    "\"Horizonte máximo recomendado: 12\" in lineas",
+    false
+   ],
+   [
+    "\"h=18 no recomendable\" in lineas",
+    false
+   ],
+   [
+    "\"18 meses\" in lineas",
+    true
+   ],
+   [
+    "\"permitido=No\" in linea_h18",
+    "TypeError: argument of type 'NoneType' is not iterable"
+   ],
+   [
+    "\"técnico=No\" in linea_h18",
+    "TypeError: argument of type 'NoneType' is not iterable"
+   ],
+   [
+    "\"escenario=No\" in linea_h18",
+    "TypeError: argument of type 'NoneType' is not iterable"
+   ],
+   [
+    "\"backtesting e intervalos aceptables\" not in linea_h18",
+    "TypeError: argument of type 'NoneType' is not iterable"
+   ]
+  ],
+  "linea_h18_encontrada": null,
+  "productivo_h12": [
+   [
+    "\"Horizonte máximo recomendado: 12\" in lineas",
+    false
+   ],
+   [
+    "\"h=18 no recomendable\" in lineas",
+    false
+   ],
+   [
+    "\"18 meses\" in lineas",
+    true
+   ],
+   [
+    "\"permitido=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"técnico=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"escenario=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"backtesting e intervalos aceptables\" not in linea_h18",
+    true
+   ]
+  ],
+  "productivo_h18": [
+   [
+    "\"Horizonte máximo recomendado: 12\" in lineas",
+    false
+   ],
+   [
+    "\"h=18 no recomendable\" in lineas",
+    false
+   ],
+   [
+    "\"18 meses\" in lineas",
+    true
+   ],
+   [
+    "\"permitido=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"técnico=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"escenario=No\" in linea_h18",
+    false
+   ],
+   [
+    "\"backtesting e intervalos aceptables\" not in linea_h18",
+    true
+   ]
+  ]
+ },
+ "contexto_productivo_h12": {
+  "horizonte_solicitado": 12,
+  "horizonte_permitido": 12,
+  "proyeccion_generada": true,
+  "alcance_maximo_proyeccion": 24,
+  "filas_tabla_horizontes": 24,
+  "claves_horizonte_info": [
+   "alcance_maximo_proyeccion",
+   "candidato_seleccionado",
+   "diferencia_absoluta_segundo",
+   "diferencia_porcentual_segundo",
+   "estrategia_calendario",
+   "evaluaciones",
+   "fourier_amplitud",
+   "fourier_coef_cos_1",
+   "fourier_coef_sin_1",
+   "fourier_k",
+   "fourier_periodo",
+   "horizonte_finalmente_permitido",
+   "horizonte_solicitado",
+   "mensaje_alcance",
+   "modelo_base",
+   "modelo_segundo",
+   "modelo_seleccionado",
+   "n0_backtesting",
+   "pares_comunes",
+   "pares_esperados",
+   "razones",
+   "rmse_segundo_oos",
+   "rmse_seleccion_oos",
+   "salvaguarda_benchmark",
+   "tabla_horizontes",
+   "trazabilidad",
+   "w_estrella"
+  ]
+ },
+ "contexto_productivo_h18": {
+  "horizonte_solicitado": 18,
+  "horizonte_permitido": 18,
+  "proyeccion_generada": true,
+  "alcance_maximo_proyeccion": 24,
+  "filas_tabla_horizontes": 24,
+  "claves_horizonte_info": [
+   "alcance_maximo_proyeccion",
+   "candidato_seleccionado",
+   "diferencia_absoluta_segundo",
+   "diferencia_porcentual_segundo",
+   "estrategia_calendario",
+   "evaluaciones",
+   "fourier_amplitud",
+   "fourier_coef_cos_1",
+   "fourier_coef_sin_1",
+   "fourier_k",
+   "fourier_periodo",
+   "horizonte_finalmente_permitido",
+   "horizonte_solicitado",
+   "mensaje_alcance",
+   "modelo_base",
+   "modelo_segundo",
+   "modelo_seleccionado",
+   "n0_backtesting",
+   "pares_comunes",
+   "pares_esperados",
+   "razones",
+   "rmse_segundo_oos",
+   "rmse_seleccion_oos",
+   "salvaguarda_benchmark",
+   "tabla_horizontes",
+   "trazabilidad",
+   "w_estrella"
+  ]
+ }
+}

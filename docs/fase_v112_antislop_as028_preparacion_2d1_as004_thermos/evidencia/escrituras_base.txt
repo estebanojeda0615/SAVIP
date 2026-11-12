@@ -1,0 +1,4 @@
+diff de listados de archivos antes/después de las capturas de la base:
+sin diferencias
+diff final:
+sin diferencias

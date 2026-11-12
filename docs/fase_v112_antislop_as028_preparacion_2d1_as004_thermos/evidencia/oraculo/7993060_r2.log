@@ -1,0 +1,84 @@
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\estadistica\diagnostico_residuos.py:58: RuntimeWarning: overflow encountered in scalar multiply
+  denom = float(np.sqrt(np.sum(x0 ** 2) * np.sum(x1 ** 2)))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:269: RuntimeWarning: overflow encountered in power
+  m3 = float(np.mean(desviaciones ** 3))
+C:\Pruebas SAVIP\Fase0\venv-test\Lib\site-packages\numpy\_core\_methods.py:132: RuntimeWarning: invalid value encountered in reduce
+  ret = umr_sum(arr, axis, dtype, out, keepdims, where=where)
+C:\Pruebas SAVIP\L2\fuentes\7993060\app_icociv\utilidades\utilidades.py:270: RuntimeWarning: overflow encountered in power
+  m4 = float(np.mean(desviaciones ** 4))
+{
+ "total": "766a34b8a8968b02c1db35fb2dcdb7a94ebbf61b9450f70e415985e69ca1bb3f",
+ "motor": "54ced4453cb01596cda04f8eb5fcb42bdd99b5996f7dd53e8689309ecb9d62a5",
+ "series_extra": "648fc5360620f12288bb2c783e5b39c37fc591c7fe2f8afb1c778deb69c4b2ee",
+ "fixtures_horizonte_dinamico": "da247bbbecece73ec0c8508bdacdfbc3380f95036146d617f5abb8876947256d",
+ "rechazos": "f6220f012ad09627c7abdfec372cd95cbf5d37725df88fc3f17c6517bea96637",
+ "economico_empalme": "633178089bfa204a74ac024415ab361d6110b15d03fdbfd4d16989bff4ef4e47",
+ "gui_sesion_exportables": "3cc1d736531ae29ae55b6de891588288111e17e93569216ec6c0adea37e689de"
+}
+codigo=0 duracion=568s

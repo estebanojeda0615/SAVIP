@@ -1,0 +1,14 @@
+run 43087996118 intento 1, commit 56d9562: conclusion=failure
+  paso: Set up job -> success
+  paso: Run actions/checkout@v4 -> success
+  paso: Run actions/setup-python@v5 -> success
+  paso: Instalar las versiones exactas (lock de la aplicación + dependencias de prueba) -> success
+  paso: Perfiles y recuentos -> success
+  paso: Tests autocontenidos esenciales (incluye los Golden Masters) -> success
+  paso: Publicar el resultado JUnit -> failure
+  paso: Post Run actions/setup-python@v5 -> skipped
+  paso: Post Run actions/checkout@v4 -> success
+  paso: Complete job -> success
+  anotacion warning: Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5, actions/upload-artifact@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+  anotacion failure: Failed to CreateArtifact: Received non-retryable error: Failed request: (404) Not Found: workflow run not found
+  log del job: no descargable (HTTP 404 «The specified blob does not exist»)
