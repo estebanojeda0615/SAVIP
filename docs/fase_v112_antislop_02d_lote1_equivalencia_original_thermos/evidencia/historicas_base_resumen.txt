@@ -1,0 +1,3 @@
+Resumen historicas: 27 archivos; 213 pruebas, 47 fallos en la primera ejecución, 3 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: tests/test_fase_4a_c.py (TIEMPO_AGOTADO); tests/test_regresiones_auditoria_independiente_bghc.py (5); tests/test_residuales_auditoria_independiente_r3.py (5)

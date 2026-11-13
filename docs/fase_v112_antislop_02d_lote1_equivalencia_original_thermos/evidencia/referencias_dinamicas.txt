@@ -1,0 +1,88 @@
+## getattr/importlib/__import__/import * en app_icociv y aplicacion.py
+app_icociv/config/dependencias.py:60:    import importlib
+app_icociv/config/dependencias.py:67:            modulo = importlib.import_module(dependencia.modulo)
+app_icociv/config/dependencias.py:74:        instalada = str(getattr(modulo, "__version__", "")) or "desconocida"
+app_icociv/config/rutas.py:31:    return bool(getattr(sys, "frozen", False))
+app_icociv/config/rutas.py:41:        base = getattr(sys, "_MEIPASS", None)
+app_icociv/interfaz/animaciones/transiciones.py:73:    return QEasingCurve(getattr(QEasingCurve.Type, nombre, QEasingCurve.Type.OutCubic))
+app_icociv/interfaz/componentes/dialogos.py:218:    existente = getattr(aplicacion, "_savip_ajuste_dialogos", None)
+app_icociv/interfaz/efectos/ventana.py:54:        return int(getattr(sys, "getwindowsversion")().build)
+app_icociv/interfaz/ventana_principal.py:390:        if getattr(self, "_barra_menu", None) is None:
+app_icociv/interfaz/ventana_principal.py:980:        if not getattr(self, "tarjetas_kpi", None):
+app_icociv/interfaz/ventana_principal.py:1033:                getattr(self, atributo).setVisible(es_resultados)
+app_icociv/interfaz/ventana_principal.py:1045:            getattr(self, nombre, None)
+app_icociv/interfaz/ventana_principal.py:1051:        for tarjeta in getattr(self, "tarjetas_kpi", {}).values():
+app_icociv/interfaz/ventana_principal.py:1059:        serie_df = getattr(self.controlador, "serie_actual", None)
+app_icociv/interfaz/ventana_principal.py:1062:        if serie_df is not None and getattr(serie_df, "empty", True) is False:
+app_icociv/interfaz/ventana_principal.py:1070:        copia = getattr(self, "_texto_ruta_copia", "")
+app_icociv/interfaz/ventana_principal.py:1259:        periodos = getattr(self.controlador, "periodos", None)
+app_icociv/interfaz/ventana_principal.py:1976:        if visible and clave != getattr(self, "_clave_vista_resultados", None):
+app_icociv/interfaz/ventana_principal.py:2049:        velo = getattr(self, "velo_carga", None)
+app_icociv/interfaz/ventana_principal.py:2889:        velo = getattr(self, "velo_carga", None)
+app_icociv/interfaz/ventana_principal.py:2905:        notificaciones = getattr(self, "notificaciones", None)
+app_icociv/interfaz/ventana_principal.py:2933:        gestor = getattr(self, "notificaciones", None)
+app_icociv/interfaz/ventana_principal.py:3068:        gestor = getattr(self, "notificaciones", None)
+app_icociv/interfaz/ventana_principal.py:3090:            componente = getattr(self, atributo, None)
+app_icociv/interfaz/widgets/controles.py:22:    if getattr(parent,'_confirmando_ingreso',False):return False
+app_icociv/interfaz/widgets/controles.py:71:        if resultado[0] == QValidator.Invalid and re.fullmatch(r'\+?\d+', texto.strip()) and int(texto.strip()) > self.maximum() and not getattr(self, '_aviso_pendiente', False):
+app_icociv/interfaz/widgets/empalme_iccp_icociv.py:259:                *[getattr(self, k).value() for k in ('cantidad', 'precio_base', 'anticipo', 'p0', 'ix', 'q')],
+app_icociv/interfaz/widgets/empalme_iccp_icociv.py:308:        if a is None or getattr(self, '_calculando_historial', False):
+app_icociv/interfaz/widgets/empalme_iccp_icociv.py:2180:    calculo = getattr(wb, "calculation", None) or getattr(wb, "calculation_properties", None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:277:        claves = getattr(index.model(), 'claves', None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:288:        w = getattr(self, 'widget_icociv', None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:304:            claves = getattr(index.model(), 'claves', [])
+app_icociv/interfaz/widgets/proyecciones_icociv.py:1287:            fila = getattr(self, nombre, None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:1406:        grupo = getattr(self, "_grupo_calc", None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:1415:        if objeto is getattr(self, "_grupo_calc", None) and evento.type() == QEvent.Type.Resize:
+app_icociv/interfaz/widgets/proyecciones_icociv.py:2045:            tabla, getattr(self, '_columnas_valores', columnas) if tabla is getattr(self, 'tabla_valores', None) else columnas))
+app_icociv/interfaz/widgets/proyecciones_icociv.py:2180:        for boton in (getattr(self, "boton_grafica_superior", None), getattr(self, "boton_grafica_inferior", None)):
+app_icociv/interfaz/widgets/proyecciones_icociv.py:2195:        for boton in (getattr(self, "boton_grafica_superior", None), getattr(self, "boton_grafica_inferior", None)):
+app_icociv/interfaz/widgets/proyecciones_icociv.py:2579:        r = getattr(self,'_registro_detalle',None)
+app_icociv/interfaz/widgets/proyecciones_icociv.py:2841:            ('Alcance',getattr(self,'_descripcion_alcance',None) or 'Toda la sesión: todos los registros; el filtro visual no reduce la exportación'),
+app_icociv/interfaz/widgets/visor_grafica.py:308:        if self._inicio_clic is not None and getattr(evento, "x", None) is not None and math.hypot(evento.x - self._inicio_clic[0], evento.y - self._inicio_clic[1]) < 4:
+app_icociv/interfaz/widgets/visor_grafica.py:322:        periodos = getattr(localizador, "periodos", None) or []
+app_icociv/interfaz/widgets/visor_grafica.py:355:        detalle = (getattr(self.figura, "savip_detalle_proyeccion", None) or {}).get(int(round(x))) if nombre == "Proyección" else None
+app_icociv/reportes/modelo.py:417:        return [(titulo, str(getattr(self, campo)).strip()) for campo, titulo in etiquetas if str(getattr(self, campo)).strip()]
+app_icociv/reportes/sesion_modulos.py:51:        Parrafo(getattr(widget,'_descripcion_alcance',None) or 'Se incluyen todos los análisis guardados y registros acumulados del módulo. El filtro de la pantalla no reduce el conjunto exportado. Las proyecciones son estimaciones de SAVIP y no índices oficiales del DANE.'),
+## __all__
+app_icociv/config/__init__.py:6:__all__ = ["CARPETA_REPORTES", "CARPETA_SESIONES", "RAIZ_PROYECTO"]
+app_icociv/datos/__init__.py:6:__all__ = ["cargar_todas_tablas"]
+app_icociv/estadistica/__init__.py:12:__all__ = [
+app_icociv/exportables/csv_reproducible.py:37:__all__ = ["construir_csv_reproducible", "construir_dataframe_reproducibilidad"]
+app_icociv/exportables/__init__.py:6:__all__ = ["construir_csv_reproducible"]
+app_icociv/interfaz/animaciones/microinteracciones.py:111:__all__ = [
+app_icociv/interfaz/animaciones/transiciones.py:273:__all__ = [
+app_icociv/interfaz/animaciones/__init__.py:26:__all__ = [
+app_icociv/interfaz/componentes/carga.py:262:__all__ = ["VeloCarga"]
+app_icociv/interfaz/componentes/dialogos.py:226:__all__ = ["AjusteDialogos", "ajustar_dialogo", "geometria_dialogo", "instalar_ajuste_dialogos"]
+app_icociv/interfaz/componentes/esqueleto.py:241:__all__ = ["EsqueletoContenido", "FranjaProgreso", "VARIANTES", "bloques"]
+app_icociv/interfaz/componentes/inicio.py:256:__all__ = ["FranjaSerie", "PantallaInicio", "TarjetaDato"]
+app_icociv/interfaz/componentes/navegacion.py:409:__all__ = ["CabeceraApp", "NavegacionLateral"]
+app_icociv/interfaz/componentes/notificaciones.py:195:__all__ = ["GestorNotificaciones", "Notificacion", "NIVELES"]
+app_icociv/interfaz/componentes/tarjetas.py:194:__all__ = ["Tarjeta", "TarjetaMetrica"]
+app_icociv/interfaz/componentes/__init__.py:12:__all__ = [
+app_icociv/interfaz/efectos/ventana.py:184:__all__ = [
+app_icociv/interfaz/efectos/__init__.py:12:__all__ = [
+app_icociv/interfaz/estilos/constantes_visuales.py:34:__all__ = [
+app_icociv/interfaz/tema/__init__.py:19:__all__ = [
+app_icociv/interfaz/widgets/dialogo_informe.py:388:__all__: list[Any] = ["DialogoConfiguracionInforme", "pedir_configuracion"]
+app_icociv/proyeccion/__init__.py:6:__all__ = ["ejecutar_proyeccion"]
+app_icociv/validacion/__init__.py:6:__all__ = ["ejecutar_backtesting"]
+## packaging
+75:hiddenimports = [
+100:# hiddenimports adicionales sin evidencia de que PyInstaller no los detecte:
+105:hiddenimports += ["statsmodels.stats.diagnostic"]
+184:    hiddenimports=hiddenimports,
+## referencias textuales a las 6 en app_icociv y aplicacion.py
+app_icociv/estadistica/analisis_series.py:713:    # `determinar_horizonte_maximo_estadistico` con W/evidencia fuera de
+app_icociv/estadistica/analisis_series.py:797:# usa `servicio_proyeccion.determinar_horizonte_maximo_estadistico`. Arrastraba
+app_icociv/interfaz/presentacion_resultados.py:1333:    # puede contener la palabra: `determinar_horizonte_maximo_estadistico` dejo
+app_icociv/proyeccion/servicio_proyeccion.py:3292:    estado_por_horizonte: list[dict[str, Any]] = _serializar_evaluaciones_horizonte(evaluaciones)
+app_icociv/proyeccion/servicio_proyeccion.py:3388:    item_global = _item_horizonte_global(estado_por_horizonte, horizonte_solicitado, max_recomendado, max_admisible)
+app_icociv/estadistica/criterios.py:639:        "app_icociv/proyeccion/servicio_proyeccion.py::_mayor_horizonte_con",
+app_icociv/proyeccion/servicio_proyeccion.py:3300:    max_recomendado = _mayor_horizonte_con(estado_ordenado, "permitido_para_proyeccion_tecnica")
+app_icociv/proyeccion/servicio_proyeccion.py:3302:    max_con_cautela = _ultimo_horizonte_por_clasificacion(
+app_icociv/proyeccion/servicio_proyeccion.py:3306:    max_escenario_puro = _ultimo_horizonte_por_clasificacion(
+app_icociv/proyeccion/servicio_proyeccion.py:3464:        # recorrido por prefijo de `_ultimo_horizonte_por_clasificacion`, retirado.
+app_icociv/proyeccion/servicio_proyeccion.py:3456:        "evidencia_horizonte_maximo_recomendado": _evidencia_horizonte(estado_ordenado, max_recomendado),
+app_icociv/proyeccion/servicio_proyeccion.py:3469:        "evidencia_horizonte_maximo_escenario": _evidencia_horizonte(estado_ordenado, max_escenario_puro),

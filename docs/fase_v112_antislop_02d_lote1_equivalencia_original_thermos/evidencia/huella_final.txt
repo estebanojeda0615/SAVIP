@@ -1,0 +1,4 @@
+capturados 20 casos de motor, economía y rechazos -> C:/Pruebas SAVIP/L1D1/g5/huella_final.json
+casos de motor: 20 / 20; diferencias exactas: 0
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *C:/Pruebas SAVIP/L1D1/g0/huella_base.json
+d6be699b700b3fa3379c743cc9d0ccbf5c185cacfa228208dbb95c2735370191 *C:/Pruebas SAVIP/L1D1/g5/huella_final.json

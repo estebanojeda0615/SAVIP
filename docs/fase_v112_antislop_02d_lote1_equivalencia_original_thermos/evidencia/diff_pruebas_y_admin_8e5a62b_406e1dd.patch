@@ -1,0 +1,313 @@
+diff --git a/.github/workflows/fase0-pruebas.yml b/.github/workflows/fase0-pruebas.yml
+index f745b45..18255fa 100644
+--- a/.github/workflows/fase0-pruebas.yml
++++ b/.github/workflows/fase0-pruebas.yml
+@@ -21,0 +22 @@ on:
++      - maintenance/v1.1.2-fase2d-lote1-equivalencia-original-thermos
+diff --git a/.gitignore b/.gitignore
+index 373829f..726cf11 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -123,0 +124 @@ logs/
++!/docs/fase_v112_antislop_02d_lote1_equivalencia_original_thermos/
+diff --git a/tests/test_cierre_metodologico.py b/tests/test_cierre_metodologico.py
+index 5c25164..eedfc15 100644
+--- a/tests/test_cierre_metodologico.py
++++ b/tests/test_cierre_metodologico.py
+@@ -473 +473,3 @@ def test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos():
+-    assert sp._mayor_horizonte_con(estado, "permitido_para_proyeccion_tecnica") == 4
++    # Lote 2D-1: se retira la aserción sobre `sp._mayor_horizonte_con` (hasta 8e5a62b devolvía 4 con este
++    # estado), porque la función se elimina con determinar_horizonte_maximo_estadistico. Se conserva la del otro
++    # máximo, cuyo auxiliar sigue vivo hasta 2D-3.
+diff --git a/tests/test_fase1a_selector_rectangular.py b/tests/test_fase1a_selector_rectangular.py
+index ed189d7..8a7d037 100644
+--- a/tests/test_fase1a_selector_rectangular.py
++++ b/tests/test_fase1a_selector_rectangular.py
+@@ -301 +301 @@ def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retira
+-    # Fase 2B (AS-003, opción B) y lote 2D-2: retirados del módulo; se exige su AUSENCIA.
++    # Fase 2B (AS-003, opción B), lote 2D-2 y lote 2D-1: retirados del módulo; se exige su AUSENCIA.
+@@ -303 +303,2 @@ def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retira
+-                  "seleccionar_modelo_por_rmse_oos_global", "_errores_oos_por_par")
++                  "seleccionar_modelo_por_rmse_oos_global", "_errores_oos_por_par",
++                  "determinar_horizonte_maximo_estadistico")
+@@ -306 +307 @@ def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retira
+-    retirados = ("determinar_horizonte_maximo_estadistico", "_evaluar_horizontes_proyeccion")
++    retirados = ("_evaluar_horizontes_proyeccion",)
+diff --git a/tests/test_presentacion_resultados.py b/tests/test_presentacion_resultados.py
+index 68471a1..9fabb95 100644
+--- a/tests/test_presentacion_resultados.py
++++ b/tests/test_presentacion_resultados.py
+@@ -510,73 +510,10 @@ def _evaluacion_horizonte_ui(
+-def test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado() -> None:
+-    """H-4 residual, 18-08-2026 (reauditoria dirigida V-CODEX-R2 residual).
+-    Renombrada y reescrita: el nombre y la ultima asercion original
+-    describian una tercera salida "permitir como escenario" que el
+-    evaluador real nunca produce (`permitido_como_escenario ==
+-    permitido_para_proyeccion_tecnica` siempre) y que se retiro tambien de
+-    `determinar_horizonte_maximo_estadistico`. Con datos sinteticos que
+-    fuerzan `permitido_como_escenario=True, permitido_para_proyeccion_
+-    tecnica=False` -combinacion que ya no ocurre con datos reales, pero que
+-    esta funcion sigue aceptando como entrada-, la accion resultante es
+-    ahora "permitir con cautela": una etiqueta generica y honesta, no la
+-    etiqueta de estado retirada."""
+-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+-
+-    evaluaciones = [
+-        _evaluacion_horizonte_ui(h)
+-        if h <= 12
+-        else _evaluacion_horizonte_ui(h, tecnico=False, escenario=True)
+-        for h in range(1, 19)
+-    ]
+-    info = determinar_horizonte_maximo_estadistico(
+-        None, None, None, evaluaciones, None, horizonte_solicitado=18
+-    )
+-
+-    assert info["horizonte_maximo_recomendado"] == 12
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 18
+-    assert info["horizonte_finalmente_permitido"] == 18
+-    assert info["accion"] == "permitir con cautela"
+-    assert info["primer_horizonte_no_viable"] == 0
+-
+-    sin_h18 = determinar_horizonte_maximo_estadistico(
+-        None, None, None, evaluaciones[:12], None, horizonte_solicitado=18
+-    )
+-    assert sin_h18["horizonte_maximo_recomendado"] == 12
+-    assert sin_h18["horizonte_maximo_permitido_como_escenario"] == 0
+-    assert sin_h18["horizonte_maximo_admisible"] == 12
+-    assert 18 in sin_h18["horizontes_no_evaluados"]
+-    assert sin_h18["accion"] == "restringir"
+-    assert sin_h18["horizonte_finalmente_permitido"] == 12
+-
+-
+-def test_horizonte_no_salta_un_corte_no_viable() -> None:
+-    from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+-
+-    evaluaciones = [
+-        _evaluacion_horizonte_ui(1),
+-        _evaluacion_horizonte_ui(2, tecnico=False, escenario=False, no_recomendable=True),
+-        _evaluacion_horizonte_ui(3),
+-        _evaluacion_horizonte_ui(4),
+-    ]
+-    info = determinar_horizonte_maximo_estadistico(
+-        None, None, None, evaluaciones, None, horizonte_solicitado=12
+-    )
+-
+-    # P0-H, 16-08-2026 (V-CODEX-3). Antes se exigia que un corte no viable en
+-    # h=2 restringiera todo a h=1: el prefijo consecutivo. La auditoria
+-    # independiente lo marco como regla decisoria CRITICA sin fuente. Ninguna
+-    # referencia exige que los horizontes validos formen un prefijo continuo:
+-    # FPP3 5.10 publica UNA TABLA POR HORIZONTE y cada h tiene su propia muestra
+-    # de errores, de modo que el desempeno en h=2 no es evidencia sobre h=3.
+-    #
+-    # El contrato nuevo: cada horizonte se juzga con su evidencia propia. Lo que
+-    # NO cambia es que el hueco se siga informando -`primer_horizonte_no_viable`
+-    # lo localiza- ni que h=2 siga marcado como no permitido.
+-    assert info["horizonte_maximo_recomendado"] == 4
+-    assert info["horizonte_maximo_admisible"] == 4
+-    assert info["primer_horizonte_no_viable"] == 2, "el hueco debe seguir informandose"
+-    assert info["horizonte_finalmente_permitido"] == 4
+-    assert info["accion"] != "bloquear"
+-    # Y el horizonte no viable no se convierte en permitido por el cambio.
+-    estados = {int(e["horizonte"]): e for e in evaluaciones}
+-    assert estados[2].get("permitido_para_proyeccion_tecnica") is False
+-    assert estados[2].get("permitido_como_escenario") is False
++# Lote 2D-1 (Anti-Slop): retirados (hasta 8e5a62b) dos tests que solo ejercían
++# determinar_horizonte_maximo_estadistico, función sin uso productivo que se retira en este lote, con
++# evaluaciones sintéticas (técnico/escenario/no viable):
++#   test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
++#   test_horizonte_no_salta_un_corte_no_viable
++# Bajo N0=12/H=24 no hay clasificación ni veto por horizonte. Contrato vigente: tests/test_metodologia_n0_12_h24.py::
++# test_efg_horizonte_solicitado_no_cambia_modelo_ni_trayectoria; tests/test_resultado_horizonte_solicitado.py::
++# test_restriccion_no_hace_pasar_h12_como_resultado_de_h18. _evaluacion_horizonte_ui queda sin uso y se conserva
++# (fuera de la autorización). Ver
++# docs/fase_v112_antislop_02d_lote1_equivalencia_original_thermos/02_MATRIZ_DE_BAJAS_Y_CONTRATOS_VIGENTES.md.
+diff --git a/tests/test_resultado_horizonte_solicitado.py b/tests/test_resultado_horizonte_solicitado.py
+index f6c5210..edd9b52 100644
+--- a/tests/test_resultado_horizonte_solicitado.py
++++ b/tests/test_resultado_horizonte_solicitado.py
+@@ -13 +12,0 @@ from app_icociv.proyeccion.servicio_proyeccion import (
+-    determinar_horizonte_maximo_estadistico,
+@@ -240,90 +239,14 @@ def test_h45_se_rechaza_explicitamente_h12_se_genera_normalmente() -> None:
+-def test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla() -> None:
+-    evaluaciones = [
+-        _evaluacion(h, "tecnico" if h <= 8 else "escenario" if h <= 11 else "no_viable")
+-        for h in range(1, 13)
+-    ]
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        evaluaciones,
+-        None,
+-        horizonte_solicitado=12,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 20,
+-            "horizonte_maximo_evaluable_por_datos": 12,
+-        },
+-    )
+-    assert info["horizonte_maximo_recomendado"] == 8
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 11
+-    assert info["horizonte_maximo_evaluado"] == 12
+-    assert info["primer_horizonte_no_viable"] == 12
+-    assert info["horizonte_maximo"] == 8
+-
+-
+-def test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta() -> None:
+-    evaluaciones = [_evaluacion(h, "tecnico") for h in range(1, 6)]
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        evaluaciones,
+-        None,
+-        horizonte_solicitado=12,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 10,
+-            "horizonte_maximo_evaluable_por_datos": 5,
+-        },
+-    )
+-    assert info["horizonte_maximo_recomendado"] == 5
+-    assert info["horizonte_maximo_evaluado"] == 5
+-    assert info["horizonte_maximo_busqueda_configurado"] == 10
+-    assert info["maximo_recomendado_es_limite_observado"] is True
+-    assert info["primer_horizonte_no_viable"] == 0
+-    assert info["tipo_parada"] == "evidencia_oos_insuficiente"
+-    assert info["horizontes_no_evaluados"] == [6, 7, 8, 9, 10]
+-
+-
+-def test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada() -> None:
+-    """post-r1-metodologia-12-24, 20-08-2026 (Prompt Calendario 06, hallazgo 4
+-    de auditoria). `determinar_horizonte_maximo_estadistico` sigue definida
+-    (funcion muerta: no la llama ningun camino productivo, ver comentarios
+-    en analisis_series.py y presentacion_resultados.py), y esta prueba
+-    conserva la comprobacion de sus propios campos, igual que sus 5
+-    hermanas en este archivo. Lo que se retira es la comparacion contra
+-    `construir_html_explicacion_tarjeta("maximo", ...)` y
+-    `_lineas_determinacion_horizonte(...)`: esas dos funciones de UI/reporte
+-    ya NO leen esta estructura triangular (leen `horizonte_info` rectangular
+-    real, ver test_maximo_tarjeta_usa_alcance_operativo_vigente abajo), asi
+-    que comparar sus textos contra vocabulario "horizonte maximo
+-    recomendado" prueba una integracion que ya no existe."""
+-    evaluaciones = [_evaluacion(h, "tecnico") for h in range(1, 14)]
+-    for h in range(14, 21):
+-        fila = _evaluacion(h, "no_viable")
+-        fila.update(
+-            {
+-                "permitido": False,
+-                "permitido_como_escenario": False,
+-                "no_recomendable": False,
+-                "clasificacion": "evidencia_insuficiente",
+-                "estado": "Evidencia insuficiente",
+-                "decision": "No determinado",
+-            }
+-        )
+-        evaluaciones.append(fila)
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        evaluaciones,
+-        None,
+-        horizonte_solicitado=24,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 30,
+-            "horizonte_maximo_evaluable_por_datos": 20,
+-        },
+-    )
+-    assert info["horizonte_maximo_evaluado"] == 20
+-    assert info["horizonte_maximo_recomendado"] == 13
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 0
+-    assert info["maximo_recomendado_es_limite_observado"] is False
++# Lote 2D-1 (Anti-Slop): retirados (hasta 8e5a62b) seis tests que solo ejercían
++# determinar_horizonte_maximo_estadistico, función que ninguna ruta productiva invocaba y que se retira en este
++# lote. Comprobaban los máximos recomendado/escenario/evaluado, la parada y sus advertencias de la regla de
++# horizonte máximo abandonada con N0=12/H=24:
++#   test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla
++#   test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta
++#   test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada
++#   test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico
++#   test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito
++#   test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola
++# Contrato vigente: tests/test_metodologia_n0_12_h24.py::test_b_h_operativo_max_es_24 y
++# ::test_efg_horizonte_solicitado_no_cambia_modelo_ni_trayectoria; en este archivo,
++# test_maximo_tarjeta_usa_alcance_operativo_vigente (más abajo).
++# Ver docs/fase_v112_antislop_02d_lote1_equivalencia_original_thermos/02_MATRIZ_DE_BAJAS_Y_CONTRATOS_VIGENTES.md.
+@@ -365,78 +287,0 @@ def test_maximo_tarjeta_usa_alcance_operativo_vigente() -> None:
+-def test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico() -> None:
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        [_evaluacion(h, "tecnico") for h in range(1, 21)],
+-        None,
+-        horizonte_solicitado=20,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 20,
+-            "horizonte_maximo_evaluable_por_datos": 20,
+-        },
+-    )
+-    assert info["horizonte_maximo_recomendado"] == 20
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 0
+-    assert info["evidencia_horizonte_maximo_recomendado"]["horizonte"] == 20
+-    assert info["evidencia_horizonte_maximo_recomendado"]["clasificacion"] == "tecnica_cautela"
+-
+-
+-def test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito() -> None:
+-    evaluaciones = [
+-        _evaluacion(h, "tecnico" if h <= 12 else "escenario")
+-        for h in range(1, 21)
+-    ]
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        evaluaciones,
+-        None,
+-        horizonte_solicitado=20,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 20,
+-            "horizonte_maximo_evaluable_por_datos": 20,
+-        },
+-    )
+-    assert info["horizonte_maximo_recomendado"] == 12
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 20
+-    assert info["horizonte_maximo_admisible"] == 20
+-    assert info["evidencia_horizonte_maximo_escenario"]["horizonte"] == 20
+-    assert info["evidencia_horizonte_maximo_escenario"]["clasificacion"] == "escenario_alta_incertidumbre"
+-
+-
+-def test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola() -> None:
+-    evaluaciones = [_evaluacion(h, "tecnico") for h in range(1, 11)]
+-    for h in range(11, 21):
+-        fila = _evaluacion(h, "no_viable")
+-        fila.update(
+-            {
+-                "permitido": False,
+-                "permitido_como_escenario": False,
+-                "no_recomendable": False,
+-                "clasificacion": "evidencia_insuficiente",
+-            }
+-        )
+-        evaluaciones.append(fila)
+-    info = determinar_horizonte_maximo_estadistico(
+-        None,
+-        None,
+-        None,
+-        evaluaciones,
+-        None,
+-        horizonte_solicitado=30,
+-        metadatos_auditoria={
+-            "horizonte_maximo_busqueda_configurado": 30,
+-            "horizonte_maximo_evaluable_por_datos": 20,
+-        },
+-    )
+-    assert info["horizonte_maximo_evaluado"] == 20
+-    assert info["horizonte_maximo_recomendado"] == 10
+-    assert info["horizonte_maximo_permitido_como_escenario"] == 0
+-    assert info["primer_horizonte_no_viable"] == 0
+-    assert info["tipo_parada"] == "evidencia_oos_insuficiente"
+-    assert "no se puede afirmar validez para horizontes superiores" in info[
+-        "advertencia_metodologica_horizontes"
+-    ]
+-
+-

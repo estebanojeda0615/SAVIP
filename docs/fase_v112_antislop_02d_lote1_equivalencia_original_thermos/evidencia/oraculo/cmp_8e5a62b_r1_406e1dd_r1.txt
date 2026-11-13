@@ -1,0 +1,9 @@
+economico_empalme: casos=1 diferencias=0
+fixtures_horizonte_dinamico: casos=6 diferencias=0
+gui_sesion_exportables: casos=1 diferencias=0
+motor: casos=35 diferencias=0
+rechazos: casos=1 diferencias=0
+series_extra: casos=22 diferencias=0
+hash A: 766a34b8a8968b02c1db35fb2dcdb7a94ebbf61b9450f70e415985e69ca1bb3f
+hash B: 766a34b8a8968b02c1db35fb2dcdb7a94ebbf61b9450f70e415985e69ca1bb3f
+IGUALES

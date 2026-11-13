@@ -1,0 +1,17 @@
+base (102f194, mismo árbol tests/app que 8e5a62b): 809 PASS 809
+final 406e1dd: 801 PASS 801
+bajas 8
+  - tests.test_presentacion_resultados test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
+  - tests.test_presentacion_resultados test_horizonte_no_salta_un_corte_no_viable
+  - tests.test_resultado_horizonte_solicitado test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito
+  - tests.test_resultado_horizonte_solicitado test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico
+  - tests.test_resultado_horizonte_solicitado test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta
+  - tests.test_resultado_horizonte_solicitado test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada
+  - tests.test_resultado_horizonte_solicitado test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla
+  - tests.test_resultado_horizonte_solicitado test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola
+altas 0 []
+cambios de estado 0 []
+golden 29 as001 16
+9 vigentes PASS: True
+fase1a guarda: PASS
+3c_a: [('test_a_acciones_geometria_click_teclado_y_senales', 'PASS'), ('test_b_empalme_paso_limites_disabled_teclado', 'PASS'), ('test_c_zoom_pan_reset_preservan_datos', 'PASS'), ('test_a_alternancia_con_movimiento', 'PASS')]

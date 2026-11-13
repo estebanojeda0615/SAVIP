@@ -1,0 +1,4 @@
+Perfil esencial de la base 8e5a62b: CI 43136025902 (809 pruebas, 0 fallos 1.ª ejecución) y JUnit local de AS-028 sobre árbol idéntico de tests/app_icociv:
+Resumen esenciales: 82 archivos; 809 pruebas, 0 fallos en la primera ejecución, 0 errores, 0 omitidas o xfail
+Intermitentes (fallaron y pasaron al reintento): ninguna
+Archivos con fallo: ninguno

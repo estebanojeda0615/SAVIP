@@ -1,0 +1,22 @@
+economico_empalme: casos=1 diferencias=0
+fixtures_horizonte_dinamico: casos=6 diferencias=0
+gui_sesion_exportables: casos=1 diferencias=2
+    gui_sesion_exportables.ok.pdf_sesion.texto[122]: 'Análisis activo: <ID1>. Proyecciones visibles guardadas: 2. Registros' != 'Análisis activo: <ID1>. Proyecciones visibles guardadas: 2.'
+    gui_sesion_exportables.ok.pdf_sesion.texto[123]: 'calculados: 3.' != 'Registros calculados: 3.'
+motor: casos=35 diferencias=0
+rechazos: casos=1 diferencias=0
+series_extra: casos=22 diferencias=11
+    series_extra.extremo_finito_x1e150|h11.candidatos: solo en B
+    series_extra.extremo_finito_x1e150|h11.claves: solo en B
+    series_extra.extremo_finito_x1e150|h11.excepcion: solo en A
+    series_extra.extremo_finito_x1e150|h11.horizontes_matriz: solo en B
+    series_extra.extremo_finito_x1e150|h11.llamadas_selector: solo en B
+    series_extra.extremo_finito_x1e150|h11.mensaje: solo en A
+    series_extra.extremo_finito_x1e150|h11.pares_comunes: solo en B
+    series_extra.extremo_finito_x1e150|h11.resultado: solo en B
+    series_extra.extremo_finito_x1e150|h11.sse_exacto: solo en B
+    series_extra.extremo_finito_x1e150|h11.traza_final: solo en A
+    series_extra.extremo_finito_x1e150|h11.w_estrella: solo en B
+hash A: a6466123cc701d8d86b7747b35151b30ab4248883fd4a0d7c52a90c6fbc28949
+hash B: 766a34b8a8968b02c1db35fb2dcdb7a94ebbf61b9450f70e415985e69ca1bb3f
+DISTINTOS

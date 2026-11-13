@@ -1,0 +1,3 @@
+ausentes base [] final 6
+casos 29 29 diferencias [] excepciones 0
+llamadas base 0

@@ -1,0 +1,63 @@
+### tests/test_resultado_horizonte_solicitado.py::test_maximos_se_derivan_de_clasificaciones_y_no_del_limite_de_grilla L240-261
+   assert info['horizonte_maximo_recomendado'] == 8
+   assert info['horizonte_maximo_permitido_como_escenario'] == 11
+   assert info['horizonte_maximo_evaluado'] == 12
+   assert info['primer_horizonte_no_viable'] == 12
+   assert info['horizonte_maximo'] == 8
+### tests/test_resultado_horizonte_solicitado.py::test_limite_evaluable_se_informa_sin_convertirlo_en_validez_absoluta L264-284
+   assert info['horizonte_maximo_recomendado'] == 5
+   assert info['horizonte_maximo_evaluado'] == 5
+   assert info['horizonte_maximo_busqueda_configurado'] == 10
+   assert info['maximo_recomendado_es_limite_observado'] is True
+   assert info['primer_horizonte_no_viable'] == 0
+   assert info['tipo_parada'] == 'evidencia_oos_insuficiente'
+   assert info['horizontes_no_evaluados'] == [6, 7, 8, 9, 10]
+### tests/test_resultado_horizonte_solicitado.py::test_maximo_evaluado_20_es_descriptivo_de_la_funcion_retirada L287-329
+   assert info['horizonte_maximo_evaluado'] == 20
+   assert info['horizonte_maximo_recomendado'] == 13
+   assert info['horizonte_maximo_permitido_como_escenario'] == 0
+   assert info['maximo_recomendado_es_limite_observado'] is False
+### tests/test_resultado_horizonte_solicitado.py::test_20_puede_ser_maximo_recomendado_si_h20_es_tecnico L365-381
+   assert info['horizonte_maximo_recomendado'] == 20
+   assert info['horizonte_maximo_permitido_como_escenario'] == 0
+   assert info['evidencia_horizonte_maximo_recomendado']['horizonte'] == 20
+   assert info['evidencia_horizonte_maximo_recomendado']['clasificacion'] == 'tecnica_cautela'
+### tests/test_resultado_horizonte_solicitado.py::test_20_puede_ser_maximo_escenario_si_h20_es_escenario_explicito L384-405
+   assert info['horizonte_maximo_recomendado'] == 12
+   assert info['horizonte_maximo_permitido_como_escenario'] == 20
+   assert info['horizonte_maximo_admisible'] == 20
+   assert info['evidencia_horizonte_maximo_escenario']['horizonte'] == 20
+   assert info['evidencia_horizonte_maximo_escenario']['clasificacion'] == 'escenario_alta_incertidumbre'
+### tests/test_resultado_horizonte_solicitado.py::test_parada_en_20_por_evidencia_incluye_advertencia_y_no_extrapola L408-440
+   assert info['horizonte_maximo_evaluado'] == 20
+   assert info['horizonte_maximo_recomendado'] == 10
+   assert info['horizonte_maximo_permitido_como_escenario'] == 0
+   assert info['primer_horizonte_no_viable'] == 0
+   assert info['tipo_parada'] == 'evidencia_oos_insuficiente'
+   assert 'no se puede afirmar validez para horizontes superiores' in info['advertencia_metodologica_horizontes']
+### tests/test_presentacion_resultados.py::test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado L510-548
+   assert info['horizonte_maximo_recomendado'] == 12
+   assert info['horizonte_maximo_permitido_como_escenario'] == 18
+   assert info['horizonte_finalmente_permitido'] == 18
+   assert info['accion'] == 'permitir con cautela'
+   assert info['primer_horizonte_no_viable'] == 0
+   assert sin_h18['horizonte_maximo_recomendado'] == 12
+   assert sin_h18['horizonte_maximo_permitido_como_escenario'] == 0
+   assert sin_h18['horizonte_maximo_admisible'] == 12
+   assert 18 in sin_h18['horizontes_no_evaluados']
+   assert sin_h18['accion'] == 'restringir'
+   assert sin_h18['horizonte_finalmente_permitido'] == 12
+### tests/test_presentacion_resultados.py::test_horizonte_no_salta_un_corte_no_viable L551-582
+   assert info['horizonte_maximo_recomendado'] == 4
+   assert info['horizonte_maximo_admisible'] == 4
+   assert info['primer_horizonte_no_viable'] == 2
+   assert info['horizonte_finalmente_permitido'] == 4
+   assert info['accion'] != 'bloquear'
+   assert estados[2].get('permitido_para_proyeccion_tecnica') is False
+   assert estados[2].get('permitido_como_escenario') is False
+### tests/test_cierre_metodologico.py::test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos L444-488
+   assert sp._mayor_horizonte_con(estado, 'permitido_para_proyeccion_tecnica') == 4
+   assert sp._mayor_horizonte_permitido(estado) == 4
+   assert estado[1]['permitido_para_proyeccion_tecnica'] is False
+   assert estado[1]['permitido_como_escenario'] is False
+   assert not any((isinstance(hijo, ast.Break) for hijo in ast.walk(nodo)))

@@ -1,0 +1,6 @@
+base 8e5a62b 213 {'PASS': 163, 'FAIL': 50, 'SKIP': 0}
+final 406e1dd 213 {'PASS': 163, 'FAIL': 50, 'SKIP': 0}
+bajas []
+altas []
+cambios []
+cascada PASS -> PASS

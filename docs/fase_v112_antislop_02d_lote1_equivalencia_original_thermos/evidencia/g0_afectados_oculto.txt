@@ -1,0 +1,118 @@
+[G4] 2D-1 oculto en memoria: ('determinar_horizonte_maximo_estadistico', '_serializar_evaluaciones_horizonte', '_item_horizonte_global', '_mayor_horizonte_con', '_ultimo_horizonte_por_clasificacion', '_evidencia_horizonte'); compartidos presentes: ('_tipo_uso_horizonte', '_mayor_horizonte_permitido')
+.........FF....................................F........................ [ 80%]
+...............FF                                                        [100%]
+=================================== ERRORS ====================================
+________ ERROR collecting tests/test_resultado_horizonte_solicitado.py ________
+ImportError while importing test module 'C:\Pruebas SAVIP\L1D1\base\tests\test_resultado_horizonte_solicitado.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_resultado_horizonte_solicitado.py:10: in <module>
+    from app_icociv.proyeccion.servicio_proyeccion import (
+E   ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\L1D1\base\app_icociv\proyeccion\servicio_proyeccion.py)
+================================== FAILURES ===================================
+______ test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado _______
+
+    def test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado() -> None:
+        """H-4 residual, 18-08-2026 (reauditoria dirigida V-CODEX-R2 residual).
+        Renombrada y reescrita: el nombre y la ultima asercion original
+        describian una tercera salida "permitir como escenario" que el
+        evaluador real nunca produce (`permitido_como_escenario ==
+        permitido_para_proyeccion_tecnica` siempre) y que se retiro tambien de
+        `determinar_horizonte_maximo_estadistico`. Con datos sinteticos que
+        fuerzan `permitido_como_escenario=True, permitido_para_proyeccion_
+        tecnica=False` -combinacion que ya no ocurre con datos reales, pero que
+        esta funcion sigue aceptando como entrada-, la accion resultante es
+        ahora "permitir con cautela": una etiqueta generica y honesta, no la
+        etiqueta de estado retirada."""
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\L1D1\base\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:522: ImportError
+_________________ test_horizonte_no_salta_un_corte_no_viable __________________
+
+    def test_horizonte_no_salta_un_corte_no_viable() -> None:
+>       from app_icociv.proyeccion.servicio_proyeccion import determinar_horizonte_maximo_estadistico
+E       ImportError: cannot import name 'determinar_horizonte_maximo_estadistico' from 'app_icociv.proyeccion.servicio_proyeccion' (C:\Pruebas SAVIP\L1D1\base\app_icociv\proyeccion\servicio_proyeccion.py)
+
+tests\test_presentacion_resultados.py:552: ImportError
+_ test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado _
+
+    def test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado():
+        serie = gen.serie("tendencia_lineal_ruido")
+        anio, mes = gen.objetivo(serie, 11)
+        # Fase 2B (AS-003, opción B) y lote 2D-2: retirados del módulo; se exige su AUSENCIA.
+        eliminados = ("_rmse_global_estable", "_modelo_consistente_desde_comparativo", "_modelo_trayectoria_consistente",
+                      "seleccionar_modelo_por_rmse_oos_global", "_errores_oos_por_par")
+        assert [n for n in eliminados if hasattr(sp, n)] == []
+        # Evaluadores heredados que siguen definidos: se espían y la ruta productiva no debe llamarlos.
+        retirados = ("determinar_horizonte_maximo_estadistico", "_evaluar_horizontes_proyeccion")
+>       espias = {n: patch.object(sp, n, wraps=getattr(sp, n)) for n in retirados}
+                                               ^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute 'determinar_horizonte_maximo_estadistico'
+
+tests\test_fase1a_selector_rectangular.py:307: AttributeError
+_______ test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos ________
+
+    def test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos():
+        """P0-H, 16-08-2026. Sustituye a `test_la_cascada_sigue_existiendo_para_causas_tecnicas`.
+
+        Aquel test era incorrecto **por dos motivos independientes**.
+
+        1. Exigia una cascada que P0-H retiro. Que los horizontes validos formen un
+           prefijo desde h=1 no lo pide ninguna fuente, y hacia que una sola falla
+           temprana cancelara toda la trayectoria posterior.
+
+        2. Pasaba por una coincidencia de texto, no por una propiedad del codigo. La
+           cadena `if evidencia["no_recomendable"]:` sobrevive dentro de un
+           COMENTARIO que documenta el `break` retirado. `inspect.getsource` no
+           distingue codigo de comentario, de modo que el assert habria seguido en
+           verde tanto con el defecto restituido como con el defecto ausente. Es la
+           clase de guarda que no protege nada, senalada por la revision
+           independiente entre los tests incidentales.
+
+        El nucleo nuevo es conductual: se construye un estado con un HUECO -h2 falla,
+        h3 y h4 se sostienen- y se comprueba que las dos funciones que publican un
+        maximo devuelven 4, no 1. La comprobacion estructural que se conserva recorre
+        el ARBOL SINTACTICO en lugar del texto, de modo que ningun comentario pueda
+        satisfacerla ni violarla.
+        """
+        estado = [
+            {"horizonte": 1, "permitido_para_proyeccion_tecnica": True, "permitido_como_escenario": True},
+            {"horizonte": 2, "permitido_para_proyeccion_tecnica": False, "permitido_como_escenario": False},
+            {"horizonte": 3, "permitido_para_proyeccion_tecnica": True, "permitido_como_escenario": True},
+            {"horizonte": 4, "permitido_para_proyeccion_tecnica": True, "permitido_como_escenario": True},
+        ]
+>       assert sp._mayor_horizonte_con(estado, "permitido_para_proyeccion_tecnica") == 4
+               ^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'app_icociv.proyeccion.servicio_proyeccion' has no attribute '_mayor_horizonte_con'
+
+tests\test_cierre_metodologico.py:473: AttributeError
+______________________ test_no_hay_modelo_por_horizonte _______________________
+
+    def test_no_hay_modelo_por_horizonte():
+        """La trayectoria se genera con UN modelo. S-HUECO no esta integrado.
+
+        `_ejecutar_proyeccion_base` -el cuerpo real; `ejecutar_proyeccion` es un
+        envoltorio de 15 lineas- toma un unico objeto `modelo` de
+        `seleccion_horizonte` y proyecta con el toda la trayectoria en una sola
+        llamada. Si alguien introdujera un ensamblaje por tramos, este recuento
+        cambiaria.
+        """
+        fuente = inspect.getsource(sp._ejecutar_proyeccion_base)
+        assert fuente.count("proyectar_modelo(") == 1, fuente.count("proyectar_modelo(")
+>       assert 'modelo = seleccion_horizonte["modelo"]' in fuente
+E       assert 'modelo = seleccion_horizonte["modelo"]' in 'def _ejecutar_proyeccion_base(\n    serie_df: pd.DataFrame,\n    year_proj: int,\n    month_proj: int,\n    anio_base..._estadistica,\n        "explicacion": "Proyección generada dentro del horizonte estadísticamente permitido.",\n    }\n'
+
+tests\test_cierre_metodologico.py:502: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_presentacion_resultados.py::test_horizonte_dinamico_diferencia_tecnico_cautela_y_no_evaluado
+FAILED tests/test_presentacion_resultados.py::test_horizonte_no_salta_un_corte_no_viable
+FAILED tests/test_fase1a_selector_rectangular.py::test_la_ruta_productiva_usa_el_selector_rectangular_y_ningun_selector_retirado
+FAILED tests/test_cierre_metodologico.py::test_no_queda_cascada_de_prefijo_en_ninguno_de_los_dos_maximos
+FAILED tests/test_cierre_metodologico.py::test_no_hay_modelo_por_horizonte - ...
+ERROR tests/test_resultado_horizonte_solicitado.py
+5 failed, 84 passed, 1 error in 120.97s (0:02:00)
+codigo=1

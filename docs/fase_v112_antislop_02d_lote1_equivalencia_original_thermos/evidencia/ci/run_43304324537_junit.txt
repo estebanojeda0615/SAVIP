@@ -1,0 +1,2 @@
+artefacto 13988187695 casos CI 801 PASS 801 golden 29 as001 16
+CI == local final: True

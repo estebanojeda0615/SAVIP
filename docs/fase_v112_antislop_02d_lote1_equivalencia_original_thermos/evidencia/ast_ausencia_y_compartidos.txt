@@ -1,0 +1,10 @@
+definiciones de nivel superior: 72
+seis ausentes: True
+presente _tipo_uso_horizonte L2362-2373 b07c77a2be38b105
+presente _mayor_horizonte_permitido L3274-3305 d0a4b9575d959d6a
+presente _evaluar_horizontes_proyeccion L2533-2737 0bf4b781db1dcc4c
+presente _clasificar_evidencia_horizonte L2740-3044 6abb62f6b1ffab48
+presente _aplicar_salvaguarda_benchmarks L3142-3260 e118eb4065843990
+presente _resultado_sin_proyeccion L3421-3580 326c77584a166bfa
+presente _estructurar_resultado_horizontes L1658-1988 80d7106a764b9ada
+referencias residuales a las seis (Name/Attribute): []

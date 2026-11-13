@@ -1,0 +1,23 @@
+.....................F                                                   [100%]
+================================== FAILURES ===================================
+______________________ test_no_hay_modelo_por_horizonte _______________________
+
+    def test_no_hay_modelo_por_horizonte():
+        """La trayectoria se genera con UN modelo. S-HUECO no esta integrado.
+
+        `_ejecutar_proyeccion_base` -el cuerpo real; `ejecutar_proyeccion` es un
+        envoltorio de 15 lineas- toma un unico objeto `modelo` de
+        `seleccion_horizonte` y proyecta con el toda la trayectoria en una sola
+        llamada. Si alguien introdujera un ensamblaje por tramos, este recuento
+        cambiaria.
+        """
+        fuente = inspect.getsource(sp._ejecutar_proyeccion_base)
+        assert fuente.count("proyectar_modelo(") == 1, fuente.count("proyectar_modelo(")
+>       assert 'modelo = seleccion_horizonte["modelo"]' in fuente
+E       assert 'modelo = seleccion_horizonte["modelo"]' in 'def _ejecutar_proyeccion_base(\n    serie_df: pd.DataFrame,\n    year_proj: int,\n    month_proj: int,\n    anio_base..._estadistica,\n        "explicacion": "Proyección generada dentro del horizonte estadísticamente permitido.",\n    }\n'
+
+tests\test_cierre_metodologico.py:502: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_cierre_metodologico.py::test_no_hay_modelo_por_horizonte - ...
+1 failed, 21 passed in 1.62s
+codigo=1
